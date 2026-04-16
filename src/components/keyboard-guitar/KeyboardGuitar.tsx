@@ -1,14 +1,16 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { guitarSynth } from "@/lib/audio/guitar-synth";
-import { KEYBOARD_ROWS, getKeyPosition, type StringIndex } from "@/lib/keyboard/layout";
+import { guitarSynth } from "@keystrum/synth";
 import {
+  KEYBOARD_ROWS,
+  getKeyPosition,
+  type StringIndex,
   DEFAULT_CHORD_COLUMNS,
   getChordFrequencies,
   getPresetForColumn,
   type ChordPreset,
-} from "@/lib/keyboard/chord-presets";
+} from "@keystrum/layout";
 
 export interface KeyboardGuitarProps {
   theme?: "dark" | "light" | "vibrant";
@@ -200,7 +202,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
                           : `0 2px 0 ${palette.shadowBase}`,
                       }}
                     >
-                      {preset && rowIdx === 3 && (
+                      {preset && rowIdx === 0 && (
                         <span
                           className="absolute -top-5 sm:-top-6 left-1/2 -translate-x-1/2 rounded-full px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold tracking-wide"
                           style={{
@@ -211,18 +213,6 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
                           }}
                         >
                           {preset.name}
-                        </span>
-                      )}
-                      {isMuteCol && rowIdx === 3 && (
-                        <span
-                          className="absolute -top-5 sm:-top-6 left-1/2 -translate-x-1/2 rounded-full px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold tracking-wide"
-                          style={{
-                            background: "transparent",
-                            color: palette.keyMuteLabel,
-                            opacity: 0.5,
-                          }}
-                        >
-                          ×
                         </span>
                       )}
                       <span className="select-none">{key.toUpperCase()}</span>
@@ -236,8 +226,8 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
 
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono" style={{ color: palette.hintFg }}>
           <span>row 1 → E4 · row 2 → B3 · row 3 → G3 · row 4 → D3</span>
-          <span className="opacity-60">try: 2-w-s-x (C) or 4-r-f-v (G) fast ↓↑</span>
-          <span className="opacity-60">· cols 7-12 (7-= · y-] · h-&apos; · n-/): palm-muted ghost notes</span>
+          <span className="opacity-60">try: 1-q-a-z (Am) · 5-t-g-b (Dm) · 6-y-h-n (F) fast ↓↑</span>
+          <span className="opacity-60">· cols 7+ (7-= · u-] · j-&apos; · m-/): palm-muted ghost notes</span>
         </div>
       </div>
     </div>

@@ -1,0 +1,18 @@
+{
+  "name": "@keystrum/synth",
+  "version": "0.1.0",
+  "description": "Karplus-Strong guitar synthesis engine for Web Audio API",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": ["src"],
+  "keywords": ["karplus-strong", "web-audio", "synthesis", "guitar"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kimhinton/keystrum.git",
+    "directory": "packages/synth"
+  }
+}

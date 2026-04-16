@@ -213,19 +213,19 @@ const scarboroughBars: PatternStep[][] = [
     { beat: 2, lane: 0, kind: "mute", muteCol: 1 },
   ],
 
-  // Bar 9 (Am): New chord in verse 2.
+  // Bar 9 (Am → Em): Lane 4 preview on beat 2.
   [
     { beat: 0, lane: 3, kind: "strum" },
     { beat: 1, lane: 3, kind: "mute", muteCol: 1 },
-    { beat: 2, lane: 3, kind: "strum" },
+    { beat: 2, lane: 4 as Lane, kind: "strum" },
   ],
 
-  // Bar 10 (C): Dense mute.
+  // Bar 10 (C → G): Dense mute, lane 5 preview on beat 2.
   [
     { beat: 0, lane: 1, kind: "strum" },
     { beat: 0.5, lane: 1, kind: "mute", muteCol: 0 },
     { beat: 1.5, lane: 1, kind: "mute", muteCol: 1 },
-    { beat: 2, lane: 1, kind: "strum" },
+    { beat: 2, lane: 5 as Lane, kind: "strum" },
   ],
 
   // Bar 11 (Dm): Full sustain.
@@ -245,10 +245,10 @@ const scarboroughBars: PatternStep[][] = [
     { beat: 2, lane: 5 as Lane, kind: "strum" },
   ],
 
-  // Bar 14 (Dm): Closing pattern.
+  // Bar 14 (Dm → Em → Dm): Closing with lane 4 echo.
   [
     { beat: 0, lane: 0, kind: "strum" },
-    { beat: 1, lane: 0, kind: "mute", muteCol: 0 },
+    { beat: 1, lane: 4 as Lane, kind: "mute", muteCol: 0 },
     { beat: 2, lane: 0, kind: "mute", muteCol: 1 },
   ],
 
@@ -330,12 +330,12 @@ const greensleevesBars: PatternStep[][] = [
     { beat: 2, lane: 1, kind: "mute", muteCol: 2 },
   ],
 
-  // Bar 10 (C): Dense mute with U introduced.
+  // Bar 10 (C → Dm): Dense mute, lane 4 bridge on beat 2.
   [
     { beat: 0, lane: 1, kind: "strum" },
     { beat: 0.5, lane: 1, kind: "mute", muteCol: 0 },
     { beat: 1, lane: 1, kind: "mute", muteCol: 1 },
-    { beat: 2, lane: 1, kind: "strum" },
+    { beat: 2, lane: 4 as Lane, kind: "strum" },
   ],
 
   // Bar 11 (Dm): NEW — lane 4 introduced. iv chord, natural minor contrast.
@@ -350,11 +350,11 @@ const greensleevesBars: PatternStep[][] = [
     { beat: 2.5, lane: 3, kind: "mute", muteCol: 0 },
   ],
 
-  // Bar 13 (C): Repeat B.
+  // Bar 13 (C → F): Repeat B with lane 5 bridge on beat 2.
   [
     { beat: 0, lane: 1, kind: "strum" },
     { beat: 1, lane: 1, kind: "mute", muteCol: 0 },
-    { beat: 2, lane: 1, kind: "mute", muteCol: 1 },
+    { beat: 2, lane: 5 as Lane, kind: "strum" },
   ],
 
   // Bar 14 (F): NEW — lane 5. VI chord, warm resolution.
@@ -372,10 +372,10 @@ const greensleevesBars: PatternStep[][] = [
     { beat: 2, lane: 0, kind: "strum" },
   ],
 
-  // Bar 16 (Em): Pre-final.
+  // Bar 16 (Em → Dm → Em): Pre-final with lane 4 color.
   [
     { beat: 0, lane: 3, kind: "strum" },
-    { beat: 1, lane: 3, kind: "mute", muteCol: 0 },
+    { beat: 1, lane: 4 as Lane, kind: "mute", muteCol: 0 },
     { beat: 2, lane: 3, kind: "strum" },
   ],
 

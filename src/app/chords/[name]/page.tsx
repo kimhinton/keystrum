@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { buildChordInfo, getChordInfo } from "@/lib/keyboard/chord-info";
+import { buildChordInfo, getChordInfo } from "@keystrum/layout";
 
 export function generateStaticParams() {
   return buildChordInfo().map((c) => ({ name: c.name }));

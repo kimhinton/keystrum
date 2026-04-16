@@ -2,13 +2,14 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { guitarSynth } from "@/lib/audio/guitar-synth";
+import { guitarSynth } from "@keystrum/synth";
 import {
   DEFAULT_CHORD_COLUMNS,
   getChordFrequencies,
   type ChordPreset,
-} from "@/lib/keyboard/chord-presets";
-import { KEYBOARD_ROWS, getKeyPosition } from "@/lib/keyboard/layout";
+  KEYBOARD_ROWS,
+  getKeyPosition,
+} from "@keystrum/layout";
 import { findCandidate, judgeHoldRelease, accuracyOf } from "@/lib/game/judgment";
 import {
   useGameStore,
@@ -34,7 +35,7 @@ import {
   type Song,
 } from "@/lib/game/types";
 
-const PREVIEW_WINDOW_MS = 2600;
+const _PREVIEW_WINDOW_MS = 2600;
 const COUNTDOWN_MS = 3000;
 
 type Phase = "idle" | "countdown" | "playing" | "finished";
@@ -156,7 +157,7 @@ export default function GameRunner({ song }: { song: Song }) {
     guitarSynth.pluckMuted(freqs[pos.row], 0.5);
   }, []);
 
-  const consumeTap = useCallback(
+  const _consumeTap = useCallback(
     (note: GameNote, at: number) => {
       const delta = Math.abs(note.time - at);
       const kind = classify(delta);
@@ -482,11 +483,8 @@ export default function GameRunner({ song }: { song: Song }) {
         pressedKeys={pressedKeys}
         chordPresets={chordPresets}
         activeHolds={activeHolds}
-        // eslint-disable-next-line react-hooks/refs -- 60fps game loop: refs read for display
         strumPending={strumPendingRef.current}
-        // eslint-disable-next-line react-hooks/refs
         consumed={consumedRef.current}
-        // eslint-disable-next-line react-hooks/refs
         missed={missedRef.current}
         bursts={bursts}
         strumming={mascotStrumming}
@@ -614,7 +612,7 @@ function Playfield({
   );
 }
 
-function GhostKeyboard({
+function _GhostKeyboard({
   pressedKeys,
   onGhostTap,
 }: {
@@ -712,14 +710,14 @@ function PreviewStrip({
   );
 }
 
-function computeGlow(dt: number): number {
+function _computeGlow(dt: number): number {
   if (dt > 2000) return 0;
   if (dt < -JUDGE_WINDOWS.miss) return 0;
   if (dt >= 0) return Math.max(0.05, 1 - dt / 2000);
   return Math.max(0, 1 - Math.abs(dt) / JUDGE_WINDOWS.miss);
 }
 
-function blendColor(hex: string, intensity: number): string {
+function _blendColor(hex: string, intensity: number): string {
   const alpha = Math.max(0.06, Math.min(0.9, intensity));
   return `${hex}${Math.round(alpha * 255)
     .toString(16)

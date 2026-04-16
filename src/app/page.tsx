@@ -205,7 +205,7 @@ const FEATURES = [
 
 const HOW = [
   { title: "Find the rows", body: "Numbers, QWERTY, ASDF, ZXCV. Four rows, four strings. Top row is the highest pitch." },
-  { title: "Pick a column", body: "Each vertical column is a chord: 1qaz = Am, 2wsx = C, 3edc = Em, 4rfv = G, and so on." },
+  { title: "Pick a column", body: "Each vertical column is a chord: 1qaz = Am, 2wsx = C, 3edc = Em, 4rfv = G, 5tgb = Dm, 6yhn = F." },
   { title: "Sweep it", body: "Hit two or more keys in a column — fast, top to bottom. That sweep is a strum. The faster you go, the tighter it sounds." },
 ];
 

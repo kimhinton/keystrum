@@ -12,8 +12,7 @@ import {
   type Lane,
   type Song,
 } from "@/lib/game/types";
-import { KEYBOARD_ROWS } from "@/lib/keyboard/layout";
-import type { ChordPreset } from "@/lib/keyboard/chord-presets";
+import { KEYBOARD_ROWS, type ChordPreset } from "@keystrum/layout";
 
 export interface ActiveHoldInfo {
   noteId: number;
@@ -315,7 +314,7 @@ export default function GameStage({
           y: restingRightHand.y + tapPressBounceY,
         };
 
-  const leftHand =
+  const _leftHand =
     strumHandPos !== null
       ? activeHold
         ? LANE_PRIMARY_CENTER[activeHold.lane]
@@ -448,7 +447,6 @@ export default function GameStage({
         KS-45 · MECHANICAL
       </text>
 
-      {/* eslint-disable-next-line react-hooks/refs -- animation timing ref inside key render */}
       {KEYBOARD_ROWS.map((row, rowIdx) =>
         row.map((keyChar, colIdx) => {
           const { x, y } = keyRect(rowIdx, colIdx);
@@ -462,9 +460,9 @@ export default function GameStage({
           const isHeld = activeHolds.some((h) => h.key === keyChar);
           const isStrumPending = lane !== null && strumPendingLanes.has(lane);
           const isPrimary = rowIdx === 1 && isLaneCol;
-          const isInPressedChord = lane !== null && lanesPressed.has(lane);
+          const _isInPressedChord = lane !== null && lanesPressed.has(lane);
           const chordFlashElapsed = lane !== null ? now - laneHitTimeRef.current[lane] : Infinity;
-          const chordFlashIntensity =
+          const _chordFlashIntensity =
             chordFlashElapsed >= 0 && chordFlashElapsed < CHORD_FLASH_DURATION
               ? 1 - chordFlashElapsed / CHORD_FLASH_DURATION
               : 0;
@@ -474,7 +472,7 @@ export default function GameStage({
           const isHandTapHit = tapPressKey !== null && tapPressKey === keyChar;
           const isHandPressing = isHandStrumHit || isHandTapHit;
 
-          const chordGlow = 0;
+          const _chordGlow = 0;
           const upcomingHint = (() => {
             if (!isLaneCol || intensity <= 0.08) return 0;
             if (upcoming?.kind === "strum") return intensity * 0.6;

@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 export const dynamic = "force-static";
 
 import { SONGS } from "@/lib/game/songs";
-import { buildChordInfo } from "@/lib/keyboard/chord-info";
+import { buildChordInfo } from "@keystrum/layout";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://keystrum.app";
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { buildChordInfo } from "@/lib/keyboard/chord-info";
+import { buildChordInfo } from "@keystrum/layout";
 
 export const metadata: Metadata = {
   title: "Chord dictionary",

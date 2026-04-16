@@ -51,3 +51,6 @@ src/lib/game/_archive/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# package manager lockfile (migrated to pnpm)
+package-lock.json
