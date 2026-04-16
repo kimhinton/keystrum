@@ -1,10 +1,12 @@
 import Link from "next/link";
 import KeyboardGuitar from "@/components/keyboard-guitar/KeyboardGuitar";
+import RecordBar from "@/components/instrument/RecordBar";
 
 export const metadata = {
   title: "Play — keystrum",
   description:
     "Play keystrum — a strum-based keyboard instrument. Four rows, six chords, one keyboard. No install needed.",
+  robots: { index: false, follow: false },
 };
 
 export default function InstrumentPage() {
@@ -24,6 +26,9 @@ export default function InstrumentPage() {
         </div>
         <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 sm:p-6 shadow-[0_20px_80px_-30px_rgba(255,107,53,0.35)]">
           <KeyboardGuitar theme="dark" />
+        </div>
+        <div className="mt-4">
+          <RecordBar />
         </div>
       </div>
     </div>

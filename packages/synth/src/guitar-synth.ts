@@ -20,6 +20,9 @@ export class GuitarSynth {
   private ctx: AudioContext | null = null;
   private masterGain: GainNode | null = null;
   private convolver: ConvolverNode | null = null;
+  private mediaRecorder: MediaRecorder | null = null;
+  private recordedChunks: Blob[] = [];
+  private _recording = false;
 
   async ensureContext(): Promise<AudioContext> {
     if (!this.ctx) {
@@ -53,6 +56,42 @@ export class GuitarSynth {
 
   setVolume(v: number) {
     if (this.masterGain) this.masterGain.gain.value = Math.max(0, Math.min(1, v));
+  }
+
+  get isRecording(): boolean {
+    return this._recording;
+  }
+
+  async startRecording(): Promise<void> {
+    const ctx = await this.ensureContext();
+    const dest = ctx.createMediaStreamDestination();
+    if (this.masterGain) this.masterGain.connect(dest);
+    this.recordedChunks = [];
+    const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+      ? "audio/webm;codecs=opus"
+      : "audio/webm";
+    this.mediaRecorder = new MediaRecorder(dest.stream, { mimeType });
+    this.mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) this.recordedChunks.push(e.data);
+    };
+    this.mediaRecorder.start(100);
+    this._recording = true;
+  }
+
+  stopRecording(): Promise<Blob> {
+    return new Promise((resolve) => {
+      if (!this.mediaRecorder || this.mediaRecorder.state !== "recording") {
+        resolve(new Blob([]));
+        return;
+      }
+      this.mediaRecorder.onstop = () => {
+        const blob = new Blob(this.recordedChunks, { type: this.mediaRecorder!.mimeType });
+        this.recordedChunks = [];
+        this._recording = false;
+        resolve(blob);
+      };
+      this.mediaRecorder.stop();
+    });
   }
 
   async pluck(freq: number, duration = 2.5, velocity = 0.8) {
