@@ -23,6 +23,15 @@ type RecPhase = "idle" | "recording" | "done";
 /*  InstrumentApp                                                      */
 /* ------------------------------------------------------------------ */
 
+const CHORDS = [
+  { name: "Am", keys: "1qaz", color: "#f43f5e" },
+  { name: "C", keys: "2wsx", color: "#f97316" },
+  { name: "Em", keys: "3edc", color: "#eab308" },
+  { name: "G", keys: "4rfv", color: "#22c55e" },
+  { name: "Dm", keys: "5tgb", color: "#3b82f6" },
+  { name: "F", keys: "6yhn", color: "#a855f7" },
+];
+
 export default function InstrumentApp() {
   // Volume
   const [volume, setVolume] = useState(0.5);
@@ -47,6 +56,9 @@ export default function InstrumentApp() {
 
   // Activity indicator
   const [active, setActive] = useState(false);
+
+  // Guide toggle
+  const [showGuide, setShowGuide] = useState(false);
 
   /* ---- Volume ---- */
   const handleVolume = useCallback((v: number) => {
@@ -197,6 +209,67 @@ export default function InstrumentApp() {
           {active ? "playing" : "ready"}
         </div>
       </header>
+
+      {/* ---- Chord Strip ---- */}
+      <div className="border-b border-white/5 bg-white/[0.02]">
+        <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-2">
+          <div className="flex items-center gap-1.5">
+            {CHORDS.map((c) => (
+              <div
+                key={c.name}
+                className="flex flex-col items-center rounded-md border px-2 py-1 sm:px-3"
+                style={{ borderColor: `${c.color}44`, background: `${c.color}10` }}
+              >
+                <span className="text-xs font-bold sm:text-sm" style={{ color: c.color }}>
+                  {c.name}
+                </span>
+                <span className="font-mono text-[8px] text-neutral-500 sm:text-[9px]">{c.keys}</span>
+              </div>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => setShowGuide((p) => !p)}
+            className="rounded border border-white/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-neutral-400 transition hover:border-white/20 hover:text-white"
+          >
+            {showGuide ? "Hide" : "Guide"}
+          </button>
+        </div>
+      </div>
+
+      {/* ---- Key Guide (collapsible) ---- */}
+      {showGuide && (
+        <div className="border-b border-white/5 bg-[#0d0d12]">
+          <div className="mx-auto max-w-4xl px-4 py-3">
+            <div className="grid grid-cols-2 gap-3 text-xs sm:grid-cols-4">
+              <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
+                <div className="mb-1 font-semibold text-[#ff6b35]">Strum</div>
+                <div className="text-neutral-400">
+                  Sweep a column top→bottom fast (under 90ms). e.g. <span className="font-mono text-white">1</span>→<span className="font-mono text-white">q</span>→<span className="font-mono text-white">a</span>→<span className="font-mono text-white">z</span> for Am
+                </div>
+              </div>
+              <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
+                <div className="mb-1 font-semibold text-neutral-200">Pick</div>
+                <div className="text-neutral-400">
+                  Tap a single key for one note. Each row = a different string pitch (top = highest).
+                </div>
+              </div>
+              <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
+                <div className="mb-1 font-semibold text-neutral-200">Mute</div>
+                <div className="text-neutral-400">
+                  Keys past column 6 (<span className="font-mono text-white">7-=</span>, <span className="font-mono text-white">u-]</span>, etc.) play palm-muted ghost notes.
+                </div>
+              </div>
+              <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
+                <div className="mb-1 font-semibold text-neutral-200">Rows</div>
+                <div className="text-neutral-400">
+                  <span className="font-mono text-white">1-6</span> = E4 &middot; <span className="font-mono text-white">q-y</span> = B3 &middot; <span className="font-mono text-white">a-h</span> = G3 &middot; <span className="font-mono text-white">z-n</span> = D3
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ---- Keyboard ---- */}
       <main className="flex flex-1 items-center justify-center p-4">

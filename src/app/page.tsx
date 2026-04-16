@@ -18,6 +18,7 @@ export default function HomePage() {
           <a href="#features" className="transition hover:text-white">Features</a>
           <Link href="/chords" className="transition hover:text-white">Chords</Link>
           <Link href="/play" className="transition hover:text-white">Play</Link>
+          <Link href="/instrument" className="transition hover:text-white">Instrument</Link>
           <a href="#faq" className="transition hover:text-white">FAQ</a>
           <a href="#instrument" className="rounded-full bg-[#ff6b35] px-4 py-1.5 text-xs font-semibold text-black transition hover:bg-[#ff8555]">
             Start playing →
@@ -60,10 +61,17 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div id="instrument" className="flex items-center">
+        <div id="instrument" className="flex flex-col items-center gap-3">
           <div className="w-full rounded-2xl border border-white/10 bg-white/[0.02] p-4 sm:p-6 shadow-[0_20px_80px_-30px_rgba(255,107,53,0.35)]">
             <KeyboardGuitar theme="dark" />
           </div>
+          <Link
+            href="/instrument"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-medium text-neutral-300 transition hover:border-[#ff6b35]/40 hover:text-white"
+          >
+            Open full instrument with recording &amp; metronome
+            <span className="text-[#ff6b35]">→</span>
+          </Link>
         </div>
       </section>
 
@@ -117,15 +125,15 @@ export default function HomePage() {
       </section>
 
       <section className="border-t border-white/5">
-        <div className="mx-auto grid max-w-7xl gap-6 px-6 py-20 md:grid-cols-2">
+        <div className="mx-auto grid max-w-7xl gap-6 px-6 py-20 md:grid-cols-3">
           <Link
             href="/play"
             className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#ff6b35]/15 via-[#ff6b35]/5 to-transparent p-8 transition hover:border-[#ff6b35]/40"
           >
-            <span className="text-xs font-mono uppercase tracking-widest text-[#ff6b35]">New · Practice mode</span>
-            <h3 className="text-2xl font-semibold tracking-tight">Learn the instrument with songs.</h3>
+            <span className="text-xs font-mono uppercase tracking-widest text-[#ff6b35]">Practice mode</span>
+            <h3 className="text-2xl font-semibold tracking-tight">Learn with songs.</h3>
             <p className="text-sm text-neutral-400">
-              A character shows you when to strum, hold, and mute. Three folk songs, six chord lanes, timing windows of 60/120/200 ms.
+              A character shows you when to strum, hold, and mute. Three folk songs, six chord lanes.
             </p>
             <div className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-[#ff6b35]">
               Start practicing
@@ -133,13 +141,27 @@ export default function HomePage() {
             </div>
           </Link>
           <Link
+            href="/instrument"
+            className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-red-500/15 via-red-500/5 to-transparent p-8 transition hover:border-red-500/40"
+          >
+            <span className="text-xs font-mono uppercase tracking-widest text-red-400">Full instrument</span>
+            <h3 className="text-2xl font-semibold tracking-tight">Play &amp; record.</h3>
+            <p className="text-sm text-neutral-400">
+              Distraction-free keyboard with metronome, volume control, and recording. Download or share your sessions.
+            </p>
+            <div className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-red-400">
+              Open instrument
+              <span className="transition group-hover:translate-x-0.5">→</span>
+            </div>
+          </Link>
+          <Link
             href="/chords"
             className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 transition hover:border-white/20"
           >
-            <span className="text-xs font-mono uppercase tracking-widest text-neutral-400">Reference · Chord dictionary</span>
+            <span className="text-xs font-mono uppercase tracking-widest text-neutral-400">Chord dictionary</span>
             <h3 className="text-2xl font-semibold tracking-tight">Six chords, six columns.</h3>
             <p className="text-sm text-neutral-400">
-              Am · C · Em · G · Dm · F. Each chord&apos;s notes, intervals, keyboard mapping, and the songs that made it famous.
+              Am · C · Em · G · Dm · F. Each chord&apos;s notes, intervals, keyboard mapping, and famous songs.
             </p>
             <div className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-neutral-200">
               Open dictionary
