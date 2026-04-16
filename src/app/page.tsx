@@ -189,8 +189,7 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 text-xs text-neutral-500 sm:flex-row sm:items-center">
           <div>© 2026 keystrum · MIT licensed</div>
           <div className="flex gap-5">
-            <a href="#" className="hover:text-neutral-300">GitHub</a>
-            <a href="#" className="hover:text-neutral-300">Privacy</a>
+            <a href="https://github.com/kimhinton/keystrum" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-300">GitHub</a>
           </div>
         </div>
       </footer>

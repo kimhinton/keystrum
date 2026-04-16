@@ -1,7 +1,21 @@
 {
   "name": "keystrum",
   "version": "0.1.0",
-  "private": true,
+  "description": "A browser-based keyboard instrument. Four rows, six chords, real strum detection. Karplus-Strong synthesis in Web Audio.",
+  "homepage": "https://keystrum.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kimhinton/keystrum.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "keyboard-instrument",
+    "web-audio",
+    "strum",
+    "karplus-strong",
+    "music",
+    "nextjs"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
