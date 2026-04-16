@@ -36,6 +36,19 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
   const isDragging = useRef(false);
   const dragKeys = useRef<Set<string>>(new Set());
 
+  // Responsive: measure container width, hide mute columns when narrow
+  const boardRef = useRef<HTMLDivElement>(null);
+  const [compact, setCompact] = useState(false);
+  useEffect(() => {
+    const el = boardRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      setCompact(entry.contentBoxSize[0].inlineSize < 500);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   const playKey = useCallback(async (key: string) => {
     const pos = getKeyPosition(key);
     if (!pos) return;
@@ -171,19 +184,21 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
       </div>
 
       <div
-        className="relative w-full overflow-x-auto rounded-xl p-3 sm:p-4"
+        ref={boardRef}
+        className="relative w-full overflow-hidden rounded-xl p-3 sm:p-4"
         style={{ background: palette.boardBg, border: `1px solid ${palette.boardBorder}`, touchAction: "none" }}
         onPointerDown={handleDragStart}
         onPointerMove={handleDragMove}
         onPointerUp={handleDragEnd}
         onPointerCancel={handleDragEnd}
       >
-        <div className="flex min-w-max flex-col gap-1.5 sm:gap-2">
+        <div className="flex w-full flex-col gap-1.5 sm:gap-2">
           {KEYBOARD_ROWS.map((row, rowIdx) => {
-            const offset = rowIdx * 14;
+            const visibleRow = compact ? row.slice(0, 6) : row;
+            const stagger = compact ? rowIdx * 6 : rowIdx * 14;
             return (
-              <div key={rowIdx} className="flex gap-1 sm:gap-1.5" style={{ paddingLeft: offset }}>
-                {row.map((key, colIdx) => {
+              <div key={rowIdx} className="flex gap-1 sm:gap-1.5" style={{ paddingLeft: stagger }}>
+                {visibleRow.map((key, colIdx) => {
                   const isActive = activeKeys.has(key);
                   const preset = getPresetForColumn(colIdx);
                   const presetColor = preset?.color;
@@ -213,7 +228,11 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
                           return n;
                         })
                       }
-                      className="relative flex size-9 sm:size-11 items-center justify-center rounded-md sm:rounded-lg font-mono text-xs sm:text-sm font-semibold transition-[transform,box-shadow,background] duration-75"
+                      className={`relative flex items-center justify-center rounded-md sm:rounded-lg font-mono font-semibold transition-[transform,box-shadow,background] duration-75 ${
+                        compact
+                          ? "flex-1 min-h-[2.75rem] text-[11px]"
+                          : "size-9 sm:size-11 text-xs sm:text-sm"
+                      }`}
                       style={{
                         background: isActive
                           ? isMuteCol
@@ -242,11 +261,14 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
                         boxShadow: isActive
                           ? `inset 0 2px 4px ${palette.shadowInset}`
                           : `0 2px 0 ${palette.shadowBase}`,
+                        aspectRatio: compact ? "1" : undefined,
                       }}
                     >
                       {preset && rowIdx === 0 && (
                         <span
-                          className="absolute -top-5 sm:-top-6 left-1/2 -translate-x-1/2 rounded-full px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold tracking-wide"
+                          className={`absolute left-1/2 -translate-x-1/2 rounded-full px-1.5 py-0.5 font-bold tracking-wide ${
+                            compact ? "-top-4 text-[8px]" : "-top-5 sm:-top-6 text-[9px] sm:text-[10px]"
+                          }`}
                           style={{
                             background: presetColor,
                             color: "#000",
@@ -268,8 +290,14 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
 
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono" style={{ color: palette.hintFg }}>
           <span>row 1 → E4 · row 2 → B3 · row 3 → G3 · row 4 → D3</span>
-          <span className="opacity-60">try: 1-q-a-z (Am) · 5-t-g-b (Dm) · 6-y-h-n (F) fast ↓↑</span>
-          <span className="opacity-60">· cols 7+ (7-= · u-] · j-&apos; · m-/): palm-muted ghost notes</span>
+          {compact ? (
+            <span className="opacity-60">swipe column top→bottom to strum</span>
+          ) : (
+            <>
+              <span className="opacity-60">try: 1-q-a-z (Am) · 5-t-g-b (Dm) · 6-y-h-n (F) fast ↓↑</span>
+              <span className="opacity-60">· cols 7+ (7-= · u-] · j-&apos; · m-/): palm-muted ghost notes</span>
+            </>
+          )}
         </div>
       </div>
     </div>

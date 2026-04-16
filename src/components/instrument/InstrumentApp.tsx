@@ -70,6 +70,40 @@ export default function InstrumentApp() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  // Wake Lock — prevent screen dim during playing/recording
+  const wakeLockRef = useRef<WakeLockSentinel | null>(null);
+  const requestWakeLock = useCallback(async () => {
+    if (!("wakeLock" in navigator) || wakeLockRef.current) return;
+    try {
+      wakeLockRef.current = await navigator.wakeLock.request("screen");
+      wakeLockRef.current.addEventListener("release", () => { wakeLockRef.current = null; });
+    } catch { /* user denied or not supported */ }
+  }, []);
+  const releaseWakeLock = useCallback(() => {
+    wakeLockRef.current?.release();
+    wakeLockRef.current = null;
+  }, []);
+
+  // Re-acquire wake lock on visibility change (OS releases it on tab switch)
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState === "visible" && (active || recPhase === "recording")) {
+        requestWakeLock();
+      }
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
+  }, [active, recPhase, requestWakeLock]);
+
+  // Acquire/release based on activity
+  useEffect(() => {
+    if (active || recPhase === "recording") requestWakeLock();
+    else releaseWakeLock();
+  }, [active, recPhase, requestWakeLock, releaseWakeLock]);
+
+  // Release on unmount
+  useEffect(() => () => { releaseWakeLock(); }, [releaseWakeLock]);
+
   /* ---- Volume ---- */
   const handleVolume = useCallback((v: number) => {
     setVolume(v);
