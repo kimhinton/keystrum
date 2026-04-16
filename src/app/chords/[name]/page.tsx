@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildChordInfo, getChordInfo } from "@keystrum/layout";
+import { SONGS } from "@/lib/game/songs";
 
 export function generateStaticParams() {
   return buildChordInfo().map((c) => ({ name: c.name }));
@@ -163,7 +164,31 @@ export default async function ChordPage(
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-3">
+        {(() => {
+          const songsWithChord = SONGS.filter((s) =>
+            Object.values(s.chordMap).includes(c.name)
+          );
+          if (songsWithChord.length === 0) return null;
+          return (
+            <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
+              <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-500">Practice songs using {c.name}</h2>
+              <div className="flex flex-wrap gap-2">
+                {songsWithChord.map((s) => (
+                  <Link
+                    key={s.id}
+                    href={`/play/${s.id}`}
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-sm transition hover:border-[#ff6b35]/40"
+                  >
+                    <span className="text-neutral-300">{s.title}</span>
+                    <span className="text-[10px] text-neutral-500">{s.difficulty}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
+
+        <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/"
             className="inline-flex items-center gap-2 rounded-full bg-[#ff6b35] px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-[#ff8555]"

@@ -80,7 +80,20 @@ export default async function PlaySong(
           <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">K</span>
           keystrum · Practice
         </Link>
-        <Link href="/play" className="text-xs text-neutral-400 hover:text-white">← Exit</Link>
+        <div className="flex items-center gap-3">
+          <div className="hidden items-center gap-1.5 sm:flex">
+            {Object.values(song.chordMap).filter((v, i, a) => a.indexOf(v) === i).map((chord) => (
+              <Link
+                key={chord}
+                href={`/chords/${chord}`}
+                className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[10px] font-mono text-neutral-400 transition hover:border-white/20 hover:text-white"
+              >
+                {chord}
+              </Link>
+            ))}
+          </div>
+          <Link href="/play" className="text-xs text-neutral-400 hover:text-white">← Exit</Link>
+        </div>
       </nav>
       <main className="flex min-h-[calc(100vh-49px)] items-center justify-center px-4 py-6">
         <GameRunner song={song} />
