@@ -36,14 +36,16 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
   const isDragging = useRef(false);
   const dragKeys = useRef<Set<string>>(new Set());
 
-  // Responsive: measure container width, hide mute columns when narrow
+  // Measure container → scale row stagger proportionally
   const boardRef = useRef<HTMLDivElement>(null);
-  const [compact, setCompact] = useState(false);
+  const [stagger, setStagger] = useState(14);
   useEffect(() => {
     const el = boardRef.current;
     if (!el) return;
     const ro = new ResizeObserver(([entry]) => {
-      setCompact(entry.contentBoxSize[0].inlineSize < 500);
+      const w = entry.contentBoxSize[0].inlineSize;
+      // 14px at ≥800px, scales down linearly, floor 3px
+      setStagger(Math.max(3, Math.min(14, Math.round(w * 0.018))));
     });
     ro.observe(el);
     return () => ro.disconnect();
@@ -157,9 +159,9 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
 
   return (
     <div className="w-full" style={{ ["--kg-active" as string]: palette.active }}>
-      <div className="mb-3 flex items-center gap-3 text-xs font-mono">
+      <div className="mb-2 sm:mb-3 flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs font-mono">
         <span
-          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 transition-colors"
+          className="inline-flex items-center gap-1.5 rounded-full px-2 sm:px-3 py-1 transition-colors"
           style={{ background: palette.chipBg, color: palette.chipFg }}
         >
           <span className="inline-block size-1.5 rounded-full" style={{ background: audioReady ? "#4ade80" : "#fb923c" }} />
@@ -167,137 +169,120 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
         </span>
         {lastChord && (
           <span
-            className="inline-flex items-center gap-2 rounded-full px-3 py-1 font-semibold"
+            className="inline-flex items-center gap-1 sm:gap-2 rounded-full px-2 sm:px-3 py-1 font-semibold"
             style={{ background: lastChord.color + "22", color: lastChord.color, border: `1px solid ${lastChord.color}44` }}
           >
-            {lastChord.name} <span className="opacity-60 font-normal">{lastChord.label}</span>
+            {lastChord.name} <span className="opacity-60 font-normal hidden sm:inline">{lastChord.label}</span>
           </span>
         )}
         {strumPulse && (
           <span
-            className="inline-flex items-center gap-1 rounded-full px-3 py-1 font-semibold animate-pulse"
+            className="inline-flex items-center gap-1 rounded-full px-2 sm:px-3 py-1 font-semibold animate-pulse"
             style={{ background: palette.strumBg, color: palette.strumFg }}
           >
-            {strumPulse.dir === "down" ? "↓ strum" : "↑ strum"}
+            {strumPulse.dir === "down" ? "↓" : "↑"}
           </span>
         )}
       </div>
 
       <div
         ref={boardRef}
-        className="relative w-full overflow-hidden rounded-xl p-3 sm:p-4"
+        className="relative w-full overflow-hidden rounded-lg sm:rounded-xl p-1.5 sm:p-3 md:p-4"
         style={{ background: palette.boardBg, border: `1px solid ${palette.boardBorder}`, touchAction: "none" }}
         onPointerDown={handleDragStart}
         onPointerMove={handleDragMove}
         onPointerUp={handleDragEnd}
         onPointerCancel={handleDragEnd}
       >
-        <div className="flex w-full flex-col gap-1.5 sm:gap-2">
-          {KEYBOARD_ROWS.map((row, rowIdx) => {
-            const visibleRow = compact ? row.slice(0, 6) : row;
-            const stagger = compact ? rowIdx * 6 : rowIdx * 14;
-            return (
-              <div key={rowIdx} className="flex gap-1 sm:gap-1.5" style={{ paddingLeft: stagger }}>
-                {visibleRow.map((key, colIdx) => {
-                  const isActive = activeKeys.has(key);
-                  const preset = getPresetForColumn(colIdx);
-                  const presetColor = preset?.color;
-                  const isStrumCol = strumPulse?.col === colIdx;
-                  const isMuteCol = !preset;
-                  return (
-                    <button
-                      type="button"
-                      key={key}
-                      data-key={key}
-                      onMouseDown={(e) => {
-                        e.preventDefault();
-                        setActiveKeys((prev) => new Set(prev).add(key));
-                        playKey(key);
-                      }}
-                      onMouseUp={() =>
-                        setActiveKeys((prev) => {
-                          const n = new Set(prev);
-                          n.delete(key);
-                          return n;
-                        })
-                      }
-                      onMouseLeave={() =>
-                        setActiveKeys((prev) => {
-                          const n = new Set(prev);
-                          n.delete(key);
-                          return n;
-                        })
-                      }
-                      className={`relative flex items-center justify-center rounded-md sm:rounded-lg font-mono font-semibold transition-[transform,box-shadow,background] duration-75 ${
-                        compact
-                          ? "flex-1 min-h-[2.75rem] text-[11px]"
-                          : "size-9 sm:size-11 text-xs sm:text-sm"
-                      }`}
-                      style={{
-                        background: isActive
+        <div className="flex w-full flex-col gap-[2px] sm:gap-1 md:gap-1.5">
+          {KEYBOARD_ROWS.map((row, rowIdx) => (
+            <div key={rowIdx} className="flex gap-[2px] sm:gap-1 md:gap-1.5" style={{ paddingLeft: rowIdx * stagger }}>
+              {row.map((key, colIdx) => {
+                const isActive = activeKeys.has(key);
+                const preset = getPresetForColumn(colIdx);
+                const presetColor = preset?.color;
+                const isStrumCol = strumPulse?.col === colIdx;
+                const isMuteCol = !preset;
+                return (
+                  <button
+                    type="button"
+                    key={key}
+                    data-key={key}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      setActiveKeys((prev) => new Set(prev).add(key));
+                      playKey(key);
+                    }}
+                    onMouseUp={() =>
+                      setActiveKeys((prev) => {
+                        const n = new Set(prev);
+                        n.delete(key);
+                        return n;
+                      })
+                    }
+                    onMouseLeave={() =>
+                      setActiveKeys((prev) => {
+                        const n = new Set(prev);
+                        n.delete(key);
+                        return n;
+                      })
+                    }
+                    className="relative flex flex-1 min-w-0 aspect-square items-center justify-center rounded sm:rounded-md md:rounded-lg font-mono text-[9px] sm:text-xs md:text-sm font-semibold transition-[transform,box-shadow,background] duration-75"
+                    style={{
+                      background: isActive
+                        ? isMuteCol
+                          ? palette.keyMuteActive
+                          : palette.keyActive
+                        : isMuteCol
+                        ? palette.keyMuteBg
+                        : palette.keyBg,
+                      color: isActive
+                        ? isMuteCol
+                          ? palette.keyMuteActiveText
+                          : palette.keyActiveText
+                        : isMuteCol
+                        ? palette.keyMuteText
+                        : palette.keyText,
+                      border: `1px ${isMuteCol ? "dashed" : "solid"} ${
+                        isActive
                           ? isMuteCol
-                            ? palette.keyMuteActive
-                            : palette.keyActive
+                            ? palette.keyMuteActiveBorder
+                            : palette.keyActiveBorder
                           : isMuteCol
-                          ? palette.keyMuteBg
-                          : palette.keyBg,
-                        color: isActive
-                          ? isMuteCol
-                            ? palette.keyMuteActiveText
-                            : palette.keyActiveText
-                          : isMuteCol
-                          ? palette.keyMuteText
-                          : palette.keyText,
-                        border: `1px ${isMuteCol ? "dashed" : "solid"} ${
-                          isActive
-                            ? isMuteCol
-                              ? palette.keyMuteActiveBorder
-                              : palette.keyActiveBorder
-                            : isMuteCol
-                            ? palette.keyMuteBorder
-                            : palette.keyBorder
-                        }`,
-                        transform: isActive ? "translateY(2px) scale(0.97)" : "translateY(0)",
-                        boxShadow: isActive
-                          ? `inset 0 2px 4px ${palette.shadowInset}`
-                          : `0 2px 0 ${palette.shadowBase}`,
-                        aspectRatio: compact ? "1" : undefined,
-                      }}
-                    >
-                      {preset && rowIdx === 0 && (
-                        <span
-                          className={`absolute left-1/2 -translate-x-1/2 rounded-full px-1.5 py-0.5 font-bold tracking-wide ${
-                            compact ? "-top-4 text-[8px]" : "-top-5 sm:-top-6 text-[9px] sm:text-[10px]"
-                          }`}
-                          style={{
-                            background: presetColor,
-                            color: "#000",
-                            opacity: isStrumCol ? 1 : 0.78,
-                            boxShadow: isStrumCol ? `0 0 12px ${presetColor}` : "none",
-                          }}
-                        >
-                          {preset.name}
-                        </span>
-                      )}
-                      <span className="select-none">{key.toUpperCase()}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            );
-          })}
+                          ? palette.keyMuteBorder
+                          : palette.keyBorder
+                      }`,
+                      transform: isActive ? "translateY(2px) scale(0.97)" : "translateY(0)",
+                      boxShadow: isActive
+                        ? `inset 0 2px 4px ${palette.shadowInset}`
+                        : `0 2px 0 ${palette.shadowBase}`,
+                    }}
+                  >
+                    {preset && rowIdx === 0 && (
+                      <span
+                        className="absolute -top-3.5 sm:-top-5 md:-top-6 left-1/2 -translate-x-1/2 rounded-full px-1 sm:px-1.5 py-0.5 text-[7px] sm:text-[9px] md:text-[10px] font-bold tracking-wide whitespace-nowrap"
+                        style={{
+                          background: presetColor,
+                          color: "#000",
+                          opacity: isStrumCol ? 1 : 0.78,
+                          boxShadow: isStrumCol ? `0 0 12px ${presetColor}` : "none",
+                        }}
+                      >
+                        {preset.name}
+                      </span>
+                    )}
+                    <span className="select-none">{key.toUpperCase()}</span>
+                  </button>
+                );
+              })}
+            </div>
+          ))}
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono" style={{ color: palette.hintFg }}>
-          <span>row 1 → E4 · row 2 → B3 · row 3 → G3 · row 4 → D3</span>
-          {compact ? (
-            <span className="opacity-60">swipe column top→bottom to strum</span>
-          ) : (
-            <>
-              <span className="opacity-60">try: 1-q-a-z (Am) · 5-t-g-b (Dm) · 6-y-h-n (F) fast ↓↑</span>
-              <span className="opacity-60">· cols 7+ (7-= · u-] · j-&apos; · m-/): palm-muted ghost notes</span>
-            </>
-          )}
+        <div className="mt-2 sm:mt-4 flex flex-wrap items-center gap-x-2 sm:gap-x-4 gap-y-1 text-[8px] sm:text-[11px] font-mono" style={{ color: palette.hintFg }}>
+          <span>row 1→E4 · row 2→B3 · row 3→G3 · row 4→D3</span>
+          <span className="opacity-60">try: 1-q-a-z (Am) · 5-t-g-b (Dm) fast ↓↑</span>
+          <span className="opacity-60 hidden sm:inline">· cols 7+ (7-= · u-] · j-&apos; · m-/): ghost notes</span>
         </div>
       </div>
     </div>

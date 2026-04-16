@@ -62,7 +62,7 @@ export default function HomePage() {
         </div>
 
         <div id="instrument" className="flex flex-col items-center gap-3">
-          <div className="w-full rounded-2xl border border-white/10 bg-white/[0.02] p-4 sm:p-6 shadow-[0_20px_80px_-30px_rgba(255,107,53,0.35)]">
+          <div className="w-full rounded-2xl border border-white/10 bg-white/[0.02] p-2 sm:p-4 md:p-6 shadow-[0_20px_80px_-30px_rgba(255,107,53,0.35)]">
             <KeyboardGuitar theme="dark" />
           </div>
           <Link
