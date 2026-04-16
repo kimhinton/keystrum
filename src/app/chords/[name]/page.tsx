@@ -34,10 +34,37 @@ export default async function ChordPage(
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "MusicComposition",
-    name: `${c.name} chord`,
-    alternativeHeadline: c.label,
-    description: `${c.label} chord. Notes: ${c.notes.join(", ")}. Intervals: ${c.intervals.join(", ")}.`,
+    "@graph": [
+      {
+        "@type": "MusicComposition",
+        name: `${c.name} chord`,
+        alternativeHeadline: c.label,
+        description: `${c.label} chord. Notes: ${c.notes.join(", ")}. Intervals: ${c.intervals.join(", ")}.`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "keystrum",
+            item: "https://keystrum.app",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Chord dictionary",
+            item: "https://keystrum.app/chords",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: `${c.name} chord`,
+            item: `https://keystrum.app/chords/${c.name}`,
+          },
+        ],
+      },
+    ],
   };
 
   return (

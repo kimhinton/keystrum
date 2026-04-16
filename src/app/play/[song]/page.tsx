@@ -33,8 +33,48 @@ export default async function PlaySong(
   const song = getSong(songId);
   if (!song) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MusicComposition",
+        name: song.title,
+        description: song.subtitle,
+        musicalKey: "C major / A minor",
+        musicCompositionForm: "Folk",
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "keystrum",
+            item: "https://keystrum.app",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Practice mode",
+            item: "https://keystrum.app/play",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: song.title,
+            item: `https://keystrum.app/play/${song.id}`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[#0b0b0f] text-neutral-100">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <nav className="flex items-center justify-between border-b border-white/5 bg-[#0b0b0f]/80 px-6 py-3 backdrop-blur-xl">
         <Link href="/play" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
           <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">K</span>

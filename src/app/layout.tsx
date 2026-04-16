@@ -47,6 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@keystrum_app",
     title: "keystrum — Strum your keyboard",
     description:
       "Four rows = four strings. Six columns = six chords. Browser-only. No install.",
@@ -81,6 +82,31 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "keystrum",
+      description:
+        "A strum-based keyboard instrument. Four rows, six chords, real strum detection. Browser-only.",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${SITE_URL}/chords/{search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "keystrum",
+      url: SITE_URL,
+      logo: `${SITE_URL}/apple-icon`,
+      sameAs: ["https://github.com/kimhinton/keystrum"],
+    },
+    {
       "@type": "SoftwareApplication",
       "@id": `${SITE_URL}/#software`,
       name: "keystrum",
@@ -90,15 +116,16 @@ const jsonLd = {
       description:
         "A strum-based keyboard instrument. QWERTY rows are strings, columns are chords. Sweep keys to strum, tap to pick. Karplus-Strong synthesis in the browser.",
       url: SITE_URL,
+      screenshot: `${SITE_URL}/opengraph-image`,
+      downloadUrl: SITE_URL,
       offers: {
         "@type": "Offer",
         price: "0",
         priceCurrency: "USD",
       },
-      author: {
-        "@type": "Organization",
-        name: "keystrum",
-      },
+      author: { "@id": `${SITE_URL}/#organization` },
+      featureList:
+        "Four-row keyboard mapping, Real strum detection, Karplus-Strong synthesis, Practice mode with songs, Chord dictionary",
     },
     {
       "@type": "FAQPage",
