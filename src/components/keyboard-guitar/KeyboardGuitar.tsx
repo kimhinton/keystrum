@@ -33,6 +33,8 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
   const [audioReady, setAudioReady] = useState(false);
   const recentByCol = useRef<Map<number, KeyEvent[]>>(new Map());
   const strumTimeout = useRef<number | null>(null);
+  const isDragging = useRef(false);
+  const dragKeys = useRef<Set<string>>(new Set());
 
   const playKey = useCallback(async (key: string) => {
     const pos = getKeyPosition(key);
@@ -103,6 +105,41 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
     };
   }, [playKey]);
 
+  const handleDragStart = useCallback((e: React.PointerEvent) => {
+    isDragging.current = true;
+    dragKeys.current = new Set();
+    const el = (e.target as HTMLElement).closest("[data-key]");
+    if (el) dragKeys.current.add(el.getAttribute("data-key")!);
+  }, []);
+
+  const handleDragMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (!isDragging.current) return;
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      if (!el) return;
+      const keyEl = el.closest("[data-key]") as HTMLElement | null;
+      if (!keyEl) return;
+      const key = keyEl.getAttribute("data-key")!;
+      if (dragKeys.current.has(key)) return;
+      dragKeys.current.add(key);
+      setActiveKeys((prev) => new Set(prev).add(key));
+      playKey(key);
+      window.setTimeout(() => {
+        setActiveKeys((prev) => {
+          const next = new Set(prev);
+          next.delete(key);
+          return next;
+        });
+      }, 180);
+    },
+    [playKey]
+  );
+
+  const handleDragEnd = useCallback(() => {
+    isDragging.current = false;
+    dragKeys.current = new Set();
+  }, []);
+
   const palette = themePalette(theme);
 
   return (
@@ -135,7 +172,11 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
 
       <div
         className="relative w-full overflow-x-auto rounded-xl p-3 sm:p-4"
-        style={{ background: palette.boardBg, border: `1px solid ${palette.boardBorder}` }}
+        style={{ background: palette.boardBg, border: `1px solid ${palette.boardBorder}`, touchAction: "none" }}
+        onPointerDown={handleDragStart}
+        onPointerMove={handleDragMove}
+        onPointerUp={handleDragEnd}
+        onPointerCancel={handleDragEnd}
       >
         <div className="flex min-w-max flex-col gap-1.5 sm:gap-2">
           {KEYBOARD_ROWS.map((row, rowIdx) => {
@@ -152,6 +193,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
                     <button
                       type="button"
                       key={key}
+                      data-key={key}
                       onMouseDown={(e) => {
                         e.preventDefault();
                         setActiveKeys((prev) => new Set(prev).add(key));

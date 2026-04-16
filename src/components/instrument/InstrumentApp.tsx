@@ -60,6 +60,16 @@ export default function InstrumentApp() {
   // Guide toggle
   const [showGuide, setShowGuide] = useState(false);
 
+  // Standalone (app) mode detection
+  const [isApp, setIsApp] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(display-mode: standalone)");
+    setIsApp(mq.matches || (navigator as unknown as { standalone?: boolean }).standalone === true);
+    const onChange = (e: MediaQueryListEvent) => setIsApp(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
   /* ---- Volume ---- */
   const handleVolume = useCallback((v: number) => {
     setVolume(v);
@@ -204,9 +214,19 @@ export default function InstrumentApp() {
           </span>
           keystrum
         </a>
-        <div className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-neutral-500">
-          {active && <span className="inline-block size-1.5 rounded-full bg-green-400" />}
-          {active ? "playing" : "ready"}
+        <div className="flex items-center gap-3">
+          {!isApp && (
+            <a
+              href="/"
+              className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 transition hover:text-neutral-300"
+            >
+              Back to site
+            </a>
+          )}
+          <div className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-neutral-500">
+            {active && <span className="inline-block size-1.5 rounded-full bg-green-400" />}
+            {active ? "playing" : "ready"}
+          </div>
         </div>
       </header>
 
