@@ -28,16 +28,6 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Verify Cloudflare auth
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: |
-          echo "Token length: ${#CLOUDFLARE_API_TOKEN}"
-          echo "Token first 4: ${CLOUDFLARE_API_TOKEN:0:4}..."
-          curl -s -o /dev/null -w "HTTP %{http_code}" \
-            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-            https://api.cloudflare.com/client/v4/user/tokens/verify
-
       - name: Deploy to Cloudflare Pages
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
