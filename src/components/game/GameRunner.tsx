@@ -460,7 +460,7 @@ export default function GameRunner({ song }: { song: Song }) {
     );
   }
 
-  const countdownLeft = phase === "countdown" ? Math.ceil((startedAtRef.current - performance.now()) / 1000) : 0;
+  const countdownLeft = phase === "countdown" ? Math.ceil(-now / 1000) : 0;
   const total = stats.perfect + stats.great + stats.good + stats.miss;
   const acc = total > 0 ? accuracyOf(stats) : 1;
 

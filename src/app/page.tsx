@@ -139,7 +139,7 @@ export default function HomePage() {
             <span className="text-xs font-mono uppercase tracking-widest text-neutral-400">Reference · Chord dictionary</span>
             <h3 className="text-2xl font-semibold tracking-tight">Six chords, six columns.</h3>
             <p className="text-sm text-neutral-400">
-              Am · C · Em · G · Dm · F. Each chord's notes, intervals, keyboard mapping, and the songs that made it famous.
+              Am · C · Em · G · Dm · F. Each chord&apos;s notes, intervals, keyboard mapping, and the songs that made it famous.
             </p>
             <div className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-neutral-200">
               Open dictionary

@@ -829,7 +829,7 @@ export default function GameStage({
               key={`spark-${offset}`}
               cx={strumHandPos.x + offset * 6 - 3}
               cy={strumHandPos.y + 14 + Math.abs(offset) * 2}
-              r={1.5 + Math.random() * 0.8}
+              r={1.5 + (offset + 2) * 0.27}
               fill="#ffb380"
               opacity={0.7 * (1 - strumRollProgress * 0.5)}
             />
