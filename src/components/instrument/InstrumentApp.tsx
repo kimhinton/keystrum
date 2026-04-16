@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { guitarSynth } from "@keystrum/synth";
 import KeyboardGuitar from "@/components/keyboard-guitar/KeyboardGuitar";
 
@@ -242,20 +243,20 @@ export default function InstrumentApp() {
     <div className="flex min-h-dvh flex-col bg-[#0b0b0f] text-neutral-100">
       {/* ---- Header ---- */}
       <header className="flex items-center justify-between border-b border-white/5 px-4 py-3">
-        <a href="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
+        <Link href="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
           <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">
             K
           </span>
           keystrum
-        </a>
+        </Link>
         <div className="flex items-center gap-3">
           {!isApp && (
-            <a
+            <Link
               href="/"
               className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 transition hover:text-neutral-300"
             >
               Back to site
-            </a>
+            </Link>
           )}
           <div className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-neutral-500">
             {active && <span className="inline-block size-1.5 rounded-full bg-green-400" />}
