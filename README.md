@@ -1,121 +1,165 @@
 <div align="center">
 
+<img src="public/hero-screenshot.png" alt="keystrum — Strum your keyboard" width="720" />
+
 # keystrum
 
-**Strum your keyboard.**
+### Strum your keyboard.
 
-A browser-based instrument that turns your QWERTY keyboard into a 6-chord strum machine. No install, no account, no samples — just Web Audio synthesis in a tab.
+A browser-based instrument that turns your QWERTY keyboard into a 6-chord strum machine.<br/>
+No install. No account. No samples. Just Web Audio synthesis in a tab.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Build](https://img.shields.io/github/actions/workflow/status/kimhinton/keystrum/ci.yml?branch=main&label=build)](https://github.com/kimhinton/keystrum/actions)
-[![GitHub stars](https://img.shields.io/github/stars/kimhinton/keystrum?style=social)](https://github.com/kimhinton/keystrum)
+[![GitHub stars](https://img.shields.io/github/stars/kimhinton/keystrum?style=social)](https://github.com/kimhinton/keystrum/stargazers)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 
-[Live Demo](https://keystrum.app) · [Play Songs](https://keystrum.app/play) · [Chord Dictionary](https://keystrum.app/chords)
+[**Live Demo**](https://keystrum.app) &nbsp;&middot;&nbsp; [**Play Songs**](https://keystrum.app/play) &nbsp;&middot;&nbsp; [**Chord Dictionary**](https://keystrum.app/chords)
 
 </div>
 
 ---
 
-## What is keystrum?
+## Demo
 
-keystrum is a new kind of instrument. Your keyboard's four rows become four strings. Each vertical column maps to a chord. Sweep a column top-to-bottom — that's a strum.
+<div align="center">
+
+<img src="public/demo.gif" alt="keystrum demo — strumming chords on a keyboard" width="720" />
+
+<sub>Strumming Am → C → Em → G → Dm → F, then a quick Am–F–C–G progression. All sound generated live in the browser.</sub>
+
+</div>
+
+## What is this?
+
+keystrum is a new kind of instrument. Not a simulator. Not a toy piano. A strum machine built for QWERTY.
+
+Your keyboard has four usable rows. Each row becomes a string. Each vertical column maps to a chord. Sweep a column top-to-bottom fast — that's a strum.
 
 ```
-        Am       C       Em       G       Dm       F
-      ┌──────┬──────┬──────┬──────┬──────┬──────┐
-Row 1 │  1   │  2   │  3   │  4   │  5   │  6   │  ← highest pitch
-      ├──────┼──────┼──────┼──────┼──────┼──────┤
-Row 2 │  Q   │  W   │  E   │  R   │  T   │  Y   │
-      ├──────┼──────┼──────┼──────┼──────┼──────┤
-Row 3 │  A   │  S   │  D   │  F   │  G   │  H   │
-      ├──────┼──────┼──────┼──────┼──────┼──────┤
-Row 4 │  Z   │  X   │  C   │  V   │  B   │  N   │  ← lowest pitch
-      └──────┴──────┴──────┴──────┴──────┴──────┘
-                                            Mute: J K L ;
+         Am       C       Em       G       Dm       F
+       ┌──────┬──────┬──────┬──────┬──────┬──────┐
+  E4   │  1   │  2   │  3   │  4   │  5   │  6   │  ← highest pitch
+       ├──────┼──────┼──────┼──────┼──────┼──────┤
+  B3   │  Q   │  W   │  E   │  R   │  T   │  Y   │
+       ├──────┼──────┼──────┼──────┼──────┼──────┤
+  G3   │  A   │  S   │  D   │  F   │  G   │  H   │
+       ├──────┼──────┼──────┼──────┼──────┼──────┤
+  D3   │  Z   │  X   │  C   │  V   │  B   │  N   │  ← lowest pitch
+       └──────┴──────┴──────┴──────┴──────┴──────┘
+                                              Mute keys: J  K  L  ;
 ```
 
-Hit `2`, `W`, `S`, `X` fast — you just strummed a C major chord.
+Hit `2` → `W` → `S` → `X` fast. You just strummed a **C major** chord.
 
 ## Features
 
-| Feature | Description |
-|---------|-------------|
-| **Strum detection** | Sweep 3+ keys in a column within 90ms — keystrum reads it as a downstroke. Reverse for upstroke. |
-| **6 diatonic chords** | Am · C · Em · G · Dm · F — all chords in C major / A minor, one per column. |
-| **Karplus-Strong synthesis** | Physical modeling algorithm running live in Web Audio. No samples, no downloads. |
-| **Practice mode** | 3 folk songs with an animated character showing when to strum, hold, and mute. |
-| **Mute keys** | J / K / L / ; — percussive palm-mute on the right hand home row. |
-| **Score sharing** | Best scores save locally. Share via URL. |
-| **Zero install** | Opens in a browser tab. No plugins, no account, no setup. |
+<table>
+<tr>
+<td width="50%">
+
+**Strum Detection**<br/>
+Sweep 3+ keys in a column within 90ms — keystrum reads it as a downstroke. Reverse for upstroke. It feels physical.
+
+**6 Diatonic Chords**<br/>
+Am · C · Em · G · Dm · F — all chords in C major / A minor. One chord per column.
+
+**Karplus-Strong Synthesis**<br/>
+Physical modeling algorithm generating sound live in Web Audio. No samples. No downloads. The sound exists only while you play.
+
+</td>
+<td width="50%">
+
+**Practice Mode**<br/>
+3 folk songs with an animated character showing when to strum, hold, and mute. Score saves locally.
+
+**Palm Mute**<br/>
+J / K / L / ; keys — percussive mute on the right-hand home row. Progressive difficulty introduces them one at a time.
+
+**Score Sharing**<br/>
+Best scores persist in localStorage. Share your run via URL.
+
+</td>
+</tr>
+</table>
 
 ## Quick Start
 
 ```bash
-# Clone
 git clone https://github.com/kimhinton/keystrum.git
 cd keystrum
-
-# Install dependencies
 npm install
-
-# Start dev server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) and press some keys.
+Open **http://localhost:3000** → press some keys → hear chords.
 
 ## Practice Mode
 
 Three songs with progressive difficulty:
 
-| Song | BPM | Time | Difficulty | Mute Keys |
-|------|-----|------|------------|-----------|
-| House of the Rising Sun | 72 | 4/4 | Easy | J only |
-| Scarborough Fair | 92 | 3/4 | Medium | J, K |
-| Greensleeves | 100 | 3/4 | Medium | J, K, L |
+| Song | BPM | Time Sig | Difficulty | Mute Keys | Description |
+|------|:---:|:--------:|:----------:|:---------:|-------------|
+| House of the Rising Sun | 72 | 4/4 | Easy | J | Am–C–Dm–F progression, single strums to pairs |
+| Scarborough Fair | 92 | 3/4 | Medium | J, K | Dorian waltz, introduces second mute key |
+| Greensleeves | 100 | 3/4 | Medium | J, K, L | Full 6-chord usage, three mute keys |
 
-Each song has two verses: Verse 1 teaches the pattern sparse, Verse 2 plays it full.
+Each song has two verses: **Verse 1** teaches the pattern sparse. **Verse 2** plays it full.
 
 ## Tech Stack
 
-- **Framework**: [Next.js](https://nextjs.org) 16 + React 19
-- **Styling**: [Tailwind CSS](https://tailwindcss.com) 4 + [shadcn/ui](https://ui.shadcn.com)
-- **Audio**: Web Audio API with Karplus-Strong synthesis
-- **State**: [Zustand](https://github.com/pmndrs/zustand) with localStorage persistence
-- **Language**: TypeScript
-- **Deploy**: Static export (`next build` → `out/`)
+| Layer | Technology |
+|-------|-----------|
+| Framework | [Next.js](https://nextjs.org/) 16 + [React](https://react.dev/) 19 |
+| Styling | [Tailwind CSS](https://tailwindcss.com/) 4 + [shadcn/ui](https://ui.shadcn.com/) |
+| Audio | Web Audio API — Karplus-Strong physical modeling synthesis |
+| State | [Zustand](https://github.com/pmndrs/zustand) with localStorage persistence |
+| Language | TypeScript (strict) |
+| Deploy | Static export → any CDN (Cloudflare Pages, Vercel, Netlify) |
 
 ## Project Structure
 
 ```
 src/
-├── app/                    # Next.js App Router pages
-│   ├── page.tsx            # Landing page with live instrument
-│   ├── play/               # Practice mode (song list + gameplay)
-│   ├── chords/             # Chord dictionary
-│   └── share/              # Score sharing
+├── app/                        # Next.js App Router pages
+│   ├── page.tsx                # Landing — hero + live instrument
+│   ├── play/                   # Practice mode (song list + gameplay)
+│   │   ├── page.tsx            # Song selection
+│   │   └── [song]/page.tsx     # Game screen
+│   ├── chords/                 # Chord dictionary
+│   │   ├── page.tsx            # All 6 chords
+│   │   └── [name]/page.tsx     # Individual chord detail
+│   └── share/                  # Score sharing
 ├── components/
-│   ├── game/               # GameRunner, GameStage (SVG), SongCard
-│   └── keyboard-guitar/    # KeyboardGuitar (homepage instrument)
+│   ├── game/                   # GameRunner (918L), GameStage SVG (987L), SongCard
+│   └── keyboard-guitar/        # Interactive keyboard on homepage
 └── lib/
-    ├── audio/              # Karplus-Strong synth engine
-    ├── game/               # Types, songs, scoring, state store
-    └── keyboard/           # Layout mapping, chord presets, chord info
+    ├── audio/                  # Karplus-Strong synth engine (148L)
+    ├── game/                   # Types, songs, judgment, Zustand store
+    └── keyboard/               # Layout mapping, chord presets, chord theory
 ```
 
-## Build
+## Build & Deploy
 
 ```bash
-npm run build    # Static export to out/
-npm run lint     # ESLint
+npm run build     # Static export → out/
+npm run lint      # ESLint
+npx tsc --noEmit  # Type check
 ```
 
-The build output in `out/` can be deployed to any static hosting (Cloudflare Pages, Vercel, Netlify, GitHub Pages).
+The `out/` directory is a static site — deploy to any hosting.
 
 ## Contributing
 
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Contributions welcome. See **[CONTRIBUTING.md](CONTRIBUTING.md)** for setup, code style, and how to add songs.
 
 ## License
 
-[MIT](LICENSE) — free to use, modify, and distribute.
+[MIT](LICENSE)
+
+---
+
+<div align="center">
+<sub>Built with Web Audio API · No animals were harmed in the making of this instrument</sub>
+</div>

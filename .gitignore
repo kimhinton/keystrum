@@ -41,6 +41,10 @@ yarn-error.log*
 
 # archives & zips
 *.zip
+
+# capture scripts temp
+scripts/*.webm
+scripts/palette.png
 src/components/game/_archive/
 src/lib/game/_archive/
 
