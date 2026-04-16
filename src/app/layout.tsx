@@ -52,6 +52,9 @@ export const metadata: Metadata = {
     description:
       "Four rows = four strings. Six columns = six chords. Browser-only. No install.",
   },
+  verification: {
+    google: "oMRjOguNwRMb4i_c48G45E9_sbFlOw_uIUxr5xo5iKA",
+  },
   robots: {
     index: true,
     follow: true,
