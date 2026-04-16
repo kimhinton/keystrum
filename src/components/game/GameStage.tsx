@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useMemo, useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import {
   ALL_LANES,
   JUDGE_WINDOWS,
@@ -203,7 +203,7 @@ export default function GameStage({
   }, [pressedKeys]);
 
   const nowRef = useRef(now);
-  nowRef.current = now;
+  useEffect(() => { nowRef.current = now; });
 
   const laneHitTimeRef = useRef<Record<Lane, number>>({ 0: -9999, 1: -9999, 2: -9999, 3: -9999, 4: -9999, 5: -9999 });
   useLayoutEffect(() => {
@@ -448,6 +448,7 @@ export default function GameStage({
         KS-45 · MECHANICAL
       </text>
 
+      {/* eslint-disable-next-line react-hooks/refs -- animation timing ref inside key render */}
       {KEYBOARD_ROWS.map((row, rowIdx) =>
         row.map((keyChar, colIdx) => {
           const { x, y } = keyRect(rowIdx, colIdx);

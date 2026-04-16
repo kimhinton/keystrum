@@ -482,8 +482,11 @@ export default function GameRunner({ song }: { song: Song }) {
         pressedKeys={pressedKeys}
         chordPresets={chordPresets}
         activeHolds={activeHolds}
+        // eslint-disable-next-line react-hooks/refs -- 60fps game loop: refs read for display
         strumPending={strumPendingRef.current}
+        // eslint-disable-next-line react-hooks/refs
         consumed={consumedRef.current}
+        // eslint-disable-next-line react-hooks/refs
         missed={missedRef.current}
         bursts={bursts}
         strumming={mascotStrumming}
