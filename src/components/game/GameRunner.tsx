@@ -35,7 +35,6 @@ import {
   type Song,
 } from "@/lib/game/types";
 
-const _PREVIEW_WINDOW_MS = 2600;
 const COUNTDOWN_MS = 3000;
 
 type Phase = "idle" | "countdown" | "playing" | "finished";
@@ -156,27 +155,6 @@ export default function GameRunner({ song }: { song: Song }) {
     const freqs = getChordFrequencies({ name: "open", label: "open", frets: [0, 0, 0, 0], color: "#888" });
     guitarSynth.pluckMuted(freqs[pos.row], 0.5);
   }, []);
-
-  const _consumeTap = useCallback(
-    (note: GameNote, at: number) => {
-      const delta = Math.abs(note.time - at);
-      const kind = classify(delta);
-      if (!kind) return;
-      consumedRef.current.add(note.id);
-      const multiplier = 1 + Math.min(combo, 50) * 0.01;
-      setScore((s) => s + JUDGE_SCORES[kind] * multiplier);
-      setCombo((c) => {
-        const next = c + 1;
-        setMaxCombo((m) => Math.max(m, next));
-        return next;
-      });
-      setStats((s) => ({ ...s, [kind]: s[kind] + 1 }));
-      pushBurst(note.lane, judgmentLabel(kind), judgmentColor(kind));
-      playChord(note.lane, 0.7);
-      flashMascotHit(note.lane);
-    },
-    [combo, pushBurst, playChord, flashMascotHit]
-  );
 
   const consumeHold = useCallback(
     (note: GameNote, key: string, at: number) => {
@@ -601,6 +579,10 @@ function Playfield({
           })}
         </div>
 
+        <div className="mt-1 md:hidden">
+          <GhostKeyboard pressedKeys={pressedKeys} onGhostTap={onGhostTap} />
+        </div>
+
         <div className="flex w-full max-w-[900px] items-center justify-between gap-4 rounded-lg border border-white/5 bg-white/[0.01] px-4 py-2 text-[11px] text-neutral-500">
           <span>
             <span className="text-neutral-300">Lane keys (1·q·a·z · 2·w·s·x · 3·e·d·c · 4·r·f·v · 5·t·g·b · 6·y·h·n)</span> play chords. <span className="text-neutral-300">Mute keys (J·K·L·;)</span> dampen strings.
@@ -612,7 +594,7 @@ function Playfield({
   );
 }
 
-function _GhostKeyboard({
+function GhostKeyboard({
   pressedKeys,
   onGhostTap,
 }: {
@@ -708,20 +690,6 @@ function PreviewStrip({
       )}
     </div>
   );
-}
-
-function _computeGlow(dt: number): number {
-  if (dt > 2000) return 0;
-  if (dt < -JUDGE_WINDOWS.miss) return 0;
-  if (dt >= 0) return Math.max(0.05, 1 - dt / 2000);
-  return Math.max(0, 1 - Math.abs(dt) / JUDGE_WINDOWS.miss);
-}
-
-function _blendColor(hex: string, intensity: number): string {
-  const alpha = Math.max(0.06, Math.min(0.9, intensity));
-  return `${hex}${Math.round(alpha * 255)
-    .toString(16)
-    .padStart(2, "0")}`;
 }
 
 function GameHud({
