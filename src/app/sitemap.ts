@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: SITE_URL, lastModified: gitLastModified("src/app/page.tsx"), changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/play`, lastModified: gitLastModified("src/app/play/page.tsx"), changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE_URL}/chords`, lastModified: gitLastModified("src/app/chords/page.tsx"), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/instrument`, lastModified: gitLastModified("src/app/instrument/page.tsx"), changeFrequency: "monthly", priority: 0.9 },
   ];
   const songDate = gitLastModified("src/lib/game/songs.ts");
   const songs = SONGS.map((s) => ({

@@ -94,6 +94,22 @@ export class GuitarSynth {
     });
   }
 
+  getVolume(): number {
+    return this.masterGain?.gain.value ?? 0.5;
+  }
+
+  async playClick(accent = false) {
+    const ctx = await this.ensureContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.frequency.value = accent ? 1200 : 800;
+    gain.gain.setValueAtTime(accent ? 0.35 : 0.2, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.04);
+  }
+
   async pluck(freq: number, duration = 2.5, velocity = 0.8) {
     const ctx = await this.ensureContext();
     const sampleRate = ctx.sampleRate;
