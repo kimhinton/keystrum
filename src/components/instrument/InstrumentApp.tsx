@@ -379,7 +379,7 @@ export default function InstrumentApp() {
       <main className="flex flex-1 items-center justify-center p-2 sm:p-4">
         <div className="w-full max-w-4xl">
           <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-2 sm:p-4 md:p-6 shadow-[0_20px_80px_-30px_rgba(255,107,53,0.35)]">
-            <KeyboardGuitar theme="dark" onActivityChange={setActive} touchOnly={native === true} />
+            <KeyboardGuitar theme="dark" onActivityChange={setActive} />
           </div>
         </div>
       </main>
