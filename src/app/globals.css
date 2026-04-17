@@ -121,13 +121,25 @@
   * {
     @apply border-border outline-ring/50;
   }
+  /* Dark background anchored at html level so safe-area padding areas render dark */
+  html, body {
+    background-color: #0b0b0f;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     /* Safe area insets for iOS notch / Dynamic Island / home indicator */
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
+  }
+  /* Native: reserve space for bottom tab bar (62px tab + safe-area) */
+  body[data-native="true"] {
+    padding-bottom: calc(62px + env(safe-area-inset-bottom));
+  }
+  /* Native: hide web-marketing sections pre-hydration to avoid flash */
+  body[data-native="true"] [data-web-only="true"] {
+    display: none !important;
   }
   html {
     @apply font-sans;

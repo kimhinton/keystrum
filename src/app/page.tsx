@@ -2,6 +2,7 @@ import Link from "next/link";
 import KeyboardGuitar from "@/components/keyboard-guitar/KeyboardGuitar";
 import RecordCTA from "@/components/home/RecordCTA";
 import MobileFallback from "@/components/home/MobileFallback";
+import NativeRedirect from "@/components/native/NativeRedirect";
 
 export const metadata = {
   title: "keystrum — Strum your keyboard",
@@ -10,7 +11,8 @@ export const metadata = {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#0b0b0f] text-neutral-100 font-sans">
+    <div className="min-h-screen bg-[#0b0b0f] text-neutral-100 font-sans" data-web-only="true">
+      <NativeRedirect />
       <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-white/5 bg-[#0b0b0f]/80 px-6 py-4 backdrop-blur-xl">
         <a href="#top" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
           <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">K</span>

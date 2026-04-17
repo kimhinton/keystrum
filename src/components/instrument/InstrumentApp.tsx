@@ -4,6 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { guitarSynth } from "@keystrum/synth";
 import KeyboardGuitar from "@/components/keyboard-guitar/KeyboardGuitar";
+import { useNative } from "@/lib/useNative";
+import { hapticPick } from "@/lib/haptics";
+import { saveRecording } from "@/lib/recordings";
+import { markTodayActive } from "@/lib/streak";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -69,7 +73,7 @@ export default function InstrumentApp() {
   // Guide toggle
   const [showGuide, setShowGuide] = useState(false);
 
-  // Standalone (app) mode detection
+  // Standalone (PWA) mode detection
   const [isApp, setIsApp] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia("(display-mode: standalone)");
@@ -78,6 +82,10 @@ export default function InstrumentApp() {
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
   }, []);
+
+  // Native (Capacitor) detection — controls back-to-site link + haptics
+  const native = useNative();
+  const hideWebChrome = isApp || native === true;
 
   // Wake Lock — prevent screen dim during playing/recording
   const wakeLockRef = useRef<WakeLockSentinel | null>(null);
@@ -171,6 +179,9 @@ export default function InstrumentApp() {
         { id, name: `Recording ${idx}`, blob, url, durationMs: dur, createdAt: Date.now() },
         ...prev,
       ]);
+      // Native only: persist to Library + bump streak
+      void saveRecording(blob, dur);
+      void markTodayActive();
     }
     setRecPhase("idle");
     setRecElapsed(0);
@@ -182,6 +193,7 @@ export default function InstrumentApp() {
       setRecPhase("unsupported");
       return;
     }
+    void hapticPick();
     recStartRef.current = Date.now();
     setRecElapsed(0);
     setRecPhase("recording");
@@ -265,17 +277,29 @@ export default function InstrumentApp() {
   const ss = String(Math.floor((recElapsed % 60000) / 1000)).padStart(2, "0");
 
   return (
-    <div className="flex min-h-dvh flex-col bg-[#0b0b0f] text-neutral-100">
+    <div
+      className="flex min-h-dvh flex-col bg-[#0b0b0f] text-neutral-100"
+      style={hideWebChrome ? { paddingBottom: "calc(62px + env(safe-area-inset-bottom))" } : undefined}
+    >
       {/* ---- Header ---- */}
       <header className="flex items-center justify-between border-b border-white/5 px-4 py-3">
-        <Link href="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
-          <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">
-            K
+        {hideWebChrome ? (
+          <span className="flex items-center gap-2 text-sm font-semibold tracking-tight">
+            <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">
+              K
+            </span>
+            keystrum
           </span>
-          keystrum
-        </Link>
+        ) : (
+          <Link href="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
+            <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">
+              K
+            </span>
+            keystrum
+          </Link>
+        )}
         <div className="flex items-center gap-3">
-          {!isApp && (
+          {!hideWebChrome && (
             <Link
               href="/"
               className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 transition hover:text-neutral-300"
@@ -355,7 +379,7 @@ export default function InstrumentApp() {
       <main className="flex flex-1 items-center justify-center p-2 sm:p-4">
         <div className="w-full max-w-4xl">
           <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-2 sm:p-4 md:p-6 shadow-[0_20px_80px_-30px_rgba(255,107,53,0.35)]">
-            <KeyboardGuitar theme="dark" onActivityChange={setActive} />
+            <KeyboardGuitar theme="dark" onActivityChange={setActive} touchOnly={native === true} />
           </div>
         </div>
       </main>

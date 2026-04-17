@@ -174,6 +174,10 @@ const jsonLd = {
   ],
 };
 
+import CapacitorBoot from "@/components/native/CapacitorBoot";
+import { NativeOnly } from "@/components/native/NativeOnly";
+import NativeTabBar from "@/components/native/NativeTabBar";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -186,13 +190,22 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var w=window;if(w.Capacitor&&w.Capacitor.isNativePlatform&&w.Capacitor.isNativePlatform()){document.body.setAttribute("data-native","true")}})();`,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <CapacitorBoot />
+        <NativeOnly>
+          <NativeTabBar />
+        </NativeOnly>
         <script
           dangerouslySetInnerHTML={{
-            __html: `if("serviceWorker"in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js")})}`,
+            __html: `if("serviceWorker"in navigator&&!window.Capacitor?.isNativePlatform?.()){window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js")})}`,
           }}
         />
       </body>

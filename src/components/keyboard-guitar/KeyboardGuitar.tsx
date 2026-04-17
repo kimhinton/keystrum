@@ -11,10 +11,13 @@ import {
   getPresetForColumn,
   type ChordPreset,
 } from "@keystrum/layout";
+import { hapticStrum } from "@/lib/haptics";
 
 export interface KeyboardGuitarProps {
   theme?: "dark" | "light" | "vibrant";
   onActivityChange?: (active: boolean) => void;
+  /** When true, hides the palm-mute columns (7-= / u-] / j-' / m-/) that have no touch counterpart. */
+  touchOnly?: boolean;
 }
 
 interface KeyEvent {
@@ -26,7 +29,7 @@ interface KeyEvent {
 
 const STRUM_WINDOW_MS = 90;
 
-export default function KeyboardGuitar({ theme = "light", onActivityChange }: KeyboardGuitarProps) {
+export default function KeyboardGuitar({ theme = "light", onActivityChange, touchOnly = false }: KeyboardGuitarProps) {
   const [activeKeys, setActiveKeys] = useState<Set<string>>(new Set());
   const [lastChord, setLastChord] = useState<ChordPreset | null>(null);
   const [strumPulse, setStrumPulse] = useState<{ col: number; dir: "down" | "up" } | null>(null);
@@ -81,6 +84,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
       const rows = pruned.map((e) => e.row);
       const isDown = rows[0] < rows[rows.length - 1];
       setStrumPulse({ col: pos.col, dir: isDown ? "down" : "up" });
+      void hapticStrum();
       if (strumTimeout.current) window.clearTimeout(strumTimeout.current);
       strumTimeout.current = window.setTimeout(() => setStrumPulse(null), 420);
     }
@@ -165,7 +169,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
           style={{ background: palette.chipBg, color: palette.chipFg }}
         >
           <span className="inline-block size-1.5 rounded-full" style={{ background: audioReady ? "#4ade80" : "#fb923c" }} />
-          {audioReady ? "audio live" : "press any key to start"}
+          {audioReady ? "audio live" : touchOnly ? "tap any pad to start" : "press any key to start"}
         </span>
         {lastChord && (
           <span
@@ -197,7 +201,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
         <div className="flex w-full flex-col gap-[2px] sm:gap-1 md:gap-1.5">
           {KEYBOARD_ROWS.map((row, rowIdx) => (
             <div key={rowIdx} className="flex gap-[2px] sm:gap-1 md:gap-1.5" style={{ paddingLeft: rowIdx * stagger }}>
-              {row.map((key, colIdx) => {
+              {(touchOnly ? row.slice(0, 6) : row).map((key, colIdx) => {
                 const isActive = activeKeys.has(key);
                 const preset = getPresetForColumn(colIdx);
                 const presetColor = preset?.color;
@@ -280,9 +284,18 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
         </div>
 
         <div className="mt-2 sm:mt-4 flex flex-wrap items-center gap-x-2 sm:gap-x-4 gap-y-1 text-[8px] sm:text-[11px] font-mono" style={{ color: palette.hintFg }}>
-          <span>row 1→E4 · row 2→B3 · row 3→G3 · row 4→D3</span>
-          <span className="opacity-60">try: 1-q-a-z (Am) · 5-t-g-b (Dm) fast ↓↑</span>
-          <span className="opacity-60 hidden sm:inline">· cols 7+ (7-= · u-] · j-&apos; · m-/): ghost notes</span>
+          {touchOnly ? (
+            <>
+              <span>4 rows = 4 strings · 6 columns = 6 chords</span>
+              <span className="opacity-60">drag down a column to strum</span>
+            </>
+          ) : (
+            <>
+              <span>row 1→E4 · row 2→B3 · row 3→G3 · row 4→D3</span>
+              <span className="opacity-60">try: 1-q-a-z (Am) · 5-t-g-b (Dm) fast ↓↑</span>
+              <span className="opacity-60 hidden sm:inline">· cols 7+ (7-= · u-] · j-&apos; · m-/): ghost notes</span>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -79,3 +79,6 @@ ios/App/App/public/
 ios/App/App/capacitor.config.json
 ios/App/App/capacitor.plugins.json
 ios/capacitor-cordova-ios-plugins/
+
+# CI artifacts downloaded locally (gh run download output)
+artifacts/
