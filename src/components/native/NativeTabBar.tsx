@@ -35,9 +35,9 @@ const TABS: Tab[] = [
     ),
   },
   {
-    href: "/play",
+    href: "/app/songs",
     label: "Songs",
-    match: (p) => p.startsWith("/play"),
+    match: (p) => p.startsWith("/app/songs") || p.startsWith("/play"),
     icon: (active) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2.4 : 2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M9 17V5l12-2v12" />
@@ -47,9 +47,9 @@ const TABS: Tab[] = [
     ),
   },
   {
-    href: "/chords",
+    href: "/app/chords",
     label: "Chords",
-    match: (p) => p.startsWith("/chords"),
+    match: (p) => p.startsWith("/app/chords") || p.startsWith("/chords"),
     icon: (active) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2.4 : 2} strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
