@@ -1,9 +1,9 @@
 import NativeSongs from "@/components/native/NativeSongs";
 
 export const metadata = {
-  robots: { index: false, follow: false },
+  title: "Songs — keystrum",
 };
 
-export default function AppSongsPage() {
+export default function NativeSongsPage() {
   return <NativeSongs />;
 }

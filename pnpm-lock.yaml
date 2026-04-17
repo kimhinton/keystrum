@@ -115,6 +115,76 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  native:
+    dependencies:
+      '@capacitor/app':
+        specifier: ^6.0.3
+        version: 6.0.3(@capacitor/core@6.2.1)
+      '@capacitor/core':
+        specifier: ^6.1.2
+        version: 6.2.1
+      '@capacitor/filesystem':
+        specifier: ^6.0.4
+        version: 6.0.4(@capacitor/core@6.2.1)
+      '@capacitor/haptics':
+        specifier: ^6.0.3
+        version: 6.0.3(@capacitor/core@6.2.1)
+      '@capacitor/keyboard':
+        specifier: ^6.0.4
+        version: 6.0.4(@capacitor/core@6.2.1)
+      '@capacitor/preferences':
+        specifier: ^6.0.4
+        version: 6.0.4(@capacitor/core@6.2.1)
+      '@capacitor/share':
+        specifier: ^6.0.3
+        version: 6.0.4(@capacitor/core@6.2.1)
+      '@capacitor/splash-screen':
+        specifier: ^6.0.3
+        version: 6.0.4(@capacitor/core@6.2.1)
+      '@capacitor/status-bar':
+        specifier: ^6.0.3
+        version: 6.0.3(@capacitor/core@6.2.1)
+      '@keystrum/layout':
+        specifier: workspace:*
+        version: link:../packages/layout
+      '@keystrum/synth':
+        specifier: workspace:*
+        version: link:../packages/synth
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      next:
+        specifier: 16.2.3
+        version: 16.2.3(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
+      zustand:
+        specifier: ^5.0.12
+        version: 5.0.12(@types/react@19.2.14)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4
+        version: 4.2.2
+      '@types/node':
+        specifier: ^20
+        version: 20.19.39
+      '@types/react':
+        specifier: ^19
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.3(@types/react@19.2.14)
+      tailwindcss:
+        specifier: ^4
+        version: 4.2.2
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   packages/layout: {}
 
   packages/synth: {}

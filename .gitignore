@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+**/node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -16,6 +17,10 @@
 # next.js
 /.next/
 /out/
+# native app separate Next.js build
+/native/.next/
+/native/out/
+/native/next-env.d.ts
 
 # production
 /build

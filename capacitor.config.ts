@@ -3,7 +3,7 @@ import type { CapacitorConfig } from "@capacitor/cli";
 const config: CapacitorConfig = {
   appId: "app.keystrum",
   appName: "keystrum",
-  webDir: "out",
+  webDir: "native/out",
   backgroundColor: "#0b0b0f",
   server: {
     androidScheme: "https",

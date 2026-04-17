@@ -1,9 +1,9 @@
 import NativeChords from "@/components/native/NativeChords";
 
 export const metadata = {
-  robots: { index: false, follow: false },
+  title: "Chords — keystrum",
 };
 
-export default function AppChordsPage() {
+export default function NativeChordsPage() {
   return <NativeChords />;
 }

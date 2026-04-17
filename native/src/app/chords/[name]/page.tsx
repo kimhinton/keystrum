@@ -8,10 +8,10 @@ export function generateStaticParams() {
 }
 
 export const metadata = {
-  robots: { index: false, follow: false },
+  title: "Chord — keystrum",
 };
 
-export default async function AppChordPage({
+export default async function NativeChordDetailPage({
   params,
 }: {
   params: Promise<{ name: string }>;
