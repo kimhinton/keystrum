@@ -1,0 +1,77 @@
+name: iOS Build
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 40
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Select latest Xcode
+        run: sudo xcode-select -switch /Applications/Xcode.app
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js static export
+        run: npm run build
+
+      - name: Verify Capacitor iOS platform exists
+        run: |
+          if [ ! -d "ios/App" ]; then
+            echo "::error::The 'ios/App' directory is missing. Run 'npx cap add ios' locally and commit."
+            exit 1
+          fi
+
+      - name: Capacitor sync
+        run: npx cap sync ios
+
+      - name: Install CocoaPods
+        working-directory: ios/App
+        run: pod install --repo-update
+
+      - name: Build archive (unsigned)
+        working-directory: ios/App
+        run: |
+          xcodebuild \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -archivePath "$PWD/build/App.xcarchive" \
+            -sdk iphoneos \
+            -destination "generic/platform=iOS" \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            archive
+
+      - name: Upload unsigned archive artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: keystrum-ios-xcarchive-unsigned
+          path: ios/App/build/App.xcarchive
+          if-no-files-found: error
+
+# Signing note:
+#   Output is UNSIGNED — NOT submittable to App Store as-is.
+#   To produce a signed IPA for App Store Connect:
+#   1. Enroll Apple Developer Program ($99/yr) → get Team ID
+#   2. Create App ID 'app.keystrum' in developer.apple.com/account (match capacitor.config.ts)
+#   3. Generate App Store Connect API key (.p8) + Issuer ID + Key ID
+#   4. Add GitHub Secrets: APP_STORE_CONNECT_KEY_BASE64, APP_STORE_CONNECT_KEY_ID, APP_STORE_CONNECT_ISSUER_ID, APPLE_TEAM_ID
+#   5. Replace the unsigned build step with a signed `xcodebuild archive + exportArchive` + `xcrun altool` upload sequence, or use Fastlane Match + Pilot.

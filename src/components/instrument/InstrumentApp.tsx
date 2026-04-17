@@ -18,7 +18,14 @@ interface Recording {
   createdAt: number;
 }
 
-type RecPhase = "idle" | "recording" | "done";
+type RecPhase = "idle" | "recording" | "done" | "unsupported";
+
+const MAX_REC_DURATION_MS = 30_000;
+const REC_MIME_PREFERENCES = ["audio/mp4", "audio/webm;codecs=opus", "audio/webm"];
+
+function extFor(mimeType: string): string {
+  return mimeType.startsWith("audio/mp4") ? "m4a" : "webm";
+}
 
 /* ------------------------------------------------------------------ */
 /*  InstrumentApp                                                      */
@@ -48,6 +55,7 @@ export default function InstrumentApp() {
   const [recPhase, setRecPhase] = useState<RecPhase>("idle");
   const [recElapsed, setRecElapsed] = useState(0);
   const recTimerRef = useRef<number | null>(null);
+  const recHardStopRef = useRef<number | null>(null);
   const recStartRef = useRef(0);
 
   // Recordings list
@@ -146,18 +154,13 @@ export default function InstrumentApp() {
   }, []);
 
   /* ---- Recording ---- */
-  const startRec = useCallback(async () => {
-    await guitarSynth.startRecording();
-    recStartRef.current = Date.now();
-    setRecElapsed(0);
-    setRecPhase("recording");
-    recTimerRef.current = window.setInterval(() => {
-      setRecElapsed(Date.now() - recStartRef.current);
-    }, 100);
+  const clearRecTimers = useCallback(() => {
+    if (recTimerRef.current) { window.clearInterval(recTimerRef.current); recTimerRef.current = null; }
+    if (recHardStopRef.current) { window.clearTimeout(recHardStopRef.current); recHardStopRef.current = null; }
   }, []);
 
   const stopRec = useCallback(async () => {
-    if (recTimerRef.current) window.clearInterval(recTimerRef.current);
+    clearRecTimers();
     const blob = await guitarSynth.stopRecording();
     if (blob.size > 0) {
       const id = crypto.randomUUID();
@@ -171,7 +174,22 @@ export default function InstrumentApp() {
     }
     setRecPhase("idle");
     setRecElapsed(0);
-  }, [recordings.length]);
+  }, [recordings.length, clearRecTimers]);
+
+  const startRec = useCallback(async () => {
+    const started = await guitarSynth.startRecording(REC_MIME_PREFERENCES);
+    if (!started) {
+      setRecPhase("unsupported");
+      return;
+    }
+    recStartRef.current = Date.now();
+    setRecElapsed(0);
+    setRecPhase("recording");
+    recTimerRef.current = window.setInterval(() => {
+      setRecElapsed(Date.now() - recStartRef.current);
+    }, 100);
+    recHardStopRef.current = window.setTimeout(() => { void stopRec(); }, MAX_REC_DURATION_MS);
+  }, [stopRec]);
 
   /* ---- Playback ---- */
   const playRecording = useCallback(
@@ -197,13 +215,13 @@ export default function InstrumentApp() {
     const a = document.createElement("a");
     a.href = rec.url;
     const ts = new Date(rec.createdAt).toISOString().slice(0, 19).replace(/[:T]/g, "-");
-    a.download = `keystrum-${ts}.webm`;
+    a.download = `keystrum-${ts}.${extFor(rec.blob.type)}`;
     a.click();
   }, []);
 
   const shareRecording = useCallback(async (rec: Recording) => {
     const ts = new Date(rec.createdAt).toISOString().slice(0, 19).replace(/[:T]/g, "-");
-    const file = new File([rec.blob], `keystrum-${ts}.webm`, { type: rec.blob.type });
+    const file = new File([rec.blob], `keystrum-${ts}.${extFor(rec.blob.type)}`, { type: rec.blob.type });
     if (navigator.canShare?.({ files: [file] })) {
       await navigator.share({ files: [file], title: "keystrum recording" });
     }
@@ -229,11 +247,18 @@ export default function InstrumentApp() {
   useEffect(() => {
     return () => {
       if (recTimerRef.current) window.clearInterval(recTimerRef.current);
+      if (recHardStopRef.current) window.clearTimeout(recHardStopRef.current);
       if (metroRef.current) window.clearInterval(metroRef.current);
       if (audioRef.current) audioRef.current.pause();
       recordings.forEach((r) => URL.revokeObjectURL(r.url));
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const onPageHide = () => { guitarSynth.dispose(); };
+    window.addEventListener("pagehide", onPageHide);
+    return () => window.removeEventListener("pagehide", onPageHide);
   }, []);
 
   const mm = String(Math.floor(recElapsed / 60000)).padStart(2, "0");
@@ -422,6 +447,9 @@ export default function InstrumentApp() {
                 <span className="font-mono text-sm text-red-400">
                   {mm}:{ss}
                 </span>
+                <span className="font-mono text-[10px] text-neutral-500">
+                  {Math.max(0, Math.ceil((MAX_REC_DURATION_MS - recElapsed) / 1000))}s left
+                </span>
                 <button
                   type="button"
                   onClick={stopRec}
@@ -431,6 +459,11 @@ export default function InstrumentApp() {
                   Stop
                 </button>
               </>
+            )}
+            {recPhase === "unsupported" && (
+              <span className="font-mono text-[11px] text-neutral-500">
+                Recording unavailable on this browser
+              </span>
             )}
           </div>
         </div>

@@ -1,0 +1,92 @@
+name: Android Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: "Artifact type"
+        required: true
+        default: "aab"
+        type: choice
+        options: [aab, apk]
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Setup Java 17 (Gradle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js static export
+        run: npm run build
+
+      - name: Verify Capacitor android platform exists
+        run: |
+          if [ ! -d "android" ]; then
+            echo "::error::The 'android' platform directory is missing. Run 'npx cap add android' locally and commit."
+            exit 1
+          fi
+
+      - name: Capacitor sync
+        run: npx cap sync android
+
+      - name: Build release bundle (AAB)
+        if: ${{ github.event.inputs.build_type == 'aab' || startsWith(github.ref, 'refs/tags/') }}
+        run: |
+          cd android
+          chmod +x ./gradlew
+          ./gradlew bundleRelease
+
+      - name: Build release APK
+        if: ${{ github.event.inputs.build_type == 'apk' }}
+        run: |
+          cd android
+          chmod +x ./gradlew
+          ./gradlew assembleRelease
+
+      - name: Upload AAB artifact
+        if: ${{ github.event.inputs.build_type == 'aab' || startsWith(github.ref, 'refs/tags/') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: keystrum-android-aab
+          path: android/app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
+
+      - name: Upload APK artifact
+        if: ${{ github.event.inputs.build_type == 'apk' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: keystrum-android-apk
+          path: android/app/build/outputs/apk/release/*.apk
+          if-no-files-found: error
+
+# Signing note:
+#   Output is UNSIGNED. To produce a Play-Store-submittable AAB:
+#   1. Generate an upload keystore once: keytool -genkey -v -keystore keystrum.keystore -keyalg RSA -keysize 2048 -validity 10000 -alias keystrum
+#   2. Store as GitHub Secrets: KEYSTORE_B64, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD
+#   3. Add a signing step before `bundleRelease` that decodes KEYSTORE_B64 into android/app/keystrum.keystore and writes a signing config.
+#   4. Or upload the unsigned AAB to Play Console and enable Play App Signing (Google signs for you).

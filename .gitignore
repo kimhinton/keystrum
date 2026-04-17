@@ -54,3 +54,17 @@ next-env.d.ts
 
 # package manager lockfile (migrated to pnpm)
 package-lock.json
+
+# capacitor — commit android/ and ios/ source, ignore per-developer + build outputs
+android/local.properties
+android/.gradle/
+android/.idea/
+android/app/build/
+android/captures/
+android/app/release/
+ios/App/Pods/
+ios/App/build/
+ios/DerivedData/
+ios/App/*.xcuserstate
+ios/App/App.xcworkspace/xcuserdata/
+ios/App/App.xcodeproj/xcuserdata/

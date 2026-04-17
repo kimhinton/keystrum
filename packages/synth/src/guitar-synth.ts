@@ -62,20 +62,42 @@ export class GuitarSynth {
     return this._recording;
   }
 
-  async startRecording(): Promise<void> {
+  async startRecording(preferredMimeTypes?: string[]): Promise<{ mimeType: string } | null> {
+    if (typeof MediaRecorder === "undefined") return null;
     const ctx = await this.ensureContext();
+    const candidates =
+      preferredMimeTypes && preferredMimeTypes.length > 0
+        ? preferredMimeTypes
+        : ["audio/webm;codecs=opus", "audio/webm"];
+    const mimeType = candidates.find((m) => {
+      try { return MediaRecorder.isTypeSupported(m); } catch { return false; }
+    });
+    if (!mimeType) return null;
     const dest = ctx.createMediaStreamDestination();
     if (this.masterGain) this.masterGain.connect(dest);
     this.recordedChunks = [];
-    const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
-      ? "audio/webm;codecs=opus"
-      : "audio/webm";
     this.mediaRecorder = new MediaRecorder(dest.stream, { mimeType });
     this.mediaRecorder.ondataavailable = (e) => {
       if (e.data.size > 0) this.recordedChunks.push(e.data);
     };
     this.mediaRecorder.start(100);
     this._recording = true;
+    return { mimeType };
+  }
+
+  dispose(): void {
+    if (this.mediaRecorder && this.mediaRecorder.state === "recording") {
+      try { this.mediaRecorder.stop(); } catch { /* ignore */ }
+    }
+    this.mediaRecorder = null;
+    this.recordedChunks = [];
+    this._recording = false;
+    if (this.ctx && this.ctx.state !== "closed") {
+      this.ctx.close().catch(() => { /* ignore */ });
+    }
+    this.ctx = null;
+    this.masterGain = null;
+    this.convolver = null;
   }
 
   stopRecording(): Promise<Blob> {

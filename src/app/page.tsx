@@ -1,5 +1,7 @@
 import Link from "next/link";
 import KeyboardGuitar from "@/components/keyboard-guitar/KeyboardGuitar";
+import RecordCTA from "@/components/home/RecordCTA";
+import MobileFallback from "@/components/home/MobileFallback";
 
 export const metadata = {
   title: "keystrum — Strum your keyboard",
@@ -74,6 +76,8 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      <RecordCTA />
 
       <section className="border-y border-white/5 bg-white/[0.015]">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-3 px-6 py-5 text-xs text-neutral-500">
@@ -215,6 +219,8 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+
+      <MobileFallback />
     </div>
   );
 }
