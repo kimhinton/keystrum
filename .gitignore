@@ -55,16 +55,27 @@ next-env.d.ts
 # package manager lockfile (migrated to pnpm)
 package-lock.json
 
-# capacitor — commit android/ and ios/ source, ignore per-developer + build outputs
+# capacitor — commit android/ and ios/ source, ignore per-developer + build + generated
 android/local.properties
 android/.gradle/
 android/.idea/
 android/app/build/
 android/captures/
 android/app/release/
+# capacitor regenerates these on `cap sync`:
+android/app/src/main/assets/public/
+android/app/src/main/assets/capacitor.config.json
+android/app/src/main/assets/capacitor.plugins.json
+android/capacitor-cordova-android-plugins/
+
 ios/App/Pods/
 ios/App/build/
 ios/DerivedData/
 ios/App/*.xcuserstate
 ios/App/App.xcworkspace/xcuserdata/
 ios/App/App.xcodeproj/xcuserdata/
+# capacitor regenerates these on `cap sync`:
+ios/App/App/public/
+ios/App/App/capacitor.config.json
+ios/App/App/capacitor.plugins.json
+ios/capacitor-cordova-ios-plugins/

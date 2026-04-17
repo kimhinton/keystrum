@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">keystrum</string>
+    <string name="title_activity_main">keystrum</string>
+    <string name="package_name">app.keystrum</string>
+    <string name="custom_url_scheme">app.keystrum</string>
+</resources>
