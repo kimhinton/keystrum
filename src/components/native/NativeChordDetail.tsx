@@ -43,8 +43,8 @@ export default function NativeChordDetail({
   );
 
   return (
-    <div className="min-h-dvh bg-[#0b0b0f] text-neutral-100">
-      <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-white/5 bg-[#0b0b0f]/90 px-4 py-3 backdrop-blur-xl">
+    <div className="min-h-dvh bg-[#0E0E12] text-neutral-100">
+      <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-white/5 bg-[#0E0E12]/90 px-4 py-3 backdrop-blur-xl">
         <Link
           href="/app/chords"
           onClick={() => {

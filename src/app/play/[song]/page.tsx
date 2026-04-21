@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GameRunner from "@/components/game/GameRunner";
 import { SONGS, getSong } from "@/lib/game/songs";
+import { Logo } from "@/components/brand/Logo";
 
 export function generateStaticParams() {
   return SONGS.map((s) => ({ song: s.id }));
@@ -70,14 +71,14 @@ export default async function PlaySong(
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0b0f] text-neutral-100">
+    <div className="min-h-screen bg-[#0E0E12] text-neutral-100">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <nav className="flex items-center justify-between border-b border-white/5 bg-[#0b0b0f]/80 px-6 py-3 backdrop-blur-xl">
+      <nav className="flex items-center justify-between border-b border-white/5 bg-[#0E0E12]/80 px-6 py-3 backdrop-blur-xl">
         <Link href="/play" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
-          <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">K</span>
+          <Logo size={20} className="shrink-0" />
           keystrum · Practice
         </Link>
         <div className="flex items-center gap-3">

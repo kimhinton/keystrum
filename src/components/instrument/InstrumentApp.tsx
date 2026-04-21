@@ -8,6 +8,7 @@ import { useNative } from "@/lib/useNative";
 import { hapticPick } from "@/lib/haptics";
 import { saveRecording } from "@/lib/recordings";
 import { markTodayActive } from "@/lib/streak";
+import { Logo } from "@/components/brand/Logo";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -278,23 +279,19 @@ export default function InstrumentApp() {
 
   return (
     <div
-      className="flex min-h-dvh flex-col bg-[#0b0b0f] text-neutral-100"
+      className="flex min-h-dvh flex-col bg-[#0E0E12] text-neutral-100"
       style={hideWebChrome ? { paddingBottom: "calc(62px + env(safe-area-inset-bottom))" } : undefined}
     >
       {/* ---- Header ---- */}
       <header className="flex items-center justify-between border-b border-white/5 px-4 py-3">
         {hideWebChrome ? (
           <span className="flex items-center gap-2 text-sm font-semibold tracking-tight">
-            <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">
-              K
-            </span>
+            <Logo size={20} className="shrink-0" />
             keystrum
           </span>
         ) : (
           <Link href="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
-            <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">
-              K
-            </span>
+            <Logo size={20} className="shrink-0" />
             keystrum
           </Link>
         )}
@@ -347,7 +344,7 @@ export default function InstrumentApp() {
           <div className="mx-auto max-w-4xl px-4 py-3">
             <div className="grid grid-cols-2 gap-3 text-xs sm:grid-cols-4">
               <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
-                <div className="mb-1 font-semibold text-[#ff6b35]">Strum</div>
+                <div className="mb-1 font-semibold text-[#FF3864]">Strum</div>
                 <div className="text-neutral-400">
                   Sweep a column top→bottom fast (under 90ms). e.g. <span className="font-mono text-white">1</span>→<span className="font-mono text-white">q</span>→<span className="font-mono text-white">a</span>→<span className="font-mono text-white">z</span> for Am
                 </div>
@@ -378,7 +375,7 @@ export default function InstrumentApp() {
       {/* ---- Keyboard ---- */}
       <main className="flex flex-1 items-center justify-center p-2 sm:p-4">
         <div className="w-full max-w-4xl">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-2 sm:p-4 md:p-6 shadow-[0_20px_80px_-30px_rgba(255,107,53,0.35)]">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-2 sm:p-4 md:p-6 shadow-[0_20px_80px_-30px_rgba(255,56,100,0.35)]">
             <KeyboardGuitar theme="dark" onActivityChange={setActive} />
           </div>
         </div>
@@ -396,7 +393,7 @@ export default function InstrumentApp() {
               max={100}
               value={Math.round(volume * 100)}
               onChange={(e) => handleVolume(Number(e.target.value) / 100)}
-              className="h-1 w-20 cursor-pointer appearance-none rounded-full bg-white/10 accent-[#ff6b35] sm:w-28"
+              className="h-1 w-20 cursor-pointer appearance-none rounded-full bg-white/10 accent-[#FF3864] sm:w-28"
             />
             <span className="w-7 text-right font-mono text-[10px] text-neutral-400">
               {Math.round(volume * 100)}
@@ -410,7 +407,7 @@ export default function InstrumentApp() {
               onClick={() => setMetroOn((p) => !p)}
               className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition ${
                 metroOn
-                  ? "bg-[#ff6b35] text-black"
+                  ? "bg-[#FF3864] text-black"
                   : "border border-white/10 bg-white/[0.03] text-neutral-300 hover:border-white/20"
               }`}
             >
@@ -445,7 +442,7 @@ export default function InstrumentApp() {
                     key={i}
                     className="inline-block size-2 rounded-full transition-colors"
                     style={{
-                      background: metroBeat === i ? (i === 0 ? "#ff6b35" : "#fbbf24") : "#333",
+                      background: metroBeat === i ? (i === 0 ? "#FF3864" : "#fbbf24") : "#333",
                     }}
                   />
                 ))}
@@ -516,7 +513,7 @@ export default function InstrumentApp() {
                       onClick={() => playRecording(rec)}
                       className={`flex size-7 items-center justify-center rounded-full transition ${
                         isPlaying
-                          ? "bg-[#ff6b35] text-black"
+                          ? "bg-[#FF3864] text-black"
                           : "border border-white/10 text-neutral-400 hover:border-white/20 hover:text-white"
                       }`}
                     >

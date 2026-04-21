@@ -22,7 +22,7 @@ export default function CapacitorBoot() {
         await StatusBar.setStyle({ style: Style.Dark });
         if (isAndroid()) {
           await StatusBar.setOverlaysWebView({ overlay: false });
-          await StatusBar.setBackgroundColor({ color: "#0b0b0f" });
+          await StatusBar.setBackgroundColor({ color: "#0E0E12" });
         }
       } catch { /* plugin unavailable */ }
 

@@ -22,7 +22,7 @@ export default function OgImage() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0b0b0f",
+          background: "#0E0E12",
           display: "flex",
           flexDirection: "column",
           fontFamily: "ui-sans-serif, system-ui, sans-serif",
@@ -37,7 +37,7 @@ export default function OgImage() {
             right: 0,
             width: 700,
             height: 700,
-            background: "radial-gradient(circle, rgba(255,107,53,0.28) 0%, rgba(255,107,53,0) 70%)",
+            background: "radial-gradient(circle, rgba(255,56,100,0.28) 0%, rgba(255,56,100,0) 70%)",
             display: "flex",
           }}
         />
@@ -45,19 +45,24 @@ export default function OgImage() {
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 36 }}>
           <div
             style={{
-              width: 48,
-              height: 48,
-              background: "#ff6b35",
-              borderRadius: 12,
+              width: 56,
+              height: 56,
+              background: "#18181F",
+              borderRadius: 14,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#0b0b0f",
-              fontSize: 32,
-              fontWeight: 900,
+              border: "1px solid #2a2a35",
             }}
           >
-            K
+            <svg width="40" height="40" viewBox="0 0 130 130" style={{ display: "block" }}>
+              <circle cx="32" cy="44" r="16" fill="#FF3864" />
+              <circle cx="72" cy="30" r="11" fill="#FFC857" />
+              <rect x="60" y="58" width="28" height="28" rx="8" fill="#7B2CBF" />
+              <circle cx="98" cy="82" r="13" fill="#2EC4B6" />
+              <rect x="22" y="80" width="22" height="22" rx="6" fill="#FFC857" transform="rotate(15 33 91)" />
+              <circle cx="76" cy="106" r="8" fill="#FF3864" />
+            </svg>
           </div>
           <div style={{ color: "white", fontSize: 34, fontWeight: 700, letterSpacing: "-0.02em", display: "flex" }}>
             keystrum
@@ -78,7 +83,7 @@ export default function OgImage() {
             }}
           >
             <div style={{ display: "flex" }}>Strum your</div>
-            <div style={{ display: "flex", color: "#ff6b35" }}>keyboard.</div>
+            <div style={{ display: "flex", color: "#FF3864" }}>keyboard.</div>
           </div>
 
           <div style={{ color: "#a3a3a3", fontSize: 26, marginBottom: 44, display: "flex" }}>

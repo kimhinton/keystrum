@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "@/components/brand/Logo";
 
 export const metadata = {
   title: "Privacy — keystrum",
@@ -11,10 +12,10 @@ const LAST_UPDATED = "2026-04-17";
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-[#0b0b0f] text-neutral-100 font-sans">
-      <nav className="flex items-center justify-between border-b border-white/5 bg-[#0b0b0f]/80 px-6 py-4">
+    <div className="min-h-screen bg-[#0E0E12] text-neutral-100 font-sans">
+      <nav className="flex items-center justify-between border-b border-white/5 bg-[#0E0E12]/80 px-6 py-4">
         <Link href="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
-          <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">K</span>
+          <Logo size={20} className="shrink-0" />
           keystrum
         </Link>
         <Link href="/" className="text-xs text-neutral-400 transition hover:text-white">
@@ -24,7 +25,7 @@ export default function PrivacyPage() {
 
       <main className="mx-auto max-w-2xl px-6 py-12">
         <div className="mb-8">
-          <span className="text-xs font-mono uppercase tracking-widest text-[#ff6b35]">Privacy policy</span>
+          <span className="text-xs font-mono uppercase tracking-widest text-[#FF3864]">Privacy policy</span>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
             We collect nothing.
           </h1>
@@ -100,11 +101,11 @@ export default function PrivacyPage() {
             <p>
               The full source code of keystrum is MIT-licensed and public. You can inspect
               every line responsible for handling your input at{" "}
-              <a href="https://github.com/kimhinton/keystrum" className="text-[#ff6b35] underline" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/kimhinton/keystrum" className="text-[#FF3864] underline" target="_blank" rel="noopener noreferrer">
                 github.com/kimhinton/keystrum
               </a>.
               If anything in this policy seems at odds with the code, the code is the ground truth — please{" "}
-              <a href="https://github.com/kimhinton/keystrum/issues" className="text-[#ff6b35] underline" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/kimhinton/keystrum/issues" className="text-[#FF3864] underline" target="_blank" rel="noopener noreferrer">
                 open an issue
               </a>.
             </p>
@@ -121,7 +122,7 @@ export default function PrivacyPage() {
           <Section title="Contact">
             <p>
               For privacy questions, open an issue at{" "}
-              <a href="https://github.com/kimhinton/keystrum/issues" className="text-[#ff6b35] underline" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/kimhinton/keystrum/issues" className="text-[#FF3864] underline" target="_blank" rel="noopener noreferrer">
                 github.com/kimhinton/keystrum/issues
               </a>.
             </p>

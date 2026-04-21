@@ -8,7 +8,7 @@ const RecordModal = dynamic(() => import("./RecordModal"), { ssr: false });
 export default function RecordCTA() {
   const [open, setOpen] = useState(false);
   return (
-    <section id="record" className="relative overflow-hidden border-y border-white/5 bg-gradient-to-b from-[#0b0b0f] via-[#12100e] to-[#0b0b0f]">
+    <section id="record" className="relative overflow-hidden border-y border-white/5 bg-gradient-to-b from-[#0E0E12] via-[#12100e] to-[#0E0E12]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(239,68,68,0.12),transparent_50%)]" />
       <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-6 py-14 lg:grid-cols-[1.3fr_auto] lg:py-20">
         <div>

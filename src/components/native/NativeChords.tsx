@@ -9,6 +9,7 @@ import {
 } from "@keystrum/layout";
 import { guitarSynth } from "@keystrum/synth";
 import { hapticPick, hapticStrum } from "@/lib/haptics";
+import { Logo } from "@/components/brand/Logo";
 
 const LONG_PRESS_MS = 420;
 
@@ -58,12 +59,10 @@ export default function NativeChords() {
   );
 
   return (
-    <div className="min-h-dvh bg-[#0b0b0f] text-neutral-100">
-      <header className="sticky top-0 z-10 flex items-center justify-between border-b border-white/5 bg-[#0b0b0f]/90 px-5 py-4 backdrop-blur-xl">
+    <div className="min-h-dvh bg-[#0E0E12] text-neutral-100">
+      <header className="sticky top-0 z-10 flex items-center justify-between border-b border-white/5 bg-[#0E0E12]/90 px-5 py-4 backdrop-blur-xl">
         <div className="flex items-center gap-2">
-          <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">
-            K
-          </span>
+          <Logo size={20} className="shrink-0" />
           <h1 className="text-lg font-semibold tracking-tight">Chords</h1>
         </div>
         <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">

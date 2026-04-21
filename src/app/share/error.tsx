@@ -15,7 +15,7 @@ export default function ShareError({
       <div className="flex gap-3">
         <button
           onClick={reset}
-          className="rounded-full bg-[#ff6b35] px-5 py-2 text-sm font-semibold text-black transition hover:bg-[#ff8555]"
+          className="rounded-full bg-[#FF3864] px-5 py-2 text-sm font-semibold text-black transition hover:bg-[#FF5680]"
         >
           Try again
         </button>

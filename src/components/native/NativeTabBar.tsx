@@ -63,7 +63,7 @@ export default function NativeTabBar() {
   const pathname = usePathname();
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#0b0b0f]/95 backdrop-blur-xl"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#0E0E12]/95 backdrop-blur-xl"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       aria-label="Primary"
     >
@@ -76,7 +76,7 @@ export default function NativeTabBar() {
               href={tab.href}
               onClick={() => { void hapticPick(); }}
               className="flex flex-1 flex-col items-center gap-1 py-2.5 transition-colors"
-              style={{ color: active ? "#ff6b35" : "#8a8d99" }}
+              style={{ color: active ? "#FF3864" : "#8a8d99" }}
               aria-current={active ? "page" : undefined}
             >
               {tab.icon(active)}

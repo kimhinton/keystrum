@@ -50,7 +50,7 @@ export function SongCard({ song }: { song: Song }) {
           <span className="font-mono text-sm font-bold text-neutral-300">{song.notes.length}</span>
         </div>
         <span
-          className="rounded-full bg-[#ff6b35]/10 px-3 py-1 text-xs font-semibold text-[#ff6b35] transition group-hover:bg-[#ff6b35] group-hover:text-black"
+          className="rounded-full bg-[#FF3864]/10 px-3 py-1 text-xs font-semibold text-[#FF3864] transition group-hover:bg-[#FF3864] group-hover:text-black"
         >
           Play →
         </span>

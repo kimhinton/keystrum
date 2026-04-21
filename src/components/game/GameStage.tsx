@@ -171,7 +171,7 @@ export default function GameStage({
   const rightIsStrumming =
     strumming || (earliestNonHold?.kind === "strum" && earliestNonHold.time - now < 250);
   const rightHandColor = rightIsStrumming
-    ? "#ff6b35"
+    ? "#FF3864"
     : missing
     ? "#f87171"
     : lastHitLane !== null
@@ -339,19 +339,19 @@ export default function GameStage({
         </linearGradient>
         <linearGradient id="stage-keyboard" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#18181b" />
-          <stop offset="100%" stopColor="#0b0b0f" />
+          <stop offset="100%" stopColor="#0E0E12" />
         </linearGradient>
         <linearGradient id="stage-key-face" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#24252d" />
           <stop offset="100%" stopColor="#18181b" />
         </linearGradient>
         <radialGradient id="stage-spot" cx="0.5" cy="0" r="0.9">
-          <stop offset="0%" stopColor="#ff6b35" stopOpacity="0.1" />
-          <stop offset="100%" stopColor="#ff6b35" stopOpacity="0" />
+          <stop offset="0%" stopColor="#FF3864" stopOpacity="0.1" />
+          <stop offset="100%" stopColor="#FF3864" stopOpacity="0" />
         </radialGradient>
         <linearGradient id="stage-floor" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#14141a" />
-          <stop offset="100%" stopColor="#0b0b0f" />
+          <stop offset="100%" stopColor="#0E0E12" />
         </linearGradient>
       </defs>
 
@@ -370,8 +370,8 @@ export default function GameStage({
         />
         <path d="M 380 180 L 380 255" stroke="#c9cbd3" strokeWidth="1.2" opacity="0.3" />
         <path d="M 520 180 L 520 255" stroke="#c9cbd3" strokeWidth="1.2" opacity="0.3" />
-        <rect x="420" y="200" width="60" height="10" rx="2" fill="#ff6b35" opacity="0.85" />
-        <text x="450" y="208" textAnchor="middle" fontSize="8" fontFamily="monospace" fontWeight="800" fill="#0b0b0f">
+        <rect x="420" y="200" width="60" height="10" rx="2" fill="#FF3864" opacity="0.85" />
+        <text x="450" y="208" textAnchor="middle" fontSize="8" fontFamily="monospace" fontWeight="800" fill="#0E0E12">
           KEYSTRUM
         </text>
 
@@ -385,13 +385,13 @@ export default function GameStage({
         />
         <rect x="384" y="88" width="18" height="38" rx="6" fill="#c9cbd3" />
         <rect x="498" y="88" width="18" height="38" rx="6" fill="#c9cbd3" />
-        <circle cx="384" cy="107" r="4" fill="#0b0b0f" />
-        <circle cx="516" cy="107" r="4" fill="#0b0b0f" />
+        <circle cx="384" cy="107" r="4" fill="#0E0E12" />
+        <circle cx="516" cy="107" r="4" fill="#0E0E12" />
 
         <ellipse cx="432" cy="112" rx="7" ry="5" fill="#c9cbd3" />
         <ellipse cx="468" cy="112" rx="7" ry="5" fill="#c9cbd3" />
-        <circle cx="433" cy="113" r="2" fill="#0b0b0f" />
-        <circle cx="469" cy="113" r="2" fill="#0b0b0f" />
+        <circle cx="433" cy="113" r="2" fill="#0E0E12" />
+        <circle cx="469" cy="113" r="2" fill="#0E0E12" />
         <circle cx="434" cy="112" r="0.7" fill="#c9cbd3" />
         <circle cx="470" cy="112" r="0.7" fill="#c9cbd3" />
 
@@ -404,8 +404,8 @@ export default function GameStage({
           strokeWidth="2.8"
           strokeLinecap="round"
         />
-        <ellipse cx="418" cy="135" rx="7" ry="3.5" fill="#ff6b35" opacity="0.18" />
-        <ellipse cx="482" cy="135" rx="7" ry="3.5" fill="#ff6b35" opacity="0.18" />
+        <ellipse cx="418" cy="135" rx="7" ry="3.5" fill="#FF3864" opacity="0.18" />
+        <ellipse cx="482" cy="135" rx="7" ry="3.5" fill="#FF3864" opacity="0.18" />
       </g>
 
       <path
@@ -433,7 +433,7 @@ export default function GameStage({
         stroke="#c9cbd3"
         strokeWidth="2.5"
       />
-      <rect x={KB_X} y={KB_Y} width={KB_W} height="12" rx="10" fill="#0b0b0f" />
+      <rect x={KB_X} y={KB_Y} width={KB_W} height="12" rx="10" fill="#0E0E12" />
       <rect x={KB_X + 12} y={KB_Y + 4} width="120" height="4" rx="2" fill="#3a3b43" />
       <text
         x={KB_X + KB_W - 16}
@@ -520,7 +520,7 @@ export default function GameStage({
             : 1;
           const textColor =
             isPressed || isHandPressing || (isLaneCol && totalGlow > 0.5)
-              ? "#0b0b0f"
+              ? "#0E0E12"
               : isLaneCol
               ? color
               : "#5a5d66";
@@ -604,7 +604,7 @@ export default function GameStage({
                     height={KEY_H + 6 + (1 - intensity) * 20}
                     rx={5 + (1 - intensity) * 10}
                     fill="none"
-                    stroke={upcoming.kind === "strum" ? "#ff6b35" : color}
+                    stroke={upcoming.kind === "strum" ? "#FF3864" : color}
                     strokeWidth={upcoming.kind === "strum" ? 2.5 : 2}
                     opacity={Math.min(0.95, intensity * 1.2)}
                   />
@@ -626,7 +626,7 @@ export default function GameStage({
                         fontSize="14"
                         fontWeight="900"
                         fontFamily="monospace"
-                        fill="#0b0b0f"
+                        fill="#0E0E12"
                         opacity={Math.min(1, intensity * 1.4)}
                       >
                         {keyChar.toUpperCase()}
@@ -659,7 +659,7 @@ export default function GameStage({
                         fontSize="9"
                         fontWeight="900"
                         fontFamily="monospace"
-                        fill="#0b0b0f"
+                        fill="#0E0E12"
                         opacity={Math.min(1, intensity * 1.3)}
                       >
                         HOLD
@@ -674,7 +674,7 @@ export default function GameStage({
                         width={50}
                         height={16}
                         rx="3"
-                        fill="#ff6b35"
+                        fill="#FF3864"
                         opacity={Math.min(1, intensity * 1.4)}
                       />
                       <text
@@ -684,7 +684,7 @@ export default function GameStage({
                         fontSize="10"
                         fontWeight="900"
                         fontFamily="monospace"
-                        fill="#0b0b0f"
+                        fill="#0E0E12"
                         opacity={Math.min(1, intensity * 1.4)}
                       >
                         ⇅ STRUM
@@ -698,7 +698,7 @@ export default function GameStage({
                   cx={x + KEY_W / 2}
                   cy={y + KEY_H + 10}
                   r="3.5"
-                  fill="#ff6b35"
+                  fill="#FF3864"
                   style={{ animation: "kg-pulse 0.6s ease-in-out infinite", pointerEvents: "none" }}
                 />
               )}
@@ -740,7 +740,7 @@ export default function GameStage({
                     fontSize="12"
                     fontWeight="900"
                     fontFamily="monospace"
-                    fill="#0b0b0f"
+                    fill="#0E0E12"
                     opacity={Math.min(1, muteIntensity * 1.4)}
                   >
                     {(upcomingMute?.kind === "hold" ? "HOLD " : "✋ ") + keyChar.toUpperCase()}
@@ -798,11 +798,11 @@ export default function GameStage({
             y1={strumStart.y}
             x2={strumHandPos.x}
             y2={strumHandPos.y}
-            stroke="#ff6b35"
+            stroke="#FF3864"
             strokeWidth="3"
             strokeLinecap="round"
             opacity={0.5 * (1 - strumRollProgress * 0.2)}
-            style={{ filter: "drop-shadow(0 0 6px #ff6b35)" }}
+            style={{ filter: "drop-shadow(0 0 6px #FF3864)" }}
           />
           {strumTrail.map((t, i) => (
             <circle
@@ -810,7 +810,7 @@ export default function GameStage({
               cx={t.x}
               cy={t.y}
               r={4 + t.opacity * 3}
-              fill="#ff6b35"
+              fill="#FF3864"
               opacity={t.opacity * 0.55}
             />
           ))}
@@ -875,7 +875,7 @@ export default function GameStage({
                 fontSize="14"
                 fontWeight="900"
                 fontFamily="monospace"
-                fill="#0b0b0f"
+                fill="#0E0E12"
                 opacity={Math.min(1, aimLineIntensity * 1.2)}
               >
                 {LANE_KEYS[earliestNonHold.lane][1].toUpperCase()}
@@ -898,7 +898,7 @@ export default function GameStage({
                 width={50}
                 height={22}
                 rx="5"
-                fill="#ff6b35"
+                fill="#FF3864"
                 opacity={Math.min(1, aimLineIntensity * 1.2)}
               />
               <text
@@ -908,7 +908,7 @@ export default function GameStage({
                 fontSize="11"
                 fontWeight="900"
                 fontFamily="monospace"
-                fill="#0b0b0f"
+                fill="#0E0E12"
                 opacity={Math.min(1, aimLineIntensity * 1.2)}
               >
                 ⇅ STRUM
@@ -948,7 +948,7 @@ export default function GameStage({
         strokeWidth="2"
         style={{
           filter: rightIsStrumming
-            ? "drop-shadow(0 0 16px #ff6b35)"
+            ? "drop-shadow(0 0 16px #FF3864)"
             : tapPressLane !== null
             ? `drop-shadow(0 0 12px ${LANE_COLORS[tapPressLane]})`
             : lastHitLane !== null

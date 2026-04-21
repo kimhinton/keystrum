@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { buildChordInfo } from "@keystrum/layout";
+import { Logo } from "@/components/brand/Logo";
 
 export const metadata: Metadata = {
   title: "Chord dictionary",
@@ -17,10 +18,10 @@ export const metadata: Metadata = {
 export default function ChordIndex() {
   const chords = buildChordInfo();
   return (
-    <div className="min-h-screen bg-[#0b0b0f] text-neutral-100">
-      <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-white/5 bg-[#0b0b0f]/80 px-6 py-4 backdrop-blur-xl">
+    <div className="min-h-screen bg-[#0E0E12] text-neutral-100">
+      <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-white/5 bg-[#0E0E12]/80 px-6 py-4 backdrop-blur-xl">
         <Link href="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
-          <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">K</span>
+          <Logo size={20} className="shrink-0" />
           keystrum
         </Link>
         <div className="flex items-center gap-5 text-sm text-neutral-400">
@@ -32,7 +33,7 @@ export default function ChordIndex() {
 
       <section className="mx-auto max-w-5xl px-6 pt-16 pb-10">
         <div className="mb-10 max-w-2xl">
-          <span className="text-xs font-mono uppercase tracking-widest text-[#ff6b35]">Chord dictionary</span>
+          <span className="text-xs font-mono uppercase tracking-widest text-[#FF3864]">Chord dictionary</span>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">Six columns, six chords.</h1>
           <p className="mt-3 text-neutral-400">
             keystrum ships with six open-position chord presets — the scaffolding for most pop music.
@@ -73,7 +74,7 @@ export default function ChordIndex() {
                 ))}
               </div>
               <p className="text-sm text-neutral-400">{c.feel}</p>
-              <span className="mt-auto text-xs text-[#ff6b35] transition group-hover:text-[#ff8555]">
+              <span className="mt-auto text-xs text-[#FF3864] transition group-hover:text-[#FF5680]">
                 Open →
               </span>
             </Link>

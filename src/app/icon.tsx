@@ -9,21 +9,21 @@ export default function Icon() {
     (
       <div
         style={{
-          fontSize: 22,
-          background: "#ff6b35",
+          background: "#0E0E12",
           width: "100%",
           height: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#0b0b0f",
-          fontWeight: 900,
-          fontFamily: "ui-sans-serif, system-ui, sans-serif",
-          letterSpacing: "-0.02em",
           borderRadius: 6,
         }}
       >
-        K
+        <svg width="26" height="26" viewBox="0 0 130 130" style={{ display: "block" }}>
+          <circle cx="32" cy="44" r="18" fill="#FF3864" />
+          <circle cx="74" cy="32" r="13" fill="#FFC857" />
+          <rect x="58" y="56" width="34" height="34" rx="10" fill="#7B2CBF" />
+          <circle cx="102" cy="86" r="15" fill="#2EC4B6" />
+        </svg>
       </div>
     ),
     { ...size },

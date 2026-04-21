@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildChordInfo, getChordInfo } from "@keystrum/layout";
 import { SONGS } from "@/lib/game/songs";
+import { Logo } from "@/components/brand/Logo";
 
 export function generateStaticParams() {
   return buildChordInfo().map((c) => ({ name: c.name }));
@@ -69,11 +70,11 @@ export default async function ChordPage(
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0b0f] text-neutral-100">
+    <div className="min-h-screen bg-[#0E0E12] text-neutral-100">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <nav className="flex items-center justify-between border-b border-white/5 bg-[#0b0b0f]/80 px-6 py-4">
+      <nav className="flex items-center justify-between border-b border-white/5 bg-[#0E0E12]/80 px-6 py-4">
         <Link href="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
-          <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">K</span>
+          <Logo size={20} className="shrink-0" />
           keystrum
         </Link>
         <div className="flex items-center gap-5 text-sm text-neutral-400">
@@ -177,7 +178,7 @@ export default async function ChordPage(
                   <Link
                     key={s.id}
                     href={`/play/${s.id}`}
-                    className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-sm transition hover:border-[#ff6b35]/40"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-sm transition hover:border-[#FF3864]/40"
                   >
                     <span className="text-neutral-300">{s.title}</span>
                     <span className="text-[10px] text-neutral-500">{s.difficulty}</span>
@@ -191,7 +192,7 @@ export default async function ChordPage(
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full bg-[#ff6b35] px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-[#ff8555]"
+            className="inline-flex items-center gap-2 rounded-full bg-[#FF3864] px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-[#FF5680]"
           >
             Play this chord on the instrument →
           </Link>

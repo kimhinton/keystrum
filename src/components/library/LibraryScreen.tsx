@@ -11,6 +11,7 @@ import {
 } from "@/lib/recordings";
 import { isNative } from "@/lib/platform";
 import { hapticPick } from "@/lib/haptics";
+import { Logo } from "@/components/brand/Logo";
 
 export default function LibraryScreen() {
   const [entries, setEntries] = useState<LibraryEntry[] | null>(null);
@@ -82,10 +83,10 @@ export default function LibraryScreen() {
   }, [playingId, refresh]);
 
   return (
-    <div className="min-h-dvh bg-[#0b0b0f] text-neutral-100" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+    <div className="min-h-dvh bg-[#0E0E12] text-neutral-100" style={{ paddingTop: "env(safe-area-inset-top)" }}>
       <header className="flex items-center justify-between border-b border-white/5 px-5 py-4">
         <div className="flex items-center gap-2 text-sm font-semibold tracking-tight">
-          <span className="inline-flex size-5 items-center justify-center rounded-md bg-[#ff6b35] text-[10px] font-black text-black">K</span>
+          <Logo size={20} className="shrink-0" />
           Library
         </div>
         <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
@@ -101,7 +102,7 @@ export default function LibraryScreen() {
         {entries && entries.length === 0 && (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <div className="mb-4 flex size-16 items-center justify-center rounded-full border border-white/10 bg-white/[0.02]">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="text-[#ff6b35]">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="text-[#FF3864]">
                 <circle cx="12" cy="12" r="4" />
                 <circle cx="12" cy="12" r="9" />
               </svg>
@@ -110,7 +111,7 @@ export default function LibraryScreen() {
             <p className="mb-6 max-w-[14rem] text-sm text-neutral-500">
               Hit REC on the instrument. Clips auto-save here and survive app restarts.
             </p>
-            <Link href="/instrument" onClick={() => { void hapticPick(); }} className="rounded-full bg-[#ff6b35] px-5 py-2.5 text-sm font-semibold text-black">
+            <Link href="/instrument" onClick={() => { void hapticPick(); }} className="rounded-full bg-[#FF3864] px-5 py-2.5 text-sm font-semibold text-black">
               Go to instrument →
             </Link>
           </div>
@@ -129,7 +130,7 @@ export default function LibraryScreen() {
                     type="button"
                     onClick={() => void handlePlay(entry)}
                     className={`flex size-9 items-center justify-center rounded-full transition ${
-                      isPlaying ? "bg-[#ff6b35] text-black" : "border border-white/10 text-neutral-300"
+                      isPlaying ? "bg-[#FF3864] text-black" : "border border-white/10 text-neutral-300"
                     }`}
                     aria-label={isPlaying ? "Pause" : "Play"}
                   >
@@ -175,7 +176,7 @@ export default function LibraryScreen() {
         )}
 
         {exportedPath && (
-          <div className="fixed inset-x-0 top-20 z-50 mx-auto w-fit max-w-[90%] rounded-full border border-[#ff6b35]/40 bg-[#ff6b35]/15 px-4 py-2 text-center text-xs font-mono text-[#ff6b35] shadow-lg">
+          <div className="fixed inset-x-0 top-20 z-50 mx-auto w-fit max-w-[90%] rounded-full border border-[#FF3864]/40 bg-[#FF3864]/15 px-4 py-2 text-center text-xs font-mono text-[#FF3864] shadow-lg">
             Exported to device Files
           </div>
         )}

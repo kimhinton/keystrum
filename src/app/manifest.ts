@@ -10,8 +10,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "A strum-based keyboard instrument. Four rows = four strings. Six columns = six chords. Browser-only.",
     start_url: "/instrument",
     display: "standalone",
-    background_color: "#0b0b0f",
-    theme_color: "#0b0b0f",
+    background_color: "#0E0E12",
+    theme_color: "#0E0E12",
     categories: ["music", "entertainment", "education"],
     icons: [
       { src: "/icon", sizes: "32x32", type: "image/png" },

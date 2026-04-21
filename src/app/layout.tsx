@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     email: false,
   },
   other: {
-    "msapplication-TileColor": "#0b0b0f",
+    "msapplication-TileColor": "#0E0E12",
     "mobile-web-app-capable": "yes",
   },
 };
@@ -97,7 +97,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0b0f" },
+    { media: "(prefers-color-scheme: dark)", color: "#0E0E12" },
   ],
   width: "device-width",
   initialScale: 1,
