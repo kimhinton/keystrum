@@ -28,7 +28,16 @@ export const metadata: Metadata = {
     "browser instrument",
     "strum keyboard",
     "chord instrument",
+    "QWERTY instrument",
+    "online guitar",
+    "virtual guitar",
+    "typing instrument",
     "Karplus-Strong synth",
+    "physical modeling synthesis",
+    "browser music app",
+    "no-install instrument",
+    "music practice",
+    "chord practice",
     "keystrum",
   ],
   authors: [{ name: "keystrum" }],
@@ -69,6 +78,20 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "keystrum",
+    statusBarStyle: "black-translucent",
+  },
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
+  other: {
+    "msapplication-TileColor": "#0b0b0f",
+    "mobile-web-app-capable": "yes",
+  },
 };
 
 export const viewport: Viewport = {

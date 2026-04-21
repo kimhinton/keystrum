@@ -7,21 +7,24 @@ Thanks for your interest in contributing.
 ```bash
 git clone https://github.com/kimhinton/keystrum.git
 cd keystrum
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
+
+Requires **pnpm ≥ 10** and **Node ≥ 22** (matches CI).
 
 ## Development
 
-- `npm run dev` — Start dev server on port 3000
-- `npm run build` — Static export build
-- `npm run lint` — Run ESLint
+- `pnpm run dev` — Start dev server on port 3000
+- `pnpm run build` — Static export build (outputs to `out/`)
+- `pnpm run lint` — Run ESLint
+- `pnpm exec tsc --noEmit` — Type check
 
 ## Pull Request Process
 
 1. Fork the repo and create a branch from `main`
 2. Make your changes
-3. Run `npm run lint` and `npm run build` — both must pass
+3. Run `pnpm run lint`, `pnpm exec tsc --noEmit`, and `pnpm run build` — all three must pass (CI enforces this)
 4. Open a PR with a clear description of what changed and why
 
 ## Code Style
