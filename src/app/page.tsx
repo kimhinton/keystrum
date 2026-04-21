@@ -85,19 +85,6 @@ export default function HomePage() {
 
       <RecordCTA />
 
-      <section className="border-y border-white/5 bg-white/[0.015]">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-3 px-6 py-5 text-xs text-neutral-500">
-          <span>Built for</span>
-          <span className="font-semibold text-neutral-300">music beginners</span>
-          <span>·</span>
-          <span className="font-semibold text-neutral-300">DAW producers</span>
-          <span>·</span>
-          <span className="font-semibold text-neutral-300">late-night jammers</span>
-          <span>·</span>
-          <span className="font-semibold text-neutral-300">music teachers</span>
-        </div>
-      </section>
-
       <section id="features" className="mx-auto max-w-7xl px-6 py-20">
         <div className="mb-12 max-w-2xl">
           <span className="text-xs uppercase tracking-widest text-[#FF3864]">Features</span>
