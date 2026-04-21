@@ -5,13 +5,23 @@ import { SongCard } from "@/components/game/SongCard";
 import { Logo } from "@/components/brand/Logo";
 
 export const metadata: Metadata = {
-  title: "Play — Practice mode",
+  title: "Folk song chord practice — browser chord trainer",
   description:
-    "Three folk songs arranged for keystrum. Strum · hold · mute across six chord lanes. 60/120/200 ms timing windows.",
+    "Practice guitar chords on three folk songs — House of the Rising Sun, Scarborough Fair, Greensleeves. Browser-based chord trainer with strum · hold · mute across 6 lanes. Progressive difficulty, no guitar required, no install.",
+  keywords: [
+    "folk song chord practice",
+    "chord practice browser",
+    "learn strumming pattern online",
+    "practice guitar chords without guitar",
+    "browser chord trainer",
+    "house of the rising sun chords practice",
+    "scarborough fair chords practice",
+    "greensleeves chords practice",
+  ],
   alternates: { canonical: "/play" },
   openGraph: {
-    title: "keystrum — Practice Mode",
-    description: "House of the Rising Sun · Scarborough Fair · Greensleeves. Strum, hold, and mute across chord lanes.",
+    title: "Folk song chord practice — keystrum",
+    description: "Learn guitar chords on House of the Rising Sun, Scarborough Fair, Greensleeves. Browser-based chord trainer with strum detection. No install, no guitar needed.",
     url: "/play",
   },
 };

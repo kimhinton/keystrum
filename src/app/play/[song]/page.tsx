@@ -16,12 +16,20 @@ export async function generateMetadata(
   const song = getSong(songId);
   if (!song) return { title: "Song not found" };
   return {
-    title: `${song.title} — Play`,
-    description: `Play ${song.title} — ${song.subtitle}. Difficulty: ${song.difficulty}. Practice mode in keystrum.`,
+    title: `Practice ${song.title} chords — browser chord trainer`,
+    description: `Learn the guitar chords of ${song.title} on your QWERTY keyboard. ${song.subtitle}. Difficulty: ${song.difficulty}. Strum detection, hold and mute windows, no guitar needed.`,
+    keywords: [
+      `${song.title.toLowerCase()} chords`,
+      `${song.title.toLowerCase()} guitar chords`,
+      `learn ${song.title.toLowerCase()} on guitar`,
+      `${song.title.toLowerCase()} chord practice`,
+      "folk song chord practice",
+      "browser chord trainer",
+    ],
     alternates: { canonical: `/play/${song.id}` },
     openGraph: {
-      title: `${song.title} · keystrum Practice`,
-      description: song.subtitle,
+      title: `Practice ${song.title} chords — keystrum`,
+      description: `${song.subtitle}. Browser chord trainer, no guitar required.`,
       url: `/play/${song.id}`,
     },
   };

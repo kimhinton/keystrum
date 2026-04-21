@@ -4,13 +4,25 @@ import { buildChordInfo } from "@keystrum/layout";
 import { Logo } from "@/components/brand/Logo";
 
 export const metadata: Metadata = {
-  title: "Chord dictionary",
+  title: "Guitar chord dictionary — Am, C, Em, G, Dm, F",
   description:
-    "All six chord presets used in keystrum — Am, C, Em, G, Dm, F. Keyboard mapping, chord notes, songs they appear in. Learn the column then play.",
+    "Guitar chord reference for the 6 chords diatonic to C major / A minor: Am, C, Em, G, Dm, F. Notes, intervals, QWERTY keyboard mapping, and famous songs each chord appears in. Practice each chord without a guitar.",
+  keywords: [
+    "guitar chord dictionary",
+    "chord practice app",
+    "Am chord guitar",
+    "C chord guitar",
+    "Em chord guitar",
+    "G chord guitar",
+    "Dm chord guitar",
+    "F chord guitar",
+    "C major chord progression",
+    "A minor chord progression",
+  ],
   alternates: { canonical: "/chords" },
   openGraph: {
-    title: "keystrum chord dictionary",
-    description: "Six chord columns, mapped to keyboard columns. Notes, feel, famous songs.",
+    title: "Guitar chord dictionary — keystrum",
+    description: "Am · C · Em · G · Dm · F — notes, intervals, keyboard mapping, and famous songs. Practice without a guitar.",
     url: "/chords",
   },
 };

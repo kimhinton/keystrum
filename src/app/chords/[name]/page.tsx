@@ -16,12 +16,21 @@ export async function generateMetadata(
   const c = getChordInfo(name);
   if (!c) return { title: "Chord not found" };
   return {
-    title: `${c.name} chord — ${c.label}`,
-    description: `${c.name} (${c.label}) — notes ${c.notes.join(" · ")}. Keyboard column ${c.columnIndex + 1} on keystrum. Used in ${c.usedIn.slice(0, 2).join(", ")}.`,
+    title: `${c.name} guitar chord — practice without a guitar`,
+    description: `${c.name} (${c.label}) guitar chord — notes ${c.notes.join(" · ")}. Play it by sweeping QWERTY keyboard column ${c.columnIndex + 1} on keystrum. Used in ${c.usedIn.slice(0, 2).join(", ")}.`,
+    keywords: [
+      `${c.name} chord`,
+      `${c.name} chord guitar`,
+      `${c.name} chord keyboard`,
+      `${c.name} chord practice`,
+      `${c.name} ${c.label.toLowerCase()}`,
+      "guitar chord dictionary",
+      "chord practice app",
+    ],
     alternates: { canonical: `/chords/${c.name}` },
     openGraph: {
-      title: `${c.name} chord — ${c.label}`,
-      description: `${c.notes.join(" · ")}. Played by keyboard column ${c.columnIndex + 1}.`,
+      title: `${c.name} guitar chord — keystrum`,
+      description: `Notes: ${c.notes.join(" · ")}. Strum on keyboard column ${c.columnIndex + 1}. Practice without a guitar.`,
       url: `/chords/${c.name}`,
     },
   };

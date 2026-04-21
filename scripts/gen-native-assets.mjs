@@ -8,31 +8,42 @@ const RES_IOS = join(root, "ios/App/App/Assets.xcassets");
 const RES_OUT_IOS_ICON = join(RES_IOS, "AppIcon.appiconset");
 const RES_OUT_IOS_SPLASH = join(RES_IOS, "Splash.imageset");
 
-const ICON_SQUARE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
-  <rect width="1024" height="1024" fill="#0b0b0f"/>
-  <g fill="#ff6b35">
-    <rect x="240" y="140" width="160" height="724" rx="16"/>
-    <polygon points="400,400 600,400 780,180 580,180"/>
-    <polygon points="400,604 600,604 780,824 580,824"/>
-  </g>
+// V2 "Dark Stage" strum-burst — matches src/app/apple-icon.tsx.
+
+// Square icon (iOS + Android legacy launcher): 1024x1024 with #18181F bg + strum-burst.
+const ICON_SQUARE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130" width="1024" height="1024">
+  <rect width="130" height="130" fill="#18181F"/>
+  <circle cx="32" cy="44" r="16" fill="#FF3864"/>
+  <circle cx="72" cy="30" r="11" fill="#FFC857"/>
+  <rect x="60" y="58" width="28" height="28" rx="8" fill="#7B2CBF"/>
+  <circle cx="98" cy="82" r="13" fill="#2EC4B6"/>
+  <rect x="22" y="80" width="22" height="22" rx="6" fill="#FFC857" transform="rotate(15 33 91)"/>
+  <circle cx="76" cy="106" r="8" fill="#FF3864"/>
 </svg>`;
 
+// Android adaptive icon foreground: 432x432 viewBox, design occupies center ~66% (safe zone).
+// 130 * 2.2 = 286 → offset (432-286)/2 = 73.
 const ICON_FOREGROUND_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432" width="432" height="432">
-  <g fill="#ff6b35" transform="translate(85.5 85.5) scale(0.2549)">
-    <rect x="240" y="140" width="160" height="724" rx="16"/>
-    <polygon points="400,400 600,400 780,180 580,180"/>
-    <polygon points="400,604 600,604 780,824 580,824"/>
+  <g transform="translate(73 73) scale(2.2)">
+    <circle cx="32" cy="44" r="16" fill="#FF3864"/>
+    <circle cx="72" cy="30" r="11" fill="#FFC857"/>
+    <rect x="60" y="58" width="28" height="28" rx="8" fill="#7B2CBF"/>
+    <circle cx="98" cy="82" r="13" fill="#2EC4B6"/>
+    <rect x="22" y="80" width="22" height="22" rx="6" fill="#FFC857" transform="rotate(15 33 91)"/>
+    <circle cx="76" cy="106" r="8" fill="#FF3864"/>
   </g>
 </svg>`;
 
+// Splash: #0E0E12 bg + centered strum-burst at ~40% of canvas.
 const SPLASH_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2732 2732" width="2732" height="2732">
-  <rect width="2732" height="2732" fill="#0b0b0f"/>
-  <g transform="translate(601 613) scale(1.5)">
-    <g fill="#ff6b35">
-      <rect x="240" y="140" width="160" height="724" rx="16"/>
-      <polygon points="400,400 600,400 780,180 580,180"/>
-      <polygon points="400,604 600,604 780,824 580,824"/>
-    </g>
+  <rect width="2732" height="2732" fill="#0E0E12"/>
+  <g transform="translate(820 820) scale(8.4)">
+    <circle cx="32" cy="44" r="16" fill="#FF3864"/>
+    <circle cx="72" cy="30" r="11" fill="#FFC857"/>
+    <rect x="60" y="58" width="28" height="28" rx="8" fill="#7B2CBF"/>
+    <circle cx="98" cy="82" r="13" fill="#2EC4B6"/>
+    <rect x="22" y="80" width="22" height="22" rx="6" fill="#FFC857" transform="rotate(15 33 91)"/>
+    <circle cx="76" cy="106" r="8" fill="#FF3864"/>
   </g>
 </svg>`;
 
@@ -87,9 +98,10 @@ for (const [bucket, size] of Object.entries(splashPortSizes)) {
     .toFile(join(dir, "splash.png"));
 }
 
+// Adaptive icon background color — matches apple-icon surface #18181F (V2).
 const bgXml = `<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#0b0b0f</color>
+    <color name="ic_launcher_background">#18181F</color>
 </resources>
 `;
 writeFileSync(
@@ -118,4 +130,4 @@ await sharp(splashBuf)
   .png()
   .toFile(join(RES_OUT_IOS_SPLASH, "splash-2732x2732-2.png"));
 
-console.log("native assets generated — Android mipmaps/drawables + iOS AppIcon + Splash");
+console.log("native assets generated — Android mipmaps/drawables + iOS AppIcon + Splash — V2 strum-burst");

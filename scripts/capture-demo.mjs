@@ -15,9 +15,10 @@ async function sleep(ms) {
 }
 
 async function main() {
-  const browser = await chromium.launch({ headless: false });
+  const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
     viewport: { width: 1280, height: 720 },
+    colorScheme: "dark",
     recordVideo: { dir: resolve(ROOT, "scripts"), size: { width: 1280, height: 720 } },
   });
 
@@ -25,9 +26,8 @@ async function main() {
   await page.goto("http://localhost:3000", { waitUntil: "networkidle" });
   await sleep(1500);
 
-  // Take a clean hero screenshot first
-  await page.screenshot({ path: SCREENSHOT_PATH, fullPage: false });
-  console.log("Hero screenshot saved");
+  // Skip overwriting hero — gen-readme-screenshot.mjs already produced the canonical hero at 2x DPR.
+  console.log("skipped hero overwrite (kept 2x-DPR version from gen-readme-screenshot.mjs)");
 
   // Simulate strum interactions for the demo
   // Strum C chord (2, w, s, x) - fast sweep

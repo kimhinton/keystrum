@@ -2,8 +2,15 @@ import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 
 export const metadata = {
-  title: "About — keystrum",
-  description: "About keystrum — a keyboard-as-guitar instrument built with Karplus-Strong synthesis.",
+  title: "About keystrum — why a QWERTY guitar, and how Karplus-Strong works",
+  description: "Why keystrum exists: practice guitar chords without a guitar. How the QWERTY-to-guitar mapping works, why Karplus-Strong physical modeling synthesis produces a real plucked-string sound in the browser, and what's next on the roadmap.",
+  keywords: [
+    "Karplus-Strong web audio",
+    "javascript guitar synthesis",
+    "physical modeling synthesis demo",
+    "open source browser instrument",
+    "qwerty keyboard instrument",
+  ],
   alternates: { canonical: "/about" },
 };
 

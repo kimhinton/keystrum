@@ -6,8 +6,8 @@ import NativeRedirect from "@/components/native/NativeRedirect";
 import { Logo } from "@/components/brand/Logo";
 
 export const metadata = {
-  title: "keystrum — Strum your keyboard",
-  description: "A new instrument. Four rows, six chords, one keyboard. Sweep a column fast and it strums. Practice mode with three songs included.",
+  title: "keystrum — Practice guitar chords without a guitar",
+  description: "Virtual guitar online, free, no download. Strum 6 guitar chords on your QWERTY keyboard — 4 rows become 4 strings. Real strum detection, Karplus-Strong synthesis, 3 folk songs in practice mode. Browser-only, no install, no account.",
 };
 
 export default function HomePage() {
@@ -35,17 +35,20 @@ export default function HomePage() {
         <div className="flex flex-col justify-center">
           <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-neutral-400">
             <span className="size-1.5 rounded-full bg-[#FF3864]" />
-            No install · Web Audio · open source
+            Practice without a guitar · No install · Open source
           </div>
-          <h1 className="mb-5 text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="mb-3 text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
             Strum your
             <br />
             <span className="text-[#FF3864]">keyboard.</span>
           </h1>
-          <p className="mb-8 max-w-lg text-lg text-neutral-400">
-            A new instrument. Four rows, six chords.
+          <p className="mb-6 max-w-xl text-xl font-medium text-neutral-200 sm:text-2xl">
+            Practice guitar chords &mdash; no guitar needed.
+          </p>
+          <p className="mb-8 max-w-lg text-base text-neutral-400">
+            A browser instrument. Four rows become four strings, six columns become six chords.
             <br className="hidden sm:block" />
-            <span className="text-neutral-300">Sweep a column — hear it ring.</span>
+            <span className="text-neutral-300">Sweep a column &mdash; hear it ring.</span>
           </p>
           <div className="flex flex-wrap gap-3">
             <a
