@@ -46,13 +46,13 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
     onClose();
   };
 
-  const sendToDesktop = async () => {
+  const shareKeystrum = async () => {
     const url = window.location.origin;
     if (shareAvailable) {
       try {
         await navigator.share({
           title: "keystrum",
-          text: "Strum your keyboard — works best on desktop",
+          text: "Practice guitar chords on your keyboard — no guitar needed.",
           url,
         });
         onClose();
@@ -80,13 +80,13 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
 
         <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest text-[#FF3864]">
           <span className="size-1.5 rounded-full bg-[#FF3864]" />
-          On mobile?
+          On mobile
         </div>
         <h2 className="mb-2 text-xl font-semibold tracking-tight">
-          keystrum plays best on a keyboard.
+          Tap or drag to strum.
         </h2>
         <p className="mb-6 text-sm text-neutral-400">
-          Touch-drag works here — but sweeping rows of physical keys is the real thing. Install this page as an app, or send a link to your desktop.
+          The on-screen keys are fully playable — tap for single notes, drag across a column to strum. Practice mode has full touch-drag strum support. Install as an app for a full-screen, offline experience.
         </p>
 
         <div className="flex flex-col gap-2">
@@ -107,17 +107,17 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
           )}
           <button
             type="button"
-            onClick={sendToDesktop}
+            onClick={shareKeystrum}
             className="rounded-full border border-white/10 bg-white/[0.03] py-3 text-sm font-medium text-neutral-200 transition hover:border-white/20 hover:bg-white/[0.06]"
           >
-            {copied ? "Link copied ✓" : shareAvailable ? "Send link to my desktop →" : "Copy link for desktop"}
+            {copied ? "Link copied ✓" : shareAvailable ? "Share keystrum →" : "Copy link"}
           </button>
           <button
             type="button"
             onClick={onClose}
             className="pt-2 text-xs text-neutral-500 transition hover:text-neutral-300"
           >
-            Keep playing on mobile
+            Keep playing
           </button>
         </div>
       </div>

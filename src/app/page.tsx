@@ -245,7 +245,7 @@ const HOW = [
 ];
 
 const FAQ = [
-  { q: "Does it work on mobile?", a: "The page loads, but strumming needs a physical keyboard. On-screen keys work as a fallback. Practice mode has touch support." },
+  { q: "Does it work on mobile?", a: "Yes, fully. Tap or drag across the on-screen keys to strum — practice mode has full touch-drag strum support. On desktop, use your keyboard. Install as a PWA for a full-screen, offline-capable experience." },
   { q: "Is there a practice mode?", a: "Yes — /play has three songs where a character shows you when to strum, hold, and mute. Scores save locally and can be shared via URL." },
   { q: "Why four strings?", a: "QWERTY has four rows. keystrum uses all four — that&apos;s the instrument&apos;s design, not a limitation." },
   { q: "Can I change the chords?", a: "Not yet on v1. Column presets will be editable in the next release. Six chords available now: Am, C, Em, G, Dm, F." },

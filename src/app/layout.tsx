@@ -168,7 +168,7 @@ const jsonLd = {
           name: "Does it work on mobile?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "The page loads on mobile, but strumming requires a physical keyboard. Tapping the on-screen keys works as a fallback.",
+            text: "Yes, fully. On mobile, tap or drag across the on-screen keys to strum — practice mode has full touch-drag strum support. On desktop, use your keyboard. Install as a PWA for a full-screen, offline-capable experience.",
           },
         },
         {

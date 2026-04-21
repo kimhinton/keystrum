@@ -182,7 +182,7 @@ export default function NativeSongs() {
         </ul>
 
         <p className="mt-6 px-2 text-center text-[11px] leading-relaxed text-neutral-600">
-          Practice mode with note-judgment needs a hardware keyboard · open on desktop at keystrum.app.
+          Tap a song to start. Touch-drag across the on-screen keys to strum — practice mode has full touch support.
         </p>
       </main>
     </div>
