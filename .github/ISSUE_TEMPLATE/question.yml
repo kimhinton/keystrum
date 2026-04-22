@@ -1,0 +1,42 @@
+name: Question / Usage help
+description: Ask how to use keystrum for your scenario
+title: "[Question] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Prefer [GitHub Discussions](https://github.com/kimhinton/keystrum/discussions) for usage questions — they are searchable and help future users. Open an issue here only if you believe this reveals a documentation gap.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: What are you trying to achieve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What did you try?
+      description: Pages visited, interactions attempted, docs consulted.
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser (if relevant)
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Not applicable
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues and discussions.
+          required: true

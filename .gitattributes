@@ -1,0 +1,45 @@
+# Normalize line endings on checkin/checkout.
+* text=auto eol=lf
+
+# TypeScript / JavaScript
+*.ts  text diff=typescript linguist-language=TypeScript
+*.tsx text diff=typescript linguist-language=TSX
+*.js  text diff=javascript
+*.jsx text diff=javascript
+*.mjs text
+*.cjs text
+
+# Styles / markup
+*.css  text
+*.scss text
+*.html text
+
+# Config / data
+*.yml   text
+*.yaml  text
+*.json  text
+*.toml  text
+*.cff   text
+*.md    text diff=markdown
+
+# Shell / scripts
+*.sh text eol=lf
+
+# Binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.mp3   binary
+*.wav   binary
+*.ogg   binary
+
+# Exclude from language stats
+/public/        linguist-documentation
+/docs/          linguist-documentation

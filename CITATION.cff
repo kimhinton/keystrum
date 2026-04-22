@@ -1,0 +1,21 @@
+cff-version: "1.2.0"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: "Hinton"
+    given-names: "Kim M."
+title: "keystrum"
+version: "0.1.0"
+date-released: "2026-04-21"
+url: "https://keystrum.app"
+repository-code: "https://github.com/kimhinton/keystrum"
+license: "MIT"
+keywords:
+  - "keyboard-instrument"
+  - "qwerty-guitar"
+  - "strum-machine"
+  - "karplus-strong"
+  - "web-audio"
+  - "guitar-chord-practice"
+  - "physical-modeling-synthesis"
+  - "nextjs"
