@@ -75,7 +75,7 @@ jobs:
 
       - name: Upload AAB artifact
         if: ${{ github.event.inputs.build_type == 'aab' || startsWith(github.ref, 'refs/tags/') }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: keystrum-android-aab
           path: android/app/build/outputs/bundle/release/*.aab
@@ -83,7 +83,7 @@ jobs:
 
       - name: Upload APK artifact
         if: ${{ github.event.inputs.build_type == 'apk' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: keystrum-android-apk
           path: android/app/build/outputs/apk/release/*.apk
