@@ -35,6 +35,19 @@ late-night jammers without a guitar · music teachers looking for a browser chor
 
 </div>
 
+## Quick Start
+
+[**Try it live**](https://keystrum.app) — no install. Or run locally:
+
+```bash
+git clone https://github.com/kimhinton/keystrum.git
+cd keystrum
+pnpm install
+pnpm run dev    # → http://localhost:3000
+```
+
+Requires **pnpm ≥ 10** and **Node ≥ 22**. Press a column of keys (e.g. `2 W S X`) → hear a C major chord.
+
 ## Screenshots
 
 <table>
@@ -111,17 +124,21 @@ Best scores persist in localStorage. Share your run via URL.
 
 **Music teachers looking for a browser chord tool.** Classroom Chromebooks don't have guitars, but every Chromebook has a keyboard. keystrum opens in any browser with no install, no login, no data stored on servers. Point a student's URL at `keystrum.app/play` and they have a chord trainer with three folk songs and progressive difficulty.
 
-## Quick Start
+## How keystrum compares
 
-```bash
-git clone https://github.com/kimhinton/keystrum.git
-cd keystrum
-pnpm install
-pnpm run dev
-```
+|                       | **keystrum**            | Yousician           | Fender Play        | Online piano apps   | Static chord charts |
+|-----------------------|-------------------------|---------------------|--------------------|---------------------|---------------------|
+| Hardware needed       | Keyboard only           | Real guitar         | Real guitar        | Keyboard            | None                |
+| Sound output          | Karplus-Strong synth    | Real (mic input)    | Video lessons      | Sampled piano       | Silent              |
+| Strum mechanic        | Column sweep <90 ms     | N/A                 | N/A                | Single notes only   | None                |
+| Practice songs        | 3 folk (free)           | 1500+ (paid)        | Curated (paid)     | Varies              | None                |
+| Account required      | No                      | Yes                 | Yes                | Often               | No                  |
+| Install               | Browser tab             | iOS/Android/desktop | iOS/Android        | Browser tab         | Browser/PDF         |
+| Cost                  | Free, MIT licensed      | $20/mo              | $10/mo             | Free–paid           | Free                |
+| Offline-capable       | After first load (PWA)  | App-only            | App-only           | Varies              | PDF only            |
+| Stores user data      | localStorage only       | Cloud account       | Cloud account      | Varies              | None                |
 
-Requires **pnpm ≥ 10** and **Node ≥ 22** (matches CI).
-Open **http://localhost:3000** → press some keys → hear chords.
+keystrum is not a replacement for a real instrument. It targets one specific gap: muscle-memory practice for diatonic chord changes when no guitar is at hand.
 
 ## Practice Mode
 
