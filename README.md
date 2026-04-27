@@ -140,6 +140,12 @@ Best scores persist in localStorage. Share your run via URL.
 
 keystrum is not a replacement for a real instrument. It targets one specific gap: muscle-memory practice for diatonic chord changes when no guitar is at hand.
 
+### Coming from another tool?
+
+- **Yousician / Fender Play / Simply Guitar** — keep them for structured lessons. keystrum is for 5-minute chord-change drills when your guitar is out of reach.
+- **Static chord charts (Ultimate-Guitar / Chordify)** — keystrum adds audio and a strum mechanic; sweep the columns instead of imagining the sound.
+- **A real guitar** — please don't migrate away. keystrum is a complement, not a replacement.
+
 ## Practice Mode
 
 Three songs with progressive difficulty:
@@ -162,6 +168,33 @@ Each song has two verses: **Verse 1** teaches the pattern sparse. **Verse 2** pl
 | State | [Zustand](https://github.com/pmndrs/zustand) with localStorage persistence |
 | Language | TypeScript (strict) |
 | Deploy | Static export → any CDN (Cloudflare Pages, Vercel, Netlify) |
+
+## Use the engine in your own app
+
+keystrum's audio synthesis and keyboard mapping are factored into independently importable packages so you can drop the strum machine into any browser app without pulling in Next.js or React.
+
+| Package | Description | Runtime deps |
+|---------|-------------|:------------:|
+| [`@keystrum/synth`](packages/synth) | Karplus-Strong physical-modeling synthesis for the Web Audio API. Configurable decay, brightness, pluck position. | None |
+| [`@keystrum/layout`](packages/layout) | QWERTY → guitar-string mapping and open-position chord definitions. Pure data, no DOM. | None |
+
+```bash
+pnpm add @keystrum/synth @keystrum/layout
+```
+
+```ts
+import { GuitarSynth } from "@keystrum/synth";
+import { DEFAULT_CHORD_COLUMNS, getChordFrequencies } from "@keystrum/layout";
+
+const synth = new GuitarSynth();
+const am = DEFAULT_CHORD_COLUMNS[0]!;          // { name: "Am", label: "A minor", ... }
+const freqs = getChordFrequencies(am);          // [82.4, 110, 146.8, 220]
+
+// downstroke: pluck each string 30 ms apart
+freqs.forEach((freq, i) => setTimeout(() => synth.pluck(freq), i * 30));
+```
+
+Each package publishes its own `dist/` and ships independently — pull only what you need.
 
 ## Project Structure
 
@@ -194,6 +227,10 @@ pnpm exec tsc --noEmit  # Type check
 ```
 
 The `out/` directory is a static site — deploy to any hosting.
+
+## Used in the wild
+
+Nothing to feature yet — keystrum is brand-new. If you build something on top of it (a teaching tool, a chord trainer, a `<KeystrumKeyboard />` embed in your own site, a Capacitor mobile build, anything), please [open a showcase issue](https://github.com/kimhinton/keystrum/issues/new?title=Showcase:%20&labels=showcase) and we'll list it here with credit.
 
 ## Contributing
 
