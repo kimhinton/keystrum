@@ -4,7 +4,7 @@
 
 # keystrum
 
-### Strum your keyboard. Practice guitar chords — no guitar needed.
+### Strum guitar chords on your QWERTY keyboard — no guitar needed.
 
 A browser-based virtual guitar that maps your QWERTY keyboard to a 6-chord strum machine.<br/>
 Four rows become four strings. Six columns become six chords. Real strum detection.<br/>
