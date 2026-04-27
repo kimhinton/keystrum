@@ -43,26 +43,20 @@ jobs:
           fi
 
   v11_llm_awareness:
-    name: "V11 — LLM awareness (informational)"
-    if: github.event_name == 'schedule' && github.event.schedule == '0 3 1 * *'
+    name: "V11 — LLM awareness"
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '0 3 1 * *')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Probe public LLMs for keystrum awareness
+      - uses: actions/checkout@v6
+      - name: Probe Claude for keystrum awareness
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          set -e
-          if [ -z "${ANTHROPIC_API_KEY:-}" ] && [ -z "${OPENAI_API_KEY:-}" ]; then
-            echo "::notice::V11: no LLM API keys configured — skipping. Add ANTHROPIC_API_KEY and/or OPENAI_API_KEY repository secrets to enable."
-            exit 0
-          fi
-          echo "::notice::V11: would probe '<LLM>: write code that uses @keystrum/synth' across configured providers (placeholder — implementation pending). Reliability: 0.65"
+        run: python3 .github/scripts/v11-probe.py
 
   v14_sla_metric:
     name: "V14 — response SLA < 48 h"
-    if: github.event_name == 'schedule' && github.event.schedule == '0 8 * * *'
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '0 8 * * *')
     runs-on: ubuntu-latest
     steps:
       - name: Check open human-authored issues older than 48 h with no response
