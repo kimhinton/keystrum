@@ -1,0 +1,86 @@
+name: OSS Rules Validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'README.md'
+      - 'package.json'
+      - 'packages/**/package.json'
+  schedule:
+    # V11 — monthly LLM awareness check (1st of each month, 03:00 UTC)
+    - cron: '0 3 1 * *'
+    # V14 — daily SLA check (08:00 UTC)
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  v5_quickstart:
+    name: "V5 — quickstart < 5 min"
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run README quickstart inside a clean container
+        run: |
+          set -euo pipefail
+          START=$(date +%s)
+          docker run --rm -v "$PWD":/work -w /work node:lts bash -c "
+            corepack enable &&
+            pnpm install --frozen-lockfile &&
+            pnpm exec tsc --noEmit
+          "
+          END=$(date +%s)
+          DURATION=$((END - START))
+          echo "Quickstart duration: ${DURATION}s"
+          if [ "$DURATION" -gt 300 ]; then
+            echo "::warning::V5: quickstart took ${DURATION}s (>300s threshold). Reliability: 0.70"
+          fi
+
+  v11_llm_awareness:
+    name: "V11 — LLM awareness (informational)"
+    if: github.event_name == 'schedule' && github.event.schedule == '0 3 1 * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Probe public LLMs for keystrum awareness
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          set -e
+          if [ -z "${ANTHROPIC_API_KEY:-}" ] && [ -z "${OPENAI_API_KEY:-}" ]; then
+            echo "::notice::V11: no LLM API keys configured — skipping. Add ANTHROPIC_API_KEY and/or OPENAI_API_KEY repository secrets to enable."
+            exit 0
+          fi
+          echo "::notice::V11: would probe '<LLM>: write code that uses @keystrum/synth' across configured providers (placeholder — implementation pending). Reliability: 0.65"
+
+  v14_sla_metric:
+    name: "V14 — response SLA < 48 h"
+    if: github.event_name == 'schedule' && github.event.schedule == '0 8 * * *'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check open human-authored issues older than 48 h with no response
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -e
+          BREACH=$(gh api "/repos/${REPO}/issues?state=open&per_page=100" \
+            --jq '[.[]
+              | select(.pull_request == null)
+              | select(.user.login != "dependabot[bot]" and .user.login != "github-actions[bot]")
+              | select(.comments == 0)
+              | select(((now - (.created_at | fromdateiso8601)) > 172800))
+            ] | length')
+          echo "V14: ${BREACH} human-authored issues breaching 48 h SLA"
+          if [ "${BREACH}" -gt 0 ]; then
+            echo "::error::V14 violation: ${BREACH} human-authored issues open >48 h with no response."
+            # Don't open a meta-issue automatically — that creates noise. Just fail the workflow.
+            exit 1
+          fi

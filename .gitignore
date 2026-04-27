@@ -55,6 +55,10 @@ yarn-error.log*
 # claude internal
 .claude/
 
+# private rule-table self-assessment metadata (kept on the maintainer's machine, not in the repo)
+.oss-rules.json
+.oss-rules-*.md
+
 # archives & zips
 *.zip
 
