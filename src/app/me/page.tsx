@@ -32,7 +32,10 @@ function lastNDays(n: number): string[] {
 
 export default function MePage() {
   const [hydrated, setHydrated] = useState(false);
-  useEffect(() => setHydrated(true), []);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- standard SSR hydration pattern; Zustand persist requires post-mount flag
+    setHydrated(true);
+  }, []);
 
   const chordPlays = useStatsStore((s) => s.chordPlays);
   const dayActivity = useStatsStore((s) => s.dayActivity);
