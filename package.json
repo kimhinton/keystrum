@@ -9,10 +9,15 @@
   },
   "license": "MIT",
   "keywords": [
-    "keyboard-instrument",
+    "qwerty-instrument",
+    "browser-guitar",
+    "guitar-chord-practice",
+    "chord-trainer",
+    "karplus-strong",
+    "web-audio-synthesis",
     "web-audio",
     "strum",
-    "karplus-strong",
+    "keyboard-instrument",
     "music",
     "nextjs"
   ],
