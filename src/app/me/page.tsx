@@ -44,6 +44,7 @@ export default function MePage() {
   const chordPlays = useStatsStore((s) => s.chordPlays);
   const dayActivity = useStatsStore((s) => s.dayActivity);
   const firstVisit = useStatsStore((s) => s.firstVisit);
+  const firstAudioAt = useStatsStore((s) => s.firstAudioAt);
   const totalSessions = useStatsStore((s) => s.totalSessions);
   const currentStreak = useStatsStore((s) => s.currentStreak);
   const longestStreak = useStatsStore((s) => s.longestStreak);
@@ -200,6 +201,42 @@ export default function MePage() {
                 })}
               </div>
             </div>
+
+            {firstVisit && (
+              <div className="mb-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
+                <div className="mb-3 flex items-baseline justify-between">
+                  <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500">Funnel (AARRR · self-hosted)</h2>
+                  <span className="font-mono text-[10px] text-neutral-600">localStorage</span>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-4">
+                  <div>
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Acquisition</div>
+                    <div className="mt-1 text-sm text-neutral-200">First visit</div>
+                    <div className="mt-0.5 font-mono text-xs text-[#FF3864]">{firstVisit}</div>
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Activation</div>
+                    <div className="mt-1 text-sm text-neutral-200">First chord</div>
+                    <div className="mt-0.5 font-mono text-xs text-[#FF3864]">
+                      {firstAudioAt
+                        ? `${Math.round((firstAudioAt - new Date(firstVisit).getTime()) / 1000)}s after visit`
+                        : "—"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Retention</div>
+                    <div className="mt-1 text-sm text-neutral-200">{Object.keys(dayActivity).length} active day{Object.keys(dayActivity).length === 1 ? "" : "s"}</div>
+                    <div className="mt-0.5 font-mono text-xs text-[#FF3864]">streak {currentStreak}d / max {longestStreak}d</div>
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Referral</div>
+                    <div className="mt-1 text-sm text-neutral-200">Shared progressions opened</div>
+                    <div className="mt-0.5 font-mono text-xs text-[#FF3864]">{sharedReceivedCount}</div>
+                  </div>
+                </div>
+                <p className="mt-3 text-[11px] text-neutral-600">All numbers live in this browser&rsquo;s localStorage. No telemetry, no SaaS. Reset clears them.</p>
+              </div>
+            )}
 
             <div className="mb-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
               <h2 className="mb-4 text-xs font-mono uppercase tracking-widest text-neutral-500">Last 30 days</h2>

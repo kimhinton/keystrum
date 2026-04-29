@@ -83,6 +83,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
     setLastChord(preset);
     const stats = useStatsStore.getState();
     stats.recordChordPlay(preset.name);
+    stats.recordFirstAudio(); // AARRR Activation — only fires the first time per device
     if (stats.pendingRecall) stats.resolveRecall(preset.name);
     onActivityChange?.(true);
     // 0.5% chance golden key — surprise reward, ~once a week at typical use

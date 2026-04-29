@@ -65,6 +65,7 @@ export interface StatsState {
   chordPlays: Record<string, number>;
   dayActivity: Record<string, number>;
   firstVisit: string | null;
+  firstAudioAt: number | null;
   totalSessions: number;
 
   currentStreak: number;
@@ -81,6 +82,7 @@ export interface StatsState {
   chordSrs: Record<string, ChordSrs>;
 
   recordChordPlay: (chord: string) => void;
+  recordFirstAudio: () => void;
   startSession: () => void;
   saveProgression: (chords: string[], name?: string) => string | null;
   removeProgression: (id: string) => void;
@@ -114,6 +116,7 @@ const noopStorage: Storage = {
 type StatsData = Omit<
   StatsState,
   | "recordChordPlay"
+  | "recordFirstAudio"
   | "startSession"
   | "saveProgression"
   | "removeProgression"
@@ -129,6 +132,7 @@ const INITIAL_STATS: StatsData = {
   chordPlays: {},
   dayActivity: {},
   firstVisit: null,
+  firstAudioAt: null,
   totalSessions: 0,
   currentStreak: 0,
   longestStreak: 0,
@@ -155,6 +159,9 @@ export const useStatsStore = create<StatsState>()(
             firstVisit: s.firstVisit ?? t,
           };
         }),
+
+      recordFirstAudio: () =>
+        set((s) => (s.firstAudioAt ? s : { firstAudioAt: Date.now() })),
 
       startSession: () =>
         set((s) => {
