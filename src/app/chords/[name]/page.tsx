@@ -44,6 +44,12 @@ export default async function ChordPage(
   const c = getChordBySlug(name);
   if (!c) notFound();
 
+  const faqEntries = c.commonMistakes.map((mistake, i) => ({
+    "@type": "Question",
+    name: `${c.name} chord — common mistake ${i + 1}`,
+    acceptedAnswer: { "@type": "Answer", text: mistake },
+  }));
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -51,7 +57,7 @@ export default async function ChordPage(
         "@type": "MusicComposition",
         name: `${c.name} chord`,
         alternativeHeadline: c.label,
-        description: `${c.label} chord. Notes: ${c.notes.join(", ")}. Intervals: ${c.intervals.join(", ")}.`,
+        description: `${c.label} chord. Notes: ${c.notes.join(", ")}. Intervals: ${c.intervals.join(", ")}. ${c.theory.function}.`,
       },
       {
         "@type": "BreadcrumbList",
@@ -76,8 +82,15 @@ export default async function ChordPage(
           },
         ],
       },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqEntries,
+      },
     ],
   };
+
+  const diffColor = (d: "easy" | "medium" | "hard" | undefined) =>
+    d === "easy" ? "text-emerald-400" : d === "medium" ? "text-yellow-400" : d === "hard" ? "text-red-400" : "text-neutral-500";
 
   return (
     <div className="min-h-screen bg-[#0E0E12] text-neutral-100">
@@ -149,6 +162,50 @@ export default async function ChordPage(
           </div>
         </div>
 
+        {c.theory.romanNumeral && (
+          <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
+            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-500">Music theory</h2>
+            <dl className="grid gap-3 text-sm sm:grid-cols-3">
+              <div>
+                <dt className="text-xs text-neutral-500">Roman numeral</dt>
+                <dd className="mt-1 font-mono text-neutral-200">{c.theory.romanNumeral}</dd>
+              </div>
+              <div className="sm:col-span-2">
+                <dt className="text-xs text-neutral-500">Function</dt>
+                <dd className="mt-1 text-neutral-300">{c.theory.function}</dd>
+              </div>
+              <div className="sm:col-span-3">
+                <dt className="text-xs text-neutral-500">Relative key</dt>
+                <dd className="mt-1 text-neutral-300">{c.theory.relativeTo}</dd>
+              </div>
+            </dl>
+          </div>
+        )}
+
+        {c.commonMistakes.length > 0 && (
+          <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
+            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-500">How to play it cleanly</h2>
+            <ul className="flex flex-col gap-2.5 text-sm text-neutral-300">
+              {c.commonMistakes.map((mistake, i) => (
+                <li key={i} className="flex items-baseline gap-2.5">
+                  <span className="font-mono text-xs text-neutral-500">{i + 1}.</span>
+                  <span>{mistake}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {c.practiceTip && (
+          <div
+            className="mt-6 rounded-xl border p-5"
+            style={{ borderColor: `${c.color}33`, background: `${c.color}08` }}
+          >
+            <h2 className="mb-2 text-xs font-mono uppercase tracking-widest" style={{ color: c.color }}>5-minute practice tip</h2>
+            <p className="text-sm text-neutral-200">{c.practiceTip}</p>
+          </div>
+        )}
+
         {c.usedIn.length > 0 && (
           <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
             <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-500">Famously used in</h2>
@@ -163,16 +220,26 @@ export default async function ChordPage(
           </div>
         )}
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          {c.siblings.map((sib) => (
-            <Link
-              key={sib}
-              href={`/chords/${getChordSlug(sib)}`}
-              className="rounded-full border border-white/10 bg-white/[0.02] px-3 py-1.5 text-sm font-mono text-neutral-400 transition hover:border-white/20 hover:text-white"
-            >
-              {sib}
-            </Link>
-          ))}
+        <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
+          <h2 className="mb-1 text-xs font-mono uppercase tracking-widest text-neutral-500">Transition difficulty from {c.name}</h2>
+          <p className="mb-4 text-xs text-neutral-500">How hard the chord change feels at typical strumming tempo.</p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {c.siblings.map((sib) => {
+              const diff = c.transitionDifficulty[sib];
+              return (
+                <Link
+                  key={sib}
+                  href={`/chords/${getChordSlug(sib)}`}
+                  className="group flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 transition hover:border-white/20 hover:bg-white/[0.05]"
+                >
+                  <span className="font-mono text-sm text-neutral-300 group-hover:text-white">→ {sib}</span>
+                  {diff && (
+                    <span className={`font-mono text-xs uppercase tracking-wider ${diffColor(diff)}`}>{diff}</span>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
         </div>
 
         {(() => {
