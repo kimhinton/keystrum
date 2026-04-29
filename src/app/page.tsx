@@ -42,6 +42,9 @@ export default function HomePage() {
             <br />
             <span className="text-[#FF3864]">keyboard.</span>
           </h1>
+          <p className="mb-2 max-w-xl text-sm italic text-neutral-500">
+            For when a guitar is out of reach.
+          </p>
           <p className="mb-6 max-w-xl text-xl font-medium text-neutral-200 sm:text-2xl">
             Practice guitar chords &mdash; no guitar needed.
           </p>
@@ -64,6 +67,26 @@ export default function HomePage() {
               See the mapping
             </a>
           </div>
+          <details className="group mt-8 max-w-xl">
+            <summary className="flex cursor-pointer list-none items-center gap-2 text-sm text-neutral-400 transition hover:text-neutral-200 [&::-webkit-details-marker]:hidden">
+              <span className="inline-block text-[#FF3864] transition group-open:rotate-90">▶</span>
+              <span>Why QWERTY? — 3 reasons</span>
+            </summary>
+            <div className="mt-4 space-y-3 text-sm text-neutral-400">
+              <p>
+                <span className="font-semibold text-neutral-200">1. The hardware is already in front of you.</span>{" "}
+                Your laptop&rsquo;s QWERTY keyboard has 4 usable rows and 6+ columns &mdash; exactly enough for 4 strings &times; 6 diatonic chords. No purchase, no setup, no setup cost between you and a chord.
+              </p>
+              <p>
+                <span className="font-semibold text-neutral-200">2. Strum detection is just timing.</span>{" "}
+                Sweep 3+ keys within 90&thinsp;ms = downstroke. Reverse for upstroke. The browser reports keystroke timestamps with millisecond precision &mdash; same physical action as a guitar pick crossing strings, just on a different surface.
+              </p>
+              <p>
+                <span className="font-semibold text-neutral-200">3. Karplus-Strong gives you real plucked-string sound.</span>{" "}
+                The same physical-modeling algorithm used in commercial guitar plugins, running live in Web Audio. No samples, no downloads. The sound is generated in your browser the moment you press a key.
+              </p>
+            </div>
+          </details>
           <div className="mt-10 flex items-center gap-5 text-xs text-neutral-500">
             <span>↓ Just press any key below</span>
           </div>
