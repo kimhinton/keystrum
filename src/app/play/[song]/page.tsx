@@ -51,6 +51,10 @@ export default async function PlaySong(
         description: song.subtitle,
         musicalKey: "C major / A minor",
         musicCompositionForm: "Folk",
+        composer: { "@type": "Person", name: "Traditional" },
+        copyrightNotice: song.credit,
+        inLanguage: "en",
+        genre: "Folk",
       },
       {
         "@type": "BreadcrumbList",

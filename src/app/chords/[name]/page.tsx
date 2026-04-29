@@ -86,6 +86,42 @@ export default async function ChordPage(
         "@type": "FAQPage",
         mainEntity: faqEntries,
       },
+      {
+        "@type": "HowTo",
+        name: `How to play the ${c.name} chord on keystrum`,
+        description: `Strum the ${c.label} chord on a QWERTY keyboard using keystrum's 4-row × 6-column mapping.`,
+        totalTime: "PT2M",
+        tool: [
+          { "@type": "HowToTool", name: "QWERTY keyboard" },
+          { "@type": "HowToTool", name: "Web browser with Web Audio support" },
+        ],
+        step: [
+          {
+            "@type": "HowToStep",
+            position: 1,
+            name: "Open the instrument",
+            text: "Visit keystrum.app — no install, no account.",
+          },
+          {
+            "@type": "HowToStep",
+            position: 2,
+            name: `Find the ${c.name} column`,
+            text: `${c.name} sits in one of the six columns. Each column maps to a chord; each row maps to a guitar string.`,
+          },
+          {
+            "@type": "HowToStep",
+            position: 3,
+            name: "Sweep the column to strum",
+            text: "Press the keys top-to-bottom inside that column within 90 ms. The strum detector fires Karplus-Strong synthesis across all four strings.",
+          },
+          {
+            "@type": "HowToStep",
+            position: 4,
+            name: "Combine into a progression",
+            text: `Add ?prog=${c.name}-... to the URL to chain ${c.name} with other chords and share the link.`,
+          },
+        ],
+      },
     ],
   };
 
