@@ -46,7 +46,7 @@ export default function HomePage() {
             <span className="text-[#FF3864]">keyboard.</span>
           </h1>
           <p className="mb-2 max-w-xl text-sm italic text-neutral-500">
-            For when a guitar is out of reach.
+            What if your keyboard <em className="not-italic font-semibold text-neutral-300">was</em> the guitar?
           </p>
           <p className="mb-6 max-w-xl text-xl font-medium text-neutral-200 sm:text-2xl">
             Practice guitar chords &mdash; no guitar needed.
@@ -91,7 +91,11 @@ export default function HomePage() {
             </div>
           </details>
           <div className="mt-10 flex items-center gap-5 text-xs text-neutral-500">
-            <span>↓ Just press any key below</span>
+            <span>
+              ↓ Press{" "}
+              <kbd className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[10px] text-neutral-300">A</kbd>
+              . Hear what happens.
+            </span>
           </div>
         </div>
 
