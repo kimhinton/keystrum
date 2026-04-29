@@ -10,6 +10,8 @@ A browser-based virtual guitar that maps your QWERTY keyboard to a 6-chord strum
 Four rows become four strings. Six columns become six chords. Real strum detection.<br/>
 No install. No account. No samples. Karplus-Strong synthesis in a tab.
 
+<sub><em>For when a guitar is out of reach.</em></sub>
+
 <sub>Built for: music beginners learning chords · DAW producers sketching ideas ·
 late-night jammers without a guitar · music teachers looking for a browser chord tool.</sub>
 
