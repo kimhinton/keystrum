@@ -63,6 +63,25 @@ function pickFasterSong(currentBpm: number, currentId: string): Song | null {
   return faster[0] ?? null;
 }
 
+const RAINBOW_BURST_COLORS = ["#fbbf24", "#34d399", "#60a5fa", "#a78bfa", "#f472b6"];
+const COMBO_MILESTONES = new Set([30, 50, 100, 150]);
+const FLOW_PRAISES = ["Sharp!", "Locked in", "Clean", "On fire", "Tight"];
+
+function pickRainbowColor(): string {
+  return RAINBOW_BURST_COLORS[Math.floor(Math.random() * RAINBOW_BURST_COLORS.length)];
+}
+
+function pickFlowPraise(): string {
+  return FLOW_PRAISES[Math.floor(Math.random() * FLOW_PRAISES.length)];
+}
+
+function triggerComboMilestoneVibration(next: number, prev: number): void {
+  if (typeof navigator === "undefined" || !navigator.vibrate) return;
+  if (COMBO_MILESTONES.has(next) && !COMBO_MILESTONES.has(prev)) {
+    navigator.vibrate([60, 30, 60]);
+  }
+}
+
 const FLOW_ZONE_INFO: Record<FlowZone, { label: string; message: string; color: string }> = {
   anxiety: {
     label: "Anxiety zone",
@@ -213,11 +232,13 @@ export default function GameRunner({ song }: { song: Song }) {
       setScore((s) => s + JUDGE_SCORES[kind] * multiplier);
       setCombo((c) => {
         const next = c + 1;
+        triggerComboMilestoneVibration(next, c);
         setMaxCombo((m) => Math.max(m, next));
         return next;
       });
       setStats((s) => ({ ...s, [kind]: s[kind] + 1 }));
-      pushBurst(note.lane, judgmentLabel(kind), judgmentColor(kind));
+      const burstColor = combo >= 30 && Math.random() < 0.12 ? pickRainbowColor() : judgmentColor(kind);
+      pushBurst(note.lane, judgmentLabel(kind), burstColor);
       const stringIdx = LANE_KEYS[note.lane].indexOf(key);
       playSingle(note.lane, stringIdx < 0 ? 0 : stringIdx, 0.6);
       holdingRef.current.set(key, { noteId: note.id, lane: note.lane });
@@ -237,11 +258,13 @@ export default function GameRunner({ song }: { song: Song }) {
       setScore((s) => s + JUDGE_SCORES[kind] * multiplier + STRUM_BONUS);
       setCombo((c) => {
         const next = c + 1;
+        triggerComboMilestoneVibration(next, c);
         setMaxCombo((m) => Math.max(m, next));
         return next;
       });
       setStats((s) => ({ ...s, [kind]: s[kind] + 1 }));
-      pushBurst(note.lane, `${judgmentLabel(kind)} · STRUM +${STRUM_BONUS}`, "#FF3864");
+      const strumColor = combo >= 30 && Math.random() < 0.12 ? pickRainbowColor() : "#FF3864";
+      pushBurst(note.lane, `${judgmentLabel(kind)} · STRUM +${STRUM_BONUS}`, strumColor);
       playChord(note.lane, 0.9);
       flashMascotHit(note.lane);
       flashMascotStrum();
@@ -259,6 +282,7 @@ export default function GameRunner({ song }: { song: Song }) {
       setScore((s) => s + JUDGE_SCORES[kind] * multiplier);
       setCombo((c) => {
         const next = c + 1;
+        triggerComboMilestoneVibration(next, c);
         setMaxCombo((m) => Math.max(m, next));
         return next;
       });
@@ -863,6 +887,8 @@ function FinishedScreen({
       : zone === "boredom"
         ? pickFasterSong(song.bpm, song.id)
         : null;
+  // Random praise picked once per FinishedScreen mount; lazy init keeps it stable across re-renders without violating react-hooks/purity
+  const [praise] = useState<string | null>(() => (acc >= 0.8 ? pickFlowPraise() : null));
   const shareUrl = useMemo(() => {
     if (typeof window === "undefined") return "";
     const payload = btoa(
@@ -884,6 +910,9 @@ function FinishedScreen({
     <div className="flex w-full max-w-md flex-col items-center gap-6 rounded-2xl border border-white/10 bg-white/[0.02] px-8 py-10 text-center text-neutral-200">
       <div>
         <div className="mb-2 text-xs font-mono uppercase tracking-widest text-[#FF3864]">Finished</div>
+        {praise && (
+          <div className="mb-1 text-2xl font-black" style={{ color: zoneInfo.color }}>{praise}</div>
+        )}
         <div className="text-6xl font-black" style={{ color: rank.color }}>{rank.label}</div>
         <div className="mt-1 text-xs text-neutral-500">{song.title}</div>
       </div>

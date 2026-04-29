@@ -32,6 +32,12 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
   const [activeKeys, setActiveKeys] = useState<Set<string>>(new Set());
   const [lastChord, setLastChord] = useState<ChordPreset | null>(null);
   const [strumPulse, setStrumPulse] = useState<{ col: number; dir: "down" | "up" } | null>(null);
+  const [goldenFlash, setGoldenFlash] = useState(false);
+
+  const triggerGoldenFlash = useCallback(() => {
+    setGoldenFlash(true);
+    window.setTimeout(() => setGoldenFlash(false), 900);
+  }, []);
   const [audioReady, setAudioReady] = useState(false);
   const recentByCol = useRef<Map<number, KeyEvent[]>>(new Map());
   const strumTimeout = useRef<number | null>(null);
@@ -79,6 +85,8 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
     stats.recordChordPlay(preset.name);
     if (stats.pendingRecall) stats.resolveRecall(preset.name);
     onActivityChange?.(true);
+    // 0.5% chance golden key — surprise reward, ~once a week at typical use
+    if (Math.random() < 0.005) triggerGoldenFlash();
 
     const events = recentByCol.current.get(pos.col) ?? [];
     const now = performance.now();
@@ -94,7 +102,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
       if (strumTimeout.current) window.clearTimeout(strumTimeout.current);
       strumTimeout.current = window.setTimeout(() => setStrumPulse(null), 420);
     }
-  }, [audioReady, onActivityChange]);
+  }, [audioReady, onActivityChange, triggerGoldenFlash]);
 
   useEffect(() => {
     const handleDown = (e: KeyboardEvent) => {
@@ -168,7 +176,14 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
   const palette = themePalette(theme);
 
   return (
-    <div className="w-full" style={{ ["--kg-active" as string]: palette.active }}>
+    <div className="w-full relative" style={{ ["--kg-active" as string]: palette.active }}>
+      {goldenFlash && (
+        <div
+          className="pointer-events-none fixed inset-0 z-40 animate-pulse"
+          style={{ boxShadow: "inset 0 0 120px 24px #fbbf24aa" }}
+          aria-hidden="true"
+        />
+      )}
       <div className="mb-2 sm:mb-3 flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs font-mono">
         <span
           className="inline-flex items-center gap-1.5 rounded-full px-2 sm:px-3 py-1 transition-colors"
