@@ -16,6 +16,8 @@ export function noteToFreq(note: string): number {
   return NOTE_FREQUENCIES[note] ?? 440;
 }
 
+const PLUCK_BUFFER_CACHE_MAX = 64;
+
 export class GuitarSynth {
   private ctx: AudioContext | null = null;
   private masterGain: GainNode | null = null;
@@ -23,6 +25,7 @@ export class GuitarSynth {
   private mediaRecorder: MediaRecorder | null = null;
   private recordedChunks: Blob[] = [];
   private _recording = false;
+  private pluckBufferCache: Map<string, AudioBuffer> = new Map();
 
   async ensureContext(): Promise<AudioContext> {
     if (!this.ctx) {
@@ -135,26 +138,38 @@ export class GuitarSynth {
   async pluck(freq: number, duration = 2.5, velocity = 0.8) {
     const ctx = await this.ensureContext();
     const sampleRate = ctx.sampleRate;
-    const bufferLength = Math.floor(sampleRate * duration);
-    const buffer = ctx.createBuffer(1, bufferLength, sampleRate);
-    const data = buffer.getChannelData(0);
+    const cacheKey = `${freq.toFixed(2)}:${duration.toFixed(2)}:${sampleRate}`;
+    let buffer = this.pluckBufferCache.get(cacheKey);
 
-    const period = Math.floor(sampleRate / freq);
-    const delayLine = new Float32Array(period);
-    for (let i = 0; i < period; i++) delayLine[i] = Math.random() * 2 - 1;
+    if (!buffer) {
+      const bufferLength = Math.floor(sampleRate * duration);
+      buffer = ctx.createBuffer(1, bufferLength, sampleRate);
+      const data = buffer.getChannelData(0);
 
-    const damping = 0.996;
-    const filterAmount = 0.5;
-    let readIdx = 0;
-    let prev = 0;
+      const period = Math.floor(sampleRate / freq);
+      const delayLine = new Float32Array(period);
+      for (let i = 0; i < period; i++) delayLine[i] = Math.random() * 2 - 1;
 
-    for (let i = 0; i < bufferLength; i++) {
-      const current = delayLine[readIdx];
-      const filtered = (current + prev) * 0.5 * filterAmount + current * (1 - filterAmount);
-      data[i] = filtered;
-      delayLine[readIdx] = filtered * damping;
-      prev = current;
-      readIdx = (readIdx + 1) % period;
+      const damping = 0.996;
+      const filterAmount = 0.5;
+      let readIdx = 0;
+      let prev = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        const current = delayLine[readIdx];
+        const filtered = (current + prev) * 0.5 * filterAmount + current * (1 - filterAmount);
+        data[i] = filtered;
+        delayLine[readIdx] = filtered * damping;
+        prev = current;
+        readIdx = (readIdx + 1) % period;
+      }
+
+      // LRU eviction: drop the oldest entry once cache reaches the cap
+      if (this.pluckBufferCache.size >= PLUCK_BUFFER_CACHE_MAX) {
+        const oldest = this.pluckBufferCache.keys().next().value;
+        if (oldest !== undefined) this.pluckBufferCache.delete(oldest);
+      }
+      this.pluckBufferCache.set(cacheKey, buffer);
     }
 
     const source = ctx.createBufferSource();
