@@ -10,10 +10,11 @@ export interface SavedProgression {
   savedAt: number;
 }
 
-export type RecallSetting = "auto" | "off";
+export type RecallSetting = "auto" | "drill" | "off";
 
 export interface PendingRecall {
-  chord: string;
+  chords: string[];
+  currentIndex: number;
   expiresAt: number;
 }
 
@@ -47,7 +48,7 @@ export interface StatsState {
   removeProgression: (id: string) => void;
   recordSharedReceived: () => void;
   setRecallSetting: (s: RecallSetting) => void;
-  triggerRecall: (chord: string, durationMs?: number) => void;
+  triggerRecall: (chords: string[], durationMs?: number) => void;
   resolveRecall: (played: string) => "correct" | "wrong" | "noop";
   skipRecall: () => void;
   reset: () => void;
@@ -159,11 +160,18 @@ export const useStatsStore = create<StatsState>()(
       setRecallSetting: (recallSetting) =>
         set({ recallSetting, pendingRecall: null }),
 
-      triggerRecall: (chord, durationMs = 30_000) => {
+      triggerRecall: (chords, durationMs = 30_000) => {
         const s = useStatsStore.getState();
         if (s.recallSetting === "off") return;
+        if (chords.length === 0) return;
         if (s.pendingRecall && s.pendingRecall.expiresAt > Date.now()) return;
-        set({ pendingRecall: { chord, expiresAt: Date.now() + durationMs } });
+        set({
+          pendingRecall: {
+            chords,
+            currentIndex: 0,
+            expiresAt: Date.now() + durationMs,
+          },
+        });
       },
 
       resolveRecall: (played) => {
@@ -174,22 +182,33 @@ export const useStatsStore = create<StatsState>()(
           set({ pendingRecall: null });
           return "noop";
         }
-        const correct = pending.chord === played;
-        const prevPer = s.recallScore.perChord[pending.chord] ?? { correct: 0, total: 0 };
-        set({
-          pendingRecall: null,
-          recallScore: {
-            correct: s.recallScore.correct + (correct ? 1 : 0),
-            total: s.recallScore.total + 1,
-            perChord: {
-              ...s.recallScore.perChord,
-              [pending.chord]: {
-                correct: prevPer.correct + (correct ? 1 : 0),
-                total: prevPer.total + 1,
-              },
+        const expected = pending.chords[pending.currentIndex];
+        if (!expected) {
+          set({ pendingRecall: null });
+          return "noop";
+        }
+        const correct = expected === played;
+        const prevPer = s.recallScore.perChord[expected] ?? { correct: 0, total: 0 };
+        const newScore = {
+          correct: s.recallScore.correct + (correct ? 1 : 0),
+          total: s.recallScore.total + 1,
+          perChord: {
+            ...s.recallScore.perChord,
+            [expected]: {
+              correct: prevPer.correct + (correct ? 1 : 0),
+              total: prevPer.total + 1,
             },
           },
-        });
+        };
+        const nextIndex = pending.currentIndex + 1;
+        if (nextIndex >= pending.chords.length) {
+          set({ pendingRecall: null, recallScore: newScore });
+        } else {
+          set({
+            pendingRecall: { ...pending, currentIndex: nextIndex },
+            recallScore: newScore,
+          });
+        }
         return correct ? "correct" : "wrong";
       },
 

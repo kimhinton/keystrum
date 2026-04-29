@@ -248,19 +248,30 @@ export default function MePage() {
             <div className="mb-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
               <div className="mb-3 flex items-baseline justify-between">
                 <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500">Active recall</h2>
-                <button
-                  type="button"
-                  onClick={() => setRecallSetting(recallSetting === "off" ? "auto" : "off")}
-                  className="text-xs text-neutral-400 underline-offset-4 transition hover:text-neutral-200 hover:underline"
-                >
-                  {recallSetting === "off" ? "Turn on" : "Turn off"}
-                </button>
+                <div className="flex items-center gap-1 rounded-md border border-white/10 p-0.5 text-xs">
+                  {(["off", "auto", "drill"] as const).map((mode) => (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => setRecallSetting(mode)}
+                      className={
+                        recallSetting === mode
+                          ? "rounded bg-[#FF3864]/20 px-2 py-1 font-medium text-[#FF3864]"
+                          : "rounded px-2 py-1 text-neutral-400 transition hover:text-neutral-200"
+                      }
+                    >
+                      {mode === "off" ? "Off" : mode === "auto" ? "1 chord" : "3-chord drill"}
+                    </button>
+                  ))}
+                </div>
               </div>
               {recallScore.total === 0 ? (
                 <p className="text-sm text-neutral-500">
                   {recallSetting === "off"
-                    ? "Recall checks are off. Turn them on to get a quick chord quiz every 5 minutes."
-                    : "Once you've played a few chords, you'll get a quick check every 5 minutes — \"strum X without looking.\" Skippable anytime."}
+                    ? "Recall checks are off. Pick 1 chord (single-chord prompt) or 3-chord drill (interleaving) to get a quick check every 5 minutes."
+                    : recallSetting === "drill"
+                      ? "Once you've played a few chords, you'll get a 3-chord drill every 5 minutes — \"strum Am → C → G without looking.\" Interleaving is ~43% better for retention than single-chord drill (Rohrer 2012). Skippable anytime."
+                      : "Once you've played a few chords, you'll get a quick check every 5 minutes — \"strum X without looking.\" Skippable anytime."}
                 </p>
               ) : (
                 <>

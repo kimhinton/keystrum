@@ -5,13 +5,23 @@ import { useStatsStore } from "@/lib/stats/store";
 
 const RECALL_INTERVAL_MS = 5 * 60 * 1000;
 const PROMPT_WINDOW_MS = 30 * 1000;
+const DRILL_WINDOW_MS = 60 * 1000;
+const DRILL_LENGTH = 3;
 const ALL_CHORDS = ["Am", "C", "Em", "G", "Dm", "F"] as const;
 
-function pickWeakChord(chordPlays: Record<string, number>): string {
+function pickWeakChords(chordPlays: Record<string, number>, n: number): string[] {
   const counts = ALL_CHORDS.map((c) => ({ chord: c, count: chordPlays[c] ?? 0 }));
   const min = Math.min(...counts.map((c) => c.count));
-  const candidates = counts.filter((c) => c.count <= min + 5).map((c) => c.chord);
-  return candidates[Math.floor(Math.random() * candidates.length)] ?? "C";
+  const pool = counts.filter((c) => c.count <= min + 5).map((c) => c.chord);
+  // Rohrer 2012 strict interleaving: distinct chords, no consecutive repeat
+  const out: string[] = [];
+  while (out.length < n) {
+    const candidates = pool.filter((c) => c !== out[out.length - 1]);
+    const next = candidates[Math.floor(Math.random() * candidates.length)];
+    if (!next) break;
+    out.push(next);
+  }
+  return out.length > 0 ? out : ["C"];
 }
 
 export default function RecallSession() {
@@ -33,8 +43,9 @@ export default function RecallSession() {
       if (s.recallSetting === "off") return;
       const totalPlays = Object.values(s.chordPlays).reduce((a, b) => a + b, 0);
       if (totalPlays < 12) return;
-      const chord = pickWeakChord(s.chordPlays);
-      triggerRecall(chord, PROMPT_WINDOW_MS);
+      const drill = s.recallSetting === "drill";
+      const chords = pickWeakChords(s.chordPlays, drill ? DRILL_LENGTH : 1);
+      triggerRecall(chords, drill ? DRILL_WINDOW_MS : PROMPT_WINDOW_MS);
     }, RECALL_INTERVAL_MS);
     return () => window.clearInterval(id);
   }, [setting, triggerRecall]);
@@ -85,21 +96,29 @@ export default function RecallSession() {
 
   if (!pending) return null;
   const remainingSec = Math.max(0, Math.ceil((pending.expiresAt - now) / 1000));
+  const currentChord = pending.chords[pending.currentIndex];
+  const isDrill = pending.chords.length > 1;
+  const total = pending.chords.length;
+  const stepLabel = isDrill ? `Drill · ${pending.currentIndex + 1}/${total} · ${remainingSec}s` : `Quick check · ${remainingSec}s`;
+  const upcoming = isDrill ? pending.chords.slice(pending.currentIndex + 1).join(" → ") : "";
 
   return (
     <div className="fixed bottom-6 left-1/2 z-50 w-[min(420px,92vw)] -translate-x-1/2 rounded-2xl border border-[#FF3864]/40 bg-[#12121a]/95 p-4 shadow-2xl backdrop-blur-md">
       <div className="mb-1 flex items-baseline justify-between">
         <span className="font-mono text-[10px] uppercase tracking-widest text-[#FF3864]">
-          Quick check · {remainingSec}s
+          {stepLabel}
         </span>
         <span className="text-[10px] text-neutral-500">no peeking at the diagram</span>
       </div>
       <p className="mb-3 text-base text-neutral-100">
         Strum{" "}
         <span className="rounded-md bg-[#FF3864]/15 px-2 py-0.5 font-mono font-semibold text-[#FF3864]">
-          {pending.chord}
+          {currentChord}
         </span>
         {" "}without looking.
+        {isDrill && upcoming && (
+          <span className="ml-2 font-mono text-xs text-neutral-500">next: {upcoming}</span>
+        )}
       </p>
       <div className="flex items-center justify-between gap-2">
         <button
