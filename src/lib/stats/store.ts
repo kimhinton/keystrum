@@ -24,6 +24,43 @@ export interface RecallScore {
   perChord: Record<string, { correct: number; total: number }>;
 }
 
+export interface ChordSrs {
+  ease: number;
+  intervalDays: number;
+  dueAt: number;
+  lapses: number;
+}
+
+const SM2_DAY_MS = 86_400_000;
+const SM2_DEFAULT_EASE = 2.5;
+const SM2_MIN_EASE = 1.3;
+const SM2_MAX_EASE = 3.5;
+const SM2_INITIAL_INTERVAL_DAYS = 1;
+
+function smUpdate(prev: ChordSrs | undefined, correct: boolean): ChordSrs {
+  const cur = prev ?? {
+    ease: SM2_DEFAULT_EASE,
+    intervalDays: SM2_INITIAL_INTERVAL_DAYS,
+    dueAt: Date.now(),
+    lapses: 0,
+  };
+  if (correct) {
+    const newInterval = cur.intervalDays * cur.ease;
+    return {
+      ease: Math.min(SM2_MAX_EASE, cur.ease + 0.1),
+      intervalDays: newInterval,
+      dueAt: Date.now() + newInterval * SM2_DAY_MS,
+      lapses: cur.lapses,
+    };
+  }
+  return {
+    ease: Math.max(SM2_MIN_EASE, cur.ease - 0.2),
+    intervalDays: SM2_INITIAL_INTERVAL_DAYS,
+    dueAt: Date.now() + SM2_DAY_MS,
+    lapses: cur.lapses + 1,
+  };
+}
+
 export interface StatsState {
   chordPlays: Record<string, number>;
   dayActivity: Record<string, number>;
@@ -41,6 +78,7 @@ export interface StatsState {
   recallSetting: RecallSetting;
   recallScore: RecallScore;
   pendingRecall: PendingRecall | null;
+  chordSrs: Record<string, ChordSrs>;
 
   recordChordPlay: (chord: string) => void;
   startSession: () => void;
@@ -100,6 +138,7 @@ const INITIAL_STATS: StatsData = {
   recallSetting: "auto",
   recallScore: { correct: 0, total: 0, perChord: {} },
   pendingRecall: null,
+  chordSrs: {},
 };
 
 export const useStatsStore = create<StatsState>()(
@@ -200,13 +239,18 @@ export const useStatsStore = create<StatsState>()(
             },
           },
         };
+        const newSrs = {
+          ...s.chordSrs,
+          [expected]: smUpdate(s.chordSrs[expected], correct),
+        };
         const nextIndex = pending.currentIndex + 1;
         if (nextIndex >= pending.chords.length) {
-          set({ pendingRecall: null, recallScore: newScore });
+          set({ pendingRecall: null, recallScore: newScore, chordSrs: newSrs });
         } else {
           set({
             pendingRecall: { ...pending, currentIndex: nextIndex },
             recallScore: newScore,
+            chordSrs: newSrs,
           });
         }
         return correct ? "correct" : "wrong";

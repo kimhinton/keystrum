@@ -9,10 +9,34 @@ const DRILL_WINDOW_MS = 60 * 1000;
 const DRILL_LENGTH = 3;
 const ALL_CHORDS = ["Am", "C", "Em", "G", "Dm", "F"] as const;
 
-function pickWeakChords(chordPlays: Record<string, number>, n: number): string[] {
-  const counts = ALL_CHORDS.map((c) => ({ chord: c, count: chordPlays[c] ?? 0 }));
-  const min = Math.min(...counts.map((c) => c.count));
-  const pool = counts.filter((c) => c.count <= min + 5).map((c) => c.chord);
+function pickDueChords(
+  srs: Record<string, { dueAt: number }>,
+  chordPlays: Record<string, number>,
+  n: number,
+): string[] {
+  const now = Date.now();
+  // SM-2 due chords: never-reviewed (no SRS entry yet) or dueAt <= now
+  const due = ALL_CHORDS.filter((c) => {
+    const s = srs[c];
+    return !s || s.dueAt <= now;
+  });
+  let pool: string[];
+  if (due.length >= n) {
+    pool = due;
+  } else if (due.length > 0) {
+    // partial: due chords + weakest non-due as filler
+    const counts = ALL_CHORDS.map((c) => ({ chord: c, count: chordPlays[c] ?? 0 }));
+    const min = Math.min(...counts.map((c) => c.count));
+    const filler = counts
+      .filter((c) => c.count <= min + 5 && !due.includes(c.chord))
+      .map((c) => c.chord);
+    pool = [...due, ...filler];
+  } else {
+    // nothing due yet: fall back to weakest pool (Rohrer interleaving baseline)
+    const counts = ALL_CHORDS.map((c) => ({ chord: c, count: chordPlays[c] ?? 0 }));
+    const min = Math.min(...counts.map((c) => c.count));
+    pool = counts.filter((c) => c.count <= min + 5).map((c) => c.chord);
+  }
   // Rohrer 2012 strict interleaving: distinct chords, no consecutive repeat
   const out: string[] = [];
   while (out.length < n) {
@@ -44,7 +68,7 @@ export default function RecallSession() {
       const totalPlays = Object.values(s.chordPlays).reduce((a, b) => a + b, 0);
       if (totalPlays < 12) return;
       const drill = s.recallSetting === "drill";
-      const chords = pickWeakChords(s.chordPlays, drill ? DRILL_LENGTH : 1);
+      const chords = pickDueChords(s.chordSrs, s.chordPlays, drill ? DRILL_LENGTH : 1);
       triggerRecall(chords, drill ? DRILL_WINDOW_MS : PROMPT_WINDOW_MS);
     }, RECALL_INTERVAL_MS);
     return () => window.clearInterval(id);

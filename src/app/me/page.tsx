@@ -32,9 +32,13 @@ function lastNDays(n: number): string[] {
 
 export default function MePage() {
   const [hydrated, setHydrated] = useState(false);
+  const [now, setNow] = useState(0);
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- standard SSR hydration pattern; Zustand persist requires post-mount flag
     setHydrated(true);
+    setNow(Date.now());
+    const id = window.setInterval(() => setNow(Date.now()), 60_000);
+    return () => window.clearInterval(id);
   }, []);
 
   const chordPlays = useStatsStore((s) => s.chordPlays);
@@ -50,6 +54,14 @@ export default function MePage() {
   const recallScore = useStatsStore((s) => s.recallScore);
   const recallSetting = useStatsStore((s) => s.recallSetting);
   const setRecallSetting = useStatsStore((s) => s.setRecallSetting);
+  const chordSrs = useStatsStore((s) => s.chordSrs);
+
+  const formatNextDue = (ms: number): string => {
+    const hours = ms / 3_600_000;
+    if (hours < 1) return `${Math.max(1, Math.round(ms / 60_000))}m`;
+    if (hours < 24) return `${Math.round(hours)}h`;
+    return `${Math.round(hours / 24)}d`;
+  };
 
   const totalPlays = useMemo(
     () => Object.values(chordPlays).reduce((a, b) => a + b, 0),
@@ -78,6 +90,21 @@ export default function MePage() {
       <div className="min-h-screen bg-[#0E0E12] text-neutral-100" />
     );
   }
+
+  // Time-dependent due-card calculation: now is updated every minute via useEffect interval
+  // (function-body Date.now() would violate react-hooks/purity)
+  let dueCount = 0;
+  let nextDueAt = Number.POSITIVE_INFINITY;
+  for (const c of CHORDS) {
+    const s = chordSrs[c];
+    if (!s || s.dueAt <= now) {
+      dueCount += 1;
+    } else if (s.dueAt < nextDueAt) {
+      nextDueAt = s.dueAt;
+    }
+  }
+  const nextDueIn = nextDueAt === Number.POSITIVE_INFINITY ? null : nextDueAt - now;
+  const dueInfo = { dueCount, nextDueIn };
 
   const empty = totalPlays === 0 && savedProgressions.length === 0 && totalSessions === 0;
 
@@ -275,6 +302,15 @@ export default function MePage() {
                 </p>
               ) : (
                 <>
+                {recallSetting !== "off" && (
+                  <p className="mb-3 text-xs text-neutral-500">
+                    {dueInfo.dueCount > 0
+                      ? `${dueInfo.dueCount} chord${dueInfo.dueCount === 1 ? "" : "s"} due now (SM-2 spaced repetition queue).`
+                      : dueInfo.nextDueIn
+                        ? `All caught up — next review in ${formatNextDue(dueInfo.nextDueIn)}.`
+                        : "Spaced repetition queue empty — next prompt picks the chord you've practiced least."}
+                  </p>
+                )}
                   <div className="flex items-baseline gap-3">
                     <span className="text-3xl font-semibold text-neutral-100">
                       {Math.round((recallScore.correct / recallScore.total) * 100)}%
