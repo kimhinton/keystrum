@@ -96,16 +96,18 @@ export default function MePage() {
   // (function-body Date.now() would violate react-hooks/purity)
   let dueCount = 0;
   let nextDueAt = Number.POSITIVE_INFINITY;
+  let nextDueChord: string | null = null;
   for (const c of CHORDS) {
     const s = chordSrs[c];
     if (!s || s.dueAt <= now) {
       dueCount += 1;
     } else if (s.dueAt < nextDueAt) {
       nextDueAt = s.dueAt;
+      nextDueChord = c;
     }
   }
   const nextDueIn = nextDueAt === Number.POSITIVE_INFINITY ? null : nextDueAt - now;
-  const dueInfo = { dueCount, nextDueIn };
+  const dueInfo = { dueCount, nextDueIn, nextDueChord };
 
   const empty = totalPlays === 0 && savedProgressions.length === 0 && totalSessions === 0;
 
@@ -343,8 +345,8 @@ export default function MePage() {
                   <p className="mb-3 text-xs text-neutral-500">
                     {dueInfo.dueCount > 0
                       ? `${dueInfo.dueCount} chord${dueInfo.dueCount === 1 ? "" : "s"} due now (SM-2 spaced repetition queue).`
-                      : dueInfo.nextDueIn
-                        ? `All caught up — next review in ${formatNextDue(dueInfo.nextDueIn)}.`
+                      : dueInfo.nextDueIn && dueInfo.nextDueChord
+                        ? `All caught up — next: ${dueInfo.nextDueChord} in ${formatNextDue(dueInfo.nextDueIn)}.`
                         : "Spaced repetition queue empty — next prompt picks the chord you've practiced least."}
                   </p>
                 )}
