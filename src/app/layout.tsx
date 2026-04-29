@@ -59,7 +59,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@keystrum_app",
+    site: "@RBlue7681",
+    creator: "@RBlue7681",
     title: "keystrum — Practice guitar chords without a guitar",
     description:
       "Guitar chords on your keyboard. 4 rows = 4 strings, 6 columns = 6 chords. Browser-only, no install.",
