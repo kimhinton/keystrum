@@ -1,4 +1,5 @@
 import InstrumentApp from "@/components/instrument/InstrumentApp";
+import RecallSession from "@/components/recall/RecallSession";
 
 export const metadata = {
   title: "Virtual guitar online — record, metronome, volume",
@@ -16,5 +17,10 @@ export const metadata = {
 };
 
 export default function InstrumentPage() {
-  return <InstrumentApp />;
+  return (
+    <>
+      <InstrumentApp />
+      <RecallSession />
+    </>
+  );
 }

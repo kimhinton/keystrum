@@ -4,6 +4,7 @@ import RecordCTA from "@/components/home/RecordCTA";
 import MobileFallback from "@/components/home/MobileFallback";
 import NativeRedirect from "@/components/native/NativeRedirect";
 import ProgressionsBar from "@/components/home/ProgressionsBar";
+import RecallSession from "@/components/recall/RecallSession";
 import { Logo } from "@/components/brand/Logo";
 
 export const metadata = {
@@ -242,6 +243,7 @@ export default function HomePage() {
       </footer>
 
       <MobileFallback />
+      <RecallSession />
     </div>
   );
 }

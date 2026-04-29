@@ -10,6 +10,19 @@ export interface SavedProgression {
   savedAt: number;
 }
 
+export type RecallSetting = "auto" | "off";
+
+export interface PendingRecall {
+  chord: string;
+  expiresAt: number;
+}
+
+export interface RecallScore {
+  correct: number;
+  total: number;
+  perChord: Record<string, { correct: number; total: number }>;
+}
+
 export interface StatsState {
   chordPlays: Record<string, number>;
   dayActivity: Record<string, number>;
@@ -24,11 +37,19 @@ export interface StatsState {
 
   sharedReceivedCount: number;
 
+  recallSetting: RecallSetting;
+  recallScore: RecallScore;
+  pendingRecall: PendingRecall | null;
+
   recordChordPlay: (chord: string) => void;
   startSession: () => void;
   saveProgression: (chords: string[], name?: string) => string | null;
   removeProgression: (id: string) => void;
   recordSharedReceived: () => void;
+  setRecallSetting: (s: RecallSetting) => void;
+  triggerRecall: (chord: string, durationMs?: number) => void;
+  resolveRecall: (played: string) => "correct" | "wrong" | "noop";
+  skipRecall: () => void;
   reset: () => void;
 }
 
@@ -51,18 +72,39 @@ const noopStorage: Storage = {
   length: 0,
 };
 
+type StatsData = Omit<
+  StatsState,
+  | "recordChordPlay"
+  | "startSession"
+  | "saveProgression"
+  | "removeProgression"
+  | "recordSharedReceived"
+  | "setRecallSetting"
+  | "triggerRecall"
+  | "resolveRecall"
+  | "skipRecall"
+  | "reset"
+>;
+
+const INITIAL_STATS: StatsData = {
+  chordPlays: {},
+  dayActivity: {},
+  firstVisit: null,
+  totalSessions: 0,
+  currentStreak: 0,
+  longestStreak: 0,
+  lastActiveDay: null,
+  savedProgressions: [],
+  sharedReceivedCount: 0,
+  recallSetting: "auto",
+  recallScore: { correct: 0, total: 0, perChord: {} },
+  pendingRecall: null,
+};
+
 export const useStatsStore = create<StatsState>()(
   persist(
-    (set) => ({
-      chordPlays: {},
-      dayActivity: {},
-      firstVisit: null,
-      totalSessions: 0,
-      currentStreak: 0,
-      longestStreak: 0,
-      lastActiveDay: null,
-      savedProgressions: [],
-      sharedReceivedCount: 0,
+    (set): StatsState => ({
+      ...INITIAL_STATS,
 
       recordChordPlay: (chord) =>
         set((s) => {
@@ -114,18 +156,46 @@ export const useStatsStore = create<StatsState>()(
       recordSharedReceived: () =>
         set((s) => ({ sharedReceivedCount: s.sharedReceivedCount + 1 })),
 
-      reset: () =>
+      setRecallSetting: (recallSetting) =>
+        set({ recallSetting, pendingRecall: null }),
+
+      triggerRecall: (chord, durationMs = 30_000) => {
+        const s = useStatsStore.getState();
+        if (s.recallSetting === "off") return;
+        if (s.pendingRecall && s.pendingRecall.expiresAt > Date.now()) return;
+        set({ pendingRecall: { chord, expiresAt: Date.now() + durationMs } });
+      },
+
+      resolveRecall: (played) => {
+        const s = useStatsStore.getState();
+        const pending = s.pendingRecall;
+        if (!pending) return "noop";
+        if (pending.expiresAt < Date.now()) {
+          set({ pendingRecall: null });
+          return "noop";
+        }
+        const correct = pending.chord === played;
+        const prevPer = s.recallScore.perChord[pending.chord] ?? { correct: 0, total: 0 };
         set({
-          chordPlays: {},
-          dayActivity: {},
-          firstVisit: null,
-          totalSessions: 0,
-          currentStreak: 0,
-          longestStreak: 0,
-          lastActiveDay: null,
-          savedProgressions: [],
-          sharedReceivedCount: 0,
-        }),
+          pendingRecall: null,
+          recallScore: {
+            correct: s.recallScore.correct + (correct ? 1 : 0),
+            total: s.recallScore.total + 1,
+            perChord: {
+              ...s.recallScore.perChord,
+              [pending.chord]: {
+                correct: prevPer.correct + (correct ? 1 : 0),
+                total: prevPer.total + 1,
+              },
+            },
+          },
+        });
+        return correct ? "correct" : "wrong";
+      },
+
+      skipRecall: () => set({ pendingRecall: null }),
+
+      reset: () => set(INITIAL_STATS),
     }),
     {
       name: "keystrum-stats",

@@ -75,7 +75,9 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
     const freqs = getChordFrequencies(preset);
     guitarSynth.pluck(freqs[pos.row], 2.4, 0.7);
     setLastChord(preset);
-    useStatsStore.getState().recordChordPlay(preset.name);
+    const stats = useStatsStore.getState();
+    stats.recordChordPlay(preset.name);
+    if (stats.pendingRecall) stats.resolveRecall(preset.name);
     onActivityChange?.(true);
 
     const events = recentByCol.current.get(pos.col) ?? [];
