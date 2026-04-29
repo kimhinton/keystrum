@@ -34,10 +34,57 @@ import {
   type RunStats,
   type Song,
 } from "@/lib/game/types";
+import { SONGS } from "@/lib/game/songs";
 
 const COUNTDOWN_MS = 3000;
 
 type Phase = "idle" | "countdown" | "playing" | "finished";
+
+type FlowZone = "anxiety" | "challenge" | "flow" | "boredom";
+
+function classifyFlowZone(acc: number): FlowZone {
+  if (acc < 0.5) return "anxiety";
+  if (acc < 0.8) return "challenge";
+  if (acc < 0.95) return "flow";
+  return "boredom";
+}
+
+function pickSlowerSong(currentBpm: number, currentId: string): Song | null {
+  const slower = SONGS.filter((s) => s.bpm < currentBpm && s.id !== currentId).sort(
+    (a, b) => b.bpm - a.bpm,
+  );
+  return slower[0] ?? null;
+}
+
+function pickFasterSong(currentBpm: number, currentId: string): Song | null {
+  const faster = SONGS.filter((s) => s.bpm > currentBpm && s.id !== currentId).sort(
+    (a, b) => a.bpm - b.bpm,
+  );
+  return faster[0] ?? null;
+}
+
+const FLOW_ZONE_INFO: Record<FlowZone, { label: string; message: string; color: string }> = {
+  anxiety: {
+    label: "Anxiety zone",
+    message: "Too fast right now — slow it down before pushing further",
+    color: "#fbbf24",
+  },
+  challenge: {
+    label: "Practice zone",
+    message: "Keep going — you're learning",
+    color: "#34d399",
+  },
+  flow: {
+    label: "Flow zone ⚡",
+    message: "Locked in — challenge and skill in balance",
+    color: "#FF3864",
+  },
+  boredom: {
+    label: "Mastered",
+    message: "Ready for a faster song",
+    color: "#60a5fa",
+  },
+};
 
 interface Burst {
   id: number;
@@ -808,6 +855,14 @@ function FinishedScreen({
 }) {
   const acc = accuracyOf(stats);
   const rank = rankFor(acc);
+  const zone = classifyFlowZone(acc);
+  const zoneInfo = FLOW_ZONE_INFO[zone];
+  const recommended =
+    zone === "anxiety"
+      ? pickSlowerSong(song.bpm, song.id)
+      : zone === "boredom"
+        ? pickFasterSong(song.bpm, song.id)
+        : null;
   const shareUrl = useMemo(() => {
     if (typeof window === "undefined") return "";
     const payload = btoa(
@@ -831,6 +886,27 @@ function FinishedScreen({
         <div className="mb-2 text-xs font-mono uppercase tracking-widest text-[#FF3864]">Finished</div>
         <div className="text-6xl font-black" style={{ color: rank.color }}>{rank.label}</div>
         <div className="mt-1 text-xs text-neutral-500">{song.title}</div>
+      </div>
+      <div
+        className="w-full rounded-xl border px-4 py-3 text-left"
+        style={{ borderColor: `${zoneInfo.color}55`, background: `${zoneInfo.color}10` }}
+      >
+        <div className="mb-1 flex items-baseline justify-between">
+          <span className="font-mono text-[11px] uppercase tracking-widest" style={{ color: zoneInfo.color }}>
+            {zoneInfo.label}
+          </span>
+          <span className="font-mono text-[10px] text-neutral-500">@ {song.bpm} BPM</span>
+        </div>
+        <p className="text-sm text-neutral-200">{zoneInfo.message}</p>
+        {recommended && (
+          <Link
+            href={`/play/${recommended.id}`}
+            className="mt-2 inline-block text-xs font-semibold underline-offset-4 transition hover:underline"
+            style={{ color: zoneInfo.color }}
+          >
+            {zone === "boredom" ? "↗" : "↘"} Try {recommended.title} · {recommended.bpm} BPM
+          </Link>
+        )}
       </div>
       <div className="grid w-full grid-cols-2 gap-3 font-mono text-sm">
         <Stat label="Score" value={score.toLocaleString()} />
