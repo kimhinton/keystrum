@@ -3,6 +3,7 @@ import KeyboardGuitar from "@/components/keyboard-guitar/KeyboardGuitar";
 import RecordCTA from "@/components/home/RecordCTA";
 import MobileFallback from "@/components/home/MobileFallback";
 import NativeRedirect from "@/components/native/NativeRedirect";
+import ProgressionsBar from "@/components/home/ProgressionsBar";
 import { Logo } from "@/components/brand/Logo";
 
 export const metadata = {
@@ -105,6 +106,8 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      <ProgressionsBar />
 
       <RecordCTA />
 
