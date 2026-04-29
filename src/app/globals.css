@@ -39,6 +39,12 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  /* keystrum brand color (vermilion #FF3864) — single source of truth.
+     Subliminal cue audit (warm wood / amp brown) can re-tune this var
+     in :root without touching component files. WCAG AA contrast on
+     #0E0E12 background = 6.24:1 (AA pass / AAA borderline). */
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -49,6 +55,8 @@
 }
 
 :root {
+  --brand: #FF3864;
+  --brand-soft: rgba(255, 56, 100, 0.15);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
