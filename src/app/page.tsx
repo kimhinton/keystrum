@@ -25,6 +25,7 @@ export default function HomePage() {
           <Link href="/chords" className="transition hover:text-white">Chords</Link>
           <Link href="/play" className="transition hover:text-white">Play</Link>
           <Link href="/instrument" className="transition hover:text-white">Instrument</Link>
+          <Link href="/me" className="transition hover:text-white">Stats</Link>
           <a href="#faq" className="transition hover:text-white">FAQ</a>
           <a href="#instrument" className="rounded-full bg-[#FF3864] px-4 py-1.5 text-xs font-semibold text-black transition hover:bg-[#FF5680]">
             Start playing →

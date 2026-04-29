@@ -12,6 +12,7 @@ import {
   type ChordPreset,
 } from "@keystrum/layout";
 import { hapticStrum } from "@/lib/haptics";
+import { useStatsStore } from "@/lib/stats/store";
 
 export interface KeyboardGuitarProps {
   theme?: "dark" | "light" | "vibrant";
@@ -52,6 +53,10 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
     return () => ro.disconnect();
   }, []);
 
+  useEffect(() => {
+    useStatsStore.getState().startSession();
+  }, []);
+
   const playKey = useCallback(async (key: string) => {
     const pos = getKeyPosition(key);
     if (!pos) return;
@@ -70,6 +75,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
     const freqs = getChordFrequencies(preset);
     guitarSynth.pluck(freqs[pos.row], 2.4, 0.7);
     setLastChord(preset);
+    useStatsStore.getState().recordChordPlay(preset.name);
     onActivityChange?.(true);
 
     const events = recentByCol.current.get(pos.col) ?? [];

@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   POPULAR_PROGRESSIONS,
@@ -8,11 +8,29 @@ import {
   encodeProgression,
   type ChordName,
 } from "@/lib/share/progression";
+import { useStatsStore } from "@/lib/stats/store";
 
 function ProgressionsContent() {
   const searchParams = useSearchParams();
   const selected = decodeProgression(searchParams.get("prog"));
   const [copied, setCopied] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const recordedKey = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (selected.length === 0) return;
+    const key = encodeProgression(selected);
+    if (recordedKey.current === key) return;
+    recordedKey.current = key;
+    useStatsStore.getState().recordSharedReceived();
+  }, [selected]);
+
+  const handleSave = () => {
+    if (selected.length === 0) return;
+    useStatsStore.getState().saveProgression(selected);
+    setSaved(true);
+    window.setTimeout(() => setSaved(false), 1500);
+  };
 
   const share = async (chords: readonly ChordName[]) => {
     const url = `${window.location.origin}/?prog=${encodeProgression(chords)}#instrument`;
@@ -54,13 +72,22 @@ function ProgressionsContent() {
               </span>
             </div>
           </div>
-          <button
-            type="button"
-            onClick={() => share(selected)}
-            className="inline-flex items-center gap-2 self-start rounded-full border border-[#FF3864]/40 bg-[#FF3864]/10 px-4 py-2 text-xs font-semibold text-[#FF3864] transition hover:bg-[#FF3864]/20 sm:self-auto"
-          >
-            {copied ? "Link copied ✓" : "Share this progression →"}
-          </button>
+          <div className="flex flex-wrap gap-2 self-start sm:self-auto">
+            <button
+              type="button"
+              onClick={handleSave}
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-xs font-semibold text-neutral-200 transition hover:bg-white/[0.06]"
+            >
+              {saved ? "Saved ✓" : "Save"}
+            </button>
+            <button
+              type="button"
+              onClick={() => share(selected)}
+              className="inline-flex items-center gap-2 rounded-full border border-[#FF3864]/40 bg-[#FF3864]/10 px-4 py-2 text-xs font-semibold text-[#FF3864] transition hover:bg-[#FF3864]/20"
+            >
+              {copied ? "Link copied ✓" : "Share →"}
+            </button>
+          </div>
         </div>
       )}
       <div className="flex flex-wrap items-center gap-2">
