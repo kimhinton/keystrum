@@ -102,3 +102,23 @@ export function buildChordInfo(): ChordInfo[] {
 export function getChordInfo(name: string): ChordInfo | null {
   return buildChordInfo().find((c) => c.name.toLowerCase() === name.toLowerCase()) ?? null;
 }
+
+const CHORD_SLUG: Record<string, string> = {
+  Am: "a-minor",
+  C: "c-major",
+  Em: "e-minor",
+  G: "g-major",
+  Dm: "d-minor",
+  F: "f-major",
+};
+
+export function getChordSlug(name: string): string {
+  return CHORD_SLUG[name] ?? name.toLowerCase();
+}
+
+export function getChordBySlug(slug: string): ChordInfo | null {
+  const lower = slug.toLowerCase();
+  return buildChordInfo().find(
+    (c) => CHORD_SLUG[c.name] === lower || c.name.toLowerCase() === lower,
+  ) ?? null;
+}

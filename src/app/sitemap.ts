@@ -4,7 +4,7 @@ import { execSync } from "child_process";
 export const dynamic = "force-static";
 
 import { SONGS } from "@/lib/game/songs";
-import { buildChordInfo } from "@keystrum/layout";
+import { buildChordInfo, getChordSlug } from "@keystrum/layout";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://keystrum.app";
 
@@ -36,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
   const chordDate = gitLastModified("packages/layout");
   const chords = buildChordInfo().map((c) => ({
-    url: `${SITE_URL}/chords/${c.name}`,
+    url: `${SITE_URL}/chords/${getChordSlug(c.name)}`,
     lastModified: chordDate,
     changeFrequency: "monthly" as const,
     priority: 0.6,

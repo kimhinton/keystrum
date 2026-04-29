@@ -18,5 +18,7 @@ export {
 export {
   buildChordInfo,
   getChordInfo,
+  getChordSlug,
+  getChordBySlug,
   type ChordInfo,
 } from "./chord-info";

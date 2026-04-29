@@ -1,20 +1,21 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { buildChordInfo, getChordInfo } from "@keystrum/layout";
+import { buildChordInfo, getChordBySlug, getChordSlug } from "@keystrum/layout";
 import { SONGS } from "@/lib/game/songs";
 import { Logo } from "@/components/brand/Logo";
 
 export function generateStaticParams() {
-  return buildChordInfo().map((c) => ({ name: c.name }));
+  return buildChordInfo().map((c) => ({ name: getChordSlug(c.name) }));
 }
 
 export async function generateMetadata(
   { params }: { params: Promise<{ name: string }> }
 ): Promise<Metadata> {
   const { name } = await params;
-  const c = getChordInfo(name);
+  const c = getChordBySlug(name);
   if (!c) return { title: "Chord not found" };
+  const slug = getChordSlug(c.name);
   return {
     title: `${c.name} guitar chord — practice without a guitar`,
     description: `${c.name} (${c.label}) guitar chord — notes ${c.notes.join(" · ")}. Play it by sweeping QWERTY keyboard column ${c.columnIndex + 1} on keystrum. Used in ${c.usedIn.slice(0, 2).join(", ")}.`,
@@ -27,11 +28,11 @@ export async function generateMetadata(
       "guitar chord dictionary",
       "chord practice app",
     ],
-    alternates: { canonical: `/chords/${c.name}` },
+    alternates: { canonical: `/chords/${slug}` },
     openGraph: {
       title: `${c.name} guitar chord — keystrum`,
       description: `Notes: ${c.notes.join(" · ")}. Strum on keyboard column ${c.columnIndex + 1}. Practice without a guitar.`,
-      url: `/chords/${c.name}`,
+      url: `/chords/${slug}`,
     },
   };
 }
@@ -40,7 +41,7 @@ export default async function ChordPage(
   { params }: { params: Promise<{ name: string }> }
 ) {
   const { name } = await params;
-  const c = getChordInfo(name);
+  const c = getChordBySlug(name);
   if (!c) notFound();
 
   const jsonLd = {
@@ -71,7 +72,7 @@ export default async function ChordPage(
             "@type": "ListItem",
             position: 3,
             name: `${c.name} chord`,
-            item: `https://keystrum.app/chords/${c.name}`,
+            item: `https://keystrum.app/chords/${getChordSlug(c.name)}`,
           },
         ],
       },
@@ -166,7 +167,7 @@ export default async function ChordPage(
           {c.siblings.map((sib) => (
             <Link
               key={sib}
-              href={`/chords/${sib}`}
+              href={`/chords/${getChordSlug(sib)}`}
               className="rounded-full border border-white/10 bg-white/[0.02] px-3 py-1.5 text-sm font-mono text-neutral-400 transition hover:border-white/20 hover:text-white"
             >
               {sib}

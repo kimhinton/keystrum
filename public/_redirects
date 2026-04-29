@@ -1,2 +1,10 @@
 # Legacy share URLs → new query param format
 /share/s/:code  /share?code=:code  301
+
+# Legacy chord URLs (raw preset names) → SEO-friendly slugs
+/chords/Am  /chords/a-minor  301
+/chords/C   /chords/c-major  301
+/chords/Em  /chords/e-minor  301
+/chords/G   /chords/g-major  301
+/chords/Dm  /chords/d-minor  301
+/chords/F   /chords/f-major  301

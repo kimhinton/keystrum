@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { buildChordInfo } from "@keystrum/layout";
+import { buildChordInfo, getChordSlug } from "@keystrum/layout";
 import { Logo } from "@/components/brand/Logo";
 
 export const metadata: Metadata = {
@@ -57,7 +57,7 @@ export default function ChordIndex() {
           {chords.map((c) => (
             <Link
               key={c.name}
-              href={`/chords/${c.name}`}
+              href={`/chords/${getChordSlug(c.name)}`}
               className="group relative flex flex-col gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-5 transition hover:border-white/15"
               style={{ ["--c" as string]: c.color }}
             >
