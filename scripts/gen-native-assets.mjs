@@ -1,6 +1,6 @@
 import sharp from "sharp";
 import { mkdirSync, writeFileSync } from "node:fs";
-import { resolve, join } from "node:path";
+import { join } from "node:path";
 
 const root = process.cwd();
 const RES_ANDROID = join(root, "android/app/src/main/res");

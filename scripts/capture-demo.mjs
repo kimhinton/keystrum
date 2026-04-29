@@ -8,7 +8,7 @@ const ROOT = resolve(__dirname, "..");
 const FFMPEG = resolve(ROOT, "node_modules/ffmpeg-static/ffmpeg.exe");
 const _VIDEO_PATH = resolve(ROOT, "scripts/demo-raw.webm");
 const GIF_PATH = resolve(ROOT, "public/demo.gif");
-const SCREENSHOT_PATH = resolve(ROOT, "public/hero-screenshot.png");
+const _SCREENSHOT_PATH = resolve(ROOT, "public/hero-screenshot.png");
 
 async function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));

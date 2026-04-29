@@ -20,7 +20,6 @@ export default function RecallSession() {
   const triggerRecall = useStatsStore((s) => s.triggerRecall);
   const skipRecall = useStatsStore((s) => s.skipRecall);
   const setRecallSetting = useStatsStore((s) => s.setRecallSetting);
-  const chordPlays = useStatsStore((s) => s.chordPlays);
 
   const [resolved, setResolved] = useState<"correct" | "wrong" | null>(null);
   const [now, setNow] = useState(Date.now());

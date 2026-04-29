@@ -338,7 +338,7 @@ export default function GameRunner({ song }: { song: Song }) {
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("keyup", onKeyUp);
     };
-  }, [phase, song.notes, handleLaneKey, handleKeyRelease, playMuteGhost, consumeMute]);
+  }, [phase, song.notes, handleLaneKey, handleKeyRelease, playMuteGhost, consumeMute, consumeHold]);
 
   useEffect(() => {
     if (phase !== "playing" && phase !== "countdown") return;

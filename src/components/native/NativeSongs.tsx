@@ -17,7 +17,6 @@ function difficultyHue(d: Song["difficulty"]): string {
 export default function NativeSongs() {
   const chordInfos = buildChordInfo();
   const colorByName = new Map(chordInfos.map((c) => [c.name, c.color]));
-  const chordByName = new Map(chordInfos.map((c) => [c.name, c]));
   const [playingId, setPlayingId] = useState<string | null>(null);
   const [playingChord, setPlayingChord] = useState<string | null>(null);
   const cancelRef = useRef(false);
@@ -32,6 +31,7 @@ export default function NativeSongs() {
       setPlayingId(song.id);
       void hapticStrum();
       await guitarSynth.ensureContext();
+      const chordByName = new Map(buildChordInfo().map((c) => [c.name, c]));
       const chords = Array.from(new Set(Object.values(song.chordMap))).slice(0, 6);
       const msPerBeat = 60000 / song.bpm;
       for (const name of chords) {
@@ -50,7 +50,7 @@ export default function NativeSongs() {
       setPlayingChord(null);
       setPlayingId(null);
     },
-    [chordByName, playingId]
+    [playingId]
   );
 
   return (
