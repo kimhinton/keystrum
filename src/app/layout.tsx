@@ -122,14 +122,6 @@ const jsonLd = {
       description:
         "Practice guitar chords without a guitar. A browser-based QWERTY keyboard instrument with real strum detection and Karplus-Strong synthesis. 6 chords, 4 rows, 3 folk songs built in.",
       publisher: { "@id": `${SITE_URL}/#organization` },
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: `${SITE_URL}/chords/{search_term_string}`,
-        },
-        "query-input": "required name=search_term_string",
-      },
     },
     {
       "@type": "Organization",
