@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Opt-in metronome in practice mode (issue #19, v0.2.0 milestone) — toggle from the Ready Up screen, 4-on-the-floor click synchronized to `song.bpm`. Downbeat is the 1200 Hz accent click, other beats are the 800 Hz tick. Persisted in `keystrum-game` (commit `84411ed`)
 - 25-minute soft session-break nudge (`SessionBreakNudge.tsx`) — appears once a tab has been open ~25 min, dismissible, postpones the next reminder by another 25 min, mounted in `RootLayout` so it applies to all routes (commit `7bb0e68`)
 - *Today / Yesterday* delta line on `/me` "Last 30 days" — `+Δ over yesterday` shown only when delta is positive; negative delta is intentionally **not** framed as a loss (commit `1006323`)
 - Wellbeing principles section in `CONTRIBUTING.md` — six explicit guardrails (no forced missions, no push, no ads, no dark patterns, silent failure, dlPFC fatigue acknowledgment) plus a *Wellbeing first* paragraph in `README.md` (commit `d6bfa39`)
