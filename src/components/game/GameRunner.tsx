@@ -143,6 +143,8 @@ export default function GameRunner({ song }: { song: Song }) {
   const rafRef = useRef<number | null>(null);
   const consumedRef = useRef<Set<number>>(new Set());
   const missedRef = useRef<Set<number>>(new Set());
+  const lastBeatIdxRef = useRef<number>(-1);
+  const metronomeEnabledRef = useRef<boolean>(false);
   const burstIdRef = useRef(0);
   const pressedRef = useRef<Set<string>>(new Set());
   const strumPendingRef = useRef<Map<number, { firstKey: string; firstAt: number }>>(new Map());
@@ -153,6 +155,11 @@ export default function GameRunner({ song }: { song: Song }) {
 
   const submitRun = useGameStore((s) => s.submitRun);
   const masterVolume = useGameStore((s) => s.masterVolume);
+  const metronomeEnabled = useGameStore((s) => s.metronomeEnabled);
+
+  useEffect(() => {
+    metronomeEnabledRef.current = metronomeEnabled;
+  }, [metronomeEnabled]);
 
   const chordPresets = useMemo<Record<Lane, ChordPreset | null>>(() => {
     const map: Record<Lane, ChordPreset | null> = { 0: null, 1: null, 2: null, 3: null, 4: null, 5: null };
@@ -419,6 +426,15 @@ export default function GameRunner({ song }: { song: Song }) {
       setNow(elapsed);
 
       if (phase === "playing") {
+        if (metronomeEnabledRef.current && elapsed >= 0 && song.bpm > 0) {
+          const beatInterval = 60_000 / song.bpm;
+          const currentBeatIdx = Math.floor(elapsed / beatInterval);
+          if (currentBeatIdx > lastBeatIdxRef.current) {
+            lastBeatIdxRef.current = currentBeatIdx;
+            guitarSynth.playClick(currentBeatIdx % 4 === 0).catch(() => { /* ignore */ });
+          }
+        }
+
         for (const n of song.notes) {
           if (consumedRef.current.has(n.id) || missedRef.current.has(n.id)) continue;
           if (elapsed - n.time > JUDGE_WINDOWS.miss) {
@@ -485,6 +501,7 @@ export default function GameRunner({ song }: { song: Song }) {
     setActiveHolds([]);
     consumedRef.current = new Set();
     missedRef.current = new Set();
+    lastBeatIdxRef.current = -1;
     holdingRef.current = new Map();
     strumPendingRef.current = new Map();
     startedAtRef.current = performance.now() + COUNTDOWN_MS;
@@ -813,6 +830,8 @@ function Stat({ label, value, accent }: { label: string; value: string; accent?:
 }
 
 function GameIntro({ song, onStart }: { song: Song; onStart: () => void }) {
+  const metronomeEnabled = useGameStore((s) => s.metronomeEnabled);
+  const setMetronomeEnabled = useGameStore((s) => s.setMetronomeEnabled);
   return (
     <div className="flex max-w-md flex-col items-center gap-6 rounded-2xl border border-white/10 bg-white/[0.02] px-8 py-10 text-center text-neutral-200">
       <div>
@@ -849,6 +868,26 @@ function GameIntro({ song, onStart }: { song: Song; onStart: () => void }) {
           <span className="inline-flex size-5 items-center justify-center rounded bg-[#f59e0b]/20 font-mono text-[10px] text-[#f59e0b]">✋</span>
           <span><b className="text-neutral-200">Mute (J·K·L·;):</b> palm-mute notes — press the highlighted right-hand key to dampen the string.</span>
         </div>
+      </div>
+      <div className="flex w-full items-center justify-between rounded-lg border border-white/5 bg-white/[0.01] px-3 py-2.5 text-xs text-neutral-300">
+        <span>
+          <span aria-hidden="true" className="font-mono text-neutral-400">♩</span>{" "}
+          Metronome <span className="font-mono text-neutral-400">@ {song.bpm} BPM</span>
+        </span>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={metronomeEnabled}
+          aria-label={`Toggle metronome — currently ${metronomeEnabled ? "on" : "off"}`}
+          onClick={() => setMetronomeEnabled(!metronomeEnabled)}
+          className={
+            metronomeEnabled
+              ? "rounded-full border border-brand/40 bg-brand/15 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-brand transition hover:bg-brand/25 focus:outline-none focus:ring-2 focus:ring-brand/40"
+              : "rounded-full border border-white/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-neutral-400 transition hover:border-white/20 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+          }
+        >
+          {metronomeEnabled ? "On" : "Off"}
+        </button>
       </div>
       <button
         type="button"

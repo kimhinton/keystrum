@@ -16,9 +16,11 @@ interface GameState {
   lastRun: RunStats | null;
   masterVolume: number;
   noteSpeed: number;
+  metronomeEnabled: boolean;
   submitRun: (run: RunStats) => void;
   setMasterVolume: (v: number) => void;
   setNoteSpeed: (v: number) => void;
+  setMetronomeEnabled: (v: boolean) => void;
 }
 
 export const useGameStore = create<GameState>()(
@@ -28,6 +30,7 @@ export const useGameStore = create<GameState>()(
       lastRun: null,
       masterVolume: 0.6,
       noteSpeed: 1,
+      metronomeEnabled: false,
       submitRun: (run) =>
         set((state) => {
           const prev = state.bestBySong[run.songId];
@@ -45,6 +48,7 @@ export const useGameStore = create<GameState>()(
         }),
       setMasterVolume: (v) => set({ masterVolume: Math.max(0, Math.min(1, v)) }),
       setNoteSpeed: (v) => set({ noteSpeed: Math.max(0.5, Math.min(2, v)) }),
+      setMetronomeEnabled: (v) => set({ metronomeEnabled: v }),
     }),
     {
       name: "keystrum-game",
@@ -53,6 +57,7 @@ export const useGameStore = create<GameState>()(
         bestBySong: s.bestBySong,
         masterVolume: s.masterVolume,
         noteSpeed: s.noteSpeed,
+        metronomeEnabled: s.metronomeEnabled,
       }),
     }
   )
