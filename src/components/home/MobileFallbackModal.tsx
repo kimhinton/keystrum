@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useStatsStore } from "@/lib/stats/store";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -13,6 +14,8 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
   const [installEvt, setInstallEvt] = useState<BeforeInstallPromptEvent | null>(null);
   const [env, setEnv] = useState<{ isIOS: boolean; shareAvailable: boolean } | null>(null);
   const [copied, setCopied] = useState(false);
+  const firstAudioAt = useStatsStore((s) => s.firstAudioAt);
+  const hasPlayedFirstChord = firstAudioAt !== null;
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -86,11 +89,14 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
           Tap or drag to strum.
         </h2>
         <p className="mb-6 text-sm text-neutral-400">
-          The on-screen keys are fully playable — tap for single notes, drag across a column to strum. Practice mode has full touch-drag strum support. Install as an app for a full-screen, offline experience.
+          The on-screen keys are fully playable — tap for single notes, drag across a column to strum. Practice mode has full touch-drag strum support.
+          {hasPlayedFirstChord
+            ? " Install as an app for a full-screen, offline experience."
+            : " Try a few chords first — once you have, the install option appears here."}
         </p>
 
         <div className="flex flex-col gap-2">
-          {installEvt && (
+          {installEvt && hasPlayedFirstChord && (
             <button
               type="button"
               onClick={install}
@@ -99,7 +105,7 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
               Install as app
             </button>
           )}
-          {!installEvt && isIOS && (
+          {!installEvt && isIOS && hasPlayedFirstChord && (
             <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3 text-xs text-neutral-300">
               <div className="mb-1 font-semibold text-white">Install on iOS</div>
               Tap <span className="font-mono text-brand">Share</span> → <span className="font-mono text-brand">Add to Home Screen</span>
