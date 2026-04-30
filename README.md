@@ -234,6 +234,14 @@ The `out/` directory is a static site — deploy to any hosting.
 
 Nothing to feature yet — keystrum is brand-new. If you build something on top of it (a teaching tool, a chord trainer, a `<KeystrumKeyboard />` embed in your own site, a Capacitor mobile build, anything), please [open a showcase issue](https://github.com/kimhinton/keystrum/issues/new?title=Showcase:%20&labels=showcase) and we'll list it here with credit.
 
+## From the maker
+
+Singapore-based solo developer maintaining two MIT-licensed open-source projects: keystrum and [endpulse](https://github.com/kimhinton/endpulse). Built keystrum after looking up chord trainers and finding only $20/mo apps or static PDF chord charts — the gap deserved a free, browser-based, no-account alternative.
+
+This is a Pre-product-market-fit project. There is no Pro tier and there will not be one. There are no ads, no analytics SaaS account, no email list, no push notifications. The maintainer surface area is one person, so contributions land best as small, scoped issues rather than cold DMs. Response window is 24–48 hours (see [CONTRIBUTING.md § Response time](CONTRIBUTING.md#response-time)).
+
+If keystrum disappeared tomorrow, would you be very disappointed? If yes, [open a show-and-tell discussion](https://github.com/kimhinton/keystrum/discussions/13) — that's the only acquisition channel that's open right now.
+
 ## Wellbeing first
 
 keystrum has no ads, no push notifications, no forced daily missions, no streak guilt, no shame counters. The only nudge is a soft 25-minute break reminder, dismissible. See **[CONTRIBUTING.md § Wellbeing principles](CONTRIBUTING.md#wellbeing-principles)** for the full design principles.
