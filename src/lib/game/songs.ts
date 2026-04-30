@@ -451,6 +451,7 @@ export const SONGS: Song[] = [
     durationMs: risingSun.endMs + 1500,
     chordMap: { 0: "Am", 1: "C", 2: "Dm", 3: "F", 4: "Em", 5: "G" },
     notes: risingSun.notes,
+    datePublished: "2026-04-29",
   },
   {
     id: "scarborough",
@@ -462,6 +463,7 @@ export const SONGS: Song[] = [
     durationMs: scarborough.endMs + 1500,
     chordMap: { 0: "Dm", 1: "C", 2: "F", 3: "Am", 4: "Em", 5: "G" },
     notes: scarborough.notes,
+    datePublished: "2026-04-29",
   },
   {
     id: "greensleeves",
@@ -473,6 +475,7 @@ export const SONGS: Song[] = [
     durationMs: greensleeves.endMs + 1500,
     chordMap: { 0: "Am", 1: "C", 2: "G", 3: "Em", 4: "Dm", 5: "F" },
     notes: greensleeves.notes,
+    datePublished: "2026-04-29",
   },
   {
     id: "britpop-jam",
@@ -484,6 +487,7 @@ export const SONGS: Song[] = [
     durationMs: britpop.endMs + 1500,
     chordMap: { 0: "Em", 1: "G", 2: "Dm", 3: "C", 4: "Am", 5: "F" },
     notes: britpop.notes,
+    datePublished: "2026-04-30",
   },
 ];
 

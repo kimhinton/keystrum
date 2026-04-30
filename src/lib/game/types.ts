@@ -25,6 +25,7 @@ export interface SongMeta {
   bpm: number;
   durationMs: number;
   chordMap: Record<number, string>;
+  datePublished: string;
 }
 
 export interface Song extends SongMeta {

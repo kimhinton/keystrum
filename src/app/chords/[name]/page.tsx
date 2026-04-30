@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildChordInfo, getChordBySlug, getChordSlug } from "@keystrum/layout";
 import { SONGS } from "@/lib/game/songs";
+import { CHORD_PAGE_PUBLISHED, CHORD_PAGE_MODIFIED } from "@/lib/seo-dates";
 import { Logo } from "@/components/brand/Logo";
 
 export function generateStaticParams() {
@@ -58,6 +59,8 @@ export default async function ChordPage(
         name: `${c.name} chord`,
         alternativeHeadline: c.label,
         description: `${c.label} chord. Notes: ${c.notes.join(", ")}. Intervals: ${c.intervals.join(", ")}. ${c.theory.function}.`,
+        datePublished: CHORD_PAGE_PUBLISHED,
+        dateModified: CHORD_PAGE_MODIFIED,
       },
       {
         "@type": "BreadcrumbList",
@@ -85,11 +88,15 @@ export default async function ChordPage(
       {
         "@type": "FAQPage",
         mainEntity: faqEntries,
+        datePublished: CHORD_PAGE_PUBLISHED,
+        dateModified: CHORD_PAGE_MODIFIED,
       },
       {
         "@type": "HowTo",
         name: `How to play the ${c.name} chord on keystrum`,
         description: `Strum the ${c.label} chord on a QWERTY keyboard using keystrum's 4-row × 6-column mapping.`,
+        datePublished: CHORD_PAGE_PUBLISHED,
+        dateModified: CHORD_PAGE_MODIFIED,
         totalTime: "PT2M",
         tool: [
           { "@type": "HowToTool", name: "QWERTY keyboard" },

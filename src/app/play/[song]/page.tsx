@@ -55,6 +55,8 @@ export default async function PlaySong(
         copyrightNotice: song.credit,
         inLanguage: "en",
         genre: "Folk",
+        datePublished: song.datePublished,
+        dateModified: song.datePublished,
       },
       {
         "@type": "BreadcrumbList",
