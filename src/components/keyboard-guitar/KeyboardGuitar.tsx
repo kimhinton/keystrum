@@ -258,7 +258,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
                         return n;
                       })
                     }
-                    className="relative flex flex-1 min-w-0 aspect-square items-center justify-center rounded sm:rounded-md md:rounded-lg font-mono text-[9px] sm:text-xs md:text-sm font-semibold transition-[transform,box-shadow,background] duration-75"
+                    className="relative flex flex-1 min-w-0 aspect-square min-h-11 sm:min-h-0 items-center justify-center rounded sm:rounded-md md:rounded-lg font-mono text-[9px] sm:text-xs md:text-sm font-semibold transition-[transform,box-shadow,background] duration-75"
                     style={{
                       background: isActive
                         ? isMuteCol
