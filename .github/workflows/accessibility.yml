@@ -1,0 +1,36 @@
+name: Accessibility (axe-core)
+
+# Manual trigger or weekly cron. Not on every push because Vercel
+# needs a few seconds to publish the deploy and CI minutes are
+# better spent on the per-commit lint+build pipeline.
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 3 * * 1" # every Monday 03:00 UTC
+
+jobs:
+  axe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run axe-core against production
+        run: node scripts/axe-check.mjs
+        env:
+          AXE_BASE_URL: https://keystrum.app
