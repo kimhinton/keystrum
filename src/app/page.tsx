@@ -207,7 +207,7 @@ export default function HomePage() {
             <br />
             <span className="text-white">Try it — yours might go here.</span>&rdquo;
           </blockquote>
-          <figcaption className="mt-6 font-mono text-xs uppercase tracking-widest text-neutral-600">— the honesty policy</figcaption>
+          <figcaption className="mt-6 font-mono text-xs uppercase tracking-widest text-neutral-400">— the honesty policy</figcaption>
         </figure>
       </section>
 

@@ -198,7 +198,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
             className="inline-flex items-center gap-1 sm:gap-2 rounded-full px-2 sm:px-3 py-1 font-semibold"
             style={{ background: lastChord.color + "22", color: lastChord.color, border: `1px solid ${lastChord.color}44` }}
           >
-            {lastChord.name} <span className="opacity-60 font-normal hidden sm:inline">{lastChord.label}</span>
+            {lastChord.name} <span className="opacity-80 font-normal hidden sm:inline">{lastChord.label}</span>
           </span>
         )}
         {strumPulse && (
@@ -307,8 +307,8 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
 
         <div className="mt-2 sm:mt-4 flex flex-wrap items-center gap-x-2 sm:gap-x-4 gap-y-1 text-[8px] sm:text-[11px] font-mono" style={{ color: palette.hintFg }}>
           <span>row 1→E4 · row 2→B3 · row 3→G3 · row 4→D3</span>
-          <span className="opacity-60">try: 1-q-a-z (Am) · 5-t-g-b (Dm) fast ↓↑</span>
-          <span className="opacity-60 hidden sm:inline">· cols 7+ (7-= · u-] · j-&apos; · m-/): ghost notes</span>
+          <span className="opacity-80">try: 1-q-a-z (Am) · 5-t-g-b (Dm) fast ↓↑</span>
+          <span className="opacity-80 hidden sm:inline">· cols 7+ (7-= · u-] · j-&apos; · m-/): ghost notes</span>
         </div>
       </div>
     </div>

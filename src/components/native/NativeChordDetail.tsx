@@ -173,7 +173,7 @@ export default function NativeChordDetail({
                   <span className="font-mono text-[10px] text-neutral-400">
                     fret {c.frets[i]}
                   </span>
-                  <span className="ml-auto font-mono text-[10px] uppercase tracking-widest text-neutral-600">
+                  <span className="ml-auto font-mono text-[10px] uppercase tracking-widest text-neutral-400">
                     tap
                   </span>
                 </button>
@@ -214,7 +214,7 @@ export default function NativeChordDetail({
             <ul className="space-y-1 text-sm text-neutral-300">
               {c.usedIn.map((s, i) => (
                 <li key={i} className="flex items-baseline gap-2">
-                  <span className="text-neutral-600">—</span>
+                  <span className="text-neutral-400">—</span>
                   <span>{s}</span>
                 </li>
               ))}

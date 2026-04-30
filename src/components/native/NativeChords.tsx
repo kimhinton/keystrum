@@ -122,7 +122,7 @@ export default function NativeChords() {
                   </div>
 
                   <div className="flex items-center justify-between text-[9px]">
-                    <span className="font-mono uppercase tracking-widest text-neutral-600">
+                    <span className="font-mono uppercase tracking-widest text-neutral-400">
                       {keyStr}
                     </span>
                     <span

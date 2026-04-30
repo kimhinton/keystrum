@@ -658,7 +658,7 @@ function Playfield({
           <span>
             <span className="text-neutral-300">Lane keys (1·q·a·z · 2·w·s·x · 3·e·d·c · 4·r·f·v · 5·t·g·b · 6·y·h·n)</span> play chords. <span className="text-neutral-300">Mute keys (J·K·L·;)</span> dampen strings.
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-600">45 keys · full qwerty</span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">45 keys · full qwerty</span>
         </div>
       </div>
     </div>
@@ -731,7 +731,7 @@ function PreviewStrip({
     <div className="flex items-center gap-2 overflow-x-auto rounded-lg bg-white/[0.02] px-3 py-2 text-xs">
       <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">Next</span>
       {upcoming.length === 0 ? (
-        <span className="text-neutral-600">—</span>
+        <span className="text-neutral-400">—</span>
       ) : (
         upcoming.map((n, idx) => {
           const isMute = n.kind === "mute";
@@ -819,7 +819,7 @@ function GameIntro({ song, onStart }: { song: Song; onStart: () => void }) {
         <div className="mb-1 text-xs font-mono uppercase tracking-widest text-[#FF3864]">Ready up</div>
         <h1 className="text-3xl font-semibold tracking-tight">{song.title}</h1>
         <p className="mt-2 text-sm text-neutral-400">{song.subtitle}</p>
-        <p className="mt-1 text-[11px] text-neutral-600">{song.credit}</p>
+        <p className="mt-1 text-[11px] text-neutral-400">{song.credit}</p>
       </div>
       <div className="grid grid-cols-6 gap-2 font-mono text-xs">
         {ALL_LANES.map((lane) => {

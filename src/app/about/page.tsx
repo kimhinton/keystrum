@@ -54,7 +54,7 @@ export default function AboutPage() {
           </a>
         </div>
 
-        <p className="mt-8 text-center text-[11px] font-mono text-neutral-600">
+        <p className="mt-8 text-center text-[11px] font-mono text-neutral-400">
           No tracking · No account · No upload
         </p>
       </main>

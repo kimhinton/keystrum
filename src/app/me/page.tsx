@@ -208,7 +208,7 @@ export default function MePage() {
               <div className="mb-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
                 <div className="mb-3 flex items-baseline justify-between">
                   <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">Funnel (AARRR · self-hosted)</h2>
-                  <span className="font-mono text-[10px] text-neutral-600">localStorage</span>
+                  <span className="font-mono text-[10px] text-neutral-400">localStorage</span>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-4">
                   <div>
@@ -236,7 +236,7 @@ export default function MePage() {
                     <div className="mt-0.5 font-mono text-xs text-[#FF3864]">{sharedReceivedCount}</div>
                   </div>
                 </div>
-                <p className="mt-3 text-[11px] text-neutral-600">All numbers live in this browser&rsquo;s localStorage. No telemetry, no SaaS. Reset clears them.</p>
+                <p className="mt-3 text-[11px] text-neutral-400">All numbers live in this browser&rsquo;s localStorage. No telemetry, no SaaS. Reset clears them.</p>
               </div>
             )}
 
@@ -368,7 +368,7 @@ export default function MePage() {
                           <div key={c} className="flex items-baseline justify-between rounded-md border border-white/5 bg-white/[0.02] px-2 py-1.5">
                             <span className="font-mono" style={{ color: CHORD_COLOR[c] }}>{c}</span>
                             <span className="font-mono tabular-nums text-neutral-400">
-                              {pct}% <span className="text-neutral-600">({per.correct}/{per.total})</span>
+                              {pct}% <span className="text-neutral-400">({per.correct}/{per.total})</span>
                             </span>
                           </div>
                         );

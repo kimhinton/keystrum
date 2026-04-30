@@ -39,7 +39,7 @@ export default function RecordModal({ onClose }: Props) {
 
         <RecordBar />
 
-        <div className="mt-4 text-[11px] font-mono text-neutral-600">
+        <div className="mt-4 text-[11px] font-mono text-neutral-400">
           .m4a on Safari · .webm elsewhere · file stays on your device
         </div>
       </div>

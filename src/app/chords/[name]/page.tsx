@@ -248,7 +248,7 @@ export default async function ChordPage(
             <ul className="flex flex-col gap-2 text-sm text-neutral-300">
               {c.usedIn.map((s, i) => (
                 <li key={i} className="flex items-baseline gap-2">
-                  <span className="text-neutral-600">—</span>
+                  <span className="text-neutral-400">—</span>
                   <span>{s}</span>
                 </li>
               ))}
