@@ -424,7 +424,7 @@ export default function GameRunner({ song }: { song: Song }) {
           if (elapsed - n.time > JUDGE_WINDOWS.miss) {
             missedRef.current.add(n.id);
             setCombo(0);
-            const label = n.kind === "strum" ? "STRUM FAIL" : n.kind === "mute" ? "MUTE MISS" : n.kind === "hold" ? "HOLD MISS" : "MISS";
+            const label = n.kind === "strum" ? "STRUM MISS" : n.kind === "mute" ? "MUTE MISS" : n.kind === "hold" ? "HOLD MISS" : "MISS";
             pushBurst(n.lane, label, judgmentColor("miss"));
             setStats((s) => ({ ...s, miss: s.miss + 1 }));
             strumPendingRef.current.delete(n.id);
