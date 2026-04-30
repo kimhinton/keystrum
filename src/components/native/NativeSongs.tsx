@@ -60,13 +60,13 @@ export default function NativeSongs() {
           <Logo size={20} className="shrink-0" />
           <h1 className="text-lg font-semibold tracking-tight">Songs</h1>
         </div>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
           tap to preview
         </span>
       </header>
 
       <main className="px-3 py-3">
-        <p className="mb-2 px-2 text-[11px] text-neutral-500">
+        <p className="mb-2 px-2 text-[11px] text-neutral-400">
           Tap a song to hear its chord progression · tap again to stop
         </p>
         <ul className="space-y-2">
@@ -163,7 +163,7 @@ export default function NativeSongs() {
                     height="22"
                     viewBox="0 0 22 22"
                     fill="none"
-                    className="shrink-0 text-neutral-500"
+                    className="shrink-0 text-neutral-400"
                     aria-hidden="true"
                   >
                     {isPlaying ? (

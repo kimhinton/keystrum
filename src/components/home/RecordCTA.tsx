@@ -21,7 +21,7 @@ export default function RecordCTA() {
           <p className="mt-4 max-w-md text-sm text-neutral-400">
             Hit record, play up to 30 seconds, download the audio or share via your OS. No signup, no upload — the file stays on your device.
           </p>
-          <div className="mt-5 flex flex-wrap items-center gap-4 text-[10px] font-mono uppercase tracking-widest text-neutral-500">
+          <div className="mt-5 flex flex-wrap items-center gap-4 text-[10px] font-mono uppercase tracking-widest text-neutral-400">
             <span>Safari · .m4a</span>
             <span className="opacity-30">·</span>
             <span>Chrome · .webm</span>

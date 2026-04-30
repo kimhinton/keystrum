@@ -99,7 +99,7 @@ function SharedCard({ payload }: { payload: SharePayload }) {
         >
           Beat this score →
         </Link>
-        <Link href="/play" className="text-xs text-neutral-500 hover:text-neutral-300">
+        <Link href="/play" className="text-xs text-neutral-400 hover:text-neutral-300">
           ← Back to songs
         </Link>
       </div>
@@ -110,7 +110,7 @@ function SharedCard({ payload }: { payload: SharePayload }) {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col items-center rounded-md border border-white/5 bg-white/[0.01] px-2 py-3">
-      <span className="text-[10px] uppercase tracking-widest text-neutral-500">{label}</span>
+      <span className="text-[10px] uppercase tracking-widest text-neutral-400">{label}</span>
       <span className="mt-0.5 text-lg font-bold text-neutral-100">{value}</span>
     </div>
   );
@@ -119,7 +119,7 @@ function Stat({ label, value }: { label: string; value: string }) {
 export default function SharePage() {
   return (
     <Suspense fallback={
-      <div className="flex min-h-screen items-center justify-center bg-[#0E0E12] text-neutral-500">
+      <div className="flex min-h-screen items-center justify-center bg-[#0E0E12] text-neutral-400">
         Loading...
       </div>
     }>

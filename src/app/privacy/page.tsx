@@ -29,7 +29,7 @@ export default function PrivacyPage() {
           <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
             We collect nothing.
           </h1>
-          <p className="mt-2 text-xs text-neutral-500">
+          <p className="mt-2 text-xs text-neutral-400">
             Last updated {LAST_UPDATED}
           </p>
         </div>
@@ -129,7 +129,7 @@ export default function PrivacyPage() {
           </Section>
         </div>
 
-        <div className="mt-12 border-t border-white/5 pt-6 text-xs text-neutral-500">
+        <div className="mt-12 border-t border-white/5 pt-6 text-xs text-neutral-400">
           keystrum · © 2026 · MIT licensed · No data · No tracking · No accounts.
         </div>
       </main>

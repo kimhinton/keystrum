@@ -152,27 +152,27 @@ export default function MePage() {
           <>
             <div className="mb-6 grid gap-4 sm:grid-cols-3">
               <div className="rounded-xl border border-white/5 bg-white/[0.02] p-5">
-                <div className="text-xs font-mono uppercase tracking-widest text-neutral-500">Streak</div>
+                <div className="text-xs font-mono uppercase tracking-widest text-neutral-400">Streak</div>
                 <div className="mt-2 flex items-baseline gap-2">
                   <span className="text-4xl font-semibold text-neutral-100">{currentStreak}</span>
-                  <span className="text-xs text-neutral-500">day{currentStreak === 1 ? "" : "s"}</span>
+                  <span className="text-xs text-neutral-400">day{currentStreak === 1 ? "" : "s"}</span>
                 </div>
-                <div className="mt-1 text-xs text-neutral-500">Longest: {longestStreak} day{longestStreak === 1 ? "" : "s"}</div>
+                <div className="mt-1 text-xs text-neutral-400">Longest: {longestStreak} day{longestStreak === 1 ? "" : "s"}</div>
               </div>
               <div className="rounded-xl border border-white/5 bg-white/[0.02] p-5">
-                <div className="text-xs font-mono uppercase tracking-widest text-neutral-500">Total chord plays</div>
+                <div className="text-xs font-mono uppercase tracking-widest text-neutral-400">Total chord plays</div>
                 <div className="mt-2 text-4xl font-semibold text-neutral-100">{totalPlays.toLocaleString()}</div>
-                <div className="mt-1 text-xs text-neutral-500">Across all sessions</div>
+                <div className="mt-1 text-xs text-neutral-400">Across all sessions</div>
               </div>
               <div className="rounded-xl border border-white/5 bg-white/[0.02] p-5">
-                <div className="text-xs font-mono uppercase tracking-widest text-neutral-500">Sessions</div>
+                <div className="text-xs font-mono uppercase tracking-widest text-neutral-400">Sessions</div>
                 <div className="mt-2 text-4xl font-semibold text-neutral-100">{totalSessions}</div>
-                <div className="mt-1 text-xs text-neutral-500">{firstVisit ? `Since ${firstVisit}` : "Today"}</div>
+                <div className="mt-1 text-xs text-neutral-400">{firstVisit ? `Since ${firstVisit}` : "Today"}</div>
               </div>
             </div>
 
             <div className="mb-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
-              <h2 className="mb-4 text-xs font-mono uppercase tracking-widest text-neutral-500">Plays per chord</h2>
+              <h2 className="mb-4 text-xs font-mono uppercase tracking-widest text-neutral-400">Plays per chord</h2>
               <div className="space-y-2.5">
                 {CHORDS.map((c) => {
                   const count = chordPlays[c] ?? 0;
@@ -207,17 +207,17 @@ export default function MePage() {
             {firstVisit && (
               <div className="mb-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
                 <div className="mb-3 flex items-baseline justify-between">
-                  <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500">Funnel (AARRR · self-hosted)</h2>
+                  <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">Funnel (AARRR · self-hosted)</h2>
                   <span className="font-mono text-[10px] text-neutral-600">localStorage</span>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-4">
                   <div>
-                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Acquisition</div>
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Acquisition</div>
                     <div className="mt-1 text-sm text-neutral-200">First visit</div>
                     <div className="mt-0.5 font-mono text-xs text-[#FF3864]">{firstVisit}</div>
                   </div>
                   <div>
-                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Activation</div>
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Activation</div>
                     <div className="mt-1 text-sm text-neutral-200">First chord</div>
                     <div className="mt-0.5 font-mono text-xs text-[#FF3864]">
                       {firstAudioAt
@@ -226,12 +226,12 @@ export default function MePage() {
                     </div>
                   </div>
                   <div>
-                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Retention</div>
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Retention</div>
                     <div className="mt-1 text-sm text-neutral-200">{Object.keys(dayActivity).length} active day{Object.keys(dayActivity).length === 1 ? "" : "s"}</div>
                     <div className="mt-0.5 font-mono text-xs text-[#FF3864]">streak {currentStreak}d / max {longestStreak}d</div>
                   </div>
                   <div>
-                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Referral</div>
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Referral</div>
                     <div className="mt-1 text-sm text-neutral-200">Shared progressions opened</div>
                     <div className="mt-0.5 font-mono text-xs text-[#FF3864]">{sharedReceivedCount}</div>
                   </div>
@@ -241,7 +241,7 @@ export default function MePage() {
             )}
 
             <div className="mb-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
-              <h2 className="mb-4 text-xs font-mono uppercase tracking-widest text-neutral-500">Last 30 days</h2>
+              <h2 className="mb-4 text-xs font-mono uppercase tracking-widest text-neutral-400">Last 30 days</h2>
               <div className="flex flex-wrap gap-1">
                 {days.map((day) => {
                   const count = dayActivity[day] ?? 0;
@@ -255,18 +255,18 @@ export default function MePage() {
                   );
                 })}
               </div>
-              <p className="mt-3 text-xs text-neutral-500">
+              <p className="mt-3 text-xs text-neutral-400">
                 Each square is one day. Brighter = more chord plays.
               </p>
             </div>
 
             <div className="mb-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
               <div className="mb-4 flex items-baseline justify-between">
-                <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500">Saved progressions</h2>
-                <span className="text-xs text-neutral-500">{savedProgressions.length}</span>
+                <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">Saved progressions</h2>
+                <span className="text-xs text-neutral-400">{savedProgressions.length}</span>
               </div>
               {savedProgressions.length === 0 ? (
-                <p className="text-sm text-neutral-500">
+                <p className="text-sm text-neutral-400">
                   Save a progression from{" "}
                   <Link href="/" className="text-neutral-300 underline-offset-4 hover:underline">
                     the home page
@@ -292,7 +292,7 @@ export default function MePage() {
                           type="button"
                           onClick={() => removeProgression(p.id)}
                           aria-label={`Remove ${p.chords.join("-")}`}
-                          className="text-xs text-neutral-500 transition hover:text-red-400"
+                          className="text-xs text-neutral-400 transition hover:text-red-400"
                         >
                           Remove
                         </button>
@@ -313,7 +313,7 @@ export default function MePage() {
 
             <div className="mb-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
               <div className="mb-3 flex items-baseline justify-between">
-                <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500">Active recall</h2>
+                <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">Active recall</h2>
                 <div className="flex items-center gap-1 rounded-md border border-white/10 p-0.5 text-xs">
                   {(["off", "auto", "drill"] as const).map((mode) => (
                     <button
@@ -332,7 +332,7 @@ export default function MePage() {
                 </div>
               </div>
               {recallScore.total === 0 ? (
-                <p className="text-sm text-neutral-500">
+                <p className="text-sm text-neutral-400">
                   {recallSetting === "off"
                     ? "Recall checks are off. Pick 1 chord (single-chord prompt) or 3-chord drill (interleaving) to get a quick check every 5 minutes."
                     : recallSetting === "drill"
@@ -342,7 +342,7 @@ export default function MePage() {
               ) : (
                 <>
                 {recallSetting !== "off" && (
-                  <p className="mb-3 text-xs text-neutral-500">
+                  <p className="mb-3 text-xs text-neutral-400">
                     {dueInfo.dueCount > 0
                       ? `${dueInfo.dueCount} chord${dueInfo.dueCount === 1 ? "" : "s"} due now (SM-2 spaced repetition queue).`
                       : dueInfo.nextDueIn && dueInfo.nextDueChord
@@ -354,7 +354,7 @@ export default function MePage() {
                     <span className="text-3xl font-semibold text-neutral-100">
                       {Math.round((recallScore.correct / recallScore.total) * 100)}%
                     </span>
-                    <span className="text-xs text-neutral-500">
+                    <span className="text-xs text-neutral-400">
                       {recallScore.correct}/{recallScore.total} correct
                     </span>
                   </div>
@@ -385,7 +385,7 @@ export default function MePage() {
                 onClick={() => {
                   if (window.confirm("Reset all your stats? This cannot be undone.")) reset();
                 }}
-                className="text-xs text-neutral-500 underline-offset-4 transition hover:text-red-400 hover:underline"
+                className="text-xs text-neutral-400 underline-offset-4 transition hover:text-red-400 hover:underline"
               >
                 Reset all stats
               </button>
@@ -395,7 +395,7 @@ export default function MePage() {
       </main>
 
       <footer className="border-t border-white/5 px-6 py-8">
-        <div className="mx-auto flex max-w-4xl items-center justify-between text-xs text-neutral-500">
+        <div className="mx-auto flex max-w-4xl items-center justify-between text-xs text-neutral-400">
           <div>© 2026 keystrum · MIT licensed · Stored locally in your browser</div>
           <Link href="/" className="hover:text-neutral-300">← Home</Link>
         </div>

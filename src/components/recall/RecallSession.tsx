@@ -132,7 +132,7 @@ export default function RecallSession() {
         <span className="font-mono text-[10px] uppercase tracking-widest text-[#FF3864]">
           {stepLabel}
         </span>
-        <span className="text-[10px] text-neutral-500">no peeking at the diagram</span>
+        <span className="text-[10px] text-neutral-400">no peeking at the diagram</span>
       </div>
       <p className="mb-3 text-base text-neutral-100">
         Strum{" "}
@@ -141,7 +141,7 @@ export default function RecallSession() {
         </span>
         {" "}without looking.
         {isDrill && upcoming && (
-          <span className="ml-2 font-mono text-xs text-neutral-500">next: {upcoming}</span>
+          <span className="ml-2 font-mono text-xs text-neutral-400">next: {upcoming}</span>
         )}
       </p>
       <div className="flex items-center justify-between gap-2">
@@ -158,7 +158,7 @@ export default function RecallSession() {
             skipRecall();
             setRecallSetting("off");
           }}
-          className="text-xs text-neutral-500 underline-offset-4 transition hover:text-neutral-300 hover:underline"
+          className="text-xs text-neutral-400 underline-offset-4 transition hover:text-neutral-300 hover:underline"
         >
           Don&rsquo;t ask again
         </button>

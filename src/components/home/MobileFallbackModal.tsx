@@ -72,7 +72,7 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 text-2xl leading-none text-neutral-500 transition hover:text-white"
+          className="absolute right-4 top-4 text-2xl leading-none text-neutral-400 transition hover:text-white"
           aria-label="Close"
         >
           ×
@@ -115,7 +115,7 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
           <button
             type="button"
             onClick={onClose}
-            className="pt-2 text-xs text-neutral-500 transition hover:text-neutral-300"
+            className="pt-2 text-xs text-neutral-400 transition hover:text-neutral-300"
           >
             Keep playing
           </button>

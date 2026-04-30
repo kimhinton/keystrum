@@ -24,7 +24,7 @@ export default function AboutPage() {
           <Logo size={20} className="shrink-0" />
           keystrum
         </Link>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">v{VERSION}</span>
+        <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">v{VERSION}</span>
       </header>
 
       <main className="mx-auto max-w-md px-5 py-6">
@@ -65,7 +65,7 @@ export default function AboutPage() {
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <li className="flex items-center justify-between px-4 py-3 text-sm">
-      <span className="text-neutral-500">{label}</span>
+      <span className="text-neutral-400">{label}</span>
       <span className="font-medium text-neutral-100">{value}</span>
     </li>
   );

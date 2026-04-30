@@ -15,7 +15,7 @@ export function SongCard({ song }: { song: Song }) {
       <div className="flex items-start justify-between">
         <div>
           <h3 className="text-lg font-semibold tracking-tight">{song.title}</h3>
-          <p className="mt-0.5 text-xs text-neutral-500">{song.subtitle}</p>
+          <p className="mt-0.5 text-xs text-neutral-400">{song.subtitle}</p>
         </div>
         <span
           className="rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider"
@@ -40,13 +40,13 @@ export function SongCard({ song }: { song: Song }) {
       </div>
       <div className="flex items-end justify-between">
         <div className="flex flex-col text-xs">
-          <span className="text-neutral-500">Best</span>
+          <span className="text-neutral-400">Best</span>
           <span className="font-mono text-sm font-bold text-neutral-200">
             {best ? best.score.toLocaleString() : "—"}
           </span>
         </div>
         <div className="flex flex-col items-end text-xs">
-          <span className="text-neutral-500">Notes</span>
+          <span className="text-neutral-400">Notes</span>
           <span className="font-mono text-sm font-bold text-neutral-300">{song.notes.length}</span>
         </div>
         <span

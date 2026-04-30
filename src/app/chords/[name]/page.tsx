@@ -126,7 +126,7 @@ export default async function ChordPage(
   };
 
   const diffColor = (d: "easy" | "medium" | "hard" | undefined) =>
-    d === "easy" ? "text-emerald-400" : d === "medium" ? "text-yellow-400" : d === "hard" ? "text-red-400" : "text-neutral-500";
+    d === "easy" ? "text-emerald-400" : d === "medium" ? "text-yellow-400" : d === "hard" ? "text-red-400" : "text-neutral-400";
 
   return (
     <div className="min-h-screen bg-[#0E0E12] text-neutral-100">
@@ -143,7 +143,7 @@ export default async function ChordPage(
       </nav>
 
       <main className="mx-auto max-w-3xl px-6 py-16">
-        <Link href="/chords" className="text-xs text-neutral-500 hover:text-neutral-300">
+        <Link href="/chords" className="text-xs text-neutral-400 hover:text-neutral-300">
           ← All chords
         </Link>
         <h1 className="mt-3 flex items-baseline gap-3 text-5xl font-semibold tracking-tight sm:text-6xl">
@@ -154,7 +154,7 @@ export default async function ChordPage(
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl border border-white/5 bg-white/[0.02] p-5">
-            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-500">Notes</h2>
+            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-400">Notes</h2>
             <div className="flex flex-wrap gap-2 font-mono text-sm">
               {c.notes.map((n, i) => (
                 <span
@@ -166,7 +166,7 @@ export default async function ChordPage(
                 </span>
               ))}
             </div>
-            <h2 className="mt-5 mb-3 text-xs font-mono uppercase tracking-widest text-neutral-500">Intervals</h2>
+            <h2 className="mt-5 mb-3 text-xs font-mono uppercase tracking-widest text-neutral-400">Intervals</h2>
             <div className="flex flex-wrap gap-2 font-mono text-xs text-neutral-400">
               {c.intervals.map((iv, i) => (
                 <span key={i} className="rounded-md border border-white/10 bg-white/[0.01] px-2 py-1">
@@ -177,22 +177,22 @@ export default async function ChordPage(
           </div>
 
           <div className="rounded-xl border border-white/5 bg-white/[0.02] p-5">
-            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-500">Keyboard column {c.columnIndex + 1}</h2>
+            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-400">Keyboard column {c.columnIndex + 1}</h2>
             <div className="flex flex-col gap-1.5 font-mono text-sm">
               {c.keys.map((row, i) => (
                 <div key={i} className="flex items-center gap-3">
-                  <span className="w-14 text-xs text-neutral-500">{["E4", "B3", "G3", "D3"][i]}</span>
+                  <span className="w-14 text-xs text-neutral-400">{["E4", "B3", "G3", "D3"][i]}</span>
                   <span
                     className="inline-flex size-9 items-center justify-center rounded-md border font-bold"
                     style={{ borderColor: `${c.color}55`, background: `${c.color}0f`, color: c.color }}
                   >
                     {row[0]?.toUpperCase() ?? "·"}
                   </span>
-                  <span className="text-xs text-neutral-500">fret {c.frets[i]}</span>
+                  <span className="text-xs text-neutral-400">fret {c.frets[i]}</span>
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-xs text-neutral-500">
+            <p className="mt-4 text-xs text-neutral-400">
               Press any one key to play that string. Press all four top-to-bottom in under 90 ms to trigger a down-strum.
             </p>
           </div>
@@ -200,18 +200,18 @@ export default async function ChordPage(
 
         {c.theory.romanNumeral && (
           <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
-            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-500">Music theory</h2>
+            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-400">Music theory</h2>
             <dl className="grid gap-3 text-sm sm:grid-cols-3">
               <div>
-                <dt className="text-xs text-neutral-500">Roman numeral</dt>
+                <dt className="text-xs text-neutral-400">Roman numeral</dt>
                 <dd className="mt-1 font-mono text-neutral-200">{c.theory.romanNumeral}</dd>
               </div>
               <div className="sm:col-span-2">
-                <dt className="text-xs text-neutral-500">Function</dt>
+                <dt className="text-xs text-neutral-400">Function</dt>
                 <dd className="mt-1 text-neutral-300">{c.theory.function}</dd>
               </div>
               <div className="sm:col-span-3">
-                <dt className="text-xs text-neutral-500">Relative key</dt>
+                <dt className="text-xs text-neutral-400">Relative key</dt>
                 <dd className="mt-1 text-neutral-300">{c.theory.relativeTo}</dd>
               </div>
             </dl>
@@ -220,11 +220,11 @@ export default async function ChordPage(
 
         {c.commonMistakes.length > 0 && (
           <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
-            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-500">How to play it cleanly</h2>
+            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-400">How to play it cleanly</h2>
             <ul className="flex flex-col gap-2.5 text-sm text-neutral-300">
               {c.commonMistakes.map((mistake, i) => (
                 <li key={i} className="flex items-baseline gap-2.5">
-                  <span className="font-mono text-xs text-neutral-500">{i + 1}.</span>
+                  <span className="font-mono text-xs text-neutral-400">{i + 1}.</span>
                   <span>{mistake}</span>
                 </li>
               ))}
@@ -244,7 +244,7 @@ export default async function ChordPage(
 
         {c.usedIn.length > 0 && (
           <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
-            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-500">Famously used in</h2>
+            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-400">Famously used in</h2>
             <ul className="flex flex-col gap-2 text-sm text-neutral-300">
               {c.usedIn.map((s, i) => (
                 <li key={i} className="flex items-baseline gap-2">
@@ -257,8 +257,8 @@ export default async function ChordPage(
         )}
 
         <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
-          <h2 className="mb-1 text-xs font-mono uppercase tracking-widest text-neutral-500">Transition difficulty from {c.name}</h2>
-          <p className="mb-4 text-xs text-neutral-500">How hard the chord change feels at typical strumming tempo.</p>
+          <h2 className="mb-1 text-xs font-mono uppercase tracking-widest text-neutral-400">Transition difficulty from {c.name}</h2>
+          <p className="mb-4 text-xs text-neutral-400">How hard the chord change feels at typical strumming tempo.</p>
           <div className="grid gap-2 sm:grid-cols-2">
             {c.siblings.map((sib) => {
               const diff = c.transitionDifficulty[sib];
@@ -285,7 +285,7 @@ export default async function ChordPage(
           if (songsWithChord.length === 0) return null;
           return (
             <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
-              <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-500">Practice songs using {c.name}</h2>
+              <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-400">Practice songs using {c.name}</h2>
               <div className="flex flex-wrap gap-2">
                 {songsWithChord.map((s) => (
                   <Link
@@ -294,7 +294,7 @@ export default async function ChordPage(
                     className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-sm transition hover:border-[#FF3864]/40"
                   >
                     <span className="text-neutral-300">{s.title}</span>
-                    <span className="text-[10px] text-neutral-500">{s.difficulty}</span>
+                    <span className="text-[10px] text-neutral-400">{s.difficulty}</span>
                   </Link>
                 ))}
               </div>
@@ -319,7 +319,7 @@ export default async function ChordPage(
       </main>
 
       <footer className="border-t border-white/5 px-6 py-8">
-        <div className="mx-auto flex max-w-3xl items-center justify-between text-xs text-neutral-500">
+        <div className="mx-auto flex max-w-3xl items-center justify-between text-xs text-neutral-400">
           <div>© 2026 keystrum · MIT licensed</div>
           <Link href="/" className="hover:text-neutral-300">← Home</Link>
         </div>

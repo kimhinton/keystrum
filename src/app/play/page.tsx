@@ -73,7 +73,7 @@ export default function PlayHome() {
       </section>
 
       <footer className="border-t border-white/5 px-6 py-8 mt-8">
-        <div className="mx-auto flex max-w-5xl items-center justify-between text-xs text-neutral-500">
+        <div className="mx-auto flex max-w-5xl items-center justify-between text-xs text-neutral-400">
           <div>© 2026 keystrum · MIT licensed</div>
           <Link href="/" className="hover:text-neutral-300">← Instrument home</Link>
         </div>

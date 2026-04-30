@@ -64,7 +64,7 @@ function ProgressionsContent() {
               {selected.map((c, i) => (
                 <span key={i} className="flex items-baseline gap-2">
                   <span className="font-mono text-lg font-semibold text-neutral-100">{c}</span>
-                  {i < selected.length - 1 && <span className="text-neutral-500">→</span>}
+                  {i < selected.length - 1 && <span className="text-neutral-400">→</span>}
                 </span>
               ))}
               <span className="ml-1 text-sm text-neutral-400">
@@ -91,7 +91,7 @@ function ProgressionsContent() {
         </div>
       )}
       <div className="flex flex-wrap items-center gap-2">
-        <span className="mr-1 text-xs text-neutral-500">
+        <span className="mr-1 text-xs text-neutral-400">
           {selected.length > 0 ? "Or try another:" : "Try a popular progression:"}
         </span>
         {POPULAR_PROGRESSIONS.map((p) => (

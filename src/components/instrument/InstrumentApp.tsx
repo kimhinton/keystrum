@@ -299,12 +299,12 @@ export default function InstrumentApp() {
           {!hideWebChrome && (
             <Link
               href="/"
-              className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 transition hover:text-neutral-300"
+              className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 transition hover:text-neutral-300"
             >
               Back to site
             </Link>
           )}
-          <div className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-neutral-500">
+          <div className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-neutral-400">
             {active && <span className="inline-block size-1.5 rounded-full bg-green-400" />}
             {active ? "playing" : "ready"}
           </div>
@@ -324,7 +324,7 @@ export default function InstrumentApp() {
                 <span className="text-xs font-bold sm:text-sm" style={{ color: c.color }}>
                   {c.name}
                 </span>
-                <span className="font-mono text-[8px] text-neutral-500 sm:text-[9px]">{c.keys}</span>
+                <span className="font-mono text-[8px] text-neutral-400 sm:text-[9px]">{c.keys}</span>
               </div>
             ))}
           </div>
@@ -386,7 +386,7 @@ export default function InstrumentApp() {
         <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-3 px-4 py-3">
           {/* Volume */}
           <div className="flex items-center gap-2">
-            <span className="text-xs text-neutral-500">VOL</span>
+            <span className="text-xs text-neutral-400">VOL</span>
             <input
               type="range"
               min={0}
@@ -468,7 +468,7 @@ export default function InstrumentApp() {
                 <span className="font-mono text-sm text-red-400">
                   {mm}:{ss}
                 </span>
-                <span className="font-mono text-[10px] text-neutral-500">
+                <span className="font-mono text-[10px] text-neutral-400">
                   {Math.max(0, Math.ceil((MAX_REC_DURATION_MS - recElapsed) / 1000))}s left
                 </span>
                 <button
@@ -482,7 +482,7 @@ export default function InstrumentApp() {
               </>
             )}
             {recPhase === "unsupported" && (
-              <span className="font-mono text-[11px] text-neutral-500">
+              <span className="font-mono text-[11px] text-neutral-400">
                 Recording unavailable on this browser
               </span>
             )}
@@ -494,7 +494,7 @@ export default function InstrumentApp() {
       {recordings.length > 0 && (
         <div className="border-t border-white/5">
           <div className="mx-auto max-w-4xl px-4 py-3">
-            <div className="mb-2 text-[10px] font-mono uppercase tracking-widest text-neutral-500">
+            <div className="mb-2 text-[10px] font-mono uppercase tracking-widest text-neutral-400">
               Recordings ({recordings.length})
             </div>
             <div className="space-y-1.5">
@@ -532,7 +532,7 @@ export default function InstrumentApp() {
                     {/* Info */}
                     <div className="flex-1 min-w-0">
                       <div className="truncate text-xs font-medium">{rec.name}</div>
-                      <div className="text-[10px] text-neutral-500">
+                      <div className="text-[10px] text-neutral-400">
                         {durMM}:{durSS} &middot;{" "}
                         {new Date(rec.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                       </div>
@@ -568,7 +568,7 @@ export default function InstrumentApp() {
                       <button
                         type="button"
                         onClick={() => deleteRecording(rec.id)}
-                        className="rounded p-1.5 text-neutral-500 transition hover:bg-red-500/10 hover:text-red-400"
+                        className="rounded p-1.5 text-neutral-400 transition hover:bg-red-500/10 hover:text-red-400"
                         title="Delete"
                       >
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">

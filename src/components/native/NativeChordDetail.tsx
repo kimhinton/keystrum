@@ -112,7 +112,7 @@ export default function NativeChordDetail({
         </p>
 
         <section className="rounded-2xl border border-white/5 bg-white/[0.02] p-4">
-          <h2 className="mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+          <h2 className="mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-400">
             Notes
           </h2>
           <div className="flex flex-wrap gap-1.5">
@@ -130,7 +130,7 @@ export default function NativeChordDetail({
               </span>
             ))}
           </div>
-          <h2 className="mt-4 mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+          <h2 className="mt-4 mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-400">
             Intervals
           </h2>
           <div className="flex flex-wrap gap-1.5">
@@ -146,7 +146,7 @@ export default function NativeChordDetail({
         </section>
 
         <section className="rounded-2xl border border-white/5 bg-white/[0.02] p-4">
-          <h2 className="mb-3 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+          <h2 className="mb-3 font-mono text-[10px] uppercase tracking-widest text-neutral-400">
             Keyboard column {c.columnIndex + 1}
           </h2>
           <ul className="space-y-2">
@@ -157,7 +157,7 @@ export default function NativeChordDetail({
                   onClick={() => playString(i)}
                   className="flex w-full items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-2 transition active:bg-white/[0.06]"
                 >
-                  <span className="w-12 font-mono text-[11px] text-neutral-500">
+                  <span className="w-12 font-mono text-[11px] text-neutral-400">
                     {STRING_LABELS[i]}
                   </span>
                   <span
@@ -170,7 +170,7 @@ export default function NativeChordDetail({
                   >
                     {row[0]?.toUpperCase() ?? "·"}
                   </span>
-                  <span className="font-mono text-[10px] text-neutral-500">
+                  <span className="font-mono text-[10px] text-neutral-400">
                     fret {c.frets[i]}
                   </span>
                   <span className="ml-auto font-mono text-[10px] uppercase tracking-widest text-neutral-600">
@@ -180,14 +180,14 @@ export default function NativeChordDetail({
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-[11px] leading-relaxed text-neutral-500">
+          <p className="mt-3 text-[11px] leading-relaxed text-neutral-400">
             Tap any row to pick that string · sweep 2+ in under 90ms to strum.
           </p>
         </section>
 
         {songsWithChord.length > 0 && (
           <section className="rounded-2xl border border-white/5 bg-white/[0.02] p-4">
-            <h2 className="mb-3 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+            <h2 className="mb-3 font-mono text-[10px] uppercase tracking-widest text-neutral-400">
               Appears in
             </h2>
             <ul className="space-y-1">
@@ -197,7 +197,7 @@ export default function NativeChordDetail({
                   className="flex items-center justify-between gap-3 text-sm"
                 >
                   <span className="text-neutral-200">{s.title}</span>
-                  <span className="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-neutral-500">
+                  <span className="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-neutral-400">
                     {s.difficulty}
                   </span>
                 </li>
@@ -208,7 +208,7 @@ export default function NativeChordDetail({
 
         {c.usedIn.length > 0 && (
           <section className="rounded-2xl border border-white/5 bg-white/[0.02] p-4">
-            <h2 className="mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+            <h2 className="mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-400">
               Famously used in
             </h2>
             <ul className="space-y-1 text-sm text-neutral-300">
@@ -224,7 +224,7 @@ export default function NativeChordDetail({
 
         {c.siblings.length > 0 && (
           <section>
-            <h2 className="mb-2 px-1 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+            <h2 className="mb-2 px-1 font-mono text-[10px] uppercase tracking-widest text-neutral-400">
               Related
             </h2>
             <div className="flex flex-wrap gap-2">

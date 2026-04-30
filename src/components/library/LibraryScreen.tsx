@@ -89,14 +89,14 @@ export default function LibraryScreen() {
           <Logo size={20} className="shrink-0" />
           Library
         </div>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
           {entries ? `${entries.length} clip${entries.length === 1 ? "" : "s"}` : "…"}
         </span>
       </header>
 
       <main className="mx-auto max-w-md px-4 py-4" style={{ paddingBottom: "calc(62px + env(safe-area-inset-bottom))" }}>
         {entries === null && (
-          <p className="py-10 text-center text-sm text-neutral-500">Loading…</p>
+          <p className="py-10 text-center text-sm text-neutral-400">Loading…</p>
         )}
 
         {entries && entries.length === 0 && (
@@ -108,7 +108,7 @@ export default function LibraryScreen() {
               </svg>
             </div>
             <h2 className="mb-1 text-lg font-semibold">No recordings yet</h2>
-            <p className="mb-6 max-w-[14rem] text-sm text-neutral-500">
+            <p className="mb-6 max-w-[14rem] text-sm text-neutral-400">
               Hit REC on the instrument. Clips auto-save here and survive app restarts.
             </p>
             <Link href="/instrument" onClick={() => { void hapticPick(); }} className="rounded-full bg-[#FF3864] px-5 py-2.5 text-sm font-semibold text-black">
@@ -143,7 +143,7 @@ export default function LibraryScreen() {
 
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-sm font-medium">{entry.name}</div>
-                    <div className="font-mono text-[10px] text-neutral-500">
+                    <div className="font-mono text-[10px] text-neutral-400">
                       {mm}:{ss} · {when.toLocaleDateString()} {when.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                     </div>
                   </div>
@@ -162,7 +162,7 @@ export default function LibraryScreen() {
                   <button
                     type="button"
                     onClick={() => void handleDelete(entry)}
-                    className="rounded-lg p-2 text-neutral-500 transition hover:bg-red-500/10 hover:text-red-400"
+                    className="rounded-lg p-2 text-neutral-400 transition hover:bg-red-500/10 hover:text-red-400"
                     aria-label="Delete"
                   >
                     <svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

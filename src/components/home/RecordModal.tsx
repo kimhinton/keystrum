@@ -22,7 +22,7 @@ export default function RecordModal({ onClose }: Props) {
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 text-2xl leading-none text-neutral-500 transition hover:text-white"
+          className="absolute right-4 top-4 text-2xl leading-none text-neutral-400 transition hover:text-white"
           aria-label="Close"
         >
           ×

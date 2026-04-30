@@ -555,7 +555,7 @@ export default function GameRunner({ song }: { song: Song }) {
         </div>
       )}
 
-      <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-500">
+      <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-400">
         <span>
           <span className="text-neutral-300">Lane keys</span> at glow peak · keep down for holds · tap 2+ for strum · free keys palm-mute
         </span>
@@ -654,7 +654,7 @@ function Playfield({
           <GhostKeyboard pressedKeys={pressedKeys} onGhostTap={onGhostTap} />
         </div>
 
-        <div className="flex w-full max-w-[900px] items-center justify-between gap-4 rounded-lg border border-white/5 bg-white/[0.01] px-4 py-2 text-[11px] text-neutral-500">
+        <div className="flex w-full max-w-[900px] items-center justify-between gap-4 rounded-lg border border-white/5 bg-white/[0.01] px-4 py-2 text-[11px] text-neutral-400">
           <span>
             <span className="text-neutral-300">Lane keys (1·q·a·z · 2·w·s·x · 3·e·d·c · 4·r·f·v · 5·t·g·b · 6·y·h·n)</span> play chords. <span className="text-neutral-300">Mute keys (J·K·L·;)</span> dampen strings.
           </span>
@@ -729,7 +729,7 @@ function PreviewStrip({
 
   return (
     <div className="flex items-center gap-2 overflow-x-auto rounded-lg bg-white/[0.02] px-3 py-2 text-xs">
-      <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">Next</span>
+      <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">Next</span>
       {upcoming.length === 0 ? (
         <span className="text-neutral-600">—</span>
       ) : (
@@ -787,7 +787,7 @@ function GameHud({
         <div>
           <div className="text-xs font-mono uppercase tracking-widest text-[#FF3864]">Now playing</div>
           <div className="text-xl font-semibold">{song.title}</div>
-          <div className="text-[11px] text-neutral-500">{song.credit}</div>
+          <div className="text-[11px] text-neutral-400">{song.credit}</div>
         </div>
         <div className="grid grid-cols-4 gap-3 font-mono text-sm">
           <Stat label="Score" value={score.toLocaleString()} />
@@ -806,7 +806,7 @@ function GameHud({
 function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div className="flex min-w-[72px] flex-col items-end">
-      <span className="text-[10px] uppercase tracking-widest text-neutral-500">{label}</span>
+      <span className="text-[10px] uppercase tracking-widest text-neutral-400">{label}</span>
       <span className={`text-lg font-bold ${accent ? "text-[#FF3864]" : "text-neutral-100"}`}>{value}</span>
     </div>
   );
@@ -857,7 +857,7 @@ function GameIntro({ song, onStart }: { song: Song; onStart: () => void }) {
       >
         Start · 3s countdown
       </button>
-      <Link href="/play" className="text-xs text-neutral-500 hover:text-neutral-300">
+      <Link href="/play" className="text-xs text-neutral-400 hover:text-neutral-300">
         ← Pick another song
       </Link>
     </div>
@@ -914,7 +914,7 @@ function FinishedScreen({
           <div className="mb-1 text-2xl font-black" style={{ color: zoneInfo.color }}>{praise}</div>
         )}
         <div className="text-6xl font-black" style={{ color: rank.color }}>{rank.label}</div>
-        <div className="mt-1 text-xs text-neutral-500">{song.title}</div>
+        <div className="mt-1 text-xs text-neutral-400">{song.title}</div>
       </div>
       <div
         className="w-full rounded-xl border px-4 py-3 text-left"
@@ -924,7 +924,7 @@ function FinishedScreen({
           <span className="font-mono text-[11px] uppercase tracking-widest" style={{ color: zoneInfo.color }}>
             {zoneInfo.label}
           </span>
-          <span className="font-mono text-[10px] text-neutral-500">@ {song.bpm} BPM</span>
+          <span className="font-mono text-[10px] text-neutral-400">@ {song.bpm} BPM</span>
         </div>
         <p className="text-sm text-neutral-200">{zoneInfo.message}</p>
         {recommended && (
@@ -964,7 +964,7 @@ function FinishedScreen({
         >
           {copied ? "Link copied ✓" : "Share score link"}
         </button>
-        <Link href="/play" className="text-xs text-neutral-500 hover:text-neutral-300">
+        <Link href="/play" className="text-xs text-neutral-400 hover:text-neutral-300">
           ← Back to songs
         </Link>
       </div>

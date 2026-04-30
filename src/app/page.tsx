@@ -45,7 +45,7 @@ export default function HomePage() {
             <br />
             <span className="text-[#FF3864]">keyboard.</span>
           </h1>
-          <p className="mb-2 max-w-xl text-sm italic text-neutral-500">
+          <p className="mb-2 max-w-xl text-sm italic text-neutral-400">
             What if your keyboard <em className="not-italic font-semibold text-neutral-300">was</em> the guitar?
           </p>
           <p className="mb-6 max-w-xl text-xl font-medium text-neutral-200 sm:text-2xl">
@@ -90,7 +90,7 @@ export default function HomePage() {
               </p>
             </div>
           </details>
-          <div className="mt-10 flex items-center gap-5 text-xs text-neutral-500">
+          <div className="mt-10 flex items-center gap-5 text-xs text-neutral-400">
             <span>
               ↓ Press{" "}
               <kbd className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[10px] text-neutral-300">A</kbd>
@@ -237,7 +237,7 @@ export default function HomePage() {
       </section>
 
       <footer className="border-t border-white/5 px-6 py-8">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 text-xs text-neutral-500 sm:flex-row sm:items-center">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 text-xs text-neutral-400 sm:flex-row sm:items-center">
           <div>© 2026 keystrum · MIT licensed</div>
           <div className="flex gap-5">
             <Link href="/privacy" className="hover:text-neutral-300">Privacy</Link>
