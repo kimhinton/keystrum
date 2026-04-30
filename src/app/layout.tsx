@@ -238,6 +238,7 @@ const jsonLd = {
 import CapacitorBoot from "@/components/native/CapacitorBoot";
 import { NativeOnly } from "@/components/native/NativeOnly";
 import NativeTabBar from "@/components/native/NativeTabBar";
+import SessionBreakNudge from "@/components/wellbeing/SessionBreakNudge";
 
 export default function RootLayout({
   children,
@@ -264,6 +265,7 @@ export default function RootLayout({
         <NativeOnly>
           <NativeTabBar />
         </NativeOnly>
+        <SessionBreakNudge />
         <script
           dangerouslySetInnerHTML={{
             __html: `if("serviceWorker"in navigator&&!window.Capacitor?.isNativePlatform?.()){window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js")})}`,
