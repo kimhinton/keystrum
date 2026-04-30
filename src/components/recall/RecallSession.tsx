@@ -112,7 +112,10 @@ export default function RecallSession() {
 
   if (resolved) {
     return (
-      <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full border px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-lg backdrop-blur-md"
+      <div
+        role="status"
+        aria-live="polite"
+        className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full border px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-lg backdrop-blur-md"
         style={{
           borderColor: resolved === "correct" ? "#10b98155" : "#fbbf2455",
           background: resolved === "correct" ? "rgba(16,185,129,0.15)" : "rgba(251,191,36,0.15)",
@@ -133,7 +136,13 @@ export default function RecallSession() {
   const upcoming = isDrill ? pending.chords.slice(pending.currentIndex + 1).join(" → ") : "";
 
   return (
-    <div className="fixed bottom-6 left-1/2 z-50 w-[min(420px,92vw)] -translate-x-1/2 rounded-2xl border border-[#FF3864]/40 bg-[#12121a]/95 p-4 shadow-2xl backdrop-blur-md">
+    <div
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label={`Active recall prompt: strum ${currentChord}${isDrill ? `, drill ${pending.currentIndex + 1} of ${total}` : ""}`}
+      className="fixed bottom-6 left-1/2 z-50 w-[min(420px,92vw)] -translate-x-1/2 rounded-2xl border border-[#FF3864]/40 bg-[#12121a]/95 p-4 shadow-2xl backdrop-blur-md"
+    >
       <div className="mb-1 flex items-baseline justify-between">
         <span className="font-mono text-[10px] uppercase tracking-widest text-[#FF3864]">
           {stepLabel}

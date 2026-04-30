@@ -177,7 +177,12 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
   const palette = themePalette(theme);
 
   return (
-    <div className="w-full relative" style={{ ["--kg-active" as string]: palette.active }}>
+    <div
+      role="application"
+      aria-label="QWERTY keyboard guitar — press number, q-row, a-row, or z-row keys to play chords"
+      className="w-full relative"
+      style={{ ["--kg-active" as string]: palette.active }}
+    >
       {goldenFlash && (
         <div
           className="pointer-events-none fixed inset-0 z-40 animate-pulse"

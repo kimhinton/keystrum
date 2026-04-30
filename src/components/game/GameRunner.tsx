@@ -907,7 +907,11 @@ function FinishedScreen({
     }
   }, [shareUrl]);
   return (
-    <div className="flex w-full max-w-md flex-col items-center gap-6 rounded-2xl border border-white/10 bg-white/[0.02] px-8 py-10 text-center text-neutral-200">
+    <div
+      role="region"
+      aria-label={`Run results for ${song.title}: ${rank.label}, accuracy ${Math.round(acc * 100)} percent, ${zoneInfo.label.toLowerCase()}`}
+      className="flex w-full max-w-md flex-col items-center gap-6 rounded-2xl border border-white/10 bg-white/[0.02] px-8 py-10 text-center text-neutral-200"
+    >
       <div>
         <div className="mb-2 text-xs font-mono uppercase tracking-widest text-[#FF3864]">Finished</div>
         {praise && (
