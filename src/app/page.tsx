@@ -75,7 +75,7 @@ export default function HomePage() {
               <span className="inline-block text-[#FF3864] transition group-open:rotate-90">▶</span>
               <span>Why QWERTY? — 3 reasons</span>
             </summary>
-            <div className="mt-4 space-y-3 text-sm text-neutral-400">
+            <div className="mt-4 space-y-3 text-sm leading-relaxed text-neutral-400">
               <p>
                 <span className="font-semibold text-neutral-200">1. The hardware is already in front of you.</span>{" "}
                 Your laptop&rsquo;s QWERTY keyboard has 4 usable rows and 6+ columns &mdash; exactly enough for 4 strings &times; 6 diatonic chords. No purchase, no setup, no setup cost between you and a chord.
@@ -218,7 +218,7 @@ export default function HomePage() {
             {FAQ.map((q) => (
               <div key={q.q} className="rounded-xl border border-white/5 bg-white/[0.02] p-5">
                 <dt className="mb-1.5 font-semibold">{q.q}</dt>
-                <dd className="text-sm text-neutral-400">{q.a}</dd>
+                <dd className="max-w-prose text-sm leading-relaxed text-neutral-400">{q.a}</dd>
               </div>
             ))}
           </dl>

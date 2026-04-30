@@ -150,7 +150,7 @@ export default async function ChordPage(
           <span style={{ color: c.color }}>{c.name}</span>
           <span className="text-xl text-neutral-400">{c.label}</span>
         </h1>
-        <p className="mt-3 max-w-xl text-neutral-400">{c.feel}</p>
+        <p className="mt-3 max-w-prose text-neutral-400 leading-relaxed">{c.feel}</p>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl border border-white/5 bg-white/[0.02] p-5">
@@ -208,7 +208,7 @@ export default async function ChordPage(
               </div>
               <div className="sm:col-span-2">
                 <dt className="text-xs text-neutral-400">Function</dt>
-                <dd className="mt-1 text-neutral-300">{c.theory.function}</dd>
+                <dd className="mt-1 text-neutral-300 leading-relaxed">{c.theory.function}</dd>
               </div>
               <div className="sm:col-span-3">
                 <dt className="text-xs text-neutral-400">Relative key</dt>
@@ -221,11 +221,11 @@ export default async function ChordPage(
         {c.commonMistakes.length > 0 && (
           <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
             <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-400">How to play it cleanly</h2>
-            <ul className="flex flex-col gap-2.5 text-sm text-neutral-300">
+            <ul className="flex flex-col gap-2.5 text-sm leading-relaxed text-neutral-300">
               {c.commonMistakes.map((mistake, i) => (
                 <li key={i} className="flex items-baseline gap-2.5">
                   <span className="font-mono text-xs text-neutral-400">{i + 1}.</span>
-                  <span>{mistake}</span>
+                  <span className="max-w-prose">{mistake}</span>
                 </li>
               ))}
             </ul>
@@ -238,7 +238,7 @@ export default async function ChordPage(
             style={{ borderColor: `${c.color}33`, background: `${c.color}08` }}
           >
             <h2 className="mb-2 text-xs font-mono uppercase tracking-widest" style={{ color: c.color }}>5-minute practice tip</h2>
-            <p className="text-sm text-neutral-200">{c.practiceTip}</p>
+            <p className="max-w-prose text-sm leading-relaxed text-neutral-200">{c.practiceTip}</p>
           </div>
         )}
 
