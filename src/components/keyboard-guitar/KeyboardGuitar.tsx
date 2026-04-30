@@ -340,7 +340,9 @@ function themePalette(theme: "dark" | "light" | "vibrant") {
       strumBg: "#FF386422",
       strumFg: "#FF3864",
       active: "#FF3864",
-      hintFg: "#6b6e7a",
+      // #6b6e7a on #0f1014 = 3.76:1 (fails WCAG AA). Aligned with chipFg
+      // (#8a8d99) for 5.87:1, clearing 4.5:1 normal-text threshold.
+      hintFg: "#8a8d99",
     };
   }
   if (theme === "vibrant") {
