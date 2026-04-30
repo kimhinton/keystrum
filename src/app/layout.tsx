@@ -172,7 +172,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col overflow-x-hidden">
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){var w=window;if(w.Capacitor&&w.Capacitor.isNativePlatform&&w.Capacitor.isNativePlatform()){document.body.setAttribute("data-native","true")}})();`,
