@@ -105,8 +105,10 @@ export const viewport: Viewport = {
   ],
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  // maximumScale + userScalable removed — both block pinch-zoom and trip
+  // WCAG 2.1 AA (1.4.4 Resize Text). The PWA "no-scale" feel is preserved
+  // through the body min-h-full + overflow rules; we don't need to forbid
+  // the user from zooming to read the ?prog= URL or the chord theory page.
   viewportFit: "cover",
   colorScheme: "dark light",
 };
