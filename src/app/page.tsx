@@ -6,15 +6,33 @@ import NativeRedirect from "@/components/native/NativeRedirect";
 import ProgressionsBar from "@/components/home/ProgressionsBar";
 import RecallSession from "@/components/recall/RecallSession";
 import { Logo } from "@/components/brand/Logo";
+import { HOME_FAQ_QUESTIONS } from "@/lib/seo-faq";
 
 export const metadata = {
   title: "keystrum — Practice guitar chords without a guitar",
   description: "Virtual guitar online, free, no download. Strum 6 guitar chords on your QWERTY keyboard — 4 rows become 4 strings. Real strum detection, Karplus-Strong synthesis, 3 folk songs in practice mode. Browser-only, no install, no account.",
 };
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://keystrum.app";
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${SITE_URL}/#faq`,
+  mainEntity: HOME_FAQ_QUESTIONS.map((entry) => ({
+    "@type": "Question",
+    name: entry.question,
+    acceptedAnswer: { "@type": "Answer", text: entry.answer },
+  })),
+};
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#0E0E12] text-neutral-100 font-sans" data-web-only="true">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <NativeRedirect />
       <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-white/5 bg-[#0E0E12]/80 px-6 py-4 backdrop-blur-xl">
         <a href="#top" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
