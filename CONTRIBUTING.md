@@ -33,6 +33,19 @@ Requires **pnpm ≥ 10** and **Node ≥ 22** (matches CI).
 - TypeScript strict mode
 - Tailwind CSS for styling (no inline styles, no CSS modules)
 
+## Wellbeing principles
+
+keystrum is designed not to exploit users. If you contribute UX, UI, copy, or feature work, please honor these:
+
+- **No forced daily missions.** No "you must practice today" pressure.
+- **No push notifications.** Notifications are opt-in only — installing as a PWA is the only entry point, and we never push.
+- **No ads.** Ever. There is no business model.
+- **No dark patterns.** No fake scarcity, no fear-of-missing-out, no streak guilt, no "you are losing progress" warnings.
+- **Failure is silent.** No red X, no shame counter. Cortisol from perceived failure shrinks the hippocampus and breaks learning itself.
+- **dlPFC fatigue is real.** A 25-minute soft break reminder is the only nudge keystrum sends — dismissible, postponable, never blocking.
+
+References: Lembke 2021 (dopamine-trap homeostasis), Tristan Harris (Time Well Spent movement), McEwen 1999 (chronic stress and hippocampal atrophy), Csikszentmihalyi (flow loss-of-self-consciousness).
+
 ## Song Contributions
 
 Adding a new song to Practice mode:
