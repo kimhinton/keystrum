@@ -6,9 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+(no changes since v0.2.0)
+
+## [0.2.0] — 2026-04-30
+
+v0.2.0 milestone effective 4/5: 3 issues closed (#14 / #19 / #21), 1 partial (#15 — height fixed, width follow-up moved to v0.3.0), 1 deferred (#23 — light/dark theme, deferred to post-PMF).
+
+Headline additions: opt-in metronome, fourth practice song, PWA install timing fix, mobile-keyboard tap-target height, plus a substantial accessibility pass (WCAG 2.1 A/AA clean, axe-core CI), brand-color migration, typography refinement, PWA enrichment, BMC strategy docs, wellbeing principles, 25-minute session-break nudge, and Reference-dependence delta on /me.
+
 ### Added
 
-- Fourth practice song "Britpop 4-chord (Em-G-Dm-C)" on `/play/britpop-jam` (issue #14, v0.2.0). 8 bars at 87 BPM, the chord cycle popularized by Wonderwall and other 1990s Britpop. D substituted with Dm to fit the keystrum 6-chord set. Title generalized to avoid trademark issues; credit + /play metadata still reference Wonderwall for search (commit `3e6504b`)
+- Fourth practice song "Britpop 4-chord (Em-G-Dm-C)" on `/play/britpop-jam` (issue #14). 8 bars at 87 BPM, the chord cycle popularized by Wonderwall and other 1990s Britpop. D substituted with Dm to fit the keystrum 6-chord set. Title generalized to avoid trademark issues; credit + /play metadata still reference Wonderwall for search (commit `3e6504b`)
 - Opt-in metronome in practice mode (issue #19, v0.2.0 milestone) — toggle from the Ready Up screen, 4-on-the-floor click synchronized to `song.bpm`. Downbeat is the 1200 Hz accent click, other beats are the 800 Hz tick. Persisted in `keystrum-game` (commit `84411ed`)
 - 25-minute soft session-break nudge (`SessionBreakNudge.tsx`) — appears once a tab has been open ~25 min, dismissible, postpones the next reminder by another 25 min, mounted in `RootLayout` so it applies to all routes (commit `7bb0e68`)
 - *Today / Yesterday* delta line on `/me` "Last 30 days" — `+Δ over yesterday` shown only when delta is positive; negative delta is intentionally **not** framed as a loss (commit `1006323`)
