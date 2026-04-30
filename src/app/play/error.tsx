@@ -12,7 +12,7 @@ export default function PlayError({
       <p className="text-sm text-neutral-400">Audio or game state failed to load.</p>
       <button
         onClick={reset}
-        className="rounded-full bg-[#FF3864] px-5 py-2 text-sm font-semibold text-black transition hover:bg-[#FF5680]"
+        className="rounded-full bg-brand px-5 py-2 text-sm font-semibold text-black transition hover:bg-brand-hover"
       >
         Try again
       </button>

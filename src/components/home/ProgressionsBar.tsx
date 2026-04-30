@@ -55,9 +55,9 @@ function ProgressionsContent() {
   return (
     <div className="mx-auto max-w-7xl px-6 pb-10">
       {selected.length > 0 && (
-        <div className="mb-6 flex flex-col gap-3 rounded-xl border border-[#FF3864]/30 bg-[#FF3864]/5 p-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-6 flex flex-col gap-3 rounded-xl border border-brand/30 bg-brand/5 p-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col gap-1">
-            <span className="font-mono text-xs uppercase tracking-widest text-[#FF3864]">
+            <span className="font-mono text-xs uppercase tracking-widest text-brand">
               Shared progression
             </span>
             <div className="flex flex-wrap items-baseline gap-2">
@@ -83,7 +83,7 @@ function ProgressionsContent() {
             <button
               type="button"
               onClick={() => share(selected)}
-              className="inline-flex items-center gap-2 rounded-full border border-[#FF3864]/40 bg-[#FF3864]/10 px-4 py-2 text-xs font-semibold text-[#FF3864] transition hover:bg-[#FF3864]/20"
+              className="inline-flex items-center gap-2 rounded-full border border-brand/40 bg-brand/10 px-4 py-2 text-xs font-semibold text-brand transition hover:bg-brand/20"
             >
               {copied ? "Link copied ✓" : "Share →"}
             </button>

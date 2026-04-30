@@ -28,7 +28,7 @@ export default function HomePage() {
           <Link href="/instrument" className="transition hover:text-white">Instrument</Link>
           <Link href="/me" className="transition hover:text-white">Stats</Link>
           <a href="#faq" className="transition hover:text-white">FAQ</a>
-          <a href="#instrument" className="rounded-full bg-[#FF3864] px-4 py-1.5 text-xs font-semibold text-black transition hover:bg-[#FF5680]">
+          <a href="#instrument" className="rounded-full bg-brand px-4 py-1.5 text-xs font-semibold text-black transition hover:bg-brand-hover">
             Start playing →
           </a>
         </div>
@@ -37,13 +37,13 @@ export default function HomePage() {
       <section id="top" className="mx-auto grid max-w-7xl gap-10 px-6 pb-16 pt-12 lg:grid-cols-[1fr_1.1fr] lg:gap-14 lg:pt-20">
         <div className="flex flex-col justify-center">
           <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-neutral-400">
-            <span className="size-1.5 rounded-full bg-[#FF3864]" />
+            <span className="size-1.5 rounded-full bg-brand" />
             Practice without a guitar · No install · Open source
           </div>
           <h1 className="mb-3 text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
             Strum your
             <br />
-            <span className="text-[#FF3864]">keyboard.</span>
+            <span className="text-brand">keyboard.</span>
           </h1>
           <p className="mb-2 max-w-xl text-sm italic text-neutral-400">
             What if your keyboard <em className="not-italic font-semibold text-neutral-300">was</em> the guitar?
@@ -59,7 +59,7 @@ export default function HomePage() {
           <div className="flex flex-wrap gap-3">
             <a
               href="#instrument"
-              className="inline-flex items-center gap-2 rounded-full bg-[#FF3864] px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-[#FF5680]"
+              className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-brand-hover"
             >
               Start playing →
             </a>
@@ -72,7 +72,7 @@ export default function HomePage() {
           </div>
           <details className="group mt-8 max-w-xl">
             <summary className="flex cursor-pointer list-none items-center gap-2 text-sm text-neutral-400 transition hover:text-neutral-200 [&::-webkit-details-marker]:hidden">
-              <span className="inline-block text-[#FF3864] transition group-open:rotate-90">▶</span>
+              <span className="inline-block text-brand transition group-open:rotate-90">▶</span>
               <span>Why QWERTY? — 3 reasons</span>
             </summary>
             <div className="mt-4 space-y-3 text-sm leading-relaxed text-neutral-400">
@@ -105,10 +105,10 @@ export default function HomePage() {
           </div>
           <Link
             href="/instrument"
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-medium text-neutral-300 transition hover:border-[#FF3864]/40 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-medium text-neutral-300 transition hover:border-brand/40 hover:text-white"
           >
             Open full instrument with recording &amp; metronome
-            <span className="text-[#FF3864]">→</span>
+            <span className="text-brand">→</span>
           </Link>
         </div>
       </section>
@@ -119,13 +119,13 @@ export default function HomePage() {
 
       <section id="features" className="mx-auto max-w-7xl px-6 py-20">
         <div className="mb-12 max-w-2xl">
-          <span className="text-xs uppercase tracking-widest text-[#FF3864]">Features</span>
+          <span className="text-xs uppercase tracking-widest text-brand">Features</span>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">An instrument that fits in your keyboard.</h2>
         </div>
         <div className="grid gap-4 sm:grid-cols-3">
           {FEATURES.map((f) => (
             <div key={f.title} className="rounded-xl border border-white/5 bg-white/[0.02] p-6 transition hover:border-white/10">
-              <div className="mb-4 inline-flex size-8 items-center justify-center rounded-lg bg-[#FF3864]/15 font-mono text-xs font-bold text-[#FF3864]">
+              <div className="mb-4 inline-flex size-8 items-center justify-center rounded-lg bg-brand/15 font-mono text-xs font-bold text-brand">
                 {f.icon}
               </div>
               <h3 className="mb-1.5 text-base font-semibold">{f.title}</h3>
@@ -138,13 +138,13 @@ export default function HomePage() {
       <section id="how" className="border-t border-white/5 bg-white/[0.015]">
         <div className="mx-auto max-w-7xl px-6 py-20">
           <div className="mb-12 max-w-2xl">
-            <span className="text-xs uppercase tracking-widest text-[#FF3864]">How it works</span>
+            <span className="text-xs uppercase tracking-widest text-brand">How it works</span>
             <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Four rows. Six chords. One sweep.</h2>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             {HOW.map((h, i) => (
               <div key={h.title} className="relative">
-                <div className="mb-3 font-mono text-5xl font-bold text-[#FF3864]/70">{String(i + 1).padStart(2, "0")}</div>
+                <div className="mb-3 font-mono text-5xl font-bold text-brand/70">{String(i + 1).padStart(2, "0")}</div>
                 <h3 className="mb-2 text-base font-semibold">{h.title}</h3>
                 <p className="text-sm text-neutral-400">{h.body}</p>
               </div>
@@ -157,14 +157,14 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-6 px-6 py-20 md:grid-cols-3">
           <Link
             href="/play"
-            className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#FF3864]/15 via-[#FF3864]/5 to-transparent p-8 transition hover:border-[#FF3864]/40"
+            className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-brand/15 via-brand/5 to-transparent p-8 transition hover:border-brand/40"
           >
-            <span className="text-xs font-mono uppercase tracking-widest text-[#FF3864]">Practice mode</span>
+            <span className="text-xs font-mono uppercase tracking-widest text-brand">Practice mode</span>
             <h3 className="text-2xl font-semibold tracking-tight">Learn with songs.</h3>
             <p className="text-sm text-neutral-400">
               A character shows you when to strum, hold, and mute. Three folk songs, six chord lanes.
             </p>
-            <div className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-[#FF3864]">
+            <div className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand">
               Start practicing
               <span className="transition group-hover:translate-x-0.5">→</span>
             </div>
@@ -226,11 +226,11 @@ export default function HomePage() {
       </section>
 
       <section className="relative overflow-hidden border-t border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FF3864]/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-brand/20 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-4xl px-6 py-24 text-center">
           <h2 className="mb-5 text-4xl font-semibold tracking-tight sm:text-5xl">Stop reading. Strum.</h2>
           <p className="mx-auto mb-8 max-w-lg text-neutral-400">Scroll back up. Hit <span className="font-mono text-white">2</span>, <span className="font-mono text-white">w</span>, <span className="font-mono text-white">s</span>, <span className="font-mono text-white">x</span> — one after the other, fast.</p>
-          <a href="#instrument" className="inline-flex items-center gap-2 rounded-full bg-[#FF3864] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#FF5680]">
+          <a href="#instrument" className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-black transition hover:bg-brand-hover">
             ↑ Back to the instrument
           </a>
         </div>

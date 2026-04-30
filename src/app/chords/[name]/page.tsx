@@ -291,7 +291,7 @@ export default async function ChordPage(
                   <Link
                     key={s.id}
                     href={`/play/${s.id}`}
-                    className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-sm transition hover:border-[#FF3864]/40"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-sm transition hover:border-brand/40"
                   >
                     <span className="text-neutral-300">{s.title}</span>
                     <span className="text-[10px] text-neutral-400">{s.difficulty}</span>
@@ -305,7 +305,7 @@ export default async function ChordPage(
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full bg-[#FF3864] px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-[#FF5680]"
+            className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-brand-hover"
           >
             Play this chord on the instrument →
           </Link>

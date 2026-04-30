@@ -96,7 +96,7 @@ const FLOW_ZONE_INFO: Record<FlowZone, { label: string; message: string; color: 
   flow: {
     label: "Flow zone ⚡",
     message: "Locked in — challenge and skill in balance",
-    color: "#FF3864",
+    color: "var(--brand)",
   },
   boredom: {
     label: "Mastered",
@@ -263,7 +263,7 @@ export default function GameRunner({ song }: { song: Song }) {
         return next;
       });
       setStats((s) => ({ ...s, [kind]: s[kind] + 1 }));
-      const strumColor = combo >= 30 && Math.random() < 0.12 ? pickRainbowColor() : "#FF3864";
+      const strumColor = combo >= 30 && Math.random() < 0.12 ? pickRainbowColor() : "var(--brand)";
       pushBurst(note.lane, `${judgmentLabel(kind)} · STRUM +${STRUM_BONUS}`, strumColor);
       playChord(note.lane, 0.9);
       flashMascotHit(note.lane);
@@ -547,8 +547,8 @@ export default function GameRunner({ song }: { song: Song }) {
       {phase === "countdown" && (
         <div className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
           <div
-            className="font-mono text-8xl font-black text-[#FF3864]"
-            style={{ textShadow: "0 0 40px #FF3864" }}
+            className="font-mono text-8xl font-black text-brand"
+            style={{ textShadow: "0 0 40px var(--brand)" }}
           >
             {countdownLeft}
           </div>
@@ -785,7 +785,7 @@ function GameHud({
     <div className="flex w-full flex-col gap-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <div className="text-xs font-mono uppercase tracking-widest text-[#FF3864]">Now playing</div>
+          <div className="text-xs font-mono uppercase tracking-widest text-brand">Now playing</div>
           <div className="text-xl font-semibold">{song.title}</div>
           <div className="text-[11px] text-neutral-400">{song.credit}</div>
         </div>
@@ -797,7 +797,7 @@ function GameHud({
         </div>
       </div>
       <div className="h-1 w-full overflow-hidden rounded-full bg-white/5">
-        <div className="h-full bg-[#FF3864] transition-[width] duration-75" style={{ width: `${progress * 100}%` }} />
+        <div className="h-full bg-brand transition-[width] duration-75" style={{ width: `${progress * 100}%` }} />
       </div>
     </div>
   );
@@ -807,7 +807,7 @@ function Stat({ label, value, accent }: { label: string; value: string; accent?:
   return (
     <div className="flex min-w-[72px] flex-col items-end">
       <span className="text-[10px] uppercase tracking-widest text-neutral-400">{label}</span>
-      <span className={`text-lg font-bold ${accent ? "text-[#FF3864]" : "text-neutral-100"}`}>{value}</span>
+      <span className={`text-lg font-bold ${accent ? "text-brand" : "text-neutral-100"}`}>{value}</span>
     </div>
   );
 }
@@ -816,7 +816,7 @@ function GameIntro({ song, onStart }: { song: Song; onStart: () => void }) {
   return (
     <div className="flex max-w-md flex-col items-center gap-6 rounded-2xl border border-white/10 bg-white/[0.02] px-8 py-10 text-center text-neutral-200">
       <div>
-        <div className="mb-1 text-xs font-mono uppercase tracking-widest text-[#FF3864]">Ready up</div>
+        <div className="mb-1 text-xs font-mono uppercase tracking-widest text-brand">Ready up</div>
         <h1 className="text-3xl font-semibold tracking-tight">{song.title}</h1>
         <p className="mt-2 text-sm text-neutral-400">{song.subtitle}</p>
         <p className="mt-1 text-[11px] text-neutral-400">{song.credit}</p>
@@ -842,7 +842,7 @@ function GameIntro({ song, onStart }: { song: Song; onStart: () => void }) {
           <span><b className="text-neutral-200">Hold:</b> HOLD tag above key → press and keep pressing.</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="inline-flex size-5 items-center justify-center rounded bg-[#FF3864]/20 font-mono text-[10px] text-[#FF3864]">⇅</span>
+          <span className="inline-flex size-5 items-center justify-center rounded bg-brand/20 font-mono text-[10px] text-brand">⇅</span>
           <span><b className="text-neutral-200">Strum:</b> ⇅ tag → must hit 2+ different keys in the column (single tap = fail).</span>
         </div>
         <div className="flex items-center gap-2">
@@ -853,7 +853,7 @@ function GameIntro({ song, onStart }: { song: Song; onStart: () => void }) {
       <button
         type="button"
         onClick={onStart}
-        className="w-full rounded-full bg-[#FF3864] py-3 text-sm font-bold text-black transition hover:bg-[#FF5680]"
+        className="w-full rounded-full bg-brand py-3 text-sm font-bold text-black transition hover:bg-brand-hover"
       >
         Start · 3s countdown
       </button>
@@ -913,7 +913,7 @@ function FinishedScreen({
       className="flex w-full max-w-md flex-col items-center gap-6 rounded-2xl border border-white/10 bg-white/[0.02] px-8 py-10 text-center text-neutral-200"
     >
       <div>
-        <div className="mb-2 text-xs font-mono uppercase tracking-widest text-[#FF3864]">Finished</div>
+        <div className="mb-2 text-xs font-mono uppercase tracking-widest text-brand">Finished</div>
         {praise && (
           <div className="mb-1 text-2xl font-black" style={{ color: zoneInfo.color }}>{praise}</div>
         )}
@@ -957,7 +957,7 @@ function FinishedScreen({
         <button
           type="button"
           onClick={onRetry}
-          className="w-full rounded-full bg-[#FF3864] py-3 text-sm font-bold text-black transition hover:bg-[#FF5680]"
+          className="w-full rounded-full bg-brand py-3 text-sm font-bold text-black transition hover:bg-brand-hover"
         >
           Retry
         </button>

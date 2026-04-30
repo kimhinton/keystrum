@@ -127,7 +127,7 @@ export default function MePage() {
 
       <main className="mx-auto max-w-4xl px-6 py-12">
         <div className="mb-8">
-          <span className="font-mono text-xs uppercase tracking-widest text-[#FF3864]">Your stats</span>
+          <span className="font-mono text-xs uppercase tracking-widest text-brand">Your stats</span>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
             Everything you&rsquo;ve strummed.
           </h1>
@@ -141,7 +141,7 @@ export default function MePage() {
             <p className="mb-4 text-neutral-300">Nothing yet — go play a few chords.</p>
             <Link
               href="/#instrument"
-              className="inline-flex items-center gap-2 rounded-full bg-[#FF3864] px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-[#FF5680]"
+              className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-brand-hover"
             >
               Open the instrument →
             </Link>
@@ -214,12 +214,12 @@ export default function MePage() {
                   <div>
                     <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Acquisition</div>
                     <div className="mt-1 text-sm text-neutral-200">First visit</div>
-                    <div className="mt-0.5 font-mono text-xs text-[#FF3864]">{firstVisit}</div>
+                    <div className="mt-0.5 font-mono text-xs text-brand">{firstVisit}</div>
                   </div>
                   <div>
                     <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Activation</div>
                     <div className="mt-1 text-sm text-neutral-200">First chord</div>
-                    <div className="mt-0.5 font-mono text-xs text-[#FF3864]">
+                    <div className="mt-0.5 font-mono text-xs text-brand">
                       {firstAudioAt
                         ? `${Math.round((firstAudioAt - new Date(firstVisit).getTime()) / 1000)}s after visit`
                         : "—"}
@@ -228,12 +228,12 @@ export default function MePage() {
                   <div>
                     <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Retention</div>
                     <div className="mt-1 text-sm text-neutral-200">{Object.keys(dayActivity).length} active day{Object.keys(dayActivity).length === 1 ? "" : "s"}</div>
-                    <div className="mt-0.5 font-mono text-xs text-[#FF3864]">streak {currentStreak}d / max {longestStreak}d</div>
+                    <div className="mt-0.5 font-mono text-xs text-brand">streak {currentStreak}d / max {longestStreak}d</div>
                   </div>
                   <div>
                     <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Referral</div>
                     <div className="mt-1 text-sm text-neutral-200">Shared progressions opened</div>
-                    <div className="mt-0.5 font-mono text-xs text-[#FF3864]">{sharedReceivedCount}</div>
+                    <div className="mt-0.5 font-mono text-xs text-brand">{sharedReceivedCount}</div>
                   </div>
                 </div>
                 <p className="mt-3 text-[11px] text-neutral-400">All numbers live in this browser&rsquo;s localStorage. No telemetry, no SaaS. Reset clears them.</p>
@@ -306,7 +306,7 @@ export default function MePage() {
             {sharedReceivedCount > 0 && (
               <div className="mb-6 rounded-xl border border-white/5 bg-white/[0.02] p-5 text-sm text-neutral-300">
                 You&rsquo;ve opened{" "}
-                <span className="font-mono font-semibold text-[#FF3864]">{sharedReceivedCount}</span>{" "}
+                <span className="font-mono font-semibold text-brand">{sharedReceivedCount}</span>{" "}
                 shared progression{sharedReceivedCount === 1 ? "" : "s"} from someone else.
               </div>
             )}
@@ -322,7 +322,7 @@ export default function MePage() {
                       onClick={() => setRecallSetting(mode)}
                       className={
                         recallSetting === mode
-                          ? "rounded bg-[#FF3864]/20 px-2 py-1 font-medium text-[#FF3864]"
+                          ? "rounded bg-brand/20 px-2 py-1 font-medium text-brand"
                           : "rounded px-2 py-1 text-neutral-400 transition hover:text-neutral-200"
                       }
                     >

@@ -45,7 +45,7 @@ export default function ChordIndex() {
 
       <section className="mx-auto max-w-5xl px-6 pt-16 pb-10">
         <div className="mb-10 max-w-2xl">
-          <span className="text-xs font-mono uppercase tracking-widest text-[#FF3864]">Chord dictionary</span>
+          <span className="text-xs font-mono uppercase tracking-widest text-brand">Chord dictionary</span>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">Six columns, six chords.</h1>
           <p className="mt-3 text-neutral-400">
             keystrum ships with six open-position chord presets — the scaffolding for most pop music.
@@ -86,7 +86,7 @@ export default function ChordIndex() {
                 ))}
               </div>
               <p className="text-sm text-neutral-400">{c.feel}</p>
-              <span className="mt-auto text-xs text-[#FF3864] transition group-hover:text-[#FF5680]">
+              <span className="mt-auto text-xs text-brand transition group-hover:text-brand-hover">
                 Open →
               </span>
             </Link>

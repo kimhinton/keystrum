@@ -345,7 +345,7 @@ export default function InstrumentApp() {
           <div className="mx-auto max-w-4xl px-4 py-3">
             <div className="grid grid-cols-2 gap-3 text-xs sm:grid-cols-4">
               <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
-                <div className="mb-1 font-semibold text-[#FF3864]">Strum</div>
+                <div className="mb-1 font-semibold text-brand">Strum</div>
                 <div className="text-neutral-400">
                   Sweep a column top→bottom fast (under 90ms). e.g. <span className="font-mono text-white">1</span>→<span className="font-mono text-white">q</span>→<span className="font-mono text-white">a</span>→<span className="font-mono text-white">z</span> for Am
                 </div>
@@ -394,7 +394,7 @@ export default function InstrumentApp() {
               max={100}
               value={Math.round(volume * 100)}
               onChange={(e) => handleVolume(Number(e.target.value) / 100)}
-              className="h-1 w-20 cursor-pointer appearance-none rounded-full bg-white/10 accent-[#FF3864] sm:w-28"
+              className="h-1 w-20 cursor-pointer appearance-none rounded-full bg-white/10 accent-brand sm:w-28"
             />
             <span className="w-7 text-right font-mono text-[10px] text-neutral-400">
               {Math.round(volume * 100)}
@@ -408,7 +408,7 @@ export default function InstrumentApp() {
               onClick={() => setMetroOn((p) => !p)}
               className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition ${
                 metroOn
-                  ? "bg-[#FF3864] text-black"
+                  ? "bg-brand text-black"
                   : "border border-white/10 bg-white/[0.03] text-neutral-300 hover:border-white/20"
               }`}
             >
@@ -443,7 +443,7 @@ export default function InstrumentApp() {
                     key={i}
                     className="inline-block size-2 rounded-full transition-colors"
                     style={{
-                      background: metroBeat === i ? (i === 0 ? "#FF3864" : "#fbbf24") : "#333",
+                      background: metroBeat === i ? (i === 0 ? "var(--brand)" : "#fbbf24") : "#333",
                     }}
                   />
                 ))}
@@ -514,7 +514,7 @@ export default function InstrumentApp() {
                       onClick={() => playRecording(rec)}
                       className={`flex size-7 items-center justify-center rounded-full transition ${
                         isPlaying
-                          ? "bg-[#FF3864] text-black"
+                          ? "bg-brand text-black"
                           : "border border-white/10 text-neutral-400 hover:border-white/20 hover:text-white"
                       }`}
                     >

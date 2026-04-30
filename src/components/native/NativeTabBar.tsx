@@ -76,7 +76,7 @@ export default function NativeTabBar() {
               href={tab.href}
               onClick={() => { void hapticPick(); }}
               className="flex flex-1 flex-col items-center gap-1 py-2.5 transition-colors"
-              style={{ color: active ? "#FF3864" : "#8a8d99" }}
+              style={{ color: active ? "var(--brand)" : "#8a8d99" }}
               aria-current={active ? "page" : undefined}
             >
               {tab.icon(active)}

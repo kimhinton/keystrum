@@ -78,8 +78,8 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
           ×
         </button>
 
-        <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest text-[#FF3864]">
-          <span className="size-1.5 rounded-full bg-[#FF3864]" />
+        <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest text-brand">
+          <span className="size-1.5 rounded-full bg-brand" />
           On mobile
         </div>
         <h2 className="mb-2 text-xl font-semibold tracking-tight">
@@ -94,7 +94,7 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
             <button
               type="button"
               onClick={install}
-              className="rounded-full bg-[#FF3864] py-3 text-sm font-semibold text-black transition hover:bg-[#FF5680]"
+              className="rounded-full bg-brand py-3 text-sm font-semibold text-black transition hover:bg-brand-hover"
             >
               Install as app
             </button>
@@ -102,7 +102,7 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
           {!installEvt && isIOS && (
             <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3 text-xs text-neutral-300">
               <div className="mb-1 font-semibold text-white">Install on iOS</div>
-              Tap <span className="font-mono text-[#FF3864]">Share</span> → <span className="font-mono text-[#FF3864]">Add to Home Screen</span>
+              Tap <span className="font-mono text-brand">Share</span> → <span className="font-mono text-brand">Add to Home Screen</span>
             </div>
           )}
           <button

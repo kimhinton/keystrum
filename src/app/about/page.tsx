@@ -29,7 +29,7 @@ export default function AboutPage() {
 
       <main className="mx-auto max-w-md px-5 py-6">
         <div className="mb-6">
-          <span className="text-xs font-mono uppercase tracking-widest text-[#FF3864]">About</span>
+          <span className="text-xs font-mono uppercase tracking-widest text-brand">About</span>
           <h1 className="mt-1.5 text-2xl font-semibold tracking-tight">A keyboard becomes a guitar.</h1>
           <p className="mt-2 text-sm text-neutral-400">
             Four rows of keys, six columns of chords. Sweep a column top-to-bottom under 90ms and it strums.

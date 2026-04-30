@@ -125,7 +125,7 @@ export default function RecordBar() {
           <button
             type="button"
             onClick={download}
-            className="rounded-full bg-[#FF3864] px-4 py-1.5 text-xs font-semibold text-black transition hover:bg-[#FF5680]"
+            className="rounded-full bg-brand px-4 py-1.5 text-xs font-semibold text-black transition hover:bg-brand-hover"
           >
             Download
           </button>

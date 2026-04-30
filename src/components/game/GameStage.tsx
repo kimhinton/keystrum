@@ -171,7 +171,7 @@ export default function GameStage({
   const rightIsStrumming =
     strumming || (earliestNonHold?.kind === "strum" && earliestNonHold.time - now < 250);
   const rightHandColor = rightIsStrumming
-    ? "#FF3864"
+    ? "var(--brand)"
     : missing
     ? "#f87171"
     : lastHitLane !== null
@@ -346,8 +346,8 @@ export default function GameStage({
           <stop offset="100%" stopColor="#18181b" />
         </linearGradient>
         <radialGradient id="stage-spot" cx="0.5" cy="0" r="0.9">
-          <stop offset="0%" stopColor="#FF3864" stopOpacity="0.1" />
-          <stop offset="100%" stopColor="#FF3864" stopOpacity="0" />
+          <stop offset="0%" stopColor="var(--brand)" stopOpacity="0.1" />
+          <stop offset="100%" stopColor="var(--brand)" stopOpacity="0" />
         </radialGradient>
         <linearGradient id="stage-floor" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#14141a" />
@@ -370,7 +370,7 @@ export default function GameStage({
         />
         <path d="M 380 180 L 380 255" stroke="#c9cbd3" strokeWidth="1.2" opacity="0.3" />
         <path d="M 520 180 L 520 255" stroke="#c9cbd3" strokeWidth="1.2" opacity="0.3" />
-        <rect x="420" y="200" width="60" height="10" rx="2" fill="#FF3864" opacity="0.85" />
+        <rect x="420" y="200" width="60" height="10" rx="2" fill="var(--brand)" opacity="0.85" />
         <text x="450" y="208" textAnchor="middle" fontSize="8" fontFamily="monospace" fontWeight="800" fill="#0E0E12">
           KEYSTRUM
         </text>
@@ -404,8 +404,8 @@ export default function GameStage({
           strokeWidth="2.8"
           strokeLinecap="round"
         />
-        <ellipse cx="418" cy="135" rx="7" ry="3.5" fill="#FF3864" opacity="0.18" />
-        <ellipse cx="482" cy="135" rx="7" ry="3.5" fill="#FF3864" opacity="0.18" />
+        <ellipse cx="418" cy="135" rx="7" ry="3.5" fill="var(--brand)" opacity="0.18" />
+        <ellipse cx="482" cy="135" rx="7" ry="3.5" fill="var(--brand)" opacity="0.18" />
       </g>
 
       <path
@@ -604,7 +604,7 @@ export default function GameStage({
                     height={KEY_H + 6 + (1 - intensity) * 20}
                     rx={5 + (1 - intensity) * 10}
                     fill="none"
-                    stroke={upcoming.kind === "strum" ? "#FF3864" : color}
+                    stroke={upcoming.kind === "strum" ? "var(--brand)" : color}
                     strokeWidth={upcoming.kind === "strum" ? 2.5 : 2}
                     opacity={Math.min(0.95, intensity * 1.2)}
                   />
@@ -674,7 +674,7 @@ export default function GameStage({
                         width={50}
                         height={16}
                         rx="3"
-                        fill="#FF3864"
+                        fill="var(--brand)"
                         opacity={Math.min(1, intensity * 1.4)}
                       />
                       <text
@@ -698,7 +698,7 @@ export default function GameStage({
                   cx={x + KEY_W / 2}
                   cy={y + KEY_H + 10}
                   r="3.5"
-                  fill="#FF3864"
+                  fill="var(--brand)"
                   style={{ animation: "kg-pulse 0.6s ease-in-out infinite", pointerEvents: "none" }}
                 />
               )}
@@ -798,11 +798,11 @@ export default function GameStage({
             y1={strumStart.y}
             x2={strumHandPos.x}
             y2={strumHandPos.y}
-            stroke="#FF3864"
+            stroke="var(--brand)"
             strokeWidth="3"
             strokeLinecap="round"
             opacity={0.5 * (1 - strumRollProgress * 0.2)}
-            style={{ filter: "drop-shadow(0 0 6px #FF3864)" }}
+            style={{ filter: "drop-shadow(0 0 6px var(--brand))" }}
           />
           {strumTrail.map((t, i) => (
             <circle
@@ -810,7 +810,7 @@ export default function GameStage({
               cx={t.x}
               cy={t.y}
               r={4 + t.opacity * 3}
-              fill="#FF3864"
+              fill="var(--brand)"
               opacity={t.opacity * 0.55}
             />
           ))}
@@ -898,7 +898,7 @@ export default function GameStage({
                 width={50}
                 height={22}
                 rx="5"
-                fill="#FF3864"
+                fill="var(--brand)"
                 opacity={Math.min(1, aimLineIntensity * 1.2)}
               />
               <text
@@ -948,7 +948,7 @@ export default function GameStage({
         strokeWidth="2"
         style={{
           filter: rightIsStrumming
-            ? "drop-shadow(0 0 16px #FF3864)"
+            ? "drop-shadow(0 0 16px var(--brand))"
             : tapPressLane !== null
             ? `drop-shadow(0 0 12px ${LANE_COLORS[tapPressLane]})`
             : lastHitLane !== null

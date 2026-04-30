@@ -57,7 +57,7 @@ function ShareContent() {
           <div className="text-center text-neutral-400">
             <h1 className="mb-2 text-2xl font-semibold text-neutral-100">Broken link</h1>
             <p className="mb-6 text-sm">This score link is malformed. Try the song list instead.</p>
-            <Link href="/play" className="inline-flex rounded-full bg-[#FF3864] px-5 py-2.5 text-sm font-semibold text-black">
+            <Link href="/play" className="inline-flex rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-black">
               Browse songs →
             </Link>
           </div>
@@ -80,7 +80,7 @@ function SharedCard({ payload }: { payload: SharePayload }) {
   return (
     <div className="flex flex-col gap-6 rounded-2xl border border-white/10 bg-white/[0.02] px-8 py-10 text-center">
       <div>
-        <div className="mb-2 text-xs font-mono uppercase tracking-widest text-[#FF3864]">Shared score</div>
+        <div className="mb-2 text-xs font-mono uppercase tracking-widest text-brand">Shared score</div>
         <div className="text-5xl font-black text-neutral-100">{payload.sc.toLocaleString()}</div>
         <div className="mt-1 text-sm text-neutral-400">{song?.title ?? payload.s}</div>
       </div>
@@ -95,7 +95,7 @@ function SharedCard({ payload }: { payload: SharePayload }) {
       <div className="flex flex-col gap-2">
         <Link
           href={song ? `/play/${song.id}` : "/play"}
-          className="w-full rounded-full bg-[#FF3864] py-3 text-sm font-bold text-black transition hover:bg-[#FF5680]"
+          className="w-full rounded-full bg-brand py-3 text-sm font-bold text-black transition hover:bg-brand-hover"
         >
           Beat this score →
         </Link>

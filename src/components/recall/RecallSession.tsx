@@ -141,17 +141,17 @@ export default function RecallSession() {
       aria-live="polite"
       aria-atomic="true"
       aria-label={`Active recall prompt: strum ${currentChord}${isDrill ? `, drill ${pending.currentIndex + 1} of ${total}` : ""}`}
-      className="fixed bottom-6 left-1/2 z-50 w-[min(420px,92vw)] -translate-x-1/2 rounded-2xl border border-[#FF3864]/40 bg-[#12121a]/95 p-4 shadow-2xl backdrop-blur-md"
+      className="fixed bottom-6 left-1/2 z-50 w-[min(420px,92vw)] -translate-x-1/2 rounded-2xl border border-brand/40 bg-[#12121a]/95 p-4 shadow-2xl backdrop-blur-md"
     >
       <div className="mb-1 flex items-baseline justify-between">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-[#FF3864]">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-brand">
           {stepLabel}
         </span>
         <span className="text-[10px] text-neutral-400">no peeking at the diagram</span>
       </div>
       <p className="mb-3 text-base text-neutral-100">
         Strum{" "}
-        <span className="rounded-md bg-[#FF3864]/15 px-2 py-0.5 font-mono font-semibold text-[#FF3864]">
+        <span className="rounded-md bg-brand/15 px-2 py-0.5 font-mono font-semibold text-brand">
           {currentChord}
         </span>
         {" "}without looking.

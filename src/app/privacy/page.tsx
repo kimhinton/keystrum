@@ -25,7 +25,7 @@ export default function PrivacyPage() {
 
       <main className="mx-auto max-w-2xl px-6 py-12">
         <div className="mb-8">
-          <span className="text-xs font-mono uppercase tracking-widest text-[#FF3864]">Privacy policy</span>
+          <span className="text-xs font-mono uppercase tracking-widest text-brand">Privacy policy</span>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
             We collect nothing.
           </h1>
@@ -101,11 +101,11 @@ export default function PrivacyPage() {
             <p>
               The full source code of keystrum is MIT-licensed and public. You can inspect
               every line responsible for handling your input at{" "}
-              <a href="https://github.com/kimhinton/keystrum" className="text-[#FF3864] underline" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/kimhinton/keystrum" className="text-brand underline" target="_blank" rel="noopener noreferrer">
                 github.com/kimhinton/keystrum
               </a>.
               If anything in this policy seems at odds with the code, the code is the ground truth — please{" "}
-              <a href="https://github.com/kimhinton/keystrum/issues" className="text-[#FF3864] underline" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/kimhinton/keystrum/issues" className="text-brand underline" target="_blank" rel="noopener noreferrer">
                 open an issue
               </a>.
             </p>
@@ -122,7 +122,7 @@ export default function PrivacyPage() {
           <Section title="Contact">
             <p>
               For privacy questions, open an issue at{" "}
-              <a href="https://github.com/kimhinton/keystrum/issues" className="text-[#FF3864] underline" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/kimhinton/keystrum/issues" className="text-brand underline" target="_blank" rel="noopener noreferrer">
                 github.com/kimhinton/keystrum/issues
               </a>.
             </p>
