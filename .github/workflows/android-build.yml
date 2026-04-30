@@ -46,8 +46,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Next.js static export
-        run: pnpm run build
+      - name: Build native app static export (Capacitor)
+        run: pnpm --filter @keystrum/native-app build
 
       - name: Verify Capacitor android platform exists
         run: |
