@@ -387,6 +387,59 @@ const risingSun = bars(72, 4, risingSunBars);
 const scarborough = bars(92, 3, scarboroughBars);
 const greensleeves = bars(100, 3, greensleevesBars);
 
+/* ──────────────────────────────────────────────────────────
+ * BRITPOP JAM — 87 BPM · 4/4 · 8 bars
+ * Chords: Em(0) G(1) Dm(2) C(3) — vi-I-v-IV in C major
+ * Difficulty: easy — 4-chord cycle, two strums per bar
+ *
+ * The Em-G-Dm-C progression underpins many 1990s Britpop songs,
+ * most famously Wonderwall (Oasis, 1995). Original key uses D and
+ * Cadd9; we substitute Dm to fit the keystrum 6-chord set.
+ * Chord progression itself is not copyrighted (musical structure).
+ * ────────────────────────────────────────────────────────── */
+const britpopBars: PatternStep[][] = [
+  // Bar 0 — Em: single strum to learn the chord
+  [{ beat: 0, lane: 0, kind: "strum" }],
+
+  // Bar 1 — G: two strums, on beat 0 and 2
+  [
+    { beat: 0, lane: 1, kind: "strum" },
+    { beat: 2, lane: 1, kind: "strum" },
+  ],
+
+  // Bar 2 — Dm
+  [
+    { beat: 0, lane: 2, kind: "strum" },
+    { beat: 2, lane: 2, kind: "strum" },
+  ],
+
+  // Bar 3 — C
+  [
+    { beat: 0, lane: 3, kind: "strum" },
+    { beat: 2, lane: 3, kind: "strum" },
+  ],
+
+  // Bars 4-7: full cycle again, two strums per bar
+  [
+    { beat: 0, lane: 0, kind: "strum" },
+    { beat: 2, lane: 0, kind: "strum" },
+  ],
+  [
+    { beat: 0, lane: 1, kind: "strum" },
+    { beat: 2, lane: 1, kind: "strum" },
+  ],
+  [
+    { beat: 0, lane: 2, kind: "strum" },
+    { beat: 2, lane: 2, kind: "strum" },
+  ],
+  [
+    { beat: 0, lane: 3, kind: "strum" },
+    { beat: 2, lane: 3, kind: "strum" },
+  ],
+];
+
+const britpop = bars(87, 4, britpopBars);
+
 export const SONGS: Song[] = [
   {
     id: "rising-sun",
@@ -420,6 +473,17 @@ export const SONGS: Song[] = [
     durationMs: greensleeves.endMs + 1500,
     chordMap: { 0: "Am", 1: "C", 2: "G", 3: "Em", 4: "Dm", 5: "F" },
     notes: greensleeves.notes,
+  },
+  {
+    id: "britpop-jam",
+    title: "Britpop 4-chord (Em-G-Dm-C)",
+    subtitle: "Em → G → Dm → C · 87 BPM · 4/4",
+    credit: "Em-G-Dm-C progression — used in many 1990s Britpop songs including Wonderwall (Oasis 1995). Chord progression is not copyrighted.",
+    difficulty: "easy",
+    bpm: 87,
+    durationMs: britpop.endMs + 1500,
+    chordMap: { 0: "Em", 1: "G", 2: "Dm", 3: "C", 4: "Am", 5: "F" },
+    notes: britpop.notes,
   },
 ];
 

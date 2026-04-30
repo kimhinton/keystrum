@@ -7,7 +7,7 @@ import { Logo } from "@/components/brand/Logo";
 export const metadata: Metadata = {
   title: "Folk song chord practice — browser chord trainer",
   description:
-    "Practice guitar chords on three folk songs — House of the Rising Sun, Scarborough Fair, Greensleeves. Browser-based chord trainer with strum · hold · mute across 6 lanes. Progressive difficulty, no guitar required, no install.",
+    "Practice guitar chords on four songs — House of the Rising Sun, Scarborough Fair, Greensleeves, and the Britpop Em-G-Dm-C progression (Wonderwall and friends). Browser-based chord trainer with strum · hold · mute across 6 lanes. Progressive difficulty, no guitar required, no install.",
   keywords: [
     "folk song chord practice",
     "chord practice browser",
@@ -17,6 +17,8 @@ export const metadata: Metadata = {
     "house of the rising sun chords practice",
     "scarborough fair chords practice",
     "greensleeves chords practice",
+    "wonderwall chords practice",
+    "em g dm c progression",
   ],
   alternates: { canonical: "/play" },
   openGraph: {
