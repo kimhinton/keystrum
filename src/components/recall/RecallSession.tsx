@@ -56,8 +56,10 @@ export default function RecallSession() {
   const setRecallSetting = useStatsStore((s) => s.setRecallSetting);
 
   const [resolved, setResolved] = useState<"correct" | "wrong" | null>(null);
-  const [now, setNow] = useState(Date.now());
-  const lastResolvedTotal = useRef(useStatsStore.getState().recallScore.total);
+  // useState init must be pure; Date.now() and store.getState() are impure
+  // (per react-hooks/purity). Both are seeded inside the mount effects below.
+  const [now, setNow] = useState(0);
+  const lastResolvedTotal = useRef(0);
 
   useEffect(() => {
     if (setting === "off") return;
@@ -83,6 +85,10 @@ export default function RecallSession() {
   }, [pending]);
 
   useEffect(() => {
+    // Seed lastResolvedTotal + now once we are on the client.
+    lastResolvedTotal.current = useStatsStore.getState().recallScore.total;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount-time clock seed; Date.now() can't run during render
+    setNow(Date.now());
     const unsub = useStatsStore.subscribe((s) => {
       if (s.recallScore.total <= lastResolvedTotal.current) return;
       lastResolvedTotal.current = s.recallScore.total;

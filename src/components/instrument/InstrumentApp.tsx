@@ -78,6 +78,7 @@ export default function InstrumentApp() {
   const [isApp, setIsApp] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia("(display-mode: standalone)");
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount-time PWA / standalone mode detection; needs window/navigator (only available client-side)
     setIsApp(mq.matches || (navigator as unknown as { standalone?: boolean }).standalone === true);
     const onChange = (e: MediaQueryListEvent) => setIsApp(e.matches);
     mq.addEventListener("change", onChange);
