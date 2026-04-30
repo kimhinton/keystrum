@@ -63,6 +63,10 @@ Open an issue with:
 - Browser + OS
 - Console errors if any
 
+## Response time
+
+Issues and pull requests usually get a first response within 24–48 hours (weekends excluded). keystrum has a single maintainer; expect a follow-up rather than instant resolution. If a bug blocks usage entirely, mention it in the issue title — those jump the queue.
+
 ## License
 
 By contributing, you agree that your contributions will be licensed under the MIT License.
