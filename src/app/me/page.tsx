@@ -79,6 +79,12 @@ export default function MePage() {
     [days, dayActivity],
   );
 
+  const todayKey = days[days.length - 1];
+  const yesterdayKey = days[days.length - 2];
+  const todayCount = dayActivity[todayKey] ?? 0;
+  const yesterdayCount = dayActivity[yesterdayKey] ?? 0;
+  const dailyDelta = todayCount - yesterdayCount;
+
   const heatBg = (count: number) => {
     if (count === 0) return "rgba(255,255,255,0.03)";
     const t = Math.min(1, count / maxDayCount);
@@ -242,6 +248,21 @@ export default function MePage() {
 
             <div className="mb-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
               <h2 className="mb-4 text-xs font-mono uppercase tracking-widest text-neutral-400">Last 30 days</h2>
+              <div className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs text-neutral-400">
+                <span>
+                  Today: <span className="font-mono tabular-nums text-neutral-200">{todayCount}</span>
+                </span>
+                <span aria-hidden="true">·</span>
+                <span>
+                  Yesterday: <span className="font-mono tabular-nums text-neutral-200">{yesterdayCount}</span>
+                </span>
+                {dailyDelta > 0 && (
+                  <span className="font-mono text-brand">+{dailyDelta} over yesterday</span>
+                )}
+                {dailyDelta === 0 && yesterdayCount > 0 && (
+                  <span>steady</span>
+                )}
+              </div>
               <div className="flex flex-wrap gap-1">
                 {days.map((day) => {
                   const count = dayActivity[day] ?? 0;
