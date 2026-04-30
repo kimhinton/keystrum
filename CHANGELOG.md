@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Fourth practice song "Britpop 4-chord (Em-G-Dm-C)" on `/play/britpop-jam` (issue #14, v0.2.0). 8 bars at 87 BPM, the chord cycle popularized by Wonderwall and other 1990s Britpop. D substituted with Dm to fit the keystrum 6-chord set. Title generalized to avoid trademark issues; credit + /play metadata still reference Wonderwall for search (commit `3e6504b`)
 - Opt-in metronome in practice mode (issue #19, v0.2.0 milestone) — toggle from the Ready Up screen, 4-on-the-floor click synchronized to `song.bpm`. Downbeat is the 1200 Hz accent click, other beats are the 800 Hz tick. Persisted in `keystrum-game` (commit `84411ed`)
 - 25-minute soft session-break nudge (`SessionBreakNudge.tsx`) — appears once a tab has been open ~25 min, dismissible, postpones the next reminder by another 25 min, mounted in `RootLayout` so it applies to all routes (commit `7bb0e68`)
 - *Today / Yesterday* delta line on `/me` "Last 30 days" — `+Δ over yesterday` shown only when delta is positive; negative delta is intentionally **not** framed as a loss (commit `1006323`)
@@ -25,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- PWA install CTA on the mobile fallback modal is now gated on the user having played at least one chord (`firstAudioAt !== null`). Pre-chord copy nudges first try, post-chord shows the install button + iOS A2HS tip (issue #21, v0.2.0 milestone, commit `688168d`)
+- KeyboardGuitar key buttons now enforce a 44 CSS-px minimum tap target height on viewports < 640 px (`min-h-11 sm:min-h-0`), satisfying Apple HIG / WCAG 2.5.5 Target Size for vertical strikes. Width on iPhone SE / 375 px stays narrow because 13 columns must fit; full layout fix is a follow-up (issue #15 partial, commit `9bd33f3`)
 - WCAG 2.1 A/AA: `viewport` no longer blocks pinch-zoom; `text-neutral-500/600` lightened to `text-neutral-400`; `opacity-60/80` removed where it dragged contrast under 4.5:1; step-number tracking opacity raised. axe-core CI check now runs weekly via `cron` and on `workflow_dispatch` — 12 violations → 0 across all six pages (commits `4be4683`, `a63c4d6`, `8b7b6db`, `eab6057`, `94823de`, `1cc8ad0`, `86c525f`, `a5c32ae`, `bf8086e`)
 - ARIA additions: `RecallSession` popup `role=status` `aria-live=polite`, `FinishedScreen` `role=region` with `aria-label`, `KeyboardGuitar` `role=application` — covers dynamic content the static axe-core checker can't see (commit `24f15b4`)
 - `eslint-config-next 16.2.4` strict-purity restored: `InstrumentApp` PWA detection moved out of render with one disable comment; `RecallSession` impure `useState` / `useRef` initializers made pure (commit `6295be4`)
