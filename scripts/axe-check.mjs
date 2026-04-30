@@ -35,7 +35,9 @@ const summary = [];
 
 for (const path of PATHS) {
   const url = `${BASE}${path}`;
-  const page = await browser.newPage();
+  // axe-core/playwright requires a context-owned page (not browser.newPage()).
+  const context = await browser.newContext();
+  const page = await context.newPage();
   try {
     await page.goto(url, { waitUntil: "networkidle", timeout: 30_000 });
     const results = await new AxeBuilder({ page })
@@ -59,7 +61,7 @@ for (const path of PATHS) {
     console.error(`ERR ${url}: ${err.message}`);
     totalViolations += 1;
   } finally {
-    await page.close();
+    await context.close();
   }
 }
 
