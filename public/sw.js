@@ -1,10 +1,15 @@
 // keystrum service worker — offline-first for PWA
-const CACHE_NAME = "keystrum-v1";
+// Bump CACHE_NAME on every deploy that adds/removes a precached route or
+// changes critical asset hashes — the activate step purges old caches.
+const CACHE_NAME = "keystrum-v2";
 const PRECACHE_URLS = [
   "/",
   "/instrument",
   "/play",
   "/chords",
+  "/me",
+  "/about",
+  "/privacy",
   "/manifest.webmanifest",
 ];
 
