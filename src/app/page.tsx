@@ -144,7 +144,7 @@ export default function HomePage() {
           <div className="grid gap-8 md:grid-cols-3">
             {HOW.map((h, i) => (
               <div key={h.title} className="relative">
-                <div className="mb-3 font-mono text-5xl font-bold text-[#FF3864]/30">{String(i + 1).padStart(2, "0")}</div>
+                <div className="mb-3 font-mono text-5xl font-bold text-[#FF3864]/70">{String(i + 1).padStart(2, "0")}</div>
                 <h3 className="mb-2 text-base font-semibold">{h.title}</h3>
                 <p className="text-sm text-neutral-400">{h.body}</p>
               </div>
