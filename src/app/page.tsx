@@ -1,5 +1,5 @@
 import Link from "next/link";
-import KeyboardGuitar from "@/components/keyboard-guitar/KeyboardGuitar";
+import KeyboardGuitar from "@/components/keyboard-guitar/KeyboardGuitarLoader";
 import RecordCTA from "@/components/home/RecordCTA";
 import MobileFallback from "@/components/home/MobileFallback";
 import NativeRedirect from "@/components/native/NativeRedirect";

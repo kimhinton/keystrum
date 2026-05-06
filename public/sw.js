@@ -1,7 +1,13 @@
-// keystrum service worker — offline-first for PWA
+// keystrum service worker — network-first for HTML, cache-first for assets
 // Bump CACHE_NAME on every deploy that adds/removes a precached route or
 // changes critical asset hashes — the activate step purges old caches.
-const CACHE_NAME = "keystrum-v2";
+//
+// Strategy split (2026-05-06):
+// - HTML / navigation: network-first (always serve fresh; cache as offline
+//   fallback only). Prevents stale-content user-signal loss after deploys.
+// - Static assets (_next/, /icon, /apple-icon, fonts, images): stale-while-
+//   revalidate (instant from cache, refresh in background).
+const CACHE_NAME = "keystrum-v3";
 const PRECACHE_URLS = [
   "/",
   "/instrument",
@@ -38,9 +44,36 @@ self.addEventListener("fetch", (event) => {
   // Skip cross-origin requests (fonts CDN, analytics, etc.)
   if (!request.url.startsWith(self.location.origin)) return;
 
+  const acceptHeader = request.headers.get("accept") || "";
+  const isHtml =
+    request.mode === "navigate" ||
+    acceptHeader.includes("text/html");
+
+  if (isHtml) {
+    // Network-first: always try fresh HTML. Falls back to cache only when
+    // offline. Avoids the stale-content trap that cost ranking signals
+    // when users land on outdated pages from search results.
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
+          return response;
+        })
+        .catch(() =>
+          caches.match(request).then((cached) =>
+            cached ?? caches.match("/") // ultimate offline fallback
+          )
+        )
+    );
+    return;
+  }
+
+  // Static assets (_next/, /icon, fonts, JSON, etc.): stale-while-revalidate
   event.respondWith(
     caches.match(request).then((cached) => {
-      // Stale-while-revalidate: serve cached, fetch fresh in background
       const fetchPromise = fetch(request)
         .then((response) => {
           if (response.ok) {
@@ -49,7 +82,7 @@ self.addEventListener("fetch", (event) => {
           }
           return response;
         })
-        .catch(() => cached); // offline fallback to cache
+        .catch(() => cached);
 
       return cached || fetchPromise;
     })
