@@ -20,6 +20,14 @@
   Content-Type: image/png
   Cache-Control: public, max-age=86400, must-revalidate
 
+/chords/*/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/play/*/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=86400, must-revalidate
+
 # Security headers for the whole site.
 /*
   X-Content-Type-Options: nosniff
