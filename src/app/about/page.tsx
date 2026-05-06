@@ -1,6 +1,27 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://keystrum.app";
+
+const aboutJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": `${SITE_URL}/about#aboutpage`,
+  name: "About keystrum",
+  description:
+    "What keystrum is, how Karplus-Strong synthesis works, who it's for, and why a QWERTY keyboard is mapped to guitar strings.",
+  url: `${SITE_URL}/about`,
+  mainEntity: { "@id": `${SITE_URL}/#organization` },
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  breadcrumb: {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "keystrum", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "About", item: `${SITE_URL}/about` },
+    ],
+  },
+};
+
 export const metadata = {
   title: "About keystrum — why a QWERTY guitar, and how Karplus-Strong works",
   description: "Why keystrum exists: practice guitar chords without a guitar. How the QWERTY-to-guitar mapping works, why Karplus-Strong physical modeling synthesis produces a real plucked-string sound in the browser, and what's next on the roadmap.",
@@ -19,6 +40,10 @@ const VERSION = "0.1.0";
 export default function AboutPage() {
   return (
     <div className="min-h-dvh bg-[#0E0E12] text-neutral-100" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }}
+      />
       <header className="flex items-center justify-between border-b border-white/5 px-5 py-4">
         <Link href="/instrument" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
           <Logo size={20} className="shrink-0" />
