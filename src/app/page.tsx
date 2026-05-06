@@ -78,13 +78,13 @@ export default function HomePage() {
           <div className="flex flex-wrap gap-3">
             <a
               href="#instrument"
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-black transition hover:bg-brand-hover"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-black transition hover:bg-brand-hover"
             >
               Start playing →
             </a>
             <a
               href="#how"
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-5 py-3 text-sm font-medium text-neutral-300 transition hover:border-white/20 hover:bg-white/[0.05]"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-5 py-3 text-sm font-medium text-neutral-300 transition hover:border-white/20 hover:bg-white/[0.05]"
             >
               See the mapping
             </a>
@@ -124,7 +124,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/instrument"
-            className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-medium text-neutral-300 transition hover:border-brand/40 hover:text-white"
+            className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-medium text-neutral-300 transition hover:border-brand/40 hover:text-white"
           >
             Open full instrument with recording &amp; metronome
             <span className="text-brand">→</span>
@@ -249,7 +249,7 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-4xl px-6 py-24 text-center">
           <h2 className="mb-5 text-4xl font-semibold tracking-tight sm:text-5xl">Stop reading. Strum.</h2>
           <p className="mx-auto mb-8 max-w-lg text-neutral-400">Scroll back up. Hit <span className="font-mono text-white">2</span>, <span className="font-mono text-white">w</span>, <span className="font-mono text-white">s</span>, <span className="font-mono text-white">x</span> — one after the other, fast.</p>
-          <a href="#instrument" className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-black transition hover:bg-brand-hover">
+          <a href="#instrument" className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-black transition hover:bg-brand-hover">
             ↑ Back to the instrument
           </a>
         </div>
