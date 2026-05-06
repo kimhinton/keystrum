@@ -153,9 +153,25 @@ export default async function ChordPage(
       </nav>
 
       <main className="mx-auto max-w-3xl px-6 py-16">
-        <Link href="/chords" className="text-xs text-neutral-400 hover:text-neutral-300">
-          ← All chords
-        </Link>
+        <nav aria-label="Breadcrumb">
+          <ol className="flex flex-wrap items-center gap-x-2 text-xs text-neutral-400">
+            <li>
+              <Link href="/" className="hover:text-neutral-300">
+                keystrum
+              </Link>
+            </li>
+            <li aria-hidden="true" className="text-neutral-600">›</li>
+            <li>
+              <Link href="/chords" className="hover:text-neutral-300">
+                Chord dictionary
+              </Link>
+            </li>
+            <li aria-hidden="true" className="text-neutral-600">›</li>
+            <li aria-current="page" className="text-neutral-300">
+              {c.name} chord
+            </li>
+          </ol>
+        </nav>
         <h1 className="mt-3 flex items-baseline gap-3 text-5xl font-semibold tracking-tight sm:text-6xl">
           <span style={{ color: c.color }}>{c.name}</span>
           <span aria-hidden="true">{" "}</span>

@@ -110,7 +110,26 @@ export default async function PlaySong(
           <Link href="/play" className="text-xs text-neutral-400 hover:text-white">← Exit</Link>
         </div>
       </nav>
-      <main className="flex min-h-[calc(100vh-49px)] items-center justify-center px-4 py-6">
+      <nav aria-label="Breadcrumb" className="border-b border-white/5 bg-[#0E0E12]/60 px-6 py-2">
+        <ol className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-2 text-xs text-neutral-400">
+          <li>
+            <Link href="/" className="hover:text-neutral-300">
+              keystrum
+            </Link>
+          </li>
+          <li aria-hidden="true" className="text-neutral-600">›</li>
+          <li>
+            <Link href="/play" className="hover:text-neutral-300">
+              Practice
+            </Link>
+          </li>
+          <li aria-hidden="true" className="text-neutral-600">›</li>
+          <li aria-current="page" className="text-neutral-300">
+            {song.title}
+          </li>
+        </ol>
+      </nav>
+      <main className="flex min-h-[calc(100vh-49px-32px)] items-center justify-center px-4 py-6">
         <GameRunner song={song} />
       </main>
 
