@@ -1,0 +1,28 @@
+# Cloudflare Pages headers config.
+# Forces correct Content-Type for Next.js metadata routes that generate
+# images at runtime — without this, Cloudflare Pages serves them as
+# application/octet-stream, breaking SERP thumbnails, OG previews,
+# and Twitter cards.
+
+/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/twitter-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/icon
+  Content-Type: image/png
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/apple-icon
+  Content-Type: image/png
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# Security headers for the whole site.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
