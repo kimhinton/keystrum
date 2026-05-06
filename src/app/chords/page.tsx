@@ -29,8 +29,50 @@ export const metadata: Metadata = {
 
 export default function ChordIndex() {
   const chords = buildChordInfo();
+
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Guitar chord dictionary — Am, C, Em, G, Dm, F",
+    description: "The 6 open-position chords diatonic to C major / A minor, with notes, intervals, voicings, and QWERTY keyboard mappings.",
+    numberOfItems: chords.length,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
+    itemListElement: chords.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `https://keystrum.app/chords/${getChordSlug(c.name)}`,
+      name: `${c.name} guitar chord (${c.label})`,
+      description: `${c.label} — notes ${c.notes.join(", ")}. ${c.voicings.length} voicings.`,
+    })),
+  };
+
+  const collectionPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://keystrum.app/chords#collection",
+    name: "Guitar chord dictionary",
+    description: "Six guitar chords (Am, C, Em, G, Dm, F) with notes, intervals, multiple voicings (open, barre, power chord, 7th, add9), and QWERTY keyboard mappings.",
+    url: "https://keystrum.app/chords",
+    isPartOf: { "@id": "https://keystrum.app/#website" },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "keystrum", item: "https://keystrum.app" },
+        { "@type": "ListItem", position: 2, name: "Chord dictionary", item: "https://keystrum.app/chords" },
+      ],
+    },
+  };
+
   return (
     <div className="min-h-screen bg-[#0E0E12] text-neutral-100">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageJsonLd) }}
+      />
       <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-white/5 bg-[#0E0E12]/80 px-6 py-4 backdrop-blur-xl">
         <Link href="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
           <Logo size={20} className="shrink-0" />
@@ -49,7 +91,7 @@ export default function ChordIndex() {
           <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">Six columns, six chords.</h1>
           <p className="mt-3 text-neutral-400">
             keystrum ships with six open-position chord presets — the scaffolding for most pop music.
-            Each column on your keyboard plays one chord. Click any card for notes, intervals, and songs.
+            Each column on your keyboard plays one chord. Click any card for notes, intervals, voicings, and songs.
           </p>
         </div>
 
