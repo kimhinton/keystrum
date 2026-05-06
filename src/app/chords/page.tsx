@@ -128,11 +128,29 @@ export default function ChordIndex() {
                 ))}
               </div>
               <p className="text-sm text-neutral-400">{c.feel}</p>
+              <p className="text-xs text-neutral-500">
+                {c.voicings.length} voicings · {c.usedIn.length > 0 && `used in ${c.usedIn[0].split(" — ")[0]}`}
+              </p>
               <span className="mt-auto text-xs text-brand transition group-hover:text-brand-hover">
                 Open →
               </span>
             </Link>
           ))}
+        </div>
+
+        <div className="mt-16 max-w-3xl rounded-xl border border-white/5 bg-white/[0.015] p-6">
+          <h2 className="mb-3 text-base font-semibold text-neutral-200">About these six chords</h2>
+          <div className="space-y-3 text-sm leading-relaxed text-neutral-400">
+            <p>
+              These six chords — Am, C, Em, G, Dm, F — are the core of Western pop, folk, and rock harmony. They are diatonic to the key of C major (and its relative minor, A minor), meaning every chord shares the same key signature with no sharps or flats. Together they form the harmonic palette of thousands of songs, from Beatles standards to modern indie folk.
+            </p>
+            <p>
+              Each chord page on keystrum includes the notes and intervals, multiple voicings (open position, barre, power chord, 7th, add9 variations), QWERTY keyboard mapping for browser practice, common mistakes, music-theory function, and a transition difficulty matrix to other chords. Practice without a guitar — your laptop keyboard becomes the instrument.
+            </p>
+            <p>
+              The most common chord progressions in pop music use these same six chords: <span className="text-neutral-300">I&ndash;V&ndash;vi&ndash;IV (C&ndash;G&ndash;Am&ndash;F)</span>, <span className="text-neutral-300">vi&ndash;IV&ndash;I&ndash;V (Am&ndash;F&ndash;C&ndash;G)</span>, and the folk standard <span className="text-neutral-300">i&ndash;VII&ndash;VI&ndash;VII (Am&ndash;G&ndash;F&ndash;G)</span>. Master these six chords and you can play hundreds of songs by ear.
+            </p>
+          </div>
         </div>
       </section>
 

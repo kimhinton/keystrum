@@ -23,6 +23,7 @@ export interface ChordInfo extends ChordPreset {
   notes: string[];
   intervals: string[];
   feel: string;
+  seoSummary: string;
   usedIn: string[];
   siblings: string[];
   commonMistakes: string[];
@@ -74,6 +75,7 @@ const INTERVAL_NAMES: Record<number, string> = {
 
 interface ChordMeta {
   feel: string;
+  seoSummary: string;
   usedIn: string[];
   commonMistakes: string[];
   practiceTip: string;
@@ -98,6 +100,7 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "C major (shares the same key signature, no sharps or flats)",
     },
     transitionDifficulty: { C: "easy", Em: "medium", G: "medium", Dm: "easy", F: "hard" },
+    seoSummary: "The A minor (Am) chord is the most-used minor chord in Western pop music, played with three fingers across the first three frets — index on B string fret 1, middle and ring on D and G strings fret 2. Its dark, reflective color anchors thousands of ballads including House of the Rising Sun, Stairway to Heaven, and Zombie. Am is the i chord in A minor and the vi chord in C major — the bridge between minor and major key centers.",
     voicings: [
       { name: "Open position", fingering: "x 0 2 2 1 0", difficulty: "beginner", description: "The classic open Am. Index on B string fret 1, middle on D string fret 2, ring on G string fret 2." },
       { name: "Am7", fingering: "x 0 2 0 1 0", difficulty: "beginner", description: "Lift the ring finger off G string — instant Am7. Mellower, jazzier, perfect for Beatles-era pop." },
@@ -121,6 +124,7 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "A minor (relative minor, same key signature)",
     },
     transitionDifficulty: { Am: "easy", Em: "medium", G: "easy", Dm: "medium", F: "medium" },
+    seoSummary: "The C major chord is the first chord most guitarists learn — bright, neutral, and immediate. Played with three fingers across the second and third frets (ring on A string fret 3, middle on D string fret 2, index on B string fret 1), it rings out across five strings and forms the I chord in C major. Used in countless songs from Let It Be to No Woman No Cry, C major is the gateway to most popular Western harmonic progressions.",
     voicings: [
       { name: "Open position", fingering: "x 3 2 0 1 0", difficulty: "beginner", description: "The first chord most guitarists learn. Ring on A string fret 3, middle on D string fret 2, index on B string fret 1." },
       { name: "Cmaj7", fingering: "x 3 2 0 0 0", difficulty: "beginner", description: "Lift the index finger off the B string. Dreamy, floating quality used in bossa nova and modern folk." },
@@ -144,6 +148,7 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "G major (relative major)",
     },
     transitionDifficulty: { Am: "medium", C: "medium", G: "easy", Dm: "medium", F: "hard" },
+    seoSummary: "The E minor (Em) chord is the easiest open chord on guitar — just two fingers on strings 5 and 4 at the second fret, with all other strings ringing open. Its brooding, modal color makes Em the go-to warmup chord and the foundation of countless rock and folk songs including Wonderwall, Zombie, and Losing My Religion. Em functions as the iii chord in C major, the vi in G major, and the i (tonic) of E minor key.",
     voicings: [
       { name: "Open position", fingering: "0 2 2 0 0 0", difficulty: "beginner", description: "The easiest chord on guitar. Just two fingers — middle and ring on A and D strings, fret 2." },
       { name: "Em7", fingering: "0 2 2 0 3 0", difficulty: "beginner", description: "Add pinky on B string fret 3. Smoother, more melodic — frequent in Cranberries and Coldplay." },
@@ -167,6 +172,7 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "E minor (relative minor)",
     },
     transitionDifficulty: { Am: "medium", C: "easy", Em: "easy", Dm: "hard", F: "hard" },
+    seoSummary: "The G major chord is the workhorse of folk and country guitar — confident, full-bodied, and rural. Played with three or four fingers spanning all six strings (middle on low E fret 3, index on A string fret 2, ring or pinky on high E fret 3), it provides the strongest low-end foundation among open chords. G major is the home key of songs like Knockin' on Heaven's Door, Wonderwall, and Sweet Caroline, and the V chord pulling toward C in the most common Western progression.",
     voicings: [
       { name: "Open position (3-finger)", fingering: "3 2 0 0 0 3", difficulty: "beginner", description: "Standard open G. Middle on low E fret 3, index on A string fret 2, ring on high E fret 3." },
       { name: "Open position (4-finger)", fingering: "3 2 0 0 3 3", difficulty: "beginner", description: "Adds pinky on B string fret 3. Bigger ring, easier transition to Cadd9. The 'modern' G voicing." },
@@ -190,6 +196,7 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "F major (relative major)",
     },
     transitionDifficulty: { Am: "easy", C: "medium", Em: "medium", G: "hard", F: "medium" },
+    seoSummary: "The D minor (Dm) chord is the saddest of the open chords — Spinal Tap's running joke about it captures the feeling exactly. Played on the top four strings only with three fingers (index on high E fret 1, middle on G string fret 2, ring on B string fret 3), Dm sits between Am and F in the i-iv-V minor cadence. It powers the emotional core of folk standards like Scarborough Fair and modern alt-rock anthems like Californication.",
     voicings: [
       { name: "Open position", fingering: "x x 0 2 3 1", difficulty: "beginner", description: "The classic open Dm. Index on high E fret 1, middle on G string fret 2, ring on B string fret 3." },
       { name: "Dm7", fingering: "x x 0 2 1 1", difficulty: "intermediate", description: "Mini-barre with index across B and high E at fret 1. Jazzy, mellow — common in Stevie Wonder and bossa." },
@@ -213,6 +220,7 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "D minor (relative minor)",
     },
     transitionDifficulty: { Am: "hard", C: "medium", Em: "hard", G: "hard", Dm: "medium" },
+    seoSummary: "The F major chord is the wall most beginning guitarists hit. The full barre version requires the index finger to press all six strings at fret 1 while the other fingers form an E shape above — but the mini-F (top four strings only, no barre) covers 90% of pop songs and is far more accessible for beginners. F major is the IV chord in C major and the I chord in F major key, used in Beatles standards Let It Be and Hey Jude.",
     voicings: [
       { name: "Mini-F (top 4 strings)", fingering: "x x 3 2 1 1", difficulty: "beginner", description: "Index mini-barres B and high E at fret 1, middle on G fret 2, ring on D fret 3. The starter F — start here, always." },
       { name: "Fmaj7", fingering: "x x 3 2 1 0", difficulty: "beginner", description: "Drop the high E to open. Floating, bright, used in jazz standards and bossa nova." },
@@ -238,6 +246,7 @@ export function buildChordInfo(): ChordInfo[] {
       notes,
       intervals,
       feel: meta?.feel ?? "",
+      seoSummary: meta?.seoSummary ?? "",
       usedIn: meta?.usedIn ?? [],
       commonMistakes: meta?.commonMistakes ?? [],
       practiceTip: meta?.practiceTip ?? "",

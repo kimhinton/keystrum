@@ -162,6 +162,12 @@ export default async function ChordPage(
         </h1>
         <p className="mt-3 max-w-prose text-neutral-400 leading-relaxed">{c.feel}</p>
 
+        {c.seoSummary && (
+          <p className="mt-4 max-w-prose text-sm text-neutral-300 leading-relaxed">
+            {c.seoSummary}
+          </p>
+        )}
+
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl border border-white/5 bg-white/[0.02] p-5">
             <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-400">Notes</h2>
