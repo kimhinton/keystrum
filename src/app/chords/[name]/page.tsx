@@ -158,7 +158,7 @@ export default async function ChordPage(
         </Link>
         <h1 className="mt-3 flex items-baseline gap-3 text-5xl font-semibold tracking-tight sm:text-6xl">
           <span style={{ color: c.color }}>{c.name}</span>
-          <span className="text-xl text-neutral-400">{c.label}</span>
+          <span className="text-xl text-neutral-400">{c.label} guitar chord</span>
         </h1>
         <p className="mt-3 max-w-prose text-neutral-400 leading-relaxed">{c.feel}</p>
 

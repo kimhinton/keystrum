@@ -17,7 +17,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://keystrum.app";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "keystrum — Strum your keyboard",
+    default: "Virtual Guitar Online — Practice Chords on Your Keyboard | keystrum",
     template: "%s · keystrum",
   },
   description:
