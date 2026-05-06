@@ -1,0 +1,56 @@
+name: IndexNow ping
+
+# Pings IndexNow (Bing, Yandex, Naver, Seznam, Yep) after each push to
+# main so search engines re-crawl changed URLs within 24h instead of
+# waiting for the natural crawl cadence (4-12 weeks for new domains).
+#
+# Google does not consume IndexNow yet, but Bing's index drives "ihub"
+# typo-correction issues this site already hits — so getting Bing
+# fresh fast is a real lever for brand "keystrum" recognition.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/app/**"
+      - "src/components/**"
+      - "src/lib/**"
+      - "packages/**"
+      - "public/sitemap.xml"
+      - "public/_redirects"
+      - "public/_headers"
+
+  # Manual trigger for index sweeps after big content changes.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping-indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Cloudflare Pages deploy to settle
+        run: sleep 90
+
+      - name: Build URL list from sitemap
+        id: urls
+        run: |
+          SITEMAP=$(curl -fsS "https://keystrum.app/sitemap.xml")
+          # Extract <loc> entries, JSON-escape, comma-join.
+          URLS=$(echo "$SITEMAP" | grep -oE '<loc>[^<]+</loc>' \
+            | sed -E 's|<loc>(.+)</loc>|"\1"|' \
+            | paste -sd ',' -)
+          echo "json_urls=$URLS" >> "$GITHUB_OUTPUT"
+
+      - name: Ping IndexNow API
+        run: |
+          curl -fsS -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+              "host": "keystrum.app",
+              "key": "b3e8f9a4c2d6e5b1a9c8f7d4e3b2a1c0",
+              "keyLocation": "https://keystrum.app/keystrum-indexnow-b3e8f9a4c2d6e5b1a9c8f7d4e3b2a1c0.txt",
+              "urlList": [${{ steps.urls.outputs.json_urls }}]
+            }' \
+            -w "\nHTTP %{http_code}\n"
