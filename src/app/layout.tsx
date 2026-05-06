@@ -129,9 +129,40 @@ const jsonLd = {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
       name: "keystrum",
+      alternateName: ["keystrum.app", "Keystrum app", "keystrum virtual guitar"],
       url: SITE_URL,
       logo: `${SITE_URL}/apple-icon`,
-      sameAs: ["https://github.com/kimhinton/keystrum"],
+      description:
+        "keystrum is a free, open-source browser-based virtual guitar instrument. It maps a QWERTY keyboard to a four-string guitar — four physical keyboard rows become four strings, six columns become six diatonic chord presets (Am, C, Em, G, Dm, F). Real strum detection (90ms timing window) and Karplus-Strong physical-modeling synthesis run live in Web Audio. Targeted at musicians who want to practice guitar chord progressions without a physical instrument.",
+      knowsAbout: [
+        "guitar chords",
+        "Karplus-Strong synthesis",
+        "Web Audio API",
+        "QWERTY keyboard instrument",
+        "music education",
+        "chord progression practice",
+        "virtual guitar simulation",
+        "physical modeling synthesis",
+      ],
+      areaServed: "Worldwide",
+      sameAs: [
+        "https://github.com/kimhinton/keystrum",
+        "https://keystrum.app",
+      ],
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": `${SITE_URL}/#defined-term`,
+      name: "keystrum",
+      alternateName: ["keystrum.app"],
+      description:
+        "keystrum (noun): a browser-based virtual guitar that turns a QWERTY computer keyboard into a strum-detecting four-string guitar. Built with Web Audio API and Karplus-Strong physical-modeling synthesis. Free, open-source, no install, no account. Distinct from the music album 'Keystrum' by Chuck Arizona.",
+      termCode: "keystrum.app",
+      url: SITE_URL,
+      inDefinedTermSet: {
+        "@type": "DefinedTermSet",
+        name: "Browser music instruments",
+      },
     },
     {
       "@type": "SoftwareApplication",
