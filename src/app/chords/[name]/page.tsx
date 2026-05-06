@@ -160,13 +160,13 @@ export default async function ChordPage(
                 keystrum
               </Link>
             </li>
-            <li aria-hidden="true" className="text-neutral-600">›</li>
+            <li aria-hidden="true" className="text-neutral-500">›</li>
             <li>
               <Link href="/chords" className="hover:text-neutral-300">
                 Chord dictionary
               </Link>
             </li>
-            <li aria-hidden="true" className="text-neutral-600">›</li>
+            <li aria-hidden="true" className="text-neutral-500">›</li>
             <li aria-current="page" className="text-neutral-300">
               {c.name} chord
             </li>

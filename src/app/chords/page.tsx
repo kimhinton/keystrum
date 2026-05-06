@@ -128,7 +128,7 @@ export default function ChordIndex() {
                 ))}
               </div>
               <p className="text-sm text-neutral-400">{c.feel}</p>
-              <p className="text-xs text-neutral-500">
+              <p className="text-xs text-neutral-400">
                 {c.voicings.length} voicings · {c.usedIn.length > 0 && `used in ${c.usedIn[0].split(" — ")[0]}`}
               </p>
               <span className="mt-auto text-xs text-brand transition group-hover:text-brand-hover">

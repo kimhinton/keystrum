@@ -117,13 +117,13 @@ export default async function PlaySong(
               keystrum
             </Link>
           </li>
-          <li aria-hidden="true" className="text-neutral-600">›</li>
+          <li aria-hidden="true" className="text-neutral-500">›</li>
           <li>
             <Link href="/play" className="hover:text-neutral-300">
               Practice
             </Link>
           </li>
-          <li aria-hidden="true" className="text-neutral-600">›</li>
+          <li aria-hidden="true" className="text-neutral-500">›</li>
           <li aria-current="page" className="text-neutral-300">
             {song.title}
           </li>
