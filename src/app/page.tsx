@@ -47,7 +47,7 @@ export default function HomePage() {
           <Link href="/instrument" className="transition hover:text-white">Instrument</Link>
           <Link href="/me" className="transition hover:text-white">Stats</Link>
           <a href="#faq" className="transition hover:text-white">FAQ</a>
-          <a href="#instrument" className="rounded-full bg-brand px-4 py-1.5 text-xs font-semibold text-black transition hover:bg-brand-hover">
+          <a href="#instrument" className="inline-flex min-h-[36px] items-center rounded-full bg-brand px-4 py-2 text-xs font-semibold text-black transition hover:bg-brand-hover">
             Start playing →
           </a>
         </div>
@@ -124,7 +124,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/instrument"
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-medium text-neutral-300 transition hover:border-brand/40 hover:text-white"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-medium text-neutral-300 transition hover:border-brand/40 hover:text-white"
           >
             Open full instrument with recording &amp; metronome
             <span className="text-brand">→</span>
