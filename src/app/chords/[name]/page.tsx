@@ -234,7 +234,7 @@ export default async function ChordPage(
               {c.voicings.length} ways to play {c.name}
             </h2>
             <p className="mb-5 text-xs text-neutral-400">
-              Standard 6-string guitar fingerings — {`x = mute, 0 = open, numbers = fret`}. Use these to expand beyond the default open voicing on your real guitar; keystrum's keyboard mapping covers the open position.
+              Standard 6-string guitar fingerings — {`x = mute, 0 = open, numbers = fret`}. Use these to expand beyond the default open voicing on your real guitar; keystrum&apos;s keyboard mapping covers the open position.
             </p>
             <ul className="flex flex-col gap-4">
               {c.voicings.map((v, i) => {
