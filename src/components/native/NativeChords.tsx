@@ -65,13 +65,13 @@ export default function NativeChords() {
           <Logo size={20} className="shrink-0" />
           <h1 className="text-lg font-semibold tracking-tight">Chords</h1>
         </div>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
+        <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">
           tap to hear
         </span>
       </header>
 
       <main className="p-3">
-        <p className="mb-3 px-1 text-[11px] text-neutral-400">
+        <p className="mb-3 px-1 text-xs text-neutral-400">
           Tap a chord to hear it · hold to read its feel
         </p>
         <ul className="grid grid-cols-2 gap-2.5">
@@ -108,7 +108,7 @@ export default function NativeChords() {
                       col {c.columnIndex + 1}
                     </span>
                   </div>
-                  <span className="text-[11px] text-neutral-400">{c.label}</span>
+                  <span className="text-xs text-neutral-400">{c.label}</span>
 
                   <div className="flex flex-wrap gap-1 pt-1">
                     {c.notes.map((n, i) => (
@@ -146,7 +146,7 @@ export default function NativeChords() {
                     >
                       {c.name}
                     </span>
-                    <span className="text-[11px] leading-relaxed text-neutral-200">
+                    <span className="text-xs leading-relaxed text-neutral-200">
                       {c.feel}
                     </span>
                     <span className="mt-3 font-mono text-[9px] uppercase tracking-widest text-neutral-400">

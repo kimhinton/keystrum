@@ -101,7 +101,7 @@ export default async function PlaySong(
               <Link
                 key={chord}
                 href={`/chords/${chord}`}
-                className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[10px] font-mono text-neutral-400 transition hover:border-white/20 hover:text-white"
+                className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-xs font-mono text-neutral-400 transition hover:border-white/20 hover:text-white"
               >
                 {chord}
               </Link>

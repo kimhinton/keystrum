@@ -80,7 +80,7 @@ export default function NativeTabBar() {
               aria-current={active ? "page" : undefined}
             >
               {tab.icon(active)}
-              <span className="text-[10px] font-mono uppercase tracking-widest">{tab.label}</span>
+              <span className="text-xs font-mono uppercase tracking-widest">{tab.label}</span>
             </Link>
           );
         })}

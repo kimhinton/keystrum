@@ -110,7 +110,7 @@ function SharedCard({ payload }: { payload: SharePayload }) {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col items-center rounded-md border border-white/5 bg-white/[0.01] px-2 py-3">
-      <span className="text-[10px] uppercase tracking-widest text-neutral-400">{label}</span>
+      <span className="text-xs uppercase tracking-widest text-neutral-400">{label}</span>
       <span className="mt-0.5 text-lg font-bold text-neutral-100">{value}</span>
     </div>
   );

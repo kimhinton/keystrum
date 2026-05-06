@@ -300,12 +300,12 @@ export default function InstrumentApp() {
           {!hideWebChrome && (
             <Link
               href="/"
-              className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 transition hover:text-neutral-300"
+              className="text-xs font-mono uppercase tracking-widest text-neutral-400 transition hover:text-neutral-300"
             >
               Back to site
             </Link>
           )}
-          <div className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-neutral-400">
+          <div className="flex items-center gap-1 text-xs font-mono uppercase tracking-widest text-neutral-400">
             {active && <span className="inline-block size-1.5 rounded-full bg-green-400" />}
             {active ? "playing" : "ready"}
           </div>
@@ -332,7 +332,7 @@ export default function InstrumentApp() {
           <button
             type="button"
             onClick={() => setShowGuide((p) => !p)}
-            className="rounded border border-white/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-neutral-400 transition hover:border-white/20 hover:text-white"
+            className="rounded border border-white/10 px-2 py-1 text-xs font-semibold uppercase tracking-wider text-neutral-400 transition hover:border-white/20 hover:text-white"
           >
             {showGuide ? "Hide" : "Guide"}
           </button>
@@ -396,7 +396,7 @@ export default function InstrumentApp() {
               onChange={(e) => handleVolume(Number(e.target.value) / 100)}
               className="h-1 w-20 cursor-pointer appearance-none rounded-full bg-white/10 accent-brand sm:w-28"
             />
-            <span className="w-7 text-right font-mono text-[10px] text-neutral-400">
+            <span className="w-7 text-right font-mono text-xs text-neutral-400">
               {Math.round(volume * 100)}
             </span>
           </div>
@@ -432,7 +432,7 @@ export default function InstrumentApp() {
             <button
               type="button"
               onClick={tapTempo}
-              className="rounded border border-white/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-neutral-400 transition hover:border-white/20 hover:text-white"
+              className="rounded border border-white/10 px-2 py-1 text-xs font-semibold uppercase tracking-wider text-neutral-400 transition hover:border-white/20 hover:text-white"
             >
               Tap
             </button>
@@ -469,7 +469,7 @@ export default function InstrumentApp() {
                 <span className="font-mono text-sm text-red-400">
                   {mm}:{ss}
                 </span>
-                <span className="font-mono text-[10px] text-neutral-400">
+                <span className="font-mono text-xs text-neutral-400">
                   {Math.max(0, Math.ceil((MAX_REC_DURATION_MS - recElapsed) / 1000))}s left
                 </span>
                 <button
@@ -483,7 +483,7 @@ export default function InstrumentApp() {
               </>
             )}
             {recPhase === "unsupported" && (
-              <span className="font-mono text-[11px] text-neutral-400">
+              <span className="font-mono text-xs text-neutral-400">
                 Recording unavailable on this browser
               </span>
             )}
@@ -495,7 +495,7 @@ export default function InstrumentApp() {
       {recordings.length > 0 && (
         <div className="border-t border-white/5">
           <div className="mx-auto max-w-4xl px-4 py-3">
-            <div className="mb-2 text-[10px] font-mono uppercase tracking-widest text-neutral-400">
+            <div className="mb-2 text-xs font-mono uppercase tracking-widest text-neutral-400">
               Recordings ({recordings.length})
             </div>
             <div className="space-y-1.5">
@@ -533,7 +533,7 @@ export default function InstrumentApp() {
                     {/* Info */}
                     <div className="flex-1 min-w-0">
                       <div className="truncate text-xs font-medium">{rec.name}</div>
-                      <div className="text-[10px] text-neutral-400">
+                      <div className="text-xs text-neutral-400">
                         {durMM}:{durSS} &middot;{" "}
                         {new Date(rec.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                       </div>

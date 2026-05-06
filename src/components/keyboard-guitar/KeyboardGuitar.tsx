@@ -190,7 +190,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
           aria-hidden="true"
         />
       )}
-      <div className="mb-2 sm:mb-3 flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs font-mono">
+      <div className="mb-2 sm:mb-3 flex items-center gap-2 sm:gap-3 text-xs sm:text-xs font-mono">
         <span
           className="inline-flex items-center gap-1.5 rounded-full px-2 sm:px-3 py-1 transition-colors"
           style={{ background: palette.chipBg, color: palette.chipFg }}
@@ -291,7 +291,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
                   >
                     {preset && rowIdx === 0 && (
                       <span
-                        className="absolute -top-3.5 sm:-top-5 md:-top-6 left-1/2 -translate-x-1/2 rounded-full px-1 sm:px-1.5 py-0.5 text-[7px] sm:text-[9px] md:text-[10px] font-bold tracking-wide whitespace-nowrap"
+                        className="absolute -top-3.5 sm:-top-5 md:-top-6 left-1/2 -translate-x-1/2 rounded-full px-1 sm:px-1.5 py-0.5 text-[7px] sm:text-[9px] md:text-xs font-bold tracking-wide whitespace-nowrap"
                         style={{
                           background: presetColor,
                           color: "#000",
@@ -310,7 +310,7 @@ export default function KeyboardGuitar({ theme = "light", onActivityChange }: Ke
           ))}
         </div>
 
-        <div className="mt-2 sm:mt-4 flex flex-wrap items-center gap-x-2 sm:gap-x-4 gap-y-1 text-[8px] sm:text-[11px] font-mono" style={{ color: palette.hintFg }}>
+        <div className="mt-2 sm:mt-4 flex flex-wrap items-center gap-x-2 sm:gap-x-4 gap-y-1 text-[8px] sm:text-xs font-mono" style={{ color: palette.hintFg }}>
           <span>row 1→E4 · row 2→B3 · row 3→G3 · row 4→D3</span>
           <span>try: 1-q-a-z (Am) · 5-t-g-b (Dm) fast ↓↑</span>
           <span className="hidden sm:inline">· cols 7+ (7-= · u-] · j-&apos; · m-/): ghost notes</span>

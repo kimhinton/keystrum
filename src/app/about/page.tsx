@@ -50,7 +50,7 @@ export default function AboutPage() {
           <Logo size={20} className="shrink-0" />
           keystrum
         </Link>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">v{VERSION}</span>
+        <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">v{VERSION}</span>
       </header>
 
       <main className="mx-auto max-w-md px-5 py-6">
@@ -107,7 +107,7 @@ export default function AboutPage() {
           </a>
         </div>
 
-        <p className="mt-8 text-center text-[11px] font-mono text-neutral-400">
+        <p className="mt-8 text-center text-xs font-mono text-neutral-400">
           No tracking · No account · No upload
         </p>
       </main>

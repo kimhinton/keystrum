@@ -89,7 +89,7 @@ export default function LibraryScreen() {
           <Logo size={20} className="shrink-0" />
           Library
         </div>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
+        <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">
           {entries ? `${entries.length} clip${entries.length === 1 ? "" : "s"}` : "…"}
         </span>
       </header>
@@ -143,7 +143,7 @@ export default function LibraryScreen() {
 
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-sm font-medium">{entry.name}</div>
-                    <div className="font-mono text-[10px] text-neutral-400">
+                    <div className="font-mono text-xs text-neutral-400">
                       {mm}:{ss} · {when.toLocaleDateString()} {when.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                     </div>
                   </div>

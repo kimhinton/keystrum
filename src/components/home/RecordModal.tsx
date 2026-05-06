@@ -28,7 +28,7 @@ export default function RecordModal({ onClose }: Props) {
           ×
         </button>
 
-        <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-red-500/30 bg-red-500/10 px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest text-red-400">
+        <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-red-500/30 bg-red-500/10 px-2.5 py-1 text-xs font-mono uppercase tracking-widest text-red-400">
           <span className="size-1.5 rounded-full bg-red-500" />
           30s max
         </div>
@@ -39,7 +39,7 @@ export default function RecordModal({ onClose }: Props) {
 
         <RecordBar />
 
-        <div className="mt-4 text-[11px] font-mono text-neutral-400">
+        <div className="mt-4 text-xs font-mono text-neutral-400">
           .m4a on Safari · .webm elsewhere · file stays on your device
         </div>
       </div>

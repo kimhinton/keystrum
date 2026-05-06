@@ -113,11 +113,11 @@ export default function ChordIndex() {
                   </span>
                   <span className="ml-2 text-sm text-neutral-400">{c.label}</span>
                 </div>
-                <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-neutral-400">
+                <span className="rounded-full bg-white/5 px-2 py-0.5 text-xs font-mono uppercase tracking-wider text-neutral-400">
                   col {c.columnIndex + 1}
                 </span>
               </div>
-              <div className="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <div className="flex flex-wrap gap-1.5 font-mono text-xs">
                 {c.notes.map((n, i) => (
                   <span
                     key={i}

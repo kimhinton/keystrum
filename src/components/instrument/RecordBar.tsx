@@ -107,7 +107,7 @@ export default function RecordBar() {
           <span className="font-mono text-sm text-red-400">
             {mm}:{ss}
           </span>
-          <span className="font-mono text-[10px] text-neutral-400">{remaining}s left</span>
+          <span className="font-mono text-xs text-neutral-400">{remaining}s left</span>
           <button
             type="button"
             onClick={stop}
@@ -149,7 +149,7 @@ export default function RecordBar() {
       )}
 
       {phase === "unsupported" && (
-        <span className="font-mono text-[11px] text-neutral-400">
+        <span className="font-mono text-xs text-neutral-400">
           Recording unavailable on this browser
         </span>
       )}

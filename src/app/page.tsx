@@ -112,7 +112,7 @@ export default function HomePage() {
           <div className="mt-10 flex items-center gap-5 text-xs text-neutral-400">
             <span>
               ↓ Press{" "}
-              <kbd className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[10px] text-neutral-300">A</kbd>
+              <kbd className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs text-neutral-300">A</kbd>
               . Hear what happens.
             </span>
           </div>

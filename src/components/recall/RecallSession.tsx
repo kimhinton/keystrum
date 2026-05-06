@@ -144,10 +144,10 @@ export default function RecallSession() {
       className="fixed bottom-6 left-1/2 z-50 w-[min(420px,92vw)] -translate-x-1/2 rounded-2xl border border-brand/40 bg-[#12121a]/95 p-4 shadow-2xl backdrop-blur-md"
     >
       <div className="mb-1 flex items-baseline justify-between">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-brand">
+        <span className="font-mono text-xs uppercase tracking-widest text-brand">
           {stepLabel}
         </span>
-        <span className="text-[10px] text-neutral-400">no peeking at the diagram</span>
+        <span className="text-xs text-neutral-400">no peeking at the diagram</span>
       </div>
       <p className="mb-3 text-base text-neutral-100">
         Strum{" "}

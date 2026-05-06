@@ -18,7 +18,7 @@ export function SongCard({ song }: { song: Song }) {
           <p className="mt-0.5 text-xs text-neutral-400">{song.subtitle}</p>
         </div>
         <span
-          className="rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider"
+          className="rounded-full border px-2 py-0.5 text-xs font-bold uppercase tracking-wider"
           style={{ borderColor: `${dColor}55`, color: dColor, background: `${dColor}10` }}
         >
           {song.difficulty}
@@ -30,7 +30,7 @@ export function SongCard({ song }: { song: Song }) {
           return (
             <span
               key={lane}
-              className="flex-1 rounded-md border py-1.5 text-center text-[10px] font-mono font-bold"
+              className="flex-1 rounded-md border py-1.5 text-center text-xs font-mono font-bold"
               style={{ borderColor: `${color}44`, color, background: `${color}10` }}
             >
               {song.chordMap[lane]}

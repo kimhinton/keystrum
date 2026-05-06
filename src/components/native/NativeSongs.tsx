@@ -60,13 +60,13 @@ export default function NativeSongs() {
           <Logo size={20} className="shrink-0" />
           <h1 className="text-lg font-semibold tracking-tight">Songs</h1>
         </div>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
+        <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">
           tap to preview
         </span>
       </header>
 
       <main className="px-3 py-3">
-        <p className="mb-2 px-2 text-[11px] text-neutral-400">
+        <p className="mb-2 px-2 text-xs text-neutral-400">
           Tap a song to hear its chord progression · tap again to stop
         </p>
         <ul className="space-y-2">
@@ -112,7 +112,7 @@ export default function NativeSongs() {
                     </span>
                     {isPlaying && (
                       <span
-                        className="absolute inset-0 flex items-center justify-center bg-black/55 font-mono text-[10px] font-bold uppercase tracking-widest text-white"
+                        className="absolute inset-0 flex items-center justify-center bg-black/55 font-mono text-xs font-bold uppercase tracking-widest text-white"
                       >
                         ■ stop
                       </span>
@@ -123,7 +123,7 @@ export default function NativeSongs() {
                     <div className="truncate text-[15px] font-semibold">
                       {song.title}
                     </div>
-                    <div className="mt-1 flex flex-wrap items-center gap-1.5 text-[11px] text-neutral-400">
+                    <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-neutral-400">
                       <span className="font-mono">{song.bpm} BPM</span>
                       <span className="text-neutral-700">·</span>
                       <span
@@ -181,7 +181,7 @@ export default function NativeSongs() {
           })}
         </ul>
 
-        <p className="mt-6 px-2 text-center text-[11px] leading-relaxed text-neutral-400">
+        <p className="mt-6 px-2 text-center text-xs leading-relaxed text-neutral-400">
           Tap a song to start. Touch-drag across the on-screen keys to strum — practice mode has full touch support.
         </p>
       </main>

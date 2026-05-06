@@ -651,7 +651,7 @@ function Playfield({
               <div key={lane} className="flex h-7 items-center justify-center">
                 {burst && (
                   <span
-                    className="rounded-md px-2 py-0.5 font-mono text-[11px] font-black tracking-wider"
+                    className="rounded-md px-2 py-0.5 font-mono text-xs font-black tracking-wider"
                     style={{
                       background: `${burst.color}22`,
                       color: burst.color,
@@ -671,11 +671,11 @@ function Playfield({
           <GhostKeyboard pressedKeys={pressedKeys} onGhostTap={onGhostTap} />
         </div>
 
-        <div className="flex w-full max-w-[900px] items-center justify-between gap-4 rounded-lg border border-white/5 bg-white/[0.01] px-4 py-2 text-[11px] text-neutral-400">
+        <div className="flex w-full max-w-[900px] items-center justify-between gap-4 rounded-lg border border-white/5 bg-white/[0.01] px-4 py-2 text-xs text-neutral-400">
           <span>
             <span className="text-neutral-300">Lane keys (1·q·a·z · 2·w·s·x · 3·e·d·c · 4·r·f·v · 5·t·g·b · 6·y·h·n)</span> play chords. <span className="text-neutral-300">Mute keys (J·K·L·;)</span> dampen strings.
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">45 keys · full qwerty</span>
+          <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">45 keys · full qwerty</span>
         </div>
       </div>
     </div>
@@ -703,7 +703,7 @@ function GhostKeyboard({
                   e.preventDefault();
                   onGhostTap(key);
                 }}
-                className="flex size-7 items-center justify-center rounded font-mono text-[10px] font-semibold transition-all"
+                className="flex size-7 items-center justify-center rounded font-mono text-xs font-semibold transition-all"
                 style={{
                   background: isPressed ? "#44403c" : "#14141a",
                   borderStyle: "dashed",
@@ -746,7 +746,7 @@ function PreviewStrip({
 
   return (
     <div className="flex items-center gap-2 overflow-x-auto rounded-lg bg-white/[0.02] px-3 py-2 text-xs">
-      <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">Next</span>
+      <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">Next</span>
       {upcoming.length === 0 ? (
         <span className="text-neutral-400">—</span>
       ) : (
@@ -760,7 +760,7 @@ function PreviewStrip({
           return (
             <div
               key={n.id}
-              className="flex items-center gap-1 rounded-md border px-2 py-1 font-mono text-[11px] font-bold"
+              className="flex items-center gap-1 rounded-md border px-2 py-1 font-mono text-xs font-bold"
               style={{
                 borderColor: isNow ? color : `${color}33`,
                 background: isNow ? `${color}22` : `${color}08`,
@@ -804,7 +804,7 @@ function GameHud({
         <div>
           <div className="text-xs font-mono uppercase tracking-widest text-brand">Now playing</div>
           <div className="text-xl font-semibold">{song.title}</div>
-          <div className="text-[11px] text-neutral-400">{song.credit}</div>
+          <div className="text-xs text-neutral-400">{song.credit}</div>
         </div>
         <div className="grid grid-cols-4 gap-3 font-mono text-sm">
           <Stat label="Score" value={score.toLocaleString()} />
@@ -823,7 +823,7 @@ function GameHud({
 function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div className="flex min-w-[72px] flex-col items-end">
-      <span className="text-[10px] uppercase tracking-widest text-neutral-400">{label}</span>
+      <span className="text-xs uppercase tracking-widest text-neutral-400">{label}</span>
       <span className={`text-lg font-bold ${accent ? "text-brand" : "text-neutral-100"}`}>{value}</span>
     </div>
   );
@@ -838,7 +838,7 @@ function GameIntro({ song, onStart }: { song: Song; onStart: () => void }) {
         <div className="mb-1 text-xs font-mono uppercase tracking-widest text-brand">Ready up</div>
         <h1 className="text-3xl font-semibold tracking-tight">{song.title}</h1>
         <p className="mt-2 text-sm text-neutral-400">{song.subtitle}</p>
-        <p className="mt-1 text-[11px] text-neutral-400">{song.credit}</p>
+        <p className="mt-1 text-xs text-neutral-400">{song.credit}</p>
       </div>
       <div className="grid grid-cols-6 gap-2 font-mono text-xs">
         {ALL_LANES.map((lane) => {
@@ -846,26 +846,26 @@ function GameIntro({ song, onStart }: { song: Song; onStart: () => void }) {
           return (
             <div key={lane} className="flex flex-col gap-1 rounded-lg border px-2 py-2" style={{ borderColor: `${color}44`, background: `${color}10`, color }}>
               <span className="text-sm font-bold">{song.chordMap[lane]}</span>
-              <span className="text-[10px] opacity-70">{LANE_KEYS[lane][1].toUpperCase()}</span>
+              <span className="text-xs opacity-70">{LANE_KEYS[lane][1].toUpperCase()}</span>
             </div>
           );
         })}
       </div>
-      <div className="w-full space-y-2 rounded-lg border border-white/5 bg-white/[0.01] p-3 text-left text-[11px] text-neutral-400">
+      <div className="w-full space-y-2 rounded-lg border border-white/5 bg-white/[0.01] p-3 text-left text-xs text-neutral-400">
         <div className="flex items-center gap-2">
-          <span className="inline-flex size-5 items-center justify-center rounded bg-white/10 font-mono text-[10px] text-white">T</span>
+          <span className="inline-flex size-5 items-center justify-center rounded bg-white/10 font-mono text-xs text-white">T</span>
           <span><b className="text-neutral-200">Tap:</b> key glows → press any one lane key at peak glow.</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="inline-flex size-5 items-center justify-center rounded bg-[#fbbf24]/20 font-mono text-[10px] text-[#fbbf24]">H</span>
+          <span className="inline-flex size-5 items-center justify-center rounded bg-[#fbbf24]/20 font-mono text-xs text-[#fbbf24]">H</span>
           <span><b className="text-neutral-200">Hold:</b> HOLD tag above key → press and keep pressing.</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="inline-flex size-5 items-center justify-center rounded bg-brand/20 font-mono text-[10px] text-brand">⇅</span>
+          <span className="inline-flex size-5 items-center justify-center rounded bg-brand/20 font-mono text-xs text-brand">⇅</span>
           <span><b className="text-neutral-200">Strum:</b> ⇅ tag → must hit 2+ different keys in the column (single tap = fail).</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="inline-flex size-5 items-center justify-center rounded bg-[#f59e0b]/20 font-mono text-[10px] text-[#f59e0b]">✋</span>
+          <span className="inline-flex size-5 items-center justify-center rounded bg-[#f59e0b]/20 font-mono text-xs text-[#f59e0b]">✋</span>
           <span><b className="text-neutral-200">Mute (J·K·L·;):</b> palm-mute notes — press the highlighted right-hand key to dampen the string.</span>
         </div>
       </div>
@@ -882,8 +882,8 @@ function GameIntro({ song, onStart }: { song: Song; onStart: () => void }) {
           onClick={() => setMetronomeEnabled(!metronomeEnabled)}
           className={
             metronomeEnabled
-              ? "rounded-full border border-brand/40 bg-brand/15 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-brand transition hover:bg-brand/25 focus:outline-none focus:ring-2 focus:ring-brand/40"
-              : "rounded-full border border-white/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-neutral-400 transition hover:border-white/20 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+              ? "rounded-full border border-brand/40 bg-brand/15 px-3 py-1 font-mono text-xs uppercase tracking-widest text-brand transition hover:bg-brand/25 focus:outline-none focus:ring-2 focus:ring-brand/40"
+              : "rounded-full border border-white/10 px-3 py-1 font-mono text-xs uppercase tracking-widest text-neutral-400 transition hover:border-white/20 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/20"
           }
         >
           {metronomeEnabled ? "On" : "Off"}
@@ -964,10 +964,10 @@ function FinishedScreen({
         style={{ borderColor: `${zoneInfo.color}55`, background: `${zoneInfo.color}10` }}
       >
         <div className="mb-1 flex items-baseline justify-between">
-          <span className="font-mono text-[11px] uppercase tracking-widest" style={{ color: zoneInfo.color }}>
+          <span className="font-mono text-xs uppercase tracking-widest" style={{ color: zoneInfo.color }}>
             {zoneInfo.label}
           </span>
-          <span className="font-mono text-[10px] text-neutral-400">@ {song.bpm} BPM</span>
+          <span className="font-mono text-xs text-neutral-400">@ {song.bpm} BPM</span>
         </div>
         <p className="text-sm text-neutral-200">{zoneInfo.message}</p>
         {recommended && (
@@ -986,7 +986,7 @@ function FinishedScreen({
         <Stat label="Max combo" value={`${maxCombo}×`} />
         <Stat label="Total hits" value={`${stats.perfect + stats.great + stats.good}`} />
       </div>
-      <div className="grid w-full grid-cols-4 gap-2 text-[10px] font-mono uppercase tracking-wider">
+      <div className="grid w-full grid-cols-4 gap-2 text-xs font-mono uppercase tracking-wider">
         <Pill label="Perfect" value={stats.perfect} color="#fbbf24" />
         <Pill label="Great" value={stats.great} color="#34d399" />
         <Pill label="Good" value={stats.good} color="#60a5fa" />

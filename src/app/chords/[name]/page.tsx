@@ -273,7 +273,7 @@ export default async function ChordPage(
                       <h3 className="text-sm font-semibold text-neutral-200">
                         {i + 1}. {v.name}
                       </h3>
-                      <span className={`font-mono text-[10px] uppercase tracking-wider ${diffColor}`}>
+                      <span className={`font-mono text-xs uppercase tracking-wider ${diffColor}`}>
                         {v.difficulty}
                       </span>
                     </div>
@@ -370,7 +370,7 @@ export default async function ChordPage(
                     className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-sm transition hover:border-brand/40"
                   >
                     <span className="text-neutral-300">{s.title}</span>
-                    <span className="text-[10px] text-neutral-400">{s.difficulty}</span>
+                    <span className="text-xs text-neutral-400">{s.difficulty}</span>
                   </Link>
                 ))}
               </div>

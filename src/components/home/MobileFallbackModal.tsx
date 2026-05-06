@@ -81,7 +81,7 @@ export default function MobileFallbackModal({ open, onClose }: Props) {
           ×
         </button>
 
-        <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest text-brand">
+        <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-mono uppercase tracking-widest text-brand">
           <span className="size-1.5 rounded-full bg-brand" />
           On mobile
         </div>
