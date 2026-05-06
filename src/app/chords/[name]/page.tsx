@@ -18,21 +18,24 @@ export async function generateMetadata(
   if (!c) return { title: "Chord not found" };
   const slug = getChordSlug(c.name);
   return {
-    title: `${c.name} guitar chord — practice without a guitar`,
-    description: `${c.name} (${c.label}) guitar chord — notes ${c.notes.join(" · ")}. Play it by sweeping QWERTY keyboard column ${c.columnIndex + 1} on keystrum. Used in ${c.usedIn.slice(0, 2).join(", ")}.`,
+    title: `${c.name} guitar chord — ${c.voicings.length} ways to play, notes & practice`,
+    description: `${c.name} (${c.label}) guitar chord with ${c.voicings.length} voicings (open, barre, power chord, ${c.name}7). Notes ${c.notes.join(" · ")}. Practice on QWERTY keyboard at keystrum — no guitar required. Used in ${c.usedIn.slice(0, 2).join(", ")}.`,
     keywords: [
       `${c.name} chord`,
       `${c.name} chord guitar`,
       `${c.name} chord keyboard`,
       `${c.name} chord practice`,
+      `${c.name} chord variations`,
+      `${c.name} chord voicings`,
+      `how to play ${c.name} chord`,
       `${c.name} ${c.label.toLowerCase()}`,
       "guitar chord dictionary",
       "chord practice app",
     ],
     alternates: { canonical: `/chords/${slug}` },
     openGraph: {
-      title: `${c.name} guitar chord — keystrum`,
-      description: `Notes: ${c.notes.join(" · ")}. Strum on keyboard column ${c.columnIndex + 1}. Practice without a guitar.`,
+      title: `${c.name} guitar chord — ${c.voicings.length} voicings · keystrum`,
+      description: `Notes: ${c.notes.join(" · ")}. ${c.voicings.length} ways to play (open, barre, power, 7th). Practice without a guitar on keystrum.`,
       url: `/chords/${slug}`,
     },
   };
@@ -94,7 +97,7 @@ export default async function ChordPage(
       {
         "@type": "HowTo",
         name: `How to play the ${c.name} chord on keystrum`,
-        description: `Strum the ${c.label} chord on a QWERTY keyboard using keystrum's 4-row × 6-column mapping.`,
+        description: `Strum the ${c.label} chord on a QWERTY keyboard using keystrum's 4-row × 6-column mapping. Also covers ${c.voicings.length} standard guitar voicings: ${c.voicings.map((v) => v.name).join(", ")}.`,
         datePublished: CHORD_PAGE_PUBLISHED,
         dateModified: CHORD_PAGE_MODIFIED,
         totalTime: "PT2M",
@@ -222,6 +225,49 @@ export default async function ChordPage(
                 <dd className="mt-1 text-neutral-300">{c.theory.relativeTo}</dd>
               </div>
             </dl>
+          </div>
+        )}
+
+        {c.voicings.length > 0 && (
+          <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-5">
+            <h2 className="mb-3 text-xs font-mono uppercase tracking-widest text-neutral-400">
+              {c.voicings.length} ways to play {c.name}
+            </h2>
+            <p className="mb-5 text-xs text-neutral-400">
+              Standard 6-string guitar fingerings — {`x = mute, 0 = open, numbers = fret`}. Use these to expand beyond the default open voicing on your real guitar; keystrum's keyboard mapping covers the open position.
+            </p>
+            <ul className="flex flex-col gap-4">
+              {c.voicings.map((v, i) => {
+                const diffColor =
+                  v.difficulty === "beginner"
+                    ? "text-emerald-400"
+                    : v.difficulty === "intermediate"
+                    ? "text-yellow-400"
+                    : "text-red-400";
+                return (
+                  <li key={i} className="flex flex-col gap-2 rounded-lg border border-white/5 bg-white/[0.015] p-4">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <h3 className="text-sm font-semibold text-neutral-200">
+                        {i + 1}. {v.name}
+                      </h3>
+                      <span className={`font-mono text-[10px] uppercase tracking-wider ${diffColor}`}>
+                        {v.difficulty}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3 font-mono">
+                      <span className="text-xs text-neutral-400">E A D G B e</span>
+                      <span
+                        className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1 text-sm font-bold tracking-widest text-neutral-100"
+                        style={{ color: c.color, borderColor: `${c.color}40` }}
+                      >
+                        {v.fingering}
+                      </span>
+                    </div>
+                    <p className="max-w-prose text-xs leading-relaxed text-neutral-400">{v.description}</p>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         )}
 

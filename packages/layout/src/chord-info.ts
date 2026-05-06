@@ -2,11 +2,19 @@ import { DEFAULT_CHORD_COLUMNS, type ChordPreset } from "./chord-presets";
 import { KEYBOARD_ROWS, STRING_NAMES } from "./layout";
 
 export type TransitionDifficulty = "easy" | "medium" | "hard";
+export type VoicingDifficulty = "beginner" | "intermediate" | "advanced";
 
 export interface ChordTheory {
   function: string;
   relativeTo: string;
   romanNumeral: string;
+}
+
+export interface ChordVoicing {
+  name: string;
+  fingering: string;
+  difficulty: VoicingDifficulty;
+  description: string;
 }
 
 export interface ChordInfo extends ChordPreset {
@@ -21,6 +29,7 @@ export interface ChordInfo extends ChordPreset {
   practiceTip: string;
   theory: ChordTheory;
   transitionDifficulty: Record<string, TransitionDifficulty>;
+  voicings: ChordVoicing[];
 }
 
 const SEMITONES: Record<string, number> = {
@@ -70,6 +79,7 @@ interface ChordMeta {
   practiceTip: string;
   theory: ChordTheory;
   transitionDifficulty: Record<string, TransitionDifficulty>;
+  voicings: ChordVoicing[];
 }
 
 const CHORD_META: Record<string, ChordMeta> = {
@@ -88,6 +98,13 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "C major (shares the same key signature, no sharps or flats)",
     },
     transitionDifficulty: { C: "easy", Em: "medium", G: "medium", Dm: "easy", F: "hard" },
+    voicings: [
+      { name: "Open position", fingering: "x 0 2 2 1 0", difficulty: "beginner", description: "The classic open Am. Index on B string fret 1, middle on D string fret 2, ring on G string fret 2." },
+      { name: "Am7", fingering: "x 0 2 0 1 0", difficulty: "beginner", description: "Lift the ring finger off G string — instant Am7. Mellower, jazzier, perfect for Beatles-era pop." },
+      { name: "A5 power chord", fingering: "x 0 2 2 x x", difficulty: "beginner", description: "Just root and fifth, no third. Neither major nor minor — the open neutral chord for rock and punk." },
+      { name: "Barre at 5th fret", fingering: "5 7 7 5 5 5", difficulty: "intermediate", description: "Movable Am shape barred at fret 5. Same shape, brighter voicing, rings through the high register." },
+      { name: "Am add9", fingering: "x 0 7 5 5 0", difficulty: "intermediate", description: "Adds the 9th (B note) for color. Used in modern indie folk and dream-pop arrangements." },
+    ],
   },
   C: {
     feel: "Bright, neutral, immediate. The chord every musician starts with.",
@@ -104,6 +121,13 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "A minor (relative minor, same key signature)",
     },
     transitionDifficulty: { Am: "easy", Em: "medium", G: "easy", Dm: "medium", F: "medium" },
+    voicings: [
+      { name: "Open position", fingering: "x 3 2 0 1 0", difficulty: "beginner", description: "The first chord most guitarists learn. Ring on A string fret 3, middle on D string fret 2, index on B string fret 1." },
+      { name: "Cmaj7", fingering: "x 3 2 0 0 0", difficulty: "beginner", description: "Lift the index finger off the B string. Dreamy, floating quality used in bossa nova and modern folk." },
+      { name: "Cadd9", fingering: "x 3 2 0 3 0", difficulty: "beginner", description: "Add the pinky on B string fret 3. The 'Wonderwall' opening — bigger, more open sound." },
+      { name: "C/G bass", fingering: "3 3 2 0 1 0", difficulty: "intermediate", description: "Adds low G to the bass for a fuller foundation. Most common alternate voicing in singer-songwriter arrangements." },
+      { name: "Barre at 8th fret", fingering: "8 10 10 9 8 8", difficulty: "advanced", description: "Movable C shape barred at fret 8. Compact, tighter voicing for solo guitar and chord-melody arrangements." },
+    ],
   },
   Em: {
     feel: "Brooding but open. Two notes and you're already making music.",
@@ -120,6 +144,13 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "G major (relative major)",
     },
     transitionDifficulty: { Am: "medium", C: "medium", G: "easy", Dm: "medium", F: "hard" },
+    voicings: [
+      { name: "Open position", fingering: "0 2 2 0 0 0", difficulty: "beginner", description: "The easiest chord on guitar. Just two fingers — middle and ring on A and D strings, fret 2." },
+      { name: "Em7", fingering: "0 2 2 0 3 0", difficulty: "beginner", description: "Add pinky on B string fret 3. Smoother, more melodic — frequent in Cranberries and Coldplay." },
+      { name: "E5 power chord", fingering: "0 2 2 x x x", difficulty: "beginner", description: "Strum only the bottom three strings. Aggressive low-end, foundation of grunge and punk." },
+      { name: "Em add9", fingering: "0 2 4 0 0 0", difficulty: "intermediate", description: "Stretch ring finger to G string fret 4. Modal, cinematic — used in post-rock and ambient guitar." },
+      { name: "Barre at 7th fret", fingering: "7 9 9 7 7 7", difficulty: "intermediate", description: "Movable Em shape at fret 7. Same minor color, higher register for solos and lead lines." },
+    ],
   },
   G: {
     feel: "Confident, rural, full. Opens up the low end.",
@@ -136,6 +167,13 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "E minor (relative minor)",
     },
     transitionDifficulty: { Am: "medium", C: "easy", Em: "easy", Dm: "hard", F: "hard" },
+    voicings: [
+      { name: "Open position (3-finger)", fingering: "3 2 0 0 0 3", difficulty: "beginner", description: "Standard open G. Middle on low E fret 3, index on A string fret 2, ring on high E fret 3." },
+      { name: "Open position (4-finger)", fingering: "3 2 0 0 3 3", difficulty: "beginner", description: "Adds pinky on B string fret 3. Bigger ring, easier transition to Cadd9. The 'modern' G voicing." },
+      { name: "G6", fingering: "3 2 0 0 0 0", difficulty: "beginner", description: "Drop the high E to open. Adds the 6th (E note) — country, rockabilly, and old-school folk." },
+      { name: "G/B bass", fingering: "x 2 0 0 3 3", difficulty: "intermediate", description: "Skip low E, B note on bass. Smooth voice-leading from C to G, classic in fingerstyle arrangements." },
+      { name: "Barre at 3rd fret", fingering: "3 5 5 4 3 3", difficulty: "intermediate", description: "E-shape barre form at fret 3. Tighter voicing, full body — works well in higher-energy strumming." },
+    ],
   },
   Dm: {
     feel: "The saddest chord \u2014 Spinal Tap's joke about this one happens to be correct.",
@@ -152,6 +190,13 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "F major (relative major)",
     },
     transitionDifficulty: { Am: "easy", C: "medium", Em: "medium", G: "hard", F: "medium" },
+    voicings: [
+      { name: "Open position", fingering: "x x 0 2 3 1", difficulty: "beginner", description: "The classic open Dm. Index on high E fret 1, middle on G string fret 2, ring on B string fret 3." },
+      { name: "Dm7", fingering: "x x 0 2 1 1", difficulty: "intermediate", description: "Mini-barre with index across B and high E at fret 1. Jazzy, mellow — common in Stevie Wonder and bossa." },
+      { name: "Dm/F bass", fingering: "1 x 0 2 3 1", difficulty: "intermediate", description: "Adds low F bass under standard Dm. Walking bass-line option in i–v–IV minor progressions." },
+      { name: "Barre at 5th fret", fingering: "x 5 7 7 6 5", difficulty: "intermediate", description: "A-shape minor barre at fret 5. Same Dm color, higher register — pairs well with barre Am at fret 5." },
+      { name: "Dm add9", fingering: "x 5 7 5 6 5", difficulty: "advanced", description: "Adds the 9th (E note) for color. Modern, atmospheric — used in indie folk and ambient arrangements." },
+    ],
   },
   F: {
     feel: "Tension, aspiration. The first chord that makes beginners quit \u2014 until they don't.",
@@ -168,6 +213,13 @@ const CHORD_META: Record<string, ChordMeta> = {
       relativeTo: "D minor (relative minor)",
     },
     transitionDifficulty: { Am: "hard", C: "medium", Em: "hard", G: "hard", Dm: "medium" },
+    voicings: [
+      { name: "Mini-F (top 4 strings)", fingering: "x x 3 2 1 1", difficulty: "beginner", description: "Index mini-barres B and high E at fret 1, middle on G fret 2, ring on D fret 3. The starter F — start here, always." },
+      { name: "Fmaj7", fingering: "x x 3 2 1 0", difficulty: "beginner", description: "Drop the high E to open. Floating, bright, used in jazz standards and bossa nova." },
+      { name: "Fadd9", fingering: "x x 3 2 1 3", difficulty: "intermediate", description: "Pinky on high E fret 3 adds the 9th. Common Coldplay and indie-folk shape." },
+      { name: "Full barre", fingering: "1 3 3 2 1 1", difficulty: "advanced", description: "The wall: index barre across all six strings at fret 1, ring on A fret 3. Full body, heavy — every guitarist's hurdle." },
+      { name: "F at 8th fret (CAGED)", fingering: "x 8 10 10 10 8", difficulty: "advanced", description: "A-shape barre at fret 8. Compact, tighter than the full barre — useful for chord-melody and solo arrangements." },
+    ],
   },
 };
 
@@ -191,6 +243,7 @@ export function buildChordInfo(): ChordInfo[] {
       practiceTip: meta?.practiceTip ?? "",
       theory: meta?.theory ?? FALLBACK_THEORY,
       transitionDifficulty: meta?.transitionDifficulty ?? {},
+      voicings: meta?.voicings ?? [],
       siblings: DEFAULT_CHORD_COLUMNS.filter(
         (p): p is ChordPreset => !!p && p.name !== preset.name
       ).map((p) => p.name),

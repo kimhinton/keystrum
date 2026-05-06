@@ -21,4 +21,8 @@ export {
   getChordSlug,
   getChordBySlug,
   type ChordInfo,
+  type ChordVoicing,
+  type VoicingDifficulty,
+  type ChordTheory,
+  type TransitionDifficulty,
 } from "./chord-info";
