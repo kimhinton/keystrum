@@ -2,9 +2,9 @@ import InstrumentApp from "@/components/instrument/InstrumentApp";
 import RecallSession from "@/components/recall/RecallSession";
 
 export const metadata = {
-  title: "Virtual guitar online — record, metronome, volume",
+  title: "Virtual Guitar — Record, Metronome, QWERTY",
   description:
-    "Full keystrum instrument — strum guitar chords on your QWERTY keyboard with metronome, volume control, and recording. Virtual guitar online, free, no download. Save sessions, share via URL.",
+    "Full keystrum instrument. Strum guitar chords with metronome, volume, recording. Browser-based virtual guitar, no install, no account.",
   keywords: [
     "virtual guitar online free",
     "virtual guitar no download",

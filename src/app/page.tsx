@@ -9,8 +9,9 @@ import { Logo } from "@/components/brand/Logo";
 import { HOME_FAQ_QUESTIONS } from "@/lib/seo-faq";
 
 export const metadata = {
-  title: "Virtual Guitar Online — Practice Guitar Chords on Your Keyboard | keystrum",
-  description: "Virtual guitar online, free, no download. Practice 6 guitar chords on your QWERTY keyboard — 4 rows become 4 strings. Real strum detection, Karplus-Strong synthesis, 3 folk songs. Browser-only, no install, no account.",
+  title: "Virtual Guitar Online · QWERTY Chord Trainer | keystrum",
+  description:
+    "Free virtual guitar online. Strum 6 guitar chords on your QWERTY keyboard — 4 rows become 4 strings. Karplus-Strong synthesis, no install, no account.",
 };
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://keystrum.app";

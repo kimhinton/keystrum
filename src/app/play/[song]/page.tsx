@@ -16,8 +16,8 @@ export async function generateMetadata(
   const song = getSong(songId);
   if (!song) return { title: "Song not found" };
   return {
-    title: `Practice ${song.title} chords — browser chord trainer`,
-    description: `Learn the guitar chords of ${song.title} on your QWERTY keyboard. ${song.subtitle}. Difficulty: ${song.difficulty}. Strum detection, hold and mute windows, no guitar needed.`,
+    title: `${song.title} Chords — Practice on QWERTY`,
+    description: `Practice ${song.title} guitar chords on your keyboard. ${song.subtitle.slice(0, 80)}. Difficulty: ${song.difficulty}. No guitar needed.`,
     keywords: [
       `${song.title.toLowerCase()} chords`,
       `${song.title.toLowerCase()} guitar chords`,

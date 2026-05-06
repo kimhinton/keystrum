@@ -5,9 +5,9 @@ import { SongCard } from "@/components/game/SongCard";
 import { Logo } from "@/components/brand/Logo";
 
 export const metadata: Metadata = {
-  title: "Folk song chord practice — browser chord trainer",
+  title: "Folk Song Chord Practice — Browser Trainer",
   description:
-    "Practice guitar chords on four songs — House of the Rising Sun, Scarborough Fair, Greensleeves, and the Britpop Em-G-Dm-C progression (Wonderwall and friends). Browser-based chord trainer with strum · hold · mute across 6 lanes. Progressive difficulty, no guitar required, no install.",
+    "Practice guitar chords on 4 songs: House of the Rising Sun, Scarborough Fair, Greensleeves, Em-G-Dm-C progression. No install, no guitar needed.",
   keywords: [
     "folk song chord practice",
     "chord practice browser",

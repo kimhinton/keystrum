@@ -23,8 +23,9 @@ const aboutJsonLd = {
 };
 
 export const metadata = {
-  title: "About keystrum — why a QWERTY guitar, and how Karplus-Strong works",
-  description: "Why keystrum exists: practice guitar chords without a guitar. How the QWERTY-to-guitar mapping works, why Karplus-Strong physical modeling synthesis produces a real plucked-string sound in the browser, and what's next on the roadmap.",
+  title: "About — QWERTY Guitar Synthesis Explained",
+  description:
+    "What keystrum is, how Karplus-Strong synthesis works, who it's for, and the QWERTY-to-guitar mapping behind the browser instrument.",
   keywords: [
     "Karplus-Strong web audio",
     "javascript guitar synthesis",

@@ -18,8 +18,8 @@ export async function generateMetadata(
   if (!c) return { title: "Chord not found" };
   const slug = getChordSlug(c.name);
   return {
-    title: `${c.name} chord (${c.label}) — ${c.voicings.length} voicings + keyboard practice`,
-    description: `${c.label} guitar chord — ${c.voicings.length} voicings, notes ${c.notes.join(", ")}. Strum on your QWERTY keyboard, no guitar needed. Used in ${c.usedIn[0] ?? "popular songs"}.`,
+    title: `${c.name} Chord — ${c.label} · ${c.voicings.length} Voicings`,
+    description: `${c.label} guitar chord. ${c.voicings.length} voicings, notes ${c.notes.join(", ")}. Practice on QWERTY keyboard, no guitar needed.`,
     keywords: [
       `${c.name} chord`,
       `${c.name} chord guitar`,

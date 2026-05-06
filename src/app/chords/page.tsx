@@ -4,9 +4,9 @@ import { buildChordInfo, getChordSlug } from "@keystrum/layout";
 import { Logo } from "@/components/brand/Logo";
 
 export const metadata: Metadata = {
-  title: "Guitar chord dictionary — Am, C, Em, G, Dm, F",
+  title: "Guitar Chord Dictionary — Am, C, Em, G, Dm, F",
   description:
-    "Guitar chord reference for the 6 chords diatonic to C major / A minor: Am, C, Em, G, Dm, F. Notes, intervals, QWERTY keyboard mapping, and famous songs each chord appears in. Practice each chord without a guitar.",
+    "Guitar chord reference: Am, C, Em, G, Dm, F. Notes, intervals, voicings, QWERTY mapping, songs each chord appears in. Practice without a guitar.",
   keywords: [
     "guitar chord dictionary",
     "chord practice app",
