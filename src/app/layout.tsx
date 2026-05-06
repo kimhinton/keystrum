@@ -61,9 +61,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@RBlue7681",
     creator: "@RBlue7681",
-    title: "keystrum — Practice guitar chords without a guitar",
+    title: "Virtual Guitar Online · QWERTY Chord Trainer",
     description:
-      "Guitar chords on your keyboard. 4 rows = 4 strings, 6 columns = 6 chords. Browser-only, no install.",
+      "Free virtual guitar. Strum 6 guitar chords on your QWERTY keyboard. 4 rows = 4 strings. No install.",
   },
   verification: {
     google: "oMRjOguNwRMb4i_c48G45E9_sbFlOw_uIUxr5xo5iKA",

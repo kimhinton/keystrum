@@ -5,10 +5,10 @@ export const dynamic = "force-static";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
-    name: "keystrum — Strum your keyboard",
+    name: "keystrum — Virtual Guitar Online",
     short_name: "keystrum",
     description:
-      "A strum-based keyboard instrument. Four rows = four strings. Six columns = six chords. Browser-only.",
+      "Virtual guitar online. Strum guitar chords on your QWERTY keyboard. 4 rows = 4 strings, 6 columns = 6 chords. Free, no install.",
     start_url: "/instrument",
     scope: "/",
     display: "standalone",
