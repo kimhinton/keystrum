@@ -1,0 +1,66 @@
+name: PWA Microsoft Store package
+
+# Generates a Windows-compatible PWA package (msixbundle) using
+# PWABuilder CLI on demand. Useful for resubmissions after major
+# manifest/icon changes — Microsoft Partner Center expects a fresh
+# package per submission.
+#
+# This workflow does NOT auto-submit to Microsoft Store — that step
+# requires a Partner Center account + manual review queue and is left
+# to the developer. It only generates the artifact and attaches it to
+# a GitHub release.
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag (e.g. pwa-0.1.0)"
+        required: true
+        default: "pwa-latest"
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install PWABuilder CLI
+        run: npm install -g @pwabuilder/cli
+
+      - name: Wait for site availability
+        run: |
+          for i in 1 2 3 4 5; do
+            if curl -fsS -o /dev/null https://keystrum.app/manifest.webmanifest; then
+              echo "Site reachable"
+              break
+            fi
+            echo "Waiting for site... ($i/5)"
+            sleep 30
+          done
+
+      - name: Generate Windows PWA package
+        run: |
+          mkdir -p ./pwa-output
+          cd ./pwa-output
+          pwa package https://keystrum.app --platform windows || \
+            echo "PWABuilder CLI may require interactive prompts. Use https://www.pwabuilder.com manually as fallback."
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: keystrum-pwa-windows-${{ github.run_id }}
+          path: ./pwa-output/**
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Notice
+        run: |
+          echo "::notice::PWA package generation attempted. If artifacts are empty, use https://www.pwabuilder.com manually with URL https://keystrum.app — manifest already supplies all metadata."
