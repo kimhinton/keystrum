@@ -113,6 +113,47 @@ export default async function PlaySong(
       <main className="flex min-h-[calc(100vh-49px)] items-center justify-center px-4 py-6">
         <GameRunner song={song} />
       </main>
+
+      <section className="border-t border-white/5 px-6 py-12">
+        <div className="mx-auto max-w-2xl space-y-5 text-sm leading-relaxed text-neutral-300">
+          <div>
+            <h2 className="mb-2 text-xs font-mono uppercase tracking-widest text-neutral-400">
+              About {song.title}
+            </h2>
+            <p>{song.subtitle}</p>
+          </div>
+          <div>
+            <h2 className="mb-2 text-xs font-mono uppercase tracking-widest text-neutral-400">
+              Chord progression
+            </h2>
+            <p>
+              {song.title} uses these chords:{" "}
+              {Object.values(song.chordMap).filter((v, i, a) => a.indexOf(v) === i).join(" → ")}.
+              Practice each chord at the{" "}
+              <Link href="/chords" className="underline hover:text-white">
+                chord dictionary
+              </Link>{" "}
+              before attempting the full song. Difficulty: {song.difficulty}.
+            </p>
+          </div>
+          <div>
+            <h2 className="mb-2 text-xs font-mono uppercase tracking-widest text-neutral-400">
+              How to practice
+            </h2>
+            <p>
+              Press the QWERTY keys mapped to each chord column. The character on screen shows when to strum, hold, and mute. Each chord lane corresponds to one column on your keyboard — sweep top-to-bottom for a downstroke, reverse for upstroke. Scores save to your browser; share via the Share button. No account, no upload.
+            </p>
+          </div>
+          {song.credit && (
+            <div>
+              <h2 className="mb-2 text-xs font-mono uppercase tracking-widest text-neutral-400">
+                Credit
+              </h2>
+              <p className="text-xs text-neutral-400">{song.credit}</p>
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

@@ -45,7 +45,34 @@ export default function AboutPage() {
           <Row label="License" value="MIT" />
         </ul>
 
-        <div className="mt-6 flex flex-col gap-2">
+        <section className="mt-8 space-y-5 text-sm leading-relaxed text-neutral-300">
+          <div>
+            <h2 className="mb-2 text-xs font-mono uppercase tracking-widest text-neutral-400">What is keystrum?</h2>
+            <p>
+              keystrum is a free, open-source browser-based virtual guitar instrument. It maps a QWERTY computer keyboard to a four-string guitar — four physical keyboard rows (numbers, QWERTY, ASDF, ZXCV) become four guitar strings, and six columns become six diatonic chord presets: Am, C, Em, G, Dm, F. No physical instrument required, no installation, no account.
+            </p>
+          </div>
+          <div>
+            <h2 className="mb-2 text-xs font-mono uppercase tracking-widest text-neutral-400">How does it sound real?</h2>
+            <p>
+              keystrum uses Karplus-Strong physical-modeling synthesis — the same algorithm used in commercial guitar plugins. Instead of playing back recorded samples, the algorithm simulates a vibrating string in real-time, producing the natural decay and overtones of a plucked acoustic guitar. The synthesis runs entirely in your browser via the Web Audio API. No server roundtrip, no audio files to download.
+            </p>
+          </div>
+          <div>
+            <h2 className="mb-2 text-xs font-mono uppercase tracking-widest text-neutral-400">Who is it for?</h2>
+            <p>
+              Beginning guitarists practicing chord transitions on the go, music teachers demonstrating progressions in the browser, late-night jammers without a guitar at hand, DAW producers sketching chord ideas, and anyone curious about how physical-modeling synthesis works. keystrum.app is distinct from <em>Keystrum</em>, the alternative music project by Chuck Arizona.
+            </p>
+          </div>
+          <div>
+            <h2 className="mb-2 text-xs font-mono uppercase tracking-widest text-neutral-400">Why a QWERTY keyboard?</h2>
+            <p>
+              Your laptop&apos;s QWERTY keyboard has four usable rows and at least six columns — exactly enough for four strings × six diatonic chords. The mapping is one-to-one. You do not learn a new instrument; you re-use the one already under your fingers. Sweep three or more keys in a column within 90 ms and keystrum reads it as a downstroke. Reverse the sweep for an upstroke. The same physical action as a guitar pick crossing strings.
+            </p>
+          </div>
+        </section>
+
+        <div className="mt-8 flex flex-col gap-2">
           <Link href="/privacy" className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm font-medium text-neutral-200 transition hover:bg-white/[0.04]">
             Privacy policy
           </Link>

@@ -19,6 +19,9 @@ export const metadata = {
 export default function InstrumentPage() {
   return (
     <>
+      <h1 className="sr-only">
+        Virtual Guitar Online — Full Instrument with Recording, Metronome, and QWERTY Keyboard Strumming
+      </h1>
       <InstrumentApp />
       <RecallSession />
     </>
