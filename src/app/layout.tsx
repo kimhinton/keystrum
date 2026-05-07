@@ -67,16 +67,12 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "oMRjOguNwRMb4i_c48G45E9_sbFlOw_uIUxr5xo5iKA",
-    // To activate Bing/Yandex/Naver, paste the verification code below
-    // and remove the surrounding /* */. See docs/seo/webmaster-registration.md
-    // for step-by-step setup.
-    /*
-    yandex: "YANDEX_CODE_HERE",
     other: {
-      "msvalidate.01": "BING_CODE_HERE",
-      "naver-site-verification": "NAVER_CODE_HERE",
+      "msvalidate.01": "046A57CFFC34DD9A5ED62EAD70C0418D",
     },
-    */
+    // To activate Yandex/Naver, paste codes following the pattern above.
+    // yandex: "YANDEX_CODE_HERE",
+    // other: { ..., "naver-site-verification": "NAVER_CODE_HERE" },
   },
   robots: {
     index: true,
