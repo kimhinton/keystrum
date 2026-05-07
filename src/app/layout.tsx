@@ -67,12 +67,12 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "oMRjOguNwRMb4i_c48G45E9_sbFlOw_uIUxr5xo5iKA",
+    yandex: "2c43c0395360c932",
     other: {
       "msvalidate.01": "046A57CFFC34DD9A5ED62EAD70C0418D",
+      // Naver verification (when registered):
+      // "naver-site-verification": "NAVER_CODE_HERE",
     },
-    // To activate Yandex/Naver, paste codes following the pattern above.
-    // yandex: "YANDEX_CODE_HERE",
-    // other: { ..., "naver-site-verification": "NAVER_CODE_HERE" },
   },
   robots: {
     index: true,
