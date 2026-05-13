@@ -54,7 +54,7 @@ jobs:
             echo "PWABuilder CLI may require interactive prompts. Use https://www.pwabuilder.com manually as fallback."
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: keystrum-pwa-windows-${{ github.run_id }}
           path: ./pwa-output/**
